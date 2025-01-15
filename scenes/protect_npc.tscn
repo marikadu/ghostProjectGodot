@@ -7,13 +7,17 @@ radius = 61.6
 
 [node name="NPC" type="CharacterBody2D"]
 scale = Vector2(0.64, 0.64)
+collision_layer = 3
+collision_mask = 0
+collision_priority = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3246c")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2DNPC" type="Area2D" parent="."]
+visibility_layer = 5
 
-[node name="NPCCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="NPCCollisionShape2D" type="CollisionShape2D" parent="Area2DNPC"]
 shape = SubResource("CircleShape2D_y1w4g")
 
 [node name="NPCCollisionShape2D" type="CollisionShape2D" parent="."]

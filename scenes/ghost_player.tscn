@@ -7,6 +7,8 @@
 radius = 48.28
 
 [node name="GhostPlayer" type="CharacterBody2D"]
+collision_layer = 9
+collision_mask = 8
 script = ExtResource("1_axoaw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -15,3 +17,11 @@ texture = ExtResource("1_rdh74")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vc2pl")
+
+[node name="dash_timer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="dash_timer_reset" type="Timer" parent="."]
+
+[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="dash_timer_reset" to="." method="_on_dash_timer_reset_timeout"]

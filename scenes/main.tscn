@@ -19,13 +19,15 @@ position = Vector2(576, 390)
 [node name="GhostPlayer" parent="." instance=ExtResource("1_wea8t")]
 position = Vector2(576, 303)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(926, 455)
-polygon = PackedVector2Array(163, -408, 107, -321, 13, -398, -55, -344, -127, -378, -326, -336, -278, -479, -106, -483, 5, -473, 100, -489)
-
 [node name="enemy1" parent="." instance=ExtResource("4_mnd5a")]
 
 [node name="enemy2" parent="." instance=ExtResource("5_l0dt8")]
 position = Vector2(1, 171)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D2"]
+position = Vector2(988, 532)
+polygon = PackedVector2Array(220, 367, -1118, 363, -1100, -525, -977, -522, -974, 315, 157, 321, 156, -525, -1094, -524, -1038, -589, 216, -561)

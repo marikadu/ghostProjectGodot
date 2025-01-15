@@ -8,13 +8,16 @@ radius = 67.42
 
 [node name="enemy1" type="CharacterBody2D"]
 editor_description = "enemy that goes to NPC"
+collision_layer = 4
+collision_mask = 3
+collision_priority = 2.0
 script = ExtResource("1_dsuvp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.513726, 0.521569, 1, 1)
 texture = ExtResource("2_df24a")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_27fh4")
