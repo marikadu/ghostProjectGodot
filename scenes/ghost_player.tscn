@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cefk00qrd2w1n"]
+
+[ext_resource type="Script" path="res://scripts/ghost_player.gd" id="1_axoaw"]
+[ext_resource type="Texture2D" uid="uid://7keft63fb5jc" path="res://sprites/icon1.png" id="1_rdh74"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vc2pl"]
+radius = 48.28
+
+[node name="GhostPlayer" type="CharacterBody2D"]
+script = ExtResource("1_axoaw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.655, 0.655)
+texture = ExtResource("1_rdh74")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vc2pl")
