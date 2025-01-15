@@ -1,6 +1,8 @@
 extends Control
 
 @onready var camera = get_node("Camera2D")
+#@onready var win_game = $Node/WinScreen
+@onready var win_game = get_node("Node/WinScreen")
 
 # list of enemies
 var enemy_list = [
@@ -18,6 +20,14 @@ func _ready() -> void:
 		print("camera is not found, where is camera?")
 	else:
 		print("camera found")
+		
+#	win screen logic
+	Events.win_game.connect(show_win_game)
+func show_win_game():
+	win_game.show()
+	get_tree().paused = true
+#	I don't know if I need to unpause it when I go to other screen, show check it later
+	pass
 
 # when enemy timer reaches zero -> ready to spawn another enemy
 func _on_enemy_1_spawn_timer_timeout() -> void:
@@ -53,9 +63,9 @@ func _on_enemy_1_spawn_timer_timeout() -> void:
 	enemy_instance.add_to_group("enemies")
 
 # calculate random spawn spot around the camera
-func get_random_position_around_camera(camera_position: Vector2, camera_size: Vector2) -> Vector2:
+func get_random_position_around_camera(camera_position: Vector2, _camera_size: Vector2) -> Vector2:
 	# min and max spawn distance from the camera
-	var min_distance = spawn_distance_range.x
+	#var min_distance = spawn_distance_range.x
 	var max_distance = spawn_distance_range.y
 
 	var spawn_x = 0

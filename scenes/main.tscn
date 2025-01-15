@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dushnf2mn65aa"]
+[gd_scene load_steps=12 format=3 uid="uid://dushnf2mn65aa"]
 
 [ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://scenes/ghost_player.tscn" id="1_wea8t"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_y5ff8"]
 [ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://scenes/ui.tscn" id="2_dpb76"]
 [ext_resource type="Texture2D" uid="uid://cb8mkpn1v6i1u" path="res://sprites/house.png" id="2_niula"]
 [ext_resource type="PackedScene" uid="uid://ccq0ksogu3xkq" path="res://scenes/protect_npc.tscn" id="3_o4x06"]
+[ext_resource type="PackedScene" uid="uid://wu4f2v4h1o72" path="res://scenes/WinScreen.tscn" id="3_vi4qj"]
 [ext_resource type="PackedScene" uid="uid://bb0ojl4hx61c3" path="res://scenes/enemy_1.tscn" id="4_mnd5a"]
 [ext_resource type="PackedScene" uid="uid://buw5tjqxg07yk" path="res://scenes/enemy_2.tscn" id="5_l0dt8"]
 [ext_resource type="Script" path="res://scenes/camera_2d2.gd" id="6_01iy2"]
@@ -25,6 +26,13 @@ process_callback = 0
 position_smoothing_speed = 0.02
 editor_draw_drag_margin = true
 script = ExtResource("6_01iy2")
+
+[node name="Node" type="CanvasLayer" parent="."]
+
+[node name="WinScreen" parent="Node" instance=ExtResource("3_vi4qj")]
+visible = false
+offset_top = 2.0
+offset_bottom = 2.0
 
 [node name="house_background" type="Sprite2D" parent="."]
 position = Vector2(576, 432)
