@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbsrkhaqog6s4"]
+
+[ext_resource type="Script" path="res://scenes/drop_zone.gd" id="1_vdkmh"]
+[ext_resource type="Texture2D" uid="uid://dxk5juwsll0ms" path="res://sprites/placehere.png" id="2_2cc0o"]
+
+[node name="drop_zone" type="Marker2D" groups=["zone"]]
+script = ExtResource("1_vdkmh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.443333, 0.444167)
+texture = ExtResource("2_2cc0o")
