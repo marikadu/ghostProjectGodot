@@ -4,15 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://7keft63fb5jc" path="res://sprites/icon1.png" id="1_rdh74"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vc2pl"]
-radius = 48.28
+radius = 73.18
 
 [node name="GhostPlayer" type="CharacterBody2D"]
+scale = Vector2(0.465, 0.465)
 collision_layer = 9
 collision_mask = 8
 script = ExtResource("1_axoaw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.655, 0.655)
 texture = ExtResource("1_rdh74")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -22,6 +22,8 @@ shape = SubResource("CircleShape2D_vc2pl")
 wait_time = 0.2
 
 [node name="dash_timer_reset" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_timer_reset" to="." method="_on_dash_timer_reset_timeout"]

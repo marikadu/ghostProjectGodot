@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
 
-@export var max_speed = 400
+@export var max_speed = 460
+@export var acceleration = 2700
+@export var friction = 900
+
 @export var dash_speed = 1100
-@export var acceleration = 1200
-@export var friction = 400
+
 @onready var axis = Vector2.ZERO
 
 var dashing = false
@@ -38,7 +40,7 @@ func get_input_axis():
 func move(delta):
 	axis = get_input_axis()
 	
-#	if the player is not moving - standing
+#	if the player is not moving = standing
 	if axis == Vector2.ZERO:
 		apply_friction(friction * delta)
 		
@@ -72,15 +74,16 @@ func start_dash():
 	$dash_timer.start()
 	$dash_timer_reset.start()
 	print("dashing!")
-	
-#func stop_dash():
-	#dashing = false
-	#print("dash ended")
 
 
 func _on_dash_timer_timeout() -> void:
 	dashing = false
-
+	print("waiting...wating...")
+	if $dash_timer_reset.is_stopped():
+		print("stop wait timer")
+		$dash_timer.stop()
 
 func _on_dash_timer_reset_timeout() -> void:
+	$dash_timer_reset.stop()
 	can_dash = true
+	print("you can dash")

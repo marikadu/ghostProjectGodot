@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dushnf2mn65aa"]
+
+[ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://scenes/ghost_player.tscn" id="1_wea8t"]
+[ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://scenes/ui.tscn" id="2_dpb76"]
+[ext_resource type="Texture2D" uid="uid://cb8mkpn1v6i1u" path="res://sprites/house.png" id="2_niula"]
+[ext_resource type="PackedScene" uid="uid://ccq0ksogu3xkq" path="res://scenes/protect_npc.tscn" id="3_o4x06"]
+[ext_resource type="PackedScene" uid="uid://bb0ojl4hx61c3" path="res://scenes/enemy_1.tscn" id="4_mnd5a"]
+[ext_resource type="PackedScene" uid="uid://buw5tjqxg07yk" path="res://scenes/enemy_2.tscn" id="5_l0dt8"]
+
+[node name="main" type="Node2D"]
+
+[node name="house_background" type="Sprite2D" parent="."]
+position = Vector2(576, 432)
+scale = Vector2(0.815, 0.815)
+texture = ExtResource("2_niula")
+
+[node name="UI" parent="." instance=ExtResource("2_dpb76")]
+offset_left = 24.0
+offset_top = 802.0
+offset_right = 24.0
+offset_bottom = 802.0
+
+[node name="NPC" parent="." instance=ExtResource("3_o4x06")]
+position = Vector2(576, 390)
+
+[node name="GhostPlayer" parent="." instance=ExtResource("1_wea8t")]
+position = Vector2(576, 303)
+
+[node name="enemy1" parent="." instance=ExtResource("4_mnd5a")]
+
+[node name="enemy2" parent="." instance=ExtResource("5_l0dt8")]
+position = Vector2(1, 171)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D2"]
+position = Vector2(988, 532)
+build_mode = 1
+polygon = PackedVector2Array(220, 367, -1118, 363, -1100, -453, -933, -445, -933, 253, 116, 253, 116, -475, -1062, -472, -1038, -589, 216, -561)

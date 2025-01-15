@@ -1,12 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://dushnf2mn65aa"]
+[gd_scene load_steps=11 format=3 uid="uid://dushnf2mn65aa"]
 
 [ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://scenes/ghost_player.tscn" id="1_wea8t"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_y5ff8"]
+[ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://scenes/ui.tscn" id="2_dpb76"]
 [ext_resource type="Texture2D" uid="uid://cb8mkpn1v6i1u" path="res://sprites/house.png" id="2_niula"]
 [ext_resource type="PackedScene" uid="uid://ccq0ksogu3xkq" path="res://scenes/protect_npc.tscn" id="3_o4x06"]
 [ext_resource type="PackedScene" uid="uid://bb0ojl4hx61c3" path="res://scenes/enemy_1.tscn" id="4_mnd5a"]
 [ext_resource type="PackedScene" uid="uid://buw5tjqxg07yk" path="res://scenes/enemy_2.tscn" id="5_l0dt8"]
+[ext_resource type="Script" path="res://scenes/camera_2d2.gd" id="6_01iy2"]
+[ext_resource type="PackedScene" uid="uid://bbobth255p4np" path="res://scenes/timer.tscn" id="9_ag1hq"]
 
-[node name="main" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gamfg"]
+size = Vector2(1252, 848)
+
+[node name="main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_y5ff8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 303)
+offset = Vector2(576, 432)
+process_callback = 0
+position_smoothing_speed = 0.02
+editor_draw_drag_margin = true
+script = ExtResource("6_01iy2")
 
 [node name="house_background" type="Sprite2D" parent="."]
 position = Vector2(576, 432)
@@ -19,6 +37,9 @@ position = Vector2(576, 390)
 [node name="GhostPlayer" parent="." instance=ExtResource("1_wea8t")]
 position = Vector2(576, 303)
 
+[node name="Enemy1SpawnTimer" type="Timer" parent="."]
+autostart = true
+
 [node name="enemy1" parent="." instance=ExtResource("4_mnd5a")]
 
 [node name="enemy2" parent="." instance=ExtResource("5_l0dt8")]
@@ -30,4 +51,30 @@ collision_mask = 15
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D2"]
 position = Vector2(988, 532)
-polygon = PackedVector2Array(220, 367, -1118, 363, -1100, -525, -977, -522, -974, 315, 157, 321, 156, -525, -1094, -524, -1038, -589, 216, -561)
+build_mode = 1
+polygon = PackedVector2Array(220, 367, -1118, 363, -1100, -453, -933, -445, -933, 253, 116, 253, 116, -475, -1062, -472, -1038, -589, 216, -561)
+
+[node name="camera_balance" type="Area2D" parent="."]
+
+[node name="collision" type="CollisionShape2D" parent="camera_balance"]
+position = Vector2(577, 436)
+shape = SubResource("RectangleShape2D_gamfg")
+disabled = true
+
+[node name="UI" parent="." instance=ExtResource("2_dpb76")]
+z_index = 6
+layout_mode = 1
+offset_left = 24.0
+offset_top = 802.0
+offset_right = 24.0
+offset_bottom = 802.0
+
+[node name="Parallax" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Timer" parent="." instance=ExtResource("9_ag1hq")]
+
+[connection signal="timeout" from="Enemy1SpawnTimer" to="." method="_on_enemy_1_spawn_timer_timeout"]

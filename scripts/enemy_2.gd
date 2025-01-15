@@ -1,14 +1,14 @@
 extends CharacterBody2D
 # if I enable layer 1 or mask 1, the enemy stops when it reaches the player
 
-var speed = 500
+var speed = 100
 var npc: CharacterBody2D
 var player: CharacterBody2D
 
 func _ready() -> void:
 
-	npc = get_tree().root.get_node("main/NPC")
 	player = get_tree().root.get_node("main/GhostPlayer")
+	npc = get_tree().root.get_node("main/NPC")
 
 # chasing the NPC
 func _physics_process(delta: float) -> void:
