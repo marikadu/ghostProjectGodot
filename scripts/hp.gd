@@ -25,11 +25,7 @@ func _set_health(_new_health):
 
 	# NPC dies
 	if health <= 0:
-		#event_node.emit_signal("spawn_posessed")
-		#emit_signal(Events.npc_died)
-		
 		Events.npc_died.emit() # sending a signal that the npc has died
-		#pass
 		#queue_free() # doesn't recieve damage again
 		# I need to make it possible for the hp bar to not get deleted for the
 		# logic of possessed

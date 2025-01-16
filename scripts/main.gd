@@ -7,6 +7,9 @@ extends Control
 #@onready var event_node = get_node("res://scripts/Events.gd")
 
 var possesed = preload("res://scenes/possessed.tscn")
+@onready var npc = preload("res://scenes/npc.tscn")
+var npc_instance: Node = null  # Store the NPC instance
+#var npc_instance = null
 
 # list of enemies
 var enemy_list = [
@@ -26,24 +29,27 @@ var enemy_instances = []
 @export var spawn_distance_range = Vector2(500, 1000)
 
 func _ready() -> void:
+
+	# connecting to signals
+	Events.win_game.connect(show_win_game)
+	Events.npc_died.connect(_on_npc_died)
+	Events.possessed_defeated.connect(_on_possessed_defeated)
+	
 #	checking if camera node is found
 	if camera == null:
 		print("camera is not found, where is camera?")
 	else:
 		print("camera found")
 		
-#	connect to win_game signal
-	Events.win_game.connect(show_win_game)
 	
-	Events.npc_died.connect(_on_npc_died)
-	#var health_bar = get_node("main/HealthBar")
-	#health_bar.connect("npc_died", self, "_on_npc_died")
-	
-	
-	# Connecting to npc_died signal from health bar to spawn possessed enemy
-	# Assuming health bar node is under the main node and is named "HealthBar"
-	#var health_bar = get_node("/root/Node/HealthBar")
-	#health_bar.connect("npc_died", self, "_on_npc_died")
+	if npc_instance == null:  # Check if the NPC instance exists
+		npc_instance = npc.instantiate()  # Instance the NPC scene
+		npc_instance.position = Vector2(576, 390)
+		#var main_node = get_node("main")
+		add_child(npc_instance)  # Add it to the scene tree
+		print("NPC instantiated")
+	else:
+		print("NPC already instantiated")
 	
 	
 func show_win_game():
@@ -68,9 +74,11 @@ func spawn_possessed_enemy():
 
 func _on_possessed_defeated():
 	print("defeated possessed")
-#	restore_npc_health(3)  # Restore 10 health to the NPC, adjust as needed
-	
-
+	if npc_instance != null:
+		npc_instance.restore_health(3) # restore health
+		#npc_instance.animated_sprite.play("sleep")
+	else:
+		print("npc not found")
 
 
 # kill all enemies

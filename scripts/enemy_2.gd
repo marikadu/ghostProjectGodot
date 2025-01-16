@@ -8,7 +8,14 @@ var player: CharacterBody2D
 func _ready() -> void:
 
 	player = get_tree().root.get_node("main/GhostPlayer")
-	npc = get_tree().root.get_node("main/NPC")
+	call_deferred("_initialize")
+
+func _initialize():
+	npc = get_node_or_null("main/NPC")
+	if npc:
+		print("NPC found: ", npc.name)
+	else:
+		print("NPC not found")
 
 # chasing the NPC
 func _physics_process(delta: float) -> void:

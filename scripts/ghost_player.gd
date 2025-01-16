@@ -4,7 +4,6 @@ extends CharacterBody2D
 @export var max_speed = 460
 @export var acceleration = 2700
 @export var friction = 900
-
 @export var dash_speed = 1100
 
 @onready var axis = Vector2.ZERO
@@ -13,7 +12,18 @@ var dashing = false
 # dash duration
 var can_dash = true
 
-@onready var npc = get_tree().root.get_node("main/NPC")  # Get NPC node
+func _ready() -> void:
+	call_deferred("_initialize")
+	pass
+	
+func _initialize():
+	var npc = get_node_or_null("main/NPC")
+	if npc:
+		print("NPC found: ", npc.name)
+	else:
+		print("NPC not found")
+	
+#@onready var npc = get_tree().root.get_node("main/NPC")  # Get NPC node
 
 func _physics_process(delta: float) -> void:
 	# dashing only once when SHIFT is pressed

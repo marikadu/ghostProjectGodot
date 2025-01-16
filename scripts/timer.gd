@@ -14,7 +14,7 @@ var npc: CharacterBody2D
 
 func _ready() -> void:
 	timer.start()
-	npc = get_tree().root.get_node("main/NPC")
+	call_deferred("_initialize")
 	
 	# Ensure the NPC and its AnimatedSprite are valid
 	if npc == null:
@@ -23,6 +23,14 @@ func _ready() -> void:
 		print("no sprite node")
 	else:
 		print("npc loaded successfully")
+		
+func _initialize():
+	npc = get_node_or_null("main/NPC")
+	if npc:
+		print("NPC found: ", npc.name)
+	else:
+		print("NPC not found")
+		
 
 func time_left_until_win():
 	var time_left = timer.time_left

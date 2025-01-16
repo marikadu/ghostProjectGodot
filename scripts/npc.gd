@@ -7,6 +7,8 @@ extends CharacterBody2D
 @onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var hit_timer = $isHitAnimation
 
+
+
 var health: int
 var max_health: int
 var is_alive: bool = true
@@ -24,6 +26,7 @@ func _ready():
 
 	if hit_timer:
 		hit_timer.connect("timeout", Callable(self, "_on_hit_timer_timeout"))
+		
 
 func set_health(value: int):
 	if not is_alive:
@@ -60,10 +63,20 @@ func take_damage(damage: int):
 	if hit_timer:
 		hit_timer.start()
 		
-#func restore_health(amount: int) -> void:
-	#health = min(health + amount, max_health)  # doesn't go beyond max_health
-	#if damage_bar != null:
-		#damage_bar.value = health  # Update the damage bar as well
+func restore_health(amount: int) -> void:
+	# revive npc if dead and health is restored
+	#if not is_alive and health + amount > 0:
+	if not is_alive:
+			is_alive = true
+			animated_sprite.play("sleeping")
+			print("npc back from the dead")
+			
+			
+	health = min(health + amount, max_health)  # doesn't go beyond max_health
+	if healthbar != null:
+		healthbar.health = health  # update the health bar
+		
+	print("NPC health: ", health)
 
 # when isHit timer finishes -> go back to sleeping animation if alive
 func _on_hit_timer_timeout():
