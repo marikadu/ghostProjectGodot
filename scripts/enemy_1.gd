@@ -8,7 +8,8 @@ var player: CharacterBody2D
 
 func _ready() -> void:
 	player = get_tree().root.get_node("main/GhostPlayer")
-	call_deferred("_initialize")
+	#call_deferred("_initialize")
+	npc = get_tree().root.get_node("main/NPC")
 
 	
 func _initialize():

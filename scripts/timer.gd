@@ -14,7 +14,8 @@ var npc: CharacterBody2D
 
 func _ready() -> void:
 	timer.start()
-	call_deferred("_initialize")
+	#call_deferred("_initialize")
+	npc = get_tree().root.get_node("main/NPC")
 	
 	# Ensure the NPC and its AnimatedSprite are valid
 	if npc == null:

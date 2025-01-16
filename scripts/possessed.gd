@@ -21,7 +21,8 @@ var random_direction: Vector2 = Vector2.ZERO
 func _ready() -> void:
 
 	player = get_tree().root.get_node("main/GhostPlayer")
-	call_deferred("_initialize")
+	#call_deferred("_initialize")
+	npc = get_tree().root.get_node("main/NPC")
 	
 	animated_sprite.play("dead")
 	
