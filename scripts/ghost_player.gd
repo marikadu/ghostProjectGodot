@@ -12,18 +12,6 @@ var dashing = false
 # dash duration
 var can_dash = true
 
-func _ready() -> void:
-	call_deferred("_initialize")
-	pass
-	
-func _initialize():
-	var npc = get_node_or_null("main/NPC")
-	if npc:
-		print("NPC found: ", npc.name)
-	else:
-		print("NPC not found")
-	
-#@onready var npc = get_tree().root.get_node("main/NPC")  # Get NPC node
 
 func _physics_process(delta: float) -> void:
 	# dashing only once when SHIFT is pressed

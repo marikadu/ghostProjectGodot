@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://scripts/possessed.gd" id="1_n4ngr"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_vc6ox"]
-[ext_resource type="Texture2D" uid="uid://dn5ctqeavgjpg" path="res://sprites/NPC/dead.png" id="3_g2e6f"]
-[ext_resource type="Texture2D" uid="uid://c675if122xtqs" path="res://sprites/NPC/sleeping3_hit.png" id="4_oxqjc"]
-[ext_resource type="Texture2D" uid="uid://c2uhi0345qw4y" path="res://sprites/NPC/sleeping.png" id="5_2i375"]
-[ext_resource type="Texture2D" uid="uid://dnahwyb3lxhhp" path="res://sprites/NPC/sleeping2.png" id="6_ltsqw"]
-[ext_resource type="Texture2D" uid="uid://csl541tgeioo8" path="res://sprites/NPC/waking_up1.png" id="7_8pntk"]
-[ext_resource type="Texture2D" uid="uid://82xu7rx5q1hb" path="res://sprites/NPC/waking_up2.png" id="8_gtfq1"]
+[ext_resource type="Texture2D" uid="uid://bhsn6ehnsepq" path="res://sprites/NPC/dead.png" id="3_g2e6f"]
+[ext_resource type="Texture2D" uid="uid://cuqg0s5a605ki" path="res://sprites/NPC/sleeping3_hit.png" id="4_oxqjc"]
+[ext_resource type="Texture2D" uid="uid://1iu2lvhsfql6" path="res://sprites/NPC/sleeping.png" id="5_2i375"]
+[ext_resource type="Texture2D" uid="uid://drtiyb8qvwv1e" path="res://sprites/NPC/sleeping2.png" id="6_ltsqw"]
+[ext_resource type="Texture2D" uid="uid://hxdnj4nqthi" path="res://sprites/NPC/waking_up1.png" id="7_8pntk"]
+[ext_resource type="Texture2D" uid="uid://cy86tcce16sil" path="res://sprites/NPC/waking_up2.png" id="8_gtfq1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_622h7"]
 resource_local_to_scene = true

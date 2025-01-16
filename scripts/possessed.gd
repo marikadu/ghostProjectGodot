@@ -21,20 +21,10 @@ var random_direction: Vector2 = Vector2.ZERO
 func _ready() -> void:
 
 	player = get_tree().root.get_node("main/GhostPlayer")
-	#call_deferred("_initialize")
-	npc = get_tree().root.get_node("main/NPC")
+	npc = Global.npc_instance
 	
 	animated_sprite.play("dead")
-	
-	#ran_dir_timer.connect("timeout", Callable(self, "_on_changing_random_direction_timeout"))
-	#ran_dir_timer.start()
-	
-func _initialize():
-	npc = get_node_or_null("main/NPC")
-	if npc:
-		print("NPC found: ", npc.name)
-	else:
-		print("NPC not found")
+
 	
 func _process(_delta):
 	# smoothly oscillating rotation between -rotation_range and +rotation_range

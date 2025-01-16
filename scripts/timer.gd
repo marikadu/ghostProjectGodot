@@ -7,30 +7,20 @@ extends Node
 
 @onready var label = $Label
 @onready var timer = $Timer
-#@onready var win_screen = get_tree().root.get_node("main/WinScreen")
 
 var npc: CharacterBody2D
 
 
 func _ready() -> void:
 	timer.start()
-	#call_deferred("_initialize")
-	npc = get_tree().root.get_node("main/NPC")
+	npc = Global.npc_instance
 	
-	# Ensure the NPC and its AnimatedSprite are valid
-	if npc == null:
-		print("no npc found")
-	elif not npc.has_node("AnimatedSprite2D"):
-		print("no sprite node")
-	else:
-		print("npc loaded successfully")
-		
-func _initialize():
-	npc = get_node_or_null("main/NPC")
-	if npc:
-		print("NPC found: ", npc.name)
-	else:
-		print("NPC not found")
+	#if npc == null:
+		#print("1111no npc found")
+	#elif not npc.has_node("AnimatedSprite2D"):
+		#print("no sprite node")
+	#else:
+		#print("npc loaded successfully")
 		
 
 func time_left_until_win():
@@ -45,7 +35,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_timer_timeout() -> void:
-	print("win!")
+	print_debug("win!")
 	Events.win_game.emit()
 	#npc.animated_sprite.play("waking_up")
 	# access the AnimatedSprite and play the animation
@@ -54,6 +44,6 @@ func _on_timer_timeout() -> void:
 		if animated_sprite != null:
 			animated_sprite.play("waking_up")
 		else:
-			print("no animated sprite node")
+			print_debug("no animated sprite node")
 	else:
-		print("no NPC is found")
+		print_debug("no NPC is found")

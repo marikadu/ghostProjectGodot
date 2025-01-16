@@ -42,14 +42,14 @@ func _ready() -> void:
 		print("camera found")
 		
 	
-	if npc_instance == null:  # Check if the NPC instance exists
-		npc_instance = npc.instantiate()  # Instance the NPC scene
+	if npc_instance == null:  # check if the NPC instance exists
+		npc_instance = npc.instantiate()  # instance the NPC
 		npc_instance.position = Vector2(576, 390)
-		#var main_node = get_node("main")
-		add_child(npc_instance)  # Add it to the scene tree
-		print("NPC instantiated")
+		add_child(npc_instance)  # adding npc to the scene tree
+		Global.npc_instance = npc_instance # store the instance in the global variable
+		print("NPC ready")
 	else:
-		print("NPC already instantiated")
+		print("NPC already instantiated or error occured")
 	
 	
 func show_win_game():
@@ -73,7 +73,7 @@ func spawn_possessed_enemy():
 	call_deferred("add_child", possessed_instance)
 
 func _on_possessed_defeated():
-	print("defeated possessed")
+	can_spawn_enemies = true
 	if npc_instance != null:
 		npc_instance.restore_health(2)
 		

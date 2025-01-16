@@ -1,16 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://dushnf2mn65aa"]
+[gd_scene load_steps=10 format=3 uid="uid://dushnf2mn65aa"]
 
 [ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://scenes/ghost_player.tscn" id="1_wea8t"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_y5ff8"]
 [ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://scenes/dash_stamina.tscn" id="2_dpb76"]
 [ext_resource type="Texture2D" uid="uid://xxokulhyor6e" path="res://sprites/house.png" id="2_niula"]
 [ext_resource type="PackedScene" uid="uid://wu4f2v4h1o72" path="res://scenes/WinScreen.tscn" id="3_vi4qj"]
-[ext_resource type="PackedScene" uid="uid://bb0ojl4hx61c3" path="res://scenes/enemy_1.tscn" id="4_mnd5a"]
-[ext_resource type="PackedScene" uid="uid://buw5tjqxg07yk" path="res://scenes/enemy_2.tscn" id="5_l0dt8"]
 [ext_resource type="Script" path="res://scenes/camera_2d2.gd" id="6_01iy2"]
 [ext_resource type="PackedScene" uid="uid://bbobth255p4np" path="res://scenes/timer.tscn" id="9_ag1hq"]
 [ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://scenes/hp.tscn" id="11_rp7p5"]
-[ext_resource type="PackedScene" uid="uid://caqmoofobi37c" path="res://scenes/possessed.tscn" id="12_w6a6f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gamfg"]
 size = Vector2(1252, 848)
@@ -46,14 +43,6 @@ position = Vector2(576, 303)
 [node name="Enemy1SpawnTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="enemy1" parent="." instance=ExtResource("4_mnd5a")]
-
-[node name="Possesed" parent="." instance=ExtResource("12_w6a6f")]
-position = Vector2(666, 410)
-
-[node name="enemy2" parent="." instance=ExtResource("5_l0dt8")]
-position = Vector2(1, 171)
-
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 collision_layer = 15
 collision_mask = 15
@@ -87,12 +76,6 @@ offset_left = 769.0
 offset_top = 26.0
 offset_right = 1184.0
 offset_bottom = 77.0
-
-[node name="Parallax" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="Timer" parent="." instance=ExtResource("9_ag1hq")]
 
