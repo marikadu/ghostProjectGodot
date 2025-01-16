@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bakasq6b2k4vs"]
 
-[ext_resource type="Texture2D" uid="uid://7keft63fb5jc" path="res://sprites/icon1.png" id="1_2aa6i"]
+[ext_resource type="Texture2D" uid="uid://q1qgmlqgdhn1" path="res://sprites/icon1.png" id="1_2aa6i"]
 
 [node name="enemy1_spawner" type="Node2D"]
 

@@ -10,6 +10,12 @@ var enemy_list = [
 	preload("res://scenes/enemy_2.tscn")
 ]
 
+# store enemy instances
+var enemy_instances = []
+
+# control spawning
+@onready var can_spawn_enemies = true
+
 # how far outside the camera to spawn enemies
 # 1st number - min distance, 2nd number - max distance in pixles
 @export var spawn_distance_range = Vector2(500, 1000)
@@ -21,21 +27,38 @@ func _ready() -> void:
 	else:
 		print("camera found")
 		
-#	win screen logic
+#	connect to win_game signal
 	Events.win_game.connect(show_win_game)
+	
+	
 func show_win_game():
 	win_game.show()
-	get_tree().paused = true
+	#get_tree().paused = true # pause game
+	kill_all_enemies()
 #	I don't know if I need to unpause it when I go to other screen, show check it later
 	pass
 
+# kill all enemies
+func kill_all_enemies():
+	for enemy in enemy_instances:
+#		if there are enemies present
+		if enemy != null and enemy.is_inside_tree():
+			enemy.queue_free()
+#	clear the list
+	enemy_instances.clear()
+
 # when enemy timer reaches zero -> ready to spawn another enemy
 func _on_enemy_1_spawn_timer_timeout() -> void:
-	# Ensure the camera is initialized and its position is accessible
+	if not can_spawn_enemies:
+		return
+	
+#	checking if camera is found and is accesible
 	if camera == null:
 #		can't spawn enemy if camera is not found
 		print("Cannot spawn enemies, camera is not ready!")
 		return
+		
+	can_spawn_enemies = false
 	
 	# randomly get an enemy from the list
 	# randi = random number
@@ -58,9 +81,14 @@ func _on_enemy_1_spawn_timer_timeout() -> void:
 
 	# addding the enemy to the scene
 	add_child(enemy_instance)
+	
+	# store the instance of the enemy in the list
+	enemy_instances.append(enemy_instance)
 
 	# adding the enemy to the group
 	enemy_instance.add_to_group("enemies")
+	
+	can_spawn_enemies = true
 
 # calculate random spawn spot around the camera
 func get_random_position_around_camera(camera_position: Vector2, _camera_size: Vector2) -> Vector2:

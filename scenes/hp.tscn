@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://giv47sl8et1g"]
+
+[ext_resource type="Texture2D" uid="uid://cnv135ij7ykqo" path="res://sprites/hp.png" id="1_608r2"]
+[ext_resource type="Script" path="res://scripts/hp.gd" id="2_ww2b3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gelca"]
+bg_color = Color(0.2, 0.0941176, 0.0941176, 0.54902)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mv755"]
+bg_color = Color(0.988739, 0.937902, 0.942327, 1)
+
+[node name="HealthBar" type="TextureProgressBar"]
+offset_right = 40.0
+offset_bottom = 40.0
+value = 74.0
+texture_progress = ExtResource("1_608r2")
+script = ExtResource("2_ww2b3")
+
+[node name="Damagebar" type="ProgressBar" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_gelca")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mv755")
+value = 89.35
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

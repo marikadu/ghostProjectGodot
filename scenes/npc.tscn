@@ -1,0 +1,127 @@
+[gd_scene load_steps=15 format=3 uid="uid://ccq0ksogu3xkq"]
+
+[ext_resource type="Script" path="res://scripts/npc.gd" id="1_ffje0"]
+[ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_ia2t5"]
+[ext_resource type="Texture2D" uid="uid://dn5ctqeavgjpg" path="res://sprites/NPC/dead.png" id="2_k635l"]
+[ext_resource type="Texture2D" uid="uid://c2uhi0345qw4y" path="res://sprites/NPC/sleeping.png" id="2_lxhe8"]
+[ext_resource type="Texture2D" uid="uid://c675if122xtqs" path="res://sprites/NPC/sleeping3_hit.png" id="2_nyprd"]
+[ext_resource type="Texture2D" uid="uid://dnahwyb3lxhhp" path="res://sprites/NPC/sleeping2.png" id="3_bo8fs"]
+[ext_resource type="Texture2D" uid="uid://csl541tgeioo8" path="res://sprites/NPC/waking_up1.png" id="6_b3f61"]
+[ext_resource type="Texture2D" uid="uid://82xu7rx5q1hb" path="res://sprites/NPC/waking_up2.png" id="7_lewop"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ngrvg"]
+resource_local_to_scene = true
+shader = ExtResource("2_ia2t5")
+shader_parameter/isHit = false
+shader_parameter/Tint = Color(1, 1, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6nsm2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k635l")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nyprd")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lxhe8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bo8fs")
+}],
+"loop": true,
+"name": &"sleeping",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_b3f61")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lewop")
+}],
+"loop": false,
+"name": &"waking_up",
+"speed": 1.0
+}]
+
+[sub_resource type="Animation" id="Animation_4443o"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isHit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 0.217638),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_lueaj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isHit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tdvf1"]
+_data = {
+"RESET": SubResource("Animation_lueaj"),
+"hit_flash": SubResource("Animation_4443o")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y1w4g"]
+radius = 61.6
+
+[node name="NPC" type="CharacterBody2D"]
+scale = Vector2(0.54, 0.54)
+collision_layer = 7
+collision_mask = 7
+collision_priority = 3.0
+script = ExtResource("1_ffje0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ngrvg")
+sprite_frames = SubResource("SpriteFrames_6nsm2")
+animation = &"hit"
+autoplay = "sleeping"
+
+[node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_tdvf1")
+}
+
+[node name="Area2DNPC" type="Area2D" parent="."]
+visibility_layer = 5
+
+[node name="NPCCollisionShape2D" type="CollisionShape2D" parent="Area2DNPC"]
+shape = SubResource("CircleShape2D_y1w4g")
+
+[node name="NPCCollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y1w4g")
+
+[node name="isHitAnimation" type="Timer" parent="."]
+wait_time = 0.7

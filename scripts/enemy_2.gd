@@ -21,9 +21,10 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player:
-		print("Player got the enemy")
-		queue_free()  # Removes the enemy from the scene
+		#print("Player got the enemy")
+		queue_free()  # remove the enemy from the scene
 		
 	elif body == npc:
-		print("2got the NPC")
+		#print("2got the NPC")
+		npc.take_damage(1) # damage the npc
 		queue_free()

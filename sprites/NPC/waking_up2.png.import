@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c88ugehmtbbsa"
-path="res://.godot/imported/placehere.png-8a412c79ed95aef9ecdb091470edbf32.ctex"
+uid="uid://82xu7rx5q1hb"
+path="res://.godot/imported/waking_up2.png-00d5015dd6903a7938a87c047f076403.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/placehere.png"
-dest_files=["res://.godot/imported/placehere.png-8a412c79ed95aef9ecdb091470edbf32.ctex"]
+source_file="res://sprites/NPC/waking_up2.png"
+dest_files=["res://.godot/imported/waking_up2.png-00d5015dd6903a7938a87c047f076403.ctex"]
 
 [params]
 

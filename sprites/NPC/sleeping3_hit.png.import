@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c88ugehmtbbsa"
-path="res://.godot/imported/placehere.png-8a412c79ed95aef9ecdb091470edbf32.ctex"
+uid="uid://c675if122xtqs"
+path="res://.godot/imported/sleeping3_hit.png-1b968574de8b69ec26763a0158a3be9f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/placehere.png"
-dest_files=["res://.godot/imported/placehere.png-8a412c79ed95aef9ecdb091470edbf32.ctex"]
+source_file="res://sprites/NPC/sleeping3_hit.png"
+dest_files=["res://.godot/imported/sleeping3_hit.png-1b968574de8b69ec26763a0158a3be9f.ctex"]
 
 [params]
 
