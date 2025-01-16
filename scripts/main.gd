@@ -75,7 +75,9 @@ func spawn_possessed_enemy():
 func _on_possessed_defeated():
 	print("defeated possessed")
 	if npc_instance != null:
-		npc_instance.restore_health(3) # restore health
+		npc_instance.restore_health(2)
+		
+		print("supposed to restore health here")
 		#npc_instance.animated_sprite.play("sleep")
 	else:
 		print("npc not found")

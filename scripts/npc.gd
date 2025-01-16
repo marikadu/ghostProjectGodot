@@ -77,6 +77,7 @@ func restore_health(amount: int) -> void:
 		healthbar.health = health  # update the health bar
 		
 	print("NPC health: ", health)
+	print("health::::: ", health)
 
 # when isHit timer finishes -> go back to sleeping animation if alive
 func _on_hit_timer_timeout():

@@ -18,15 +18,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 Events="*res://scripts/Events.gd"
-PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+Global="*res://scripts/Global.gd"
 
 [display]
 
 window/size/viewport_height=864
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [global_group]
 

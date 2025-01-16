@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dushnf2mn65aa"]
+[gd_scene load_steps=13 format=3 uid="uid://dushnf2mn65aa"]
 
 [ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://scenes/ghost_player.tscn" id="1_wea8t"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_y5ff8"]
 [ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://scenes/dash_stamina.tscn" id="2_dpb76"]
 [ext_resource type="Texture2D" uid="uid://xxokulhyor6e" path="res://sprites/house.png" id="2_niula"]
-[ext_resource type="PackedScene" uid="uid://ccq0ksogu3xkq" path="res://scenes/npc.tscn" id="3_o4x06"]
 [ext_resource type="PackedScene" uid="uid://wu4f2v4h1o72" path="res://scenes/WinScreen.tscn" id="3_vi4qj"]
 [ext_resource type="PackedScene" uid="uid://bb0ojl4hx61c3" path="res://scenes/enemy_1.tscn" id="4_mnd5a"]
 [ext_resource type="PackedScene" uid="uid://buw5tjqxg07yk" path="res://scenes/enemy_2.tscn" id="5_l0dt8"]
@@ -54,9 +53,6 @@ position = Vector2(666, 410)
 
 [node name="enemy2" parent="." instance=ExtResource("5_l0dt8")]
 position = Vector2(1, 171)
-
-[node name="NPC" parent="." instance=ExtResource("3_o4x06")]
-position = Vector2(576, 390)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 collision_layer = 15
