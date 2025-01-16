@@ -18,11 +18,11 @@ func _ready() -> void:
 	
 	# Ensure the NPC and its AnimatedSprite are valid
 	if npc == null:
-		print("Error: NPC not found!")
-	elif not npc.has_node("AnimatedSprite"):
-		print("Error: NPC does not have an AnimatedSprite node!")
+		print("no npc found")
+	elif not npc.has_node("AnimatedSprite2D"):
+		print("no sprite node")
 	else:
-		print("NPC and AnimatedSprite found successfully.")
+		print("npc loaded successfully")
 
 func time_left_until_win():
 	var time_left = timer.time_left
@@ -39,12 +39,12 @@ func _on_timer_timeout() -> void:
 	print("win!")
 	Events.win_game.emit()
 	#npc.animated_sprite.play("waking_up")
-	# Access the AnimatedSprite and play the animation
+	# access the AnimatedSprite and play the animation
 	if npc != null:
 		var animated_sprite = npc.get_node_or_null("AnimatedSprite2D")
 		if animated_sprite != null:
 			animated_sprite.play("waking_up")
 		else:
-			print("Error: NPC does not have an AnimatedSprite node!")
+			print("no animated sprite node")
 	else:
-		print("Error: NPC not found!")
+		print("no NPC is found")

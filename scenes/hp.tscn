@@ -12,7 +12,8 @@ bg_color = Color(0.988739, 0.937902, 0.942327, 1)
 [node name="HealthBar" type="TextureProgressBar"]
 offset_right = 40.0
 offset_bottom = 40.0
-value = 74.0
+scale = Vector2(0.58, 0.58)
+value = 70.0
 texture_progress = ExtResource("1_608r2")
 script = ExtResource("2_ww2b3")
 

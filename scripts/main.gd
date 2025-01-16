@@ -3,6 +3,10 @@ extends Control
 @onready var camera = get_node("Camera2D")
 #@onready var win_game = $Node/WinScreen
 @onready var win_game = get_node("Node/WinScreen")
+#@onready var events = get_node("Events")
+#@onready var event_node = get_node("res://scripts/Events.gd")
+
+var possesed = preload("res://scenes/possessed.tscn")
 
 # list of enemies
 var enemy_list = [
@@ -15,6 +19,7 @@ var enemy_instances = []
 
 # control spawning
 @onready var can_spawn_enemies = true
+@onready var can_spawn_posessed = false
 
 # how far outside the camera to spawn enemies
 # 1st number - min distance, 2nd number - max distance in pixles
@@ -30,6 +35,16 @@ func _ready() -> void:
 #	connect to win_game signal
 	Events.win_game.connect(show_win_game)
 	
+	Events.npc_died.connect(_on_npc_died)
+	#var health_bar = get_node("main/HealthBar")
+	#health_bar.connect("npc_died", self, "_on_npc_died")
+	
+	
+	# Connecting to npc_died signal from health bar to spawn possessed enemy
+	# Assuming health bar node is under the main node and is named "HealthBar"
+	#var health_bar = get_node("/root/Node/HealthBar")
+	#health_bar.connect("npc_died", self, "_on_npc_died")
+	
 	
 func show_win_game():
 	win_game.show()
@@ -37,6 +52,26 @@ func show_win_game():
 	kill_all_enemies()
 #	I don't know if I need to unpause it when I go to other screen, show check it later
 	pass
+	
+func _on_npc_died():
+	spawn_possessed_enemy()
+#	maybe create some sort of effect "za warudo" or something, but don't affect time?
+	kill_all_enemies()
+	can_spawn_enemies = false
+	pass
+	
+func spawn_possessed_enemy():
+	var possessed_instance = possesed.instantiate()
+	possessed_instance.position = Vector2(576, 390)
+	#add_child(possessed_instance)
+	call_deferred("add_child", possessed_instance)
+
+func _on_possessed_defeated():
+	print("defeated possessed")
+#	restore_npc_health(3)  # Restore 10 health to the NPC, adjust as needed
+	
+
+
 
 # kill all enemies
 func kill_all_enemies():

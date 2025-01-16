@@ -38,7 +38,7 @@ offset_bottom = 2.0
 
 [node name="house_background" type="Sprite2D" parent="."]
 position = Vector2(576, 432)
-scale = Vector2(0.695, 0.695)
+scale = Vector2(0.815, 0.815)
 texture = ExtResource("2_niula")
 
 [node name="NPC" parent="." instance=ExtResource("3_o4x06")]
@@ -66,7 +66,7 @@ collision_mask = 15
 position = Vector2(997.86, 548)
 scale = Vector2(1.03, 1.03)
 build_mode = 1
-polygon = PackedVector2Array(220, 367, -1118, 363, -1102.78, -465.049, -952.291, -459.223, -954.233, 298.058, 144.796, 298.058, 145.767, -473.786, -1062, -472, -1038, -589, 216, -561)
+polygon = PackedVector2Array(220, 367, -1118, 363, -1102.78, -465.049, -936.757, -461.165, -935.786, 265.049, 113.728, 266.019, 116, -475, -1062, -472, -1038, -589, 216, -561)
 
 [node name="camera_balance" type="Area2D" parent="."]
 visible = false

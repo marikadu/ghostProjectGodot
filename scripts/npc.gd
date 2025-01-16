@@ -8,10 +8,12 @@ extends CharacterBody2D
 @onready var hit_timer = $isHitAnimation
 
 var health: int
+var max_health: int
 var is_alive: bool = true
 
 func _ready():
-	health = 10
+	max_health = 5
+	health = max_health # at the start of the game, health is max
 	is_alive = true
 
 	if healthbar != null:
@@ -33,33 +35,39 @@ func set_health(value: int):
 	if health <= 0:
 		health = 0
 		is_alive = false
-		print("NPC died")
-		print("GAME OVER")
+		animated_sprite.play("gone")
+		print("npc died")
 	else:
-		print("NPC health: %d" % health)
+		#print("NPC health: %d" % health)
+		pass
 
 	if healthbar != null:
 #		if the healthbar is active -> update it
 		healthbar.health = health
 
-# enemy collision (doesn't work for some reason)
+# enemy collision logic
 func _on_area_2d_body_entered(body: Node) -> void:
 	if body.is_in_group("enemy"):
-		take_damage(1)  # Reduce health by 1 when an enemy touches the NPC
+		# reduce health by 1
+		take_damage(1)
 
-# take damage (works)
+# take damage
 func take_damage(damage: int):
 	animated_sprite.play("hit")
 	hit_flash.play("hit_flash")
-
 #	update health
 	set_health(health - damage)
-
 	if hit_timer:
 		hit_timer.start()
+		
+#func restore_health(amount: int) -> void:
+	#health = min(health + amount, max_health)  # doesn't go beyond max_health
+	#if damage_bar != null:
+		#damage_bar.value = health  # Update the damage bar as well
 
 # when isHit timer finishes -> go back to sleeping animation if alive
 func _on_hit_timer_timeout():
-	print("Hit animation finished")
+	$isHitAnimation.stop()
+	#print("Hit animation finished")
 	if is_alive:
 		animated_sprite.play("sleeping")

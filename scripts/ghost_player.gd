@@ -78,12 +78,12 @@ func start_dash():
 
 func _on_dash_timer_timeout() -> void:
 	dashing = false
-	print("waiting...wating...")
+	#print("waiting...wating...")
 	if $dash_timer_reset.is_stopped():
-		print("stop wait timer")
+		#print("stop wait timer")
 		$dash_timer.stop()
 
 func _on_dash_timer_reset_timeout() -> void:
 	$dash_timer_reset.stop()
 	can_dash = true
-	print("you can dash")
+	#print("you can dash")

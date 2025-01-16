@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 Events="*res://scripts/Events.gd"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [display]
 
@@ -67,6 +67,7 @@ dash={
 2d_physics/layer_2="NPC"
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="Wall"
+2d_physics/layer_5="Possessed"
 
 [rendering]
 
