@@ -54,8 +54,9 @@ func _ready() -> void:
 	
 func show_win_game():
 	win_game.show()
-	#get_tree().paused = true # pause game
 	kill_all_enemies()
+	can_spawn_enemies = false
+	#get_tree().paused = true # pause game
 #	I don't know if I need to unpause it when I go to other screen, show check it later
 	pass
 	
@@ -76,9 +77,6 @@ func _on_possessed_defeated():
 	can_spawn_enemies = true
 	if npc_instance != null:
 		npc_instance.restore_health(2)
-		
-		print("supposed to restore health here")
-		#npc_instance.animated_sprite.play("sleep")
 	else:
 		print("npc not found")
 
