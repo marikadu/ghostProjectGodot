@@ -78,6 +78,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			die()
 		
 func take_damage():
+	
+	#var camera = get_viewport().get_camera_2d()
+	#if camera:
+##		intensity 10, duration 0.2 seconds
+		#camera.start_shake(4, 0.2)
+		
 	health -= 1
 	print("ow oww")
 	

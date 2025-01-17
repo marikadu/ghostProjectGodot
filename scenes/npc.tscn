@@ -106,6 +106,7 @@ _data = {
 radius = 61.6
 
 [node name="NPC" type="CharacterBody2D"]
+z_index = -2
 scale = Vector2(0.47, 0.47)
 collision_layer = 7
 collision_mask = 7

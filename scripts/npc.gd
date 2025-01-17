@@ -56,6 +56,11 @@ func _on_area_2d_body_entered(body: Node) -> void:
 
 # take damage
 func take_damage(damage: int):
+	#var camera = get_viewport().get_camera_2d()
+	#if camera:
+##		intensity 10, duration 0.2 seconds
+		#camera.start_shake(2, 0.2)
+		
 	animated_sprite.play("hit")
 	hit_flash.play("hit_flash")
 #	update health

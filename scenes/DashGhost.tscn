@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c102qktbipg6m"]
+
+[ext_resource type="Texture2D" uid="uid://ck654affas43o" path="res://icon.svg" id="1_g0evs"]
+[ext_resource type="Script" path="res://scripts/dashGhost.gd" id="1_ix86d"]
+[ext_resource type="Shader" uid="uid://dutycefqxllsq" path="res://scenes/dashEffect.tres" id="1_ohhxx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yqeu6"]
+shader = ExtResource("1_ohhxx")
+shader_parameter/Tint2 = Color(1, 1, 1, 1)
+
+[node name="Sprite2D" type="Sprite2D"]
+z_index = -1
+material = SubResource("ShaderMaterial_yqeu6")
+scale = Vector2(0.475, 0.475)
+texture = ExtResource("1_g0evs")
+script = ExtResource("1_ix86d")
+
+[node name="GhostTimer" type="Timer" parent="."]
+wait_time = 0.05

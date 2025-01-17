@@ -270,13 +270,12 @@ states/walk/node = SubResource("AnimationNodeBlendSpace2D_lobm1")
 states/walk/position = Vector2(434, 87)
 graph_offset = Vector2(48, -18)
 
-[node name="GhostPlayer" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree")]
+[node name="GhostPlayer" type="CharacterBody2D"]
 z_index = 1
 scale = Vector2(0.445, 0.445)
 collision_layer = 25
 collision_mask = 24
 script = ExtResource("1_axoaw")
-animation_tree = NodePath("AnimationTree")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_yr74a")
@@ -304,5 +303,9 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(-0.00332224, -0.0212766)
 parameters/walk/blend_position = Vector2(0.0116279, -0.442478)
 
+[node name="GhostEffectTimer" type="Timer" parent="."]
+wait_time = 0.03
+
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_timer_reset" to="." method="_on_dash_timer_reset_timeout"]
+[connection signal="timeout" from="GhostEffectTimer" to="." method="_on_ghost_effect_timer_timeout"]

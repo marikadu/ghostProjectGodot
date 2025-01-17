@@ -3,7 +3,8 @@ extends Control
 # CTRL + drag a script to put it here with @onready with $
 #@onready var camera_2d: Camera2D = $Camera2D
 
-@onready var camera = get_node("Camera2D")
+@onready var camera: Camera2D = %Camera2D
+#@onready var camera = get_node("Camera2D")
 @onready var win_game = get_node("Node/WinScreen")
 @onready var game_over = get_node("Node/GameOverScreen")
 #@onready var events = get_node("Events")
