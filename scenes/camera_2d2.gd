@@ -14,4 +14,12 @@ func _process(delta):
 	# foreground = don't divide, don't multiply
 	# close foreground = multiply by 2
 	position += (player.position *2 * delta) - position
+	#position += lerp((player.position *2 * delta) - position, player.position, delta)
+	#pass
+	
+	# add camera shake when kill the enemy
+	# more shake when defeat the possessed?
+	# maybe even shake + slightly zoom out or zoom in for more juice
+	
+	# maybe something similar to ori and the will of the whisps
 	

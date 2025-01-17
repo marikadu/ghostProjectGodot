@@ -92,7 +92,7 @@ func die():
 	# updating random direction every 1.4 seconds
 	#random_direction = get_random_direction()
 	
-	# Restart the timer to keep updating direction every 2 seconds
+	# restart the timer to keep updating direction every 2 seconds
 	#ran_dir_timer.start(1.4)
 
 

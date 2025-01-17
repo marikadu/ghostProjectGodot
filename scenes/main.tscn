@@ -26,11 +26,9 @@ script = ExtResource("1_y5ff8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
-position = Vector2(4, -1)
 offset = Vector2(576, 432)
 process_callback = 0
-position_smoothing_speed = 0.02
-editor_draw_drag_margin = true
+position_smoothing_speed = 10.0
 script = ExtResource("6_01iy2")
 
 [node name="Node" type="CanvasLayer" parent="."]

@@ -1,3 +1,0 @@
-[gd_scene format=3 uid="uid://dpfps5tc4gg40"]
-
-[node name="Enemy1SpawnTimer" type="Timer"]
