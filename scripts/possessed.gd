@@ -82,6 +82,8 @@ func take_damage():
 	print("ow oww")
 	
 func die():
+	Global.score += 100
+	print("Score: ", Global.score)
 	Events.possessed_defeated.emit()
 	print("posesses died")
 	queue_free()

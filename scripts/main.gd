@@ -1,11 +1,15 @@
 extends Control
 
+# CTRL + drag a script to put it here with @onready with $
+#@onready var camera_2d: Camera2D = $Camera2D
+
 @onready var camera = get_node("Camera2D")
-#@onready var win_game = $Node/WinScreen
 @onready var win_game = get_node("Node/WinScreen")
 @onready var game_over = get_node("Node/GameOverScreen")
 #@onready var events = get_node("Events")
 #@onready var event_node = get_node("res://scripts/Events.gd")
+
+
 
 var possessed = preload("res://scenes/possessed.tscn")
 @onready var npc = preload("res://scenes/npc.tscn")
@@ -38,6 +42,10 @@ func _ready() -> void:
 	Events.npc_died.connect(_on_npc_died)
 	Events.possessed_defeated.connect(_on_possessed_defeated)
 	
+	# resetting the score for every new game
+	Global.score = 0
+	print("resetting score:", Global.score)
+	
 #	checking if camera node is found
 	if camera == null:
 		print("camera is not found, where is camera?")
@@ -60,6 +68,8 @@ func _ready() -> void:
 func show_win_game():
 	win_game.show()
 	kill_all_enemies()
+	# updating personal best ONLY when won the game
+	Global.update_personal_best()
 	can_spawn_enemies = false
 	#get_tree().paused = true # pause game
 #	I don't know if I need to unpause it when I go to other screen, show check it later
