@@ -7,6 +7,9 @@ extends CharacterBody2D
 @onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var hit_timer = $isHitAnimation
 
+#@onready var camera_control: Control = %CameraControl
+@onready var camera_control = get_tree().root.get_node("main/CameraControl")
+
 
 
 var health: int
@@ -34,10 +37,12 @@ func set_health(value: int):
 		return  
 		
 
+	# npc dies
 	health = value
 	if health <= 0:
 		health = 0
 		is_alive = false
+		camera_control.apply_shake(30.0, 5)
 		animated_sprite.play("gone")
 		print("npc died")
 	else:
@@ -56,10 +61,8 @@ func _on_area_2d_body_entered(body: Node) -> void:
 
 # take damage
 func take_damage(damage: int):
-	#var camera = get_viewport().get_camera_2d()
-	#if camera:
-##		intensity 10, duration 0.2 seconds
-		#camera.start_shake(2, 0.2)
+	camera_control.apply_shake(3, 2)
+
 		
 	animated_sprite.play("hit")
 	hit_flash.play("hit_flash")

@@ -15,6 +15,7 @@ var rotation_range: float = 2.0  # Maximum rotation angle (in degrees) to the le
 @onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var hit_timer = $isHitAnimation
 @onready var possessed_escapes = get_tree().root.get_node("main/PossessedEscapes")
+@onready var camera_control = get_tree().root.get_node("main/CameraControl")
 
 #var velocity = Vector2.ZERO
 var random_direction: Vector2 = Vector2.ZERO
@@ -69,25 +70,21 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 		
 	if body == player and player.dashing :
-		print("ow owww ow") # show somehow that the possessed 
 		take_damage()
-		hit_flash.play("hit_flash")
 		
 		#queue_free()  # remove the enemy from the scene
 		if health <= 0:
 			die()
 		
 func take_damage():
-	
-	#var camera = get_viewport().get_camera_2d()
-	#if camera:
-##		intensity 10, duration 0.2 seconds
-		#camera.start_shake(4, 0.2)
-		
+	# show somehow that the possessed takes damage
+	hit_flash.play("hit_flash")
 	health -= 1
 	print("ow oww")
+	camera_control.apply_shake(3, 1)
 	
 func die():
+	camera_control.apply_shake(12, 3)
 	Global.score += 100
 	print("Score: ", Global.score)
 	Events.possessed_defeated.emit()

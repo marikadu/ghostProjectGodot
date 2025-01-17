@@ -101,7 +101,8 @@ func _on_npc_died():
 	
 func spawn_possessed_enemy():
 	var possessed_instance = possessed.instantiate()
-	possessed_instance.position = Vector2(576, 390)
+	#possessed_instance.position = Vector2(576, 390)
+	possessed_instance.position = Vector2(578, 426)
 	#add_child(possessed_instance)
 	call_deferred("add_child", possessed_instance)
 

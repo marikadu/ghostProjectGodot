@@ -7,7 +7,7 @@ var npc: CharacterBody2D
 var player: CharacterBody2D
 var time_to_max_speed = 2.0 # time to reach the max.speed
 var elapsed_time = 0.0  # time tracker for speed increase
-var delay_before_acceleration = 3.0 # wait before setting to max.speed
+var delay_before_acceleration = 2.0 # wait before setting to max.speed
 var is_accelerating = false
 
 @onready var speed_timer = $SpeedTimer  # timer to control gradual speed change

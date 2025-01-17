@@ -3,7 +3,7 @@ extends Camera2D
 @onready var player = get_tree().root.get_node("main/GhostPlayer") # !!!!
 
 func _process(delta):
-	#pass
+	pass
 	# multiply by number = make camera faster
 	# divide by number = make camera slower
 	# I should also apply those to the items to create a parallax effect
@@ -21,7 +21,13 @@ func _process(delta):
 	
 	# maybe something similar to ori and the will of the whisps
 	
-	position += (player.position *2 * delta) - position # !!!!!
+	
+	
+	#position += (player.position *2 * delta) - position # !!!!!
+	
+	
+	
+	
 	#position += (player.position * delta) - position # !!!!!
 	#position += (player.position * delta) - position
 	#position = position.lerp(player.position, delta * smoothing_factor)

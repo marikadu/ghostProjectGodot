@@ -19,10 +19,13 @@ extends CharacterBody2D
 var dashing = false
 var can_dash = true
 
+var current_speed = 0.0
+
 var input: Vector2 = Vector2.ZERO
 var playback: AnimationNodeStateMachinePlayback
 
 func _ready():
+	current_speed = max_speed
 	playback = animation_tree["parameters/playback"]
 	animation_tree.active = true
 
@@ -43,6 +46,8 @@ func _physics_process(delta: float) -> void:
 	
 	if dashing:
 		velocity = velocity.normalized() * dash_speed
+		#velocity 
+		#current_speed = lerp(1200.0, 200.0, delta * 1200)
 
 	move_and_slide()
 	select_animation()
