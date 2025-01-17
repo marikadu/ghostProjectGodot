@@ -77,17 +77,8 @@ func show_game_over():
 #	I don't know if I need to unpause it when I go to other screen, show check it later
 	pass
 	
-	#	if possessed _on_area_2d_body_entered border:
-	# 	trigger game over
-	
-func _on_possessed_escapes_body_exited(body: Node2D) -> void:
-	if body == possessed:
-		print("main: possessed has escaped!")
-	pass # Replace with function body.
-	
 
-	
-	
+
 func _on_npc_died():
 	spawn_possessed_enemy()
 #	maybe create some sort of effect "za warudo" or something, but don't affect time?

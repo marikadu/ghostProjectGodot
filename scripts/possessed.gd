@@ -96,7 +96,7 @@ func die():
 	#ran_dir_timer.start(1.4)
 
 
-func _on_area_2d_possessed_area_shape_exited(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
+func _on_area_2d_possessed_area_shape_entered(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
 	if area == possessed_escapes:
 		print("Possessed: possesed has escaped")
 		print("lmao possessed has escaped")
