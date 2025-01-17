@@ -3,10 +3,11 @@ extends Control
 @onready var camera = get_node("Camera2D")
 #@onready var win_game = $Node/WinScreen
 @onready var win_game = get_node("Node/WinScreen")
+@onready var game_over = get_node("Node/GameOverScreen")
 #@onready var events = get_node("Events")
 #@onready var event_node = get_node("res://scripts/Events.gd")
 
-var possesed = preload("res://scenes/possessed.tscn")
+var possessed = preload("res://scenes/possessed.tscn")
 @onready var npc = preload("res://scenes/npc.tscn")
 var npc_instance: Node = null  # Store the NPC instance
 #var npc_instance = null
@@ -23,6 +24,7 @@ var enemy_instances = []
 # control spawning
 @onready var can_spawn_enemies = true
 @onready var can_spawn_posessed = false
+#@onready var possessed_area = $PossessedArea  # Replace with your Area2D node's path
 
 # how far outside the camera to spawn enemies
 # 1st number - min distance, 2nd number - max distance in pixles
@@ -32,6 +34,7 @@ func _ready() -> void:
 
 	# connecting to signals
 	Events.win_game.connect(show_win_game)
+	Events.game_over.connect(show_game_over)
 	Events.npc_died.connect(_on_npc_died)
 	Events.possessed_defeated.connect(_on_possessed_defeated)
 	
@@ -40,6 +43,8 @@ func _ready() -> void:
 		print("camera is not found, where is camera?")
 	else:
 		print("camera found")
+		
+	#possessed.possessed_area.connect("body_exited", self, "_on_possessed_escapes_body_exited")
 		
 	
 	if npc_instance == null:  # check if the NPC instance exists
@@ -59,6 +64,29 @@ func show_win_game():
 	#get_tree().paused = true # pause game
 #	I don't know if I need to unpause it when I go to other screen, show check it later
 	pass
+
+	
+func show_game_over():
+	
+	game_over.show()
+	# show that the ghosts go back to hiding spots when sun rises
+	kill_all_enemies()
+	# main character (ghost) evaporates or is sad
+	can_spawn_enemies = false
+	#get_tree().paused = true # pause game
+#	I don't know if I need to unpause it when I go to other screen, show check it later
+	pass
+	
+	#	if possessed _on_area_2d_body_entered border:
+	# 	trigger game over
+	
+func _on_possessed_escapes_body_exited(body: Node2D) -> void:
+	if body == possessed:
+		print("main: possessed has escaped!")
+	pass # Replace with function body.
+	
+
+	
 	
 func _on_npc_died():
 	spawn_possessed_enemy()
@@ -68,7 +96,7 @@ func _on_npc_died():
 	pass
 	
 func spawn_possessed_enemy():
-	var possessed_instance = possesed.instantiate()
+	var possessed_instance = possessed.instantiate()
 	possessed_instance.position = Vector2(576, 390)
 	#add_child(possessed_instance)
 	call_deferred("add_child", possessed_instance)

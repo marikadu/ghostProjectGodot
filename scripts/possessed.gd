@@ -10,9 +10,11 @@ var rotation_range: float = 2.0  # Maximum rotation angle (in degrees) to the le
 @export var health = 3  # Health of the possessed
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var possessed_area = $Area2DPossessed
 @onready var ran_dir_timer = $ChangingRandomDirection
 @onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var hit_timer = $isHitAnimation
+@onready var possessed_escapes = get_tree().root.get_node("main/PossessedEscapes")
 
 #var velocity = Vector2.ZERO
 var random_direction: Vector2 = Vector2.ZERO
@@ -24,6 +26,12 @@ func _ready() -> void:
 	npc = Global.npc_instance
 	
 	animated_sprite.play("dead")
+	
+	if possessed_area:
+#		npc_area.connect("body_entered", Callable(self, "_on_area_2d_body_entered"))
+		possessed_area.connect("body_exited", Callable(self, "_on_possessed_area_body_exited"))
+	else:
+		print("Possessed area is missing!")
 
 	
 func _process(_delta):
@@ -86,3 +94,12 @@ func die():
 	
 	# Restart the timer to keep updating direction every 2 seconds
 	#ran_dir_timer.start(1.4)
+
+
+func _on_area_2d_possessed_area_shape_exited(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
+	if area == possessed_escapes:
+		print("Possessed: possesed has escaped")
+		print("lmao possessed has escaped")
+		Events.game_over.emit()
+		Events.possessed_escaped.emit()
+	pass # Replace with function body.

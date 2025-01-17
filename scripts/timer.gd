@@ -12,6 +12,7 @@ var npc: CharacterBody2D
 
 
 func _ready() -> void:
+	Events.possessed_escaped.connect(_on_possessed_escaped)
 	timer.start()
 #	initializing npc before accessing it
 	call_deferred("_initialize_npc")
@@ -37,19 +38,33 @@ func _initialize_npc() -> void:
 
 
 func _on_timer_timeout() -> void:
-	print("win!")
-	Events.win_game.emit()
-	#npc.animated_sprite.play("waking_up")
+	var animated_sprite = npc.get_node_or_null("AnimatedSprite2D")
+	if animated_sprite != null:
+		if npc.is_alive:
+			print("yippie npc is alive")
+			print("win!")
+			animated_sprite.play("waking_up")
+			Events.win_game.emit()
+			
+		else:
+			print("npc is dead lmao")
+			Events.game_over.emit()
+		#npc.animated_sprite.play("waking_up")
 
 	if npc == null:
 		print("NPC instance is null")
 		return 
+		
+func _on_possessed_escaped():
+	print("stop the timer")
+	timer.stop()
+	pass
 	
-	var animated_sprite = npc.get_node_or_null("AnimatedSprite2D")
-	if animated_sprite != null:
-		animated_sprite.play("waking_up")
-	else:
-		print("AnimatedSprite2D node not found")
+	#var animated_sprite = npc.get_node_or_null("AnimatedSprite2D")
+	#if animated_sprite != null:
+		#animated_sprite.play("waking_up")
+	#else:
+		#print("AnimatedSprite2D node not found")
 
 	#if npc != null:
 		#var animated_sprite = npc.get_node_or_null("AnimatedSprite2D")

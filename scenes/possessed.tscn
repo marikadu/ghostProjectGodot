@@ -114,9 +114,9 @@ libraries = {
 "": SubResource("AnimationLibrary_tdvf1")
 }
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2DPossessed" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DPossessed"]
 shape = SubResource("CircleShape2D_hf5l8")
 
 [node name="CollisionShape2D_disabled" type="CollisionShape2D" parent="."]
@@ -129,5 +129,6 @@ wait_time = 1.5
 [node name="isHitAnimation" type="Timer" parent="."]
 wait_time = 0.7
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_shape_exited" from="Area2DPossessed" to="." method="_on_area_2d_possessed_area_shape_exited"]
+[connection signal="body_entered" from="Area2DPossessed" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="ChangingRandomDirection" to="." method="_on_changing_random_direction_timeout"]
