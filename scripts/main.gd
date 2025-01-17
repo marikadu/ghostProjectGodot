@@ -19,7 +19,8 @@ var npc_instance: Node = null  # Store the NPC instance
 # list of enemies
 var enemy_list = [
 	preload("res://scenes/enemy_1.tscn"),
-	preload("res://scenes/enemy_2.tscn")
+	preload("res://scenes/enemy_2.tscn"),
+	preload("res://scenes/enemy_3.tscn")
 ]
 
 # store enemy instances
@@ -32,7 +33,7 @@ var enemy_instances = []
 
 # how far outside the camera to spawn enemies
 # 1st number - min distance, 2nd number - max distance in pixles
-@export var spawn_distance_range = Vector2(500, 1000)
+@export var spawn_distance_range = Vector2(550, 1200)
 
 func _ready() -> void:
 
@@ -57,7 +58,8 @@ func _ready() -> void:
 	
 	if npc_instance == null:  # check if the NPC instance exists
 		npc_instance = npc.instantiate()  # instance the NPC
-		npc_instance.position = Vector2(576, 390)
+		#npc_instance.position = Vector2(576, 390)
+		npc_instance.position = get_viewport_rect().size/2
 		add_child(npc_instance)  # adding npc to the scene tree
 		Global.npc_instance = npc_instance # store the instance in the global variable
 		print("NPC ready")

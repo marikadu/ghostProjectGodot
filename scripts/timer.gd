@@ -6,7 +6,7 @@ extends Node
 # Engine.time_scale = 0.5 (would be cool for lose screen)
 
 @onready var label = $Label
-@onready var timer = $Timer
+@onready var timer = $CountDownTimerTimer
 
 var npc: CharacterBody2D
 
@@ -14,6 +14,7 @@ var npc: CharacterBody2D
 func _ready() -> void:
 	Events.possessed_escaped.connect(_on_possessed_escaped)
 	timer.start()
+	
 #	initializing npc before accessing it
 	call_deferred("_initialize_npc")
 	

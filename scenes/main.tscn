@@ -23,7 +23,10 @@ size = Vector2(30, 984)
 [node name="main" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+size_flags_horizontal = 6
+size_flags_vertical = 3
 script = ExtResource("1_y5ff8")
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 top_level = true
@@ -99,7 +102,8 @@ offset_top = 26.0
 offset_right = 1184.0
 offset_bottom = 77.0
 
-[node name="Timer" parent="." instance=ExtResource("9_ag1hq")]
+[node name="CountDownTimer" parent="." instance=ExtResource("9_ag1hq")]
+unique_name_in_owner = true
 
 [node name="PossessedEscapes" type="Area2D" parent="."]
 collision_layer = 17
