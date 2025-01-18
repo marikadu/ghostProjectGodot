@@ -1,6 +1,10 @@
 extends Control
 
-@onready var ghost_player = get_node_or_null("../GhostPlayer")
+#@onready var ghost_player = get_node_or_null("../GhostPlayer")
+#@onready var ghost_player: CharacterBody2D = $"../../GhostPlayer"
+@onready var ghost_player: CharacterBody2D = get_node_or_null("../../GhostPlayer")
+
+
 @onready var dash_timer_reset = ghost_player.get_node_or_null("dash_timer_reset") if ghost_player else null
 @onready var pb = $TextureProgressBar  # progress bar within the UI
 

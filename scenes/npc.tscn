@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ccq0ksogu3xkq"]
+[gd_scene load_steps=17 format=3 uid="uid://ccq0ksogu3xkq"]
 
 [ext_resource type="Script" path="res://scripts/npc.gd" id="1_ffje0"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_ia2t5"]
@@ -102,8 +102,11 @@ _data = {
 "hit_flash": SubResource("Animation_4443o")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qos5"]
+size = Vector2(136.71, 204.73)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_y1w4g"]
-radius = 61.6
+radius = 11.65
 
 [node name="NPC" type="CharacterBody2D"]
 z_index = -2
@@ -128,10 +131,11 @@ libraries = {
 visibility_layer = 5
 
 [node name="NPCCollisionShape2D" type="CollisionShape2D" parent="Area2DNPC"]
-shape = SubResource("CircleShape2D_y1w4g")
-
-[node name="NPCCollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_y1w4g")
+position = Vector2(0, 2.12766)
+shape = SubResource("RectangleShape2D_2qos5")
 
 [node name="isHitAnimation" type="Timer" parent="."]
 wait_time = 0.7
+
+[node name="NPCCollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y1w4g")

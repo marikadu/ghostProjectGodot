@@ -1,6 +1,11 @@
 extends CharacterBody2D
 
-@onready var healthbar = get_tree().root.get_node("main/HealthBar")
+@onready var healthbar : TextureProgressBar = get_tree().root.get_node("main/UI/HealthBar")
+#@onready var healthbar = %HealthBar
+#@onready var healthbar: TextureProgressBar = %HealthBar
+#@onready var healthbar = get_node("Node/%HealthBar")
+
+
 @onready var npc = get_tree().root.get_node("main/NPC")
 @onready var npc_area = $Area2DNPC
 @onready var animated_sprite = $AnimatedSprite2D
@@ -61,7 +66,7 @@ func _on_area_2d_body_entered(body: Node) -> void:
 
 # take damage
 func take_damage(damage: int):
-	camera_control.apply_shake(3, 2)
+	camera_control.apply_shake(1.2, 1)
 
 		
 	animated_sprite.play("hit")

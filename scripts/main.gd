@@ -5,8 +5,11 @@ extends Control
 
 @onready var camera: Camera2D = %Camera2D
 #@onready var camera = get_node("Camera2D")
-@onready var win_game = get_node("Node/WinScreen")
-@onready var game_over = get_node("Node/GameOverScreen")
+#@onready var win_game = get_node("Node/WinScreen")
+#@onready var win_game : TextureProgressBar = get_tree().root.get_node("main/UI/HealthBar")
+@onready var win_game: ColorRect = $UI/WinScreen
+@onready var game_over: ColorRect = $UI/GameOverScreen
+#@onready var game_over = get_node("Node/GameOverScreen")
 #@onready var events = get_node("Events")
 #@onready var event_node = get_node("res://scripts/Events.gd")
 
