@@ -338,6 +338,7 @@ stream = ExtResource("5_s4a3m")
 [node name="ghost_dies" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_28kjp")
 volume_db = -1.284
+max_polyphony = 3
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_timer_reset" to="." method="_on_dash_timer_reset_timeout"]

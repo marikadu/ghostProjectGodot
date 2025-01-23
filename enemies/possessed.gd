@@ -1,15 +1,15 @@
 extends CharacterBody2D
 # if I enable layer 1 or mask 1, the enemy stops when it reaches the player
 
-var speed = 145
+@export var speed = 145
+@export var health = 3
+@export var rotation_speed: float = 2.0  # speed of rotation (degrees per second)
+@export var rotation_range: float = 2.0  # maximum rotation angle (in degrees) to the left and right
+
 var npc: CharacterBody2D
 var player: CharacterBody2D
 
-var rotation_speed: float = 2.0  # Speed of rotation (degrees per second)
-var rotation_range: float = 2.0  # Maximum rotation angle (in degrees) to the left and right
-@export var health = 3  # Health of the possessed
-
-
+@onready var can_hurt = true
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var possessed_area = $Area2DPossessed
 @onready var ran_dir_timer = $ChangingRandomDirection
@@ -19,7 +19,7 @@ var rotation_range: float = 2.0  # Maximum rotation angle (in degrees) to the le
 @onready var camera_control = get_tree().root.get_node("main/CameraControl")
 @onready var possessed_hit: AudioStreamPlayer2D = $possessed_hit
 @onready var hit: AudioStreamPlayer2D = $hit
-
+@onready var main = get_tree().root.get_node("main")
 
 #var velocity = Vector2.ZERO
 var random_direction: Vector2 = Vector2.ZERO
@@ -65,7 +65,8 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player and !player.dashing:
-		print("touched player, ignore player") # show somehow that the possessed 
+		print("touched player, ignore player")
+		# show somehow that the possessed 
 		#doesn't care if you are not dashing
 		
 		#print("Player got the enemy")
@@ -81,13 +82,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			die()
 		
 func take_damage():
-	# show somehow that the possessed takes damage
-	possessed_hit.play()
-	hit.play()
-	hit_flash.play("hit_flash")
-	health -= 1
-	print("ow oww")
-	camera_control.apply_shake(3, 1)
+	# can't kill if game over
+	if not main.is_game_over:
+		possessed_hit.play()
+		hit.play()
+		hit_flash.play("hit_flash")
+		health -= 1
+		print("ow oww")
+		camera_control.apply_shake(3, 1)
 	
 func die():
 	# if I put the sounds here, they don't work

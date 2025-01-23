@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dushnf2mn65aa"]
+[gd_scene load_steps=27 format=3 uid="uid://dushnf2mn65aa"]
 
 [ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="1_wea8t"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_y5ff8"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://scenes/night_bye.gd" id="16_8u1su"]
 [ext_resource type="AudioStream" uid="uid://c0o0nrc7kgl0t" path="res://SFX/possessed_dies2.ogg" id="18_fyf2b"]
 [ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="19_am3cw"]
+[ext_resource type="AudioStream" uid="uid://br1m6jylcxj0w" path="res://SFX/win.ogg" id="19_t81kq"]
 
 [sub_resource type="Curve2D" id="Curve2D_l6exe"]
 _data = {
@@ -208,6 +209,12 @@ position = Vector2(579, 303)
 scale = Vector2(0.445, 0.445)
 stream = SubResource("AudioStreamRandomizer_rwpst")
 pitch_scale = 1.22
+
+[node name="win" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(579, 303)
+scale = Vector2(0.445, 0.445)
+stream = ExtResource("19_t81kq")
+volume_db = 1.455
 
 [node name="possessed_hit" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(579, 303)

@@ -145,7 +145,7 @@ shape = SubResource("RectangleShape2D_2qos5")
 wait_time = 0.7
 
 [node name="NPCCollisionShape2D2" type="CollisionShape2D" parent="."]
-scale = Vector2(3.63, 5.472)
+scale = Vector2(4.785, 7.213)
 shape = SubResource("RectangleShape2D_8d2p6")
 
 [node name="npc_hit" type="AudioStreamPlayer2D" parent="."]
