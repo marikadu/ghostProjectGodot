@@ -6,11 +6,15 @@ extends CharacterBody2D
 #@onready var healthbar = get_node("Node/%HealthBar")
 
 
-@onready var npc = get_tree().root.get_node("main/NPC")
+#@onready var npc = get_tree().root.get_node("main/NPC")
 @onready var npc_area = $Area2DNPC
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var hit_timer = $isHitAnimation
+@onready var npc_hit: AudioStreamPlayer2D = $npc_hit
+@onready var hit: AudioStreamPlayer2D = $hit
+
+
 
 #@onready var camera_control: Control = %CameraControl
 @onready var camera_control = get_tree().root.get_node("main/CameraControl")
@@ -20,8 +24,10 @@ extends CharacterBody2D
 var health: int
 var max_health: int
 var is_alive: bool = true
+var player: CharacterBody2D
 
 func _ready():
+	player = get_tree().root.get_node("main/GhostPlayer")
 	max_health = 5
 	health = max_health # at the start of the game, health is max
 	is_alive = true
@@ -63,12 +69,17 @@ func _on_area_2d_body_entered(body: Node) -> void:
 	if body.is_in_group("enemy"):
 		# reduce health by 1
 		take_damage(1)
+	if body == player:
+		#print("AAAAAAAAAAA")
+		# apply damage if player is near
+		pass
 
 # take damage
 func take_damage(damage: int):
 	camera_control.apply_shake(1.2, 1)
 
-		
+	npc_hit.play()
+	hit.play()
 	animated_sprite.play("hit")
 	hit_flash.play("hit_flash")
 #	update health

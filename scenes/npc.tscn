@@ -1,6 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://ccq0ksogu3xkq"]
+[gd_scene load_steps=20 format=3 uid="uid://ccq0ksogu3xkq"]
 
-[ext_resource type="Script" path="res://scripts/npc.gd" id="1_ffje0"]
+[ext_resource type="Script" path="res://scripts/npc.gd" id="1_05yxr"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_ia2t5"]
 [ext_resource type="Texture2D" uid="uid://bhsn6ehnsepq" path="res://sprites/NPC/dead.png" id="2_k635l"]
 [ext_resource type="Texture2D" uid="uid://1iu2lvhsfql6" path="res://sprites/NPC/sleeping.png" id="2_lxhe8"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://drkmvsp3apya1" path="res://sprites/NPC/gone.png" id="4_vveos"]
 [ext_resource type="Texture2D" uid="uid://hxdnj4nqthi" path="res://sprites/NPC/waking_up1.png" id="6_b3f61"]
 [ext_resource type="Texture2D" uid="uid://cy86tcce16sil" path="res://sprites/NPC/waking_up2.png" id="7_lewop"]
+[ext_resource type="AudioStream" uid="uid://jighd3tmh4ap" path="res://SFX/npc_hit.ogg" id="10_wccak"]
+[ext_resource type="AudioStream" uid="uid://cwqkcb7uy7cly" path="res://SFX/hit.ogg" id="11_0l7xh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ngrvg"]
 resource_local_to_scene = true
@@ -105,8 +107,12 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2qos5"]
 size = Vector2(136.71, 204.73)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_y1w4g"]
-radius = 11.65
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8d2p6"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_snm13"]
+random_pitch = 1.19
+streams_count = 1
+stream_0/stream = ExtResource("10_wccak")
 
 [node name="NPC" type="CharacterBody2D"]
 z_index = -2
@@ -114,7 +120,7 @@ scale = Vector2(0.47, 0.47)
 collision_layer = 7
 collision_mask = 7
 collision_priority = 3.0
-script = ExtResource("1_ffje0")
+script = ExtResource("1_05yxr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ngrvg")
@@ -131,6 +137,7 @@ libraries = {
 visibility_layer = 5
 
 [node name="NPCCollisionShape2D" type="CollisionShape2D" parent="Area2DNPC"]
+visible = false
 position = Vector2(0, 2.12766)
 shape = SubResource("RectangleShape2D_2qos5")
 
@@ -138,4 +145,12 @@ shape = SubResource("RectangleShape2D_2qos5")
 wait_time = 0.7
 
 [node name="NPCCollisionShape2D2" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_y1w4g")
+scale = Vector2(3.63, 5.472)
+shape = SubResource("RectangleShape2D_8d2p6")
+
+[node name="npc_hit" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_snm13")
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_0l7xh")
+pitch_scale = 2.16

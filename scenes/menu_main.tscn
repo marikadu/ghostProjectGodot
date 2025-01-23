@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dn4008nv06clk"]
+[gd_scene load_steps=3 format=3 uid="uid://dn4008nv06clk"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_60uys"]
+[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_36rfs"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -30,14 +31,17 @@ layout_mode = 2
 
 [node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_36rfs")
 text = "Play"
 
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_36rfs")
 text = "Options"
 
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_36rfs")
 text = "Exit"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]

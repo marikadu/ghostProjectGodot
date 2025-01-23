@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbobth255p4np"]
+[gd_scene load_steps=3 format=3 uid="uid://bbobth255p4np"]
 
 [ext_resource type="Script" path="res://scripts/timer.gd" id="1_n6t8t"]
+[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_kly3c"]
 
 [node name="CountDownTimer" type="Node"]
 script = ExtResource("1_n6t8t")
@@ -15,6 +16,7 @@ offset_bottom = 70.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+theme = ExtResource("2_kly3c")
 theme_override_font_sizes/font_size = 51
 text = "00:00"
 horizontal_alignment = 1

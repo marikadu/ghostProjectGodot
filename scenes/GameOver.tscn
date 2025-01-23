@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4cgmatdls027"]
+[gd_scene load_steps=3 format=3 uid="uid://b4cgmatdls027"]
 
 [ext_resource type="Script" path="res://scripts/game_over_screen.gd" id="1_x11hr"]
+[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_hwt1f"]
 
 [node name="GameOverScreen" type="ColorRect"]
 anchors_preset = 15
@@ -24,18 +25,21 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="GameOverScreen/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_hwt1f")
 theme_override_font_sizes/font_size = 50
 text = "Game Over"
 horizontal_alignment = 1
 
 [node name="TryAgain" type="Button" parent="GameOverScreen/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_hwt1f")
 theme_override_font_sizes/font_size = 41
 text = "Try Again"
 icon_alignment = 1
 
 [node name="MainMenuButton" type="Button" parent="GameOverScreen/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_hwt1f")
 theme_override_font_sizes/font_size = 41
 text = "Main Menu"
 icon_alignment = 1

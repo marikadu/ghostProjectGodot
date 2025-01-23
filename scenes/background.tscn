@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://jdi7jw0iyfni"]
+
+[ext_resource type="Texture2D" uid="uid://dxx7ap03i0ego" path="res://sprites/day.png" id="1_2maq2"]
+[ext_resource type="Script" path="res://scenes/background.gd" id="2_6eig6"]
+[ext_resource type="Texture2D" uid="uid://p75t3ho1pyls" path="res://sprites/night.png" id="2_drtb3"]
+
+[sub_resource type="Animation" id="Animation_vvvnc"]
+resource_name = "time"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_asuh5"]
+_data = {
+"time": SubResource("Animation_vvvnc")
+}
+
+[node name="Background" type="Node2D"]
+
+[node name="Sprite2Day" type="Sprite2D" parent="."]
+texture = ExtResource("1_2maq2")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+script = ExtResource("2_6eig6")
+
+[node name="Sprite2Night" type="Sprite2D" parent="CanvasModulate"]
+texture = ExtResource("2_drtb3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasModulate/Sprite2Night"]
+libraries = {
+"": SubResource("AnimationLibrary_asuh5")
+}

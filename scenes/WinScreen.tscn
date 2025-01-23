@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://wu4f2v4h1o72"]
+[gd_scene load_steps=3 format=3 uid="uid://wu4f2v4h1o72"]
 
 [ext_resource type="Script" path="res://scripts/win_screen.gd" id="1_g10im"]
+[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_0sg50"]
 
 [node name="WinScreen" type="ColorRect"]
 anchors_preset = 15
@@ -24,12 +25,14 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="WinScreen/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_0sg50")
 theme_override_font_sizes/font_size = 50
 text = "You survived!"
 horizontal_alignment = 1
 
 [node name="MainMenuButton" type="Button" parent="WinScreen/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_0sg50")
 theme_override_font_sizes/font_size = 41
 text = "Main Menu"
 icon_alignment = 1

@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://tnqjhgxd31yv"]
+
+[ext_resource type="Script" path="res://enemies/enemy_3.gd" id="1_fohts"]
+[ext_resource type="Texture2D" uid="uid://5188v7gd0hce" path="res://sprites/icon4.png" id="2_fjun3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_27fh4"]
+radius = 67.42
+
+[node name="enemy3" type="CharacterBody2D" groups=["enemy"]]
+editor_description = "enemy that goes to NPC"
+scale = Vector2(0.46, 0.46)
+collision_layer = 4
+collision_mask = 3
+collision_priority = 2.0
+script = ExtResource("1_fohts")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.881246, 0.441064, 0.339695, 1)
+texture = ExtResource("2_fjun3")
+
+[node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_27fh4")
+
+[node name="CollisionShape2D_disabled" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_27fh4")
+disabled = true
+
+[node name="SpeedTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]

@@ -1,9 +1,10 @@
 extends Camera2D
 
 @onready var player = get_tree().root.get_node("main/GhostPlayer") # !!!!
+var camera_off = Vector2(584,449)
 
 func _process(delta):
-	pass
+	#pass
 	# multiply by number = make camera faster
 	# divide by number = make camera slower
 	# I should also apply those to the items to create a parallax effect
@@ -23,7 +24,8 @@ func _process(delta):
 	
 	
 	
-	#position += (player.position *2 * delta) - position # !!!!!
+	#position += (player.position *2 * delta) - position # !!!!! OLD CODE
+	position = (player.position*delta) + camera_off # NEW CODE
 	
 	
 	

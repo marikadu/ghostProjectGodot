@@ -22,8 +22,8 @@ Global="*res://scripts/Global.gd"
 
 [debug]
 
-settings/stdout/print_fps=true
 gdscript/warnings/unused_signal=0
+gdscript/stdout/print_fps=false
 
 [display]
 

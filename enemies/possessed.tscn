@@ -1,0 +1,147 @@
+[gd_scene load_steps=18 format=3 uid="uid://caqmoofobi37c"]
+
+[ext_resource type="Script" path="res://enemies/possessed.gd" id="1_n4ngr"]
+[ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_vc6ox"]
+[ext_resource type="Texture2D" uid="uid://bhsn6ehnsepq" path="res://sprites/NPC/dead.png" id="3_g2e6f"]
+[ext_resource type="Texture2D" uid="uid://cuqg0s5a605ki" path="res://sprites/NPC/sleeping3_hit.png" id="4_oxqjc"]
+[ext_resource type="Texture2D" uid="uid://1iu2lvhsfql6" path="res://sprites/NPC/sleeping.png" id="5_2i375"]
+[ext_resource type="Texture2D" uid="uid://drtiyb8qvwv1e" path="res://sprites/NPC/sleeping2.png" id="6_ltsqw"]
+[ext_resource type="Texture2D" uid="uid://hxdnj4nqthi" path="res://sprites/NPC/waking_up1.png" id="7_8pntk"]
+[ext_resource type="Texture2D" uid="uid://cy86tcce16sil" path="res://sprites/NPC/waking_up2.png" id="8_gtfq1"]
+[ext_resource type="AudioStream" uid="uid://blxd3xi3kn46d" path="res://SFX/possessed_hit.wav" id="9_eeym8"]
+[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="10_yemxf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_622h7"]
+resource_local_to_scene = true
+shader = ExtResource("2_vc6ox")
+shader_parameter/isHit = false
+shader_parameter/Tint = Color(1, 1, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ibt27"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_g2e6f")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_oxqjc")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2i375")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ltsqw")
+}],
+"loop": true,
+"name": &"sleeping",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_8pntk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_gtfq1")
+}],
+"loop": false,
+"name": &"waking_up",
+"speed": 1.0
+}]
+
+[sub_resource type="Animation" id="Animation_lueaj"]
+length = 0.0115
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isHit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4443o"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isHit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 0.217638),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tdvf1"]
+_data = {
+"RESET": SubResource("Animation_lueaj"),
+"hit_flash": SubResource("Animation_4443o")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hf5l8"]
+radius = 86.56
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_axo24"]
+random_pitch = 1.19
+streams_count = 1
+stream_0/stream = ExtResource("9_eeym8")
+
+[node name="Possesed" type="CharacterBody2D"]
+scale = Vector2(0.675, 0.675)
+collision_layer = 17
+collision_mask = 17
+script = ExtResource("1_n4ngr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_622h7")
+position = Vector2(0, 11.555)
+sprite_frames = SubResource("SpriteFrames_ibt27")
+animation = &"dead"
+autoplay = "sleeping"
+
+[node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_tdvf1")
+}
+
+[node name="Area2DPossessed" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DPossessed"]
+shape = SubResource("CircleShape2D_hf5l8")
+
+[node name="CollisionShape2D_disabled" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hf5l8")
+disabled = true
+
+[node name="ChangingRandomDirection" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="isHitAnimation" type="Timer" parent="."]
+wait_time = 0.7
+
+[node name="possessed_hit" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_axo24")
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_yemxf")
+
+[connection signal="area_shape_entered" from="Area2DPossessed" to="." method="_on_area_2d_possessed_area_shape_entered"]
+[connection signal="body_entered" from="Area2DPossessed" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="ChangingRandomDirection" to="." method="_on_changing_random_direction_timeout"]
