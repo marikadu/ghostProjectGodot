@@ -136,6 +136,7 @@ func spawn_enemy():
 	
 func _on_enemy_spawn_timer_timeout() -> void:
 	if can_spawn_enemies:
-		spawn_enemy()
+		#spawn_enemy()
+		pass
 	else:
 		return

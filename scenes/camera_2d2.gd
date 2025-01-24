@@ -1,7 +1,7 @@
 extends Camera2D
 
 @onready var player = get_tree().root.get_node("main/GhostPlayer") # !!!!
-var camera_off = Vector2(584,449)
+var camera_off = Vector2(576,449)
 
 func _process(delta):
 	#pass

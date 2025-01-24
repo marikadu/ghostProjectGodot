@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://dnhtj68mhqb2u"]
+
+[ext_resource type="Texture2D" uid="uid://cth7yboi1klpl" path="res://sprites/foreground_n.png" id="1_6sewi"]
+[ext_resource type="Script" path="res://scripts/bg_moves.gd" id="1_wo1p5"]
+[ext_resource type="Texture2D" uid="uid://c0pktx7o2ve3t" path="res://sprites/middleground_n.png" id="2_cbigt"]
+[ext_resource type="Texture2D" uid="uid://bjoscv5jch06r" path="res://sprites/sky_n.png" id="2_mcd70"]
+[ext_resource type="Texture2D" uid="uid://04pi5nvnnso4" path="res://sprites/background_n.png" id="2_vi5fq"]
+[ext_resource type="Texture2D" uid="uid://b2mbjhtlvxuid" path="res://sprites/moon.png" id="3_fe7de"]
+[ext_resource type="Script" path="res://scripts/moon_anim.gd" id="4_70v8j"]
+
+[sub_resource type="Animation" id="Animation_xqj4p"]
+resource_name = "moon"
+length = 25.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../moon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2.76667, 23.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 164), Vector2(0, -223)]
+}
+
+[sub_resource type="Animation" id="Animation_cligc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../moon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 164)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w1pcp"]
+_data = {
+"RESET": SubResource("Animation_cligc"),
+"moon": SubResource("Animation_xqj4p")
+}
+
+[node name="bg" type="Node2D"]
+script = ExtResource("1_wo1p5")
+
+[node name="sky" type="Sprite2D" parent="."]
+texture = ExtResource("2_mcd70")
+
+[node name="moon" type="Sprite2D" parent="."]
+position = Vector2(0, 164)
+texture = ExtResource("3_fe7de")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="moon"]
+root_node = NodePath("../../sky")
+libraries = {
+"": SubResource("AnimationLibrary_w1pcp")
+}
+script = ExtResource("4_70v8j")
+
+[node name="background" type="Sprite2D" parent="."]
+texture = ExtResource("2_vi5fq")
+
+[node name="middleground" type="Sprite2D" parent="."]
+texture = ExtResource("2_cbigt")
+
+[node name="foreground" type="Sprite2D" parent="."]
+texture = ExtResource("1_6sewi")

@@ -28,6 +28,7 @@ gdscript/stdout/print_fps=false
 [display]
 
 window/size/viewport_height=864
+window/size/resizable=false
 
 [global_group]
 

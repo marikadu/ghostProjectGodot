@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://dushnf2mn65aa"]
+[gd_scene load_steps=29 format=3 uid="uid://dushnf2mn65aa"]
 
 [ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="1_wea8t"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_y5ff8"]
 [ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://scenes/dash_stamina.tscn" id="2_dpb76"]
 [ext_resource type="Script" path="res://scenes/camera_effects.gd" id="2_eeje6"]
+[ext_resource type="Texture2D" uid="uid://cfdml4i4dgigl" path="res://bg.png" id="2_mt6j4"]
 [ext_resource type="Texture2D" uid="uid://xxokulhyor6e" path="res://sprites/house.png" id="2_niula"]
 [ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/daynightcycle-gradient-texture.tres" id="3_evgsl"]
 [ext_resource type="PackedScene" uid="uid://wu4f2v4h1o72" path="res://scenes/WinScreen.tscn" id="3_vi4qj"]
@@ -15,6 +16,7 @@
 [ext_resource type="Shader" path="res://shaders/border.gdshader" id="10_be6vf"]
 [ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://scenes/hp.tscn" id="11_rp7p5"]
 [ext_resource type="Texture2D" uid="uid://dxx7ap03i0ego" path="res://sprites/day.png" id="12_lnxhn"]
+[ext_resource type="PackedScene" uid="uid://dnhtj68mhqb2u" path="res://scenes/bg_moves.tscn" id="13_fb5vo"]
 [ext_resource type="Texture2D" uid="uid://p75t3ho1pyls" path="res://sprites/night.png" id="15_uas1i"]
 [ext_resource type="Script" path="res://scenes/night_bye.gd" id="16_8u1su"]
 [ext_resource type="AudioStream" uid="uid://c0o0nrc7kgl0t" path="res://SFX/possessed_dies2.ogg" id="18_fyf2b"]
@@ -111,15 +113,6 @@ offset_right = 150.0
 offset_bottom = 33.0
 
 [node name="Score" parent="UI" instance=ExtResource("8_lcji7")]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.0
-offset_left = 496.0
-offset_top = 797.0
-offset_right = 496.0
-offset_bottom = 797.0
-grow_vertical = 1
 
 [node name="HealthBar" parent="UI" instance=ExtResource("11_rp7p5")]
 z_index = 6
@@ -180,20 +173,33 @@ offset_right = 33.0
 offset_bottom = 794.0
 scale = Vector2(30.04, 8)
 
+[node name="bg" parent="." instance=ExtResource("13_fb5vo")]
+z_index = -10
+position = Vector2(576, 432)
+
 [node name="house_background" type="Sprite2D" parent="."]
+visible = false
 z_index = -10
 position = Vector2(576, 432)
 scale = Vector2(0.695, 0.695)
 texture = ExtResource("2_niula")
 
 [node name="newhouse_d" type="Sprite2D" parent="."]
+visible = false
 z_index = -10
 position = Vector2(567, 409)
 scale = Vector2(4.03976, 4.03976)
 texture = ExtResource("12_lnxhn")
 
+[node name="Bg2" type="Sprite2D" parent="."]
+visible = false
+z_index = -10
+position = Vector2(576, 432)
+texture = ExtResource("2_mt6j4")
+
 [node name="newhouse_n" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+visible = false
 z_index = -10
 position = Vector2(567, 409)
 scale = Vector2(4.03976, 4.03976)
@@ -202,22 +208,19 @@ script = ExtResource("16_8u1su")
 
 [node name="GhostPlayer" parent="." instance=ExtResource("1_wea8t")]
 z_index = 2
-position = Vector2(579, 303)
+position = Vector2(576, 305)
 
 [node name="possessed_dies" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(579, 303)
 scale = Vector2(0.445, 0.445)
 stream = SubResource("AudioStreamRandomizer_rwpst")
 pitch_scale = 1.22
 
 [node name="win" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(579, 303)
 scale = Vector2(0.445, 0.445)
 stream = ExtResource("19_t81kq")
 volume_db = 1.455
 
 [node name="possessed_hit" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(579, 303)
 scale = Vector2(0.445, 0.445)
 stream = ExtResource("19_am3cw")
 pitch_scale = 2.16
