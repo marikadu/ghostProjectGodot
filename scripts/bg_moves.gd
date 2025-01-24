@@ -7,8 +7,10 @@ extends Node2D
 @onready var n_background: Sprite2D = $n_background
 @onready var n_sky: Sprite2D = $n_sky
 
-@onready var d_background: Sprite2D = $d_background
+@onready var d_foreground: Sprite2D = $d_foreground
 @onready var d_middleground: Sprite2D = $d_middleground
+@onready var d_background: Sprite2D = $d_background
+@onready var d_sky: Sprite2D = $d_sky
 
 
 @export var time = 15.0
@@ -27,6 +29,7 @@ func _process(delta):
 	
 	await get_tree().create_timer(wait_before_sunrise).timeout
 	fade_out()
+	
 
 	#position = (player.position*delta) + camera_off # NEW CODE
 	
