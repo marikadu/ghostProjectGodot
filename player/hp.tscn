@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://giv47sl8et1g"]
 
 [ext_resource type="Texture2D" uid="uid://cnv135ij7ykqo" path="res://sprites/hp.png" id="1_608r2"]
-[ext_resource type="Script" path="res://scripts/hp.gd" id="2_ww2b3"]
+[ext_resource type="Script" path="res://player/hp.gd" id="2_ww2b3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gelca"]
 bg_color = Color(0.2, 0.0941176, 0.0941176, 0.54902)

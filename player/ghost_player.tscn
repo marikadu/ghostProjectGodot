@@ -300,11 +300,17 @@ vframes = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vc2pl")
 
-[node name="dash_timer" type="Timer" parent="."]
+[node name="dashing_t" type="Timer" parent="."]
 wait_time = 0.2
 
 [node name="dash_timer_reset" type="Timer" parent="."]
-wait_time = 0.8
+wait_time = 0.2
+one_shot = true
+
+[node name="GhostEffectTimer" type="Timer" parent="."]
+wait_time = 0.03
+
+[node name="stamina_restore_timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -317,9 +323,6 @@ tree_root = SubResource("AnimationNodeStateMachine_ol1gt")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(-0.00332224, -0.0212766)
 parameters/walk/blend_position = Vector2(0.0116279, -0.442478)
-
-[node name="GhostEffectTimer" type="Timer" parent="."]
-wait_time = 0.03
 
 [node name="dash" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(2.24719, 2.24719)
@@ -340,6 +343,7 @@ stream = SubResource("AudioStreamRandomizer_28kjp")
 volume_db = -1.284
 max_polyphony = 3
 
-[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="dashing_t" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_timer_reset" to="." method="_on_dash_timer_reset_timeout"]
 [connection signal="timeout" from="GhostEffectTimer" to="." method="_on_ghost_effect_timer_timeout"]
+[connection signal="timeout" from="stamina_restore_timer" to="." method="_on_stamina_restore_timer_timeout"]

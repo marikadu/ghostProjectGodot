@@ -9,31 +9,38 @@ var time_to_max_speed = 2.0 # time to reach the max.speed
 var elapsed_time = 0.0  # time tracker for speed increase
 var delay_before_acceleration = 2.0 # wait before setting to max.speed
 var is_accelerating = false
+var dead : bool
 
+# waiting time before disappearing for the death animation to play
+@export var wait_death_animation = 0.4
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var speed_timer = $SpeedTimer  # timer to control gradual speed change
-#@onready var ghost_dies: AudioStreamPlayer2D = $ghost_dies
-#@onready var npc = get_tree().root.get_node("main/NPC")
-
 
 
 func _ready() -> void:
+	dead = false
+	#var mooving = true
 	player = get_tree().root.get_node("main/GhostPlayer")
 	npc = Global.npc_instance
 	
 	# wait before going to max.speed
 	speed_timer.wait_time = delay_before_acceleration
 	speed_timer.start()
+	animated_sprite_2d.play("moving")
 	
 	
 func _process(delta: float) -> void:
 	if is_accelerating:
-		elapsed_time += delta
-		if elapsed_time <= time_to_max_speed:
-			# increase speed linearly over time_to_max_speed
-			speed = lerp(10, max_speed, elapsed_time / time_to_max_speed)
-		# cap the speed to max when acceleration ends
-		else:
-			speed = max_speed 
+			elapsed_time += delta
+			if elapsed_time <= time_to_max_speed:
+				# increase speed linearly over time_to_max_speed
+				speed = lerp(10, max_speed, elapsed_time / time_to_max_speed)
+			# cap the speed to max when acceleration ends
+			else:
+				speed = max_speed 
+		
 			
 
 # chasing the NPC
@@ -47,14 +54,19 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player:
+		dead = true
+		animated_sprite_2d.play("dies")
 		player.ghost_dies.play()
 		player.hit.play()
+		hit_flash.play("hit_flash")
 		Global.score += 10
+		await get_tree().create_timer(wait_death_animation).timeout
+		#if animated_sprite_2d.animation_finished:
 		queue_free()  # remove the enemy from the scene
 		if player.dashing:
 			player.dash_hit.play()
 		
-	elif body == npc:
+	elif body == npc and not dead:
 		npc.take_damage(1) # damage the npc
 		queue_free()
 		

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d4eb43rmirjs8"]
 
-[ext_resource type="Script" path="res://scripts/score.gd" id="1_oduly"]
+[ext_resource type="Script" path="res://player/score.gd" id="1_oduly"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="1_xcj6h"]
 
 [node name="Score" type="Control"]

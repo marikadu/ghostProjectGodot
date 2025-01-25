@@ -1,24 +1,24 @@
 [gd_scene load_steps=29 format=3 uid="uid://dushnf2mn65aa"]
 
 [ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="1_wea8t"]
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_y5ff8"]
-[ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://scenes/dash_stamina.tscn" id="2_dpb76"]
-[ext_resource type="Script" path="res://scenes/camera_effects.gd" id="2_eeje6"]
+[ext_resource type="Script" path="res://scenes/scripts/main.gd" id="1_y5ff8"]
+[ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="2_dpb76"]
+[ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="2_eeje6"]
 [ext_resource type="Texture2D" uid="uid://cfdml4i4dgigl" path="res://bg.png" id="2_mt6j4"]
 [ext_resource type="Texture2D" uid="uid://xxokulhyor6e" path="res://sprites/house.png" id="2_niula"]
 [ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/daynightcycle-gradient-texture.tres" id="3_evgsl"]
 [ext_resource type="PackedScene" uid="uid://wu4f2v4h1o72" path="res://scenes/WinScreen.tscn" id="3_vi4qj"]
 [ext_resource type="PackedScene" uid="uid://b4cgmatdls027" path="res://scenes/GameOver.tscn" id="4_1o0n2"]
-[ext_resource type="Script" path="res://scripts/day_night_2.gd" id="4_vq2rb"]
-[ext_resource type="Script" path="res://scenes/camera_2d2.gd" id="6_01iy2"]
+[ext_resource type="Script" path="res://scenes/scripts/day_night_2.gd" id="4_vq2rb"]
+[ext_resource type="Script" path="res://scenes/scripts/camera_2d2.gd" id="6_01iy2"]
 [ext_resource type="PackedScene" uid="uid://d4eb43rmirjs8" path="res://scenes/score.tscn" id="8_lcji7"]
 [ext_resource type="PackedScene" uid="uid://bbobth255p4np" path="res://scenes/timer.tscn" id="9_ag1hq"]
 [ext_resource type="Shader" path="res://shaders/border.gdshader" id="10_be6vf"]
-[ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://scenes/hp.tscn" id="11_rp7p5"]
+[ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://player/hp.tscn" id="11_rp7p5"]
 [ext_resource type="Texture2D" uid="uid://dxx7ap03i0ego" path="res://sprites/day.png" id="12_lnxhn"]
 [ext_resource type="PackedScene" uid="uid://dnhtj68mhqb2u" path="res://scenes/bg_moves.tscn" id="13_fb5vo"]
 [ext_resource type="Texture2D" uid="uid://p75t3ho1pyls" path="res://sprites/night.png" id="15_uas1i"]
-[ext_resource type="Script" path="res://scenes/night_bye.gd" id="16_8u1su"]
+[ext_resource type="Script" path="res://scenes/scripts/night_bye.gd" id="16_8u1su"]
 [ext_resource type="AudioStream" uid="uid://c0o0nrc7kgl0t" path="res://SFX/possessed_dies2.ogg" id="18_fyf2b"]
 [ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="19_am3cw"]
 [ext_resource type="AudioStream" uid="uid://br1m6jylcxj0w" path="res://SFX/win.ogg" id="19_t81kq"]
@@ -77,6 +77,7 @@ unique_name_in_owner = true
 top_level = true
 position = Vector2(584, 449)
 process_callback = 0
+position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("6_01iy2")
 
@@ -100,7 +101,7 @@ script = ExtResource("2_eeje6")
 metadata/_edit_use_anchors_ = true
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 0.46
+wait_time = 0.7
 autostart = true
 
 [node name="UI" type="CanvasLayer" parent="."]

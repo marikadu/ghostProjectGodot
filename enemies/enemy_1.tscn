@@ -1,10 +1,107 @@
-[gd_scene load_steps=4 format=3 uid="uid://bb0ojl4hx61c3"]
+[gd_scene load_steps=20 format=3 uid="uid://bb0ojl4hx61c3"]
 
 [ext_resource type="Script" path="res://enemies/enemy_1.gd" id="1_nl2ya"]
-[ext_resource type="Texture2D" uid="uid://5188v7gd0hce" path="res://sprites/icon4.png" id="2_jc0fk"]
+[ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="3_4o8mh"]
+[ext_resource type="Texture2D" uid="uid://bywlh5h78s0bq" path="res://sprites/enemies/purple1.png" id="3_v0wlu"]
+[ext_resource type="Texture2D" uid="uid://r58t6qn0b5dq" path="res://sprites/enemies/purple2.png" id="4_o0i3y"]
+[ext_resource type="Texture2D" uid="uid://70ld27bpj155" path="res://sprites/enemies/purple/purple_dies1.png" id="4_qpt75"]
+[ext_resource type="Texture2D" uid="uid://beachhw4bq7cx" path="res://sprites/enemies/purple3.png" id="5_pb6be"]
+[ext_resource type="Texture2D" uid="uid://cjjy2nhs7g8tk" path="res://sprites/enemies/purple/purple_dies2.png" id="5_rmfq1"]
+[ext_resource type="Texture2D" uid="uid://cy8sjdosup322" path="res://sprites/enemies/purple/purple_dies3.png" id="6_plwqg"]
+[ext_resource type="Texture2D" uid="uid://cqi8gfqkoua0h" path="res://sprites/enemies/purple/purple_dies4.png" id="7_jeaus"]
+[ext_resource type="Texture2D" uid="uid://cpu5q0oh8few6" path="res://sprites/enemies/purple/purple_dies5.png" id="8_qi34j"]
+[ext_resource type="Texture2D" uid="uid://3tslggekw40r" path="res://sprites/enemies/purple/purple_dies6.png" id="9_1pb5e"]
+[ext_resource type="Texture2D" uid="uid://q517835lfj21" path="res://p_particle.png" id="12_wy7ln"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jufo"]
+resource_local_to_scene = true
+shader = ExtResource("3_4o8mh")
+shader_parameter/isHit = false
+shader_parameter/Tint = Color(1, 1, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hgbdu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qpt75")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rmfq1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_plwqg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_jeaus")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qi34j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_1pb5e")
+}],
+"loop": false,
+"name": &"dies",
+"speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_v0wlu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_o0i3y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pb6be")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_lueaj"]
+length = 0.0115
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isHit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4443o"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isHit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 0.217638),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tdvf1"]
+_data = {
+"RESET": SubResource("Animation_lueaj"),
+"hit_flash": SubResource("Animation_4443o")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_27fh4"]
 radius = 67.42
+
+[sub_resource type="Curve" id="Curve_lcko2"]
+_data = [Vector2(0, 0.736264), 0.0, 0.0, 0, 0, Vector2(0.0539419, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.195021, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.975104, 0.406593), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [node name="enemy1" type="CharacterBody2D" groups=["enemy"]]
 editor_description = "enemy that chases the player"
@@ -14,16 +111,46 @@ collision_mask = 2
 collision_priority = 2.0
 script = ExtResource("1_nl2ya")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_jc0fk")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_5jufo")
+position = Vector2(6.66667, -1.43653e-14)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_hgbdu")
+animation = &"dies"
+
+[node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_tdvf1")
+}
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource("CircleShape2D_27fh4")
 
 [node name="CollisionShape2D_disabled" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_27fh4")
 disabled = true
+
+[node name="isHitAnimation" type="Timer" parent="."]
+wait_time = 0.7
+
+[node name="splash" type="CPUParticles2D" parent="."]
+visible = false
+emitting = false
+lifetime = 1.2
+one_shot = true
+speed_scale = 2.47
+explosiveness = 0.86
+randomness = 0.16
+texture = ExtResource("12_wy7ln")
+spread = 176.55
+gravity = Vector2(0, 0)
+initial_velocity_min = 71.52
+initial_velocity_max = 102.3
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_lcko2")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

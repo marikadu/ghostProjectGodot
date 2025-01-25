@@ -8,7 +8,7 @@ extends Control
 @onready var game_over: ColorRect = $UI/GameOverScreen
 @onready var is_game_over = false
 
-@onready var npc = preload("res://scenes/npc.tscn")
+@onready var npc = preload("res://player/npc.tscn")
 @onready var possessed_dies: AudioStreamPlayer2D = $possessed_dies
 @onready var possessed_hit: AudioStreamPlayer2D = $possessed_hit
 @onready var sfx_win: AudioStreamPlayer2D = $win
@@ -136,7 +136,7 @@ func spawn_enemy():
 	
 func _on_enemy_spawn_timer_timeout() -> void:
 	if can_spawn_enemies:
-		#spawn_enemy()
+		spawn_enemy()
 		pass
 	else:
 		return

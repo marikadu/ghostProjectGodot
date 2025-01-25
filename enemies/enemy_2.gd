@@ -4,13 +4,19 @@ extends CharacterBody2D
 var speed = 100
 var npc: CharacterBody2D
 var player: CharacterBody2D
+var dead : bool
 
-#@onready var ghost_dies: AudioStreamPlayer2D = $ghost_dies
+# waiting time before disappearing for the death animation to play
+@export var wait_death_animation = 0.4
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var hit_flash = $AnimatedSprite2D/HitFlash
 
 
 func _ready() -> void:
 	player = get_tree().root.get_node("main/GhostPlayer")
 	npc = Global.npc_instance
+	animated_sprite_2d.play("moving")
 
 
 # chasing the NPC
@@ -25,13 +31,17 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player:
+		dead = true
+		animated_sprite_2d.play("dies")
+		hit_flash.play("hit_flash")
 		player.ghost_dies.play()
 		player.hit.play()
 		Global.score += 10
+		await get_tree().create_timer(wait_death_animation).timeout
 		queue_free()  # remove the enemy from the scene
 		if player.dashing:
 			player.dash_hit.play()
 		
-	elif body == npc:
+	elif body == npc and not dead:
 		npc.take_damage(1) # damage the npc
 		queue_free()

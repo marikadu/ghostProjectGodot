@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://wu4f2v4h1o72"]
 
-[ext_resource type="Script" path="res://scripts/win_screen.gd" id="1_g10im"]
+[ext_resource type="Script" path="res://scenes/scripts/win_screen.gd" id="1_g10im"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_0sg50"]
 
 [node name="WinScreen" type="ColorRect"]

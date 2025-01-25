@@ -1,7 +1,100 @@
-[gd_scene load_steps=4 format=3 uid="uid://tnqjhgxd31yv"]
+[gd_scene load_steps=19 format=3 uid="uid://tnqjhgxd31yv"]
 
 [ext_resource type="Script" path="res://enemies/enemy_3.gd" id="1_fohts"]
 [ext_resource type="Texture2D" uid="uid://5188v7gd0hce" path="res://sprites/icon4.png" id="2_fjun3"]
+[ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="3_2flvk"]
+[ext_resource type="Texture2D" uid="uid://b48tudputncfg" path="res://sprites/enemies/red/red_die1.png" id="3_i03vt"]
+[ext_resource type="Texture2D" uid="uid://1v5jp44ku2bi" path="res://sprites/enemies/red/red1.png" id="3_o8luf"]
+[ext_resource type="Texture2D" uid="uid://n11s0ywr64qi" path="res://sprites/enemies/red/red_die2.png" id="4_gfhwu"]
+[ext_resource type="Texture2D" uid="uid://dxj0c5i0272lw" path="res://sprites/enemies/red/red2.png" id="4_s72lh"]
+[ext_resource type="Texture2D" uid="uid://hk07a35bio6r" path="res://sprites/enemies/red/red_die3.png" id="5_ecjq5"]
+[ext_resource type="Texture2D" uid="uid://5me5fp76fhb2" path="res://sprites/enemies/red/red3.png" id="5_imy5g"]
+[ext_resource type="Texture2D" uid="uid://dtqiaglgxwr3i" path="res://sprites/enemies/red/red_die4.png" id="6_h2ubv"]
+[ext_resource type="Texture2D" uid="uid://b4h8su1vc4i6m" path="res://sprites/enemies/red/red_die5.png" id="7_8igm5"]
+[ext_resource type="Texture2D" uid="uid://g6blq2ucsrf5" path="res://sprites/enemies/red/red_die6.png" id="8_6pi8l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8psmm"]
+resource_local_to_scene = true
+shader = ExtResource("3_2flvk")
+shader_parameter/isHit = false
+shader_parameter/Tint = Color(1, 1, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rrhqk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_i03vt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gfhwu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ecjq5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_h2ubv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8igm5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6pi8l")
+}],
+"loop": false,
+"name": &"dies",
+"speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_o8luf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_s72lh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_imy5g")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_lueaj"]
+length = 0.0115
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isHit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4443o"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isHit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 0.217638),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tdvf1"]
+_data = {
+"RESET": SubResource("Animation_lueaj"),
+"hit_flash": SubResource("Animation_4443o")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_27fh4"]
 radius = 67.42
@@ -15,8 +108,21 @@ collision_priority = 2.0
 script = ExtResource("1_fohts")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.881246, 0.441064, 0.339695, 1)
 texture = ExtResource("2_fjun3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_8psmm")
+position = Vector2(15.2174, 0)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_rrhqk")
+animation = &"dies"
+
+[node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_tdvf1")
+}
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
 
@@ -29,6 +135,9 @@ disabled = true
 
 [node name="SpeedTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="isHitAnimation" type="Timer" parent="."]
+wait_time = 0.7
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]

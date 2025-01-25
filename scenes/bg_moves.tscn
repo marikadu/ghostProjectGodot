@@ -1,88 +1,71 @@
-[gd_scene load_steps=19 format=3 uid="uid://dnhtj68mhqb2u"]
+[gd_scene load_steps=25 format=3 uid="uid://dnhtj68mhqb2u"]
 
 [ext_resource type="Texture2D" uid="uid://cth7yboi1klpl" path="res://sprites/foreground_n.png" id="1_6sewi"]
-[ext_resource type="Script" path="res://scripts/bg_moves.gd" id="1_wo1p5"]
+[ext_resource type="Script" path="res://scenes/scripts/bg_moves.gd" id="1_wo1p5"]
 [ext_resource type="Texture2D" uid="uid://c0pktx7o2ve3t" path="res://sprites/middleground_n.png" id="2_cbigt"]
 [ext_resource type="Texture2D" uid="uid://bjoscv5jch06r" path="res://sprites/sky_n.png" id="2_mcd70"]
 [ext_resource type="Texture2D" uid="uid://04pi5nvnnso4" path="res://sprites/background_n.png" id="2_vi5fq"]
 [ext_resource type="Texture2D" uid="uid://b2mbjhtlvxuid" path="res://sprites/moon.png" id="3_fe7de"]
 [ext_resource type="Texture2D" uid="uid://ibdwlbh40u73" path="res://sprites/sky_d.png" id="3_v65wt"]
-[ext_resource type="Script" path="res://scripts/sky.gd" id="4_70v8j"]
+[ext_resource type="Script" path="res://scenes/scripts/sky_moon.gd" id="4_70v8j"]
 [ext_resource type="Texture2D" uid="uid://dpjxqtqbkq382" path="res://sprites/sun.png" id="6_mp1xp"]
 [ext_resource type="Texture2D" uid="uid://x8ux2fb6gm08" path="res://sprites/stars.png" id="6_nok8x"]
 [ext_resource type="Texture2D" uid="uid://drasnc06wmkbx" path="res://sprites/background_d.png" id="7_16t37"]
+[ext_resource type="Script" path="res://scenes/scripts/sky_stars.gd" id="7_bgafi"]
 [ext_resource type="Texture2D" uid="uid://b40cjnsqspwh8" path="res://sprites/foreground_d.png" id="8_mdsfa"]
 [ext_resource type="Texture2D" uid="uid://bgxneldwm028q" path="res://sprites/middleground_d.png" id="9_6utk2"]
+[ext_resource type="Script" path="res://scenes/scripts/sky_sun.gd" id="9_77q60"]
+
+[sub_resource type="Animation" id="Animation_6bt76"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 164)]
+}
+
+[sub_resource type="Animation" id="Animation_1mdwt"]
+resource_name = "moon"
+length = 32.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(6.96667, 30.2333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 164), Vector2(0, -195)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_75ivp"]
+_data = {
+"RESET": SubResource("Animation_6bt76"),
+"moon": SubResource("Animation_1mdwt")
+}
 
 [sub_resource type="Animation" id="Animation_cligc"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../sun:position")
+tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 206)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../moon:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 164)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 2)]
-}
-
-[sub_resource type="Animation" id="Animation_xqj4p"]
-resource_name = "moon"
-length = 31.949
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../moon:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(7.6, 30.1667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 164), Vector2(0, -210)]
-}
-
-[sub_resource type="Animation" id="Animation_me706"]
-resource_name = "sun"
-length = 37.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../sun:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 36.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 206), Vector2(0, -198)]
 }
 
 [sub_resource type="Animation" id="Animation_ufiqn"]
@@ -104,9 +87,44 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w1pcp"]
 _data = {
 "RESET": SubResource("Animation_cligc"),
-"moon": SubResource("Animation_xqj4p"),
-"stars": SubResource("Animation_ufiqn"),
-"sun": SubResource("Animation_me706")
+"stars": SubResource("Animation_ufiqn")
+}
+
+[sub_resource type="Animation" id="Animation_ffqpo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 206)]
+}
+
+[sub_resource type="Animation" id="Animation_l20v6"]
+resource_name = "sun"
+length = 37.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 35.8667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 206), Vector2(0, -200)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fckib"]
+_data = {
+"RESET": SubResource("Animation_ffqpo"),
+"sun": SubResource("Animation_l20v6")
 }
 
 [node name="bg" type="Node2D"]
@@ -122,9 +140,9 @@ texture = ExtResource("2_mcd70")
 position = Vector2(0, 164)
 texture = ExtResource("3_fe7de")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="moon"]
+[node name="moon_player" type="AnimationPlayer" parent="moon"]
 libraries = {
-"": SubResource("AnimationLibrary_w1pcp")
+"": SubResource("AnimationLibrary_75ivp")
 }
 script = ExtResource("4_70v8j")
 
@@ -132,21 +150,21 @@ script = ExtResource("4_70v8j")
 position = Vector2(0, 2)
 texture = ExtResource("6_nok8x")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="stars"]
+[node name="stars_player" type="AnimationPlayer" parent="stars"]
 libraries = {
 "": SubResource("AnimationLibrary_w1pcp")
 }
-script = ExtResource("4_70v8j")
+script = ExtResource("7_bgafi")
 
 [node name="sun" type="Sprite2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(0, 206)
 texture = ExtResource("6_mp1xp")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="sun"]
+[node name="sun_player" type="AnimationPlayer" parent="sun"]
 libraries = {
-"": SubResource("AnimationLibrary_w1pcp")
+"": SubResource("AnimationLibrary_fckib")
 }
-script = ExtResource("4_70v8j")
+script = ExtResource("9_77q60")
 
 [node name="d_background" type="Sprite2D" parent="."]
 texture = ExtResource("7_16t37")

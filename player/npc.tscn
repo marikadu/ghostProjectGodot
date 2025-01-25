@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://ccq0ksogu3xkq"]
 
-[ext_resource type="Script" path="res://scripts/npc.gd" id="1_05yxr"]
+[ext_resource type="Script" path="res://player/npc.gd" id="1_05yxr"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_ia2t5"]
 [ext_resource type="Texture2D" uid="uid://bhsn6ehnsepq" path="res://sprites/NPC/dead.png" id="2_k635l"]
 [ext_resource type="Texture2D" uid="uid://1iu2lvhsfql6" path="res://sprites/NPC/sleeping.png" id="2_lxhe8"]
