@@ -1,11 +1,12 @@
-[gd_scene load_steps=44 format=3 uid="uid://ccq0ksogu3xkq"]
+[gd_scene load_steps=46 format=3 uid="uid://ccq0ksogu3xkq"]
 
 [ext_resource type="Script" path="res://player/npc.gd" id="1_05yxr"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_ia2t5"]
 [ext_resource type="Texture2D" uid="uid://bhsn6ehnsepq" path="res://sprites/NPC/dead.png" id="2_k635l"]
-[ext_resource type="Texture2D" uid="uid://cuqg0s5a605ki" path="res://sprites/NPC/sleeping3_hit.png" id="2_nyprd"]
+[ext_resource type="Texture2D" uid="uid://cuqg0s5a605ki" path="res://sprites/NPC/hit.png" id="2_nyprd"]
 [ext_resource type="Texture2D" uid="uid://drkmvsp3apya1" path="res://sprites/NPC/gone.png" id="4_vveos"]
 [ext_resource type="Texture2D" uid="uid://ctptdwn5gcwdn" path="res://sprites/NPC/sleeping0000.png" id="6_atu4r"]
+[ext_resource type="Texture2D" uid="uid://m2832mlr2ddp" path="res://sprites/NPC/hit_player.png" id="6_u6dtu"]
 [ext_resource type="Texture2D" uid="uid://btd6h3jjfyhwh" path="res://sprites/NPC/sleeping0001.png" id="7_tl4bq"]
 [ext_resource type="Texture2D" uid="uid://bjjyrju85plc6" path="res://sprites/NPC/waking_up0000.png" id="8_8k6ep"]
 [ext_resource type="Texture2D" uid="uid://d3ijpbq1bwhiq" path="res://sprites/NPC/sleeping0002.png" id="8_wts65"]
@@ -35,6 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://5o8vesti0th3" path="res://sprites/NPC/waking_up0013.png" id="21_ah6wu"]
 [ext_resource type="Texture2D" uid="uid://ook241jqrb3p" path="res://sprites/NPC/waking_up0015.png" id="22_m0fjg"]
 [ext_resource type="Texture2D" uid="uid://ickvddvx83jd" path="res://sprites/NPC/waking_up0014.png" id="23_xo46l"]
+[ext_resource type="AudioStream" uid="uid://b78m6xs2u8px2" path="res://SFX/player_near.ogg" id="37_hlo2i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ngrvg"]
 resource_local_to_scene = true
@@ -66,6 +68,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_u6dtu")
+}],
+"loop": true,
+"name": &"hit_player",
 "speed": 5.0
 }, {
 "frames": [{
@@ -227,22 +237,20 @@ script = ExtResource("1_05yxr")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ngrvg")
 sprite_frames = SubResource("SpriteFrames_6nsm2")
-animation = &"sleeping"
+animation = &"hit_player"
 autoplay = "sleeping"
-frame = 9
-frame_progress = 0.65343
 
 [node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_tdvf1")
 }
 
-[node name="Area2DNPC" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
 visibility_layer = 5
 
-[node name="NPCCollisionShape2D" type="CollisionShape2D" parent="Area2DNPC"]
-visible = false
+[node name="sleep_distance" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 2.12766)
+scale = Vector2(1.22, 1.22)
 shape = SubResource("RectangleShape2D_2qos5")
 
 [node name="isHitAnimation" type="Timer" parent="."]
@@ -258,3 +266,14 @@ stream = SubResource("AudioStreamRandomizer_snm13")
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_0l7xh")
 pitch_scale = 2.16
+
+[node name="player_near_sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("37_hlo2i")
+
+[node name="player_near" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2dnpc_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="player_near" to="." method="_on_player_near_timeout"]

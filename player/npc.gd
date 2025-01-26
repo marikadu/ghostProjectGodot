@@ -7,25 +7,30 @@ extends CharacterBody2D
 
 
 #@onready var npc = get_tree().root.get_node("main/NPC")
-@onready var npc_area = $Area2DNPC
+@onready var npc_area = $Area2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var hit_timer = $isHitAnimation
-@onready var npc_hit: AudioStreamPlayer2D = $npc_hit
-@onready var hit: AudioStreamPlayer2D = $hit
-
-
-
-#@onready var camera_control: Control = %CameraControl
+@onready var player_near_timer: Timer = $player_near
+#@onready var sleep_distance: CollisionShape2D = $Area2DNPC/sleep_distance
 @onready var camera_control = get_tree().root.get_node("main/CameraControl")
 
+@onready var npc_hit: AudioStreamPlayer2D = $npc_hit
+@onready var hit: AudioStreamPlayer2D = $hit
+@onready var player_near_sfx: AudioStreamPlayer2D = $player_near_sfx
+
+@export var enemy_type: String = "npc"
 
 
 var health: int
 var max_health: int
 var is_alive: bool = true
+var is_player_near: bool = false
+#var player_near_time: float = 0.0
+#var patience: float = 3.0
 var player: CharacterBody2D
 var killed_by: String = ""
+var body: Node
 
 
 func _ready():
@@ -33,6 +38,10 @@ func _ready():
 	max_health = 5
 	health = max_health # at the start of the game, health is max
 	is_alive = true
+	
+	#if player_near_timer:
+		#player_near_timer.set_wait_time(0.1) # checking if player is near every 0.1 seconds
+		#player_near_timer.start()
 
 	if healthbar != null:
 		healthbar.init_health(health)
@@ -47,6 +56,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	animated_sprite.scale.x = move_toward(animated_sprite.scale.x, 1, 3 * delta)
 	animated_sprite.scale.y = move_toward(animated_sprite.scale.y, 1, 3 * delta)
+	#player_near = is_player_near()
 		
 
 func set_health(value: int):
@@ -81,18 +91,43 @@ func switchValue():
 			print("killed by BLUE")
 		"enemy3":
 			print("killed by RED")
+		_:
+			# DON'T SPAWN POSSESSED!
+			print("you woke the NPC up")
 	pass
 
-# enemy collision logic
+# collision logic
 func _on_area_2d_body_entered(body: Node) -> void:
-	if body.is_in_group("enemy"):
-		# reduce health by 1
-		take_damage(1, body)
-		pass
-	if body == player:
-		#print("AAAAAAAAAAA")
+	if is_alive:
+		if body.is_in_group("enemy"):
+			# reduce health by 1
+			take_damage(1, body)
+			
 		# apply damage if player is near
-		pass
+		if body == player:
+			
+			#await get_tree().create_timer(3).timeout
+			camera_control.zoom_in()
+			player_near_sfx.play()
+			is_player_near = true
+			print("player near")
+			player_near_timer.start()
+			print(player_near_timer.wait_time)
+			player_near_timer.one_shot = false
+			animated_sprite.play("hit_player")
+			pass
+		
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body == player and is_alive:
+		camera_control.zoom_out()
+		player_near_sfx.stop()
+		is_player_near = false
+		player_near_timer.stop()
+		player_near_timer.set_wait_time(3.0) 
+		player_near_timer.one_shot = true
+		animated_sprite.play("sleeping")
+		print("player bye")
+		 #apply damage if player is near
 
 # take damage
 func take_damage(damage: int, enemy: Node):
@@ -112,9 +147,12 @@ func restore_health(amount: int) -> void:
 	# revive npc if dead and health is restored
 	#if not is_alive and health + amount > 0:
 	if not is_alive:
-			is_alive = true
-			animated_sprite.play("sleeping")
-			print("npc back from the dead")
+		is_alive = true
+		animated_sprite.play("sleeping")
+		print("npc back from the dead")
+		player_near_timer.stop()
+		player_near_timer.set_wait_time(3.0) 
+		player_near_timer.one_shot = true
 			
 			
 	health = min(health + amount, max_health)  # doesn't go beyond max_health
@@ -125,8 +163,34 @@ func restore_health(amount: int) -> void:
 
 # when isHit timer finishes -> go back to sleeping animation if alive
 func _on_hit_timer_timeout():
-	$isHitAnimation.stop()
-	#print("Hit animation finished")
 	if is_alive:
-		animated_sprite.play("sleeping")
-		
+		print("AAAAAAAAAAA")
+		animated_sprite.play("hit")
+		#await get_tree().create_timer(2).timeout
+		#take_damage(1, body)
+		await get_tree().create_timer(1).timeout
+		$isHitAnimation.stop()
+		#print("Hit animation finished")
+		if is_alive and not is_player_near:
+			animated_sprite.play("sleeping")
+		elif is_alive and is_player_near:
+			animated_sprite.play("hit_player")
+	
+func _on_player_near_timeout() -> void:
+	if is_alive:
+		take_damage(1, self)
+		print("NOTICED THE PLAYER")
+
+
+#func _on_player_near_timeout() -> void:
+	#if player_near:
+		#player_near_time += player_near_timer.wait_time # adding to the timer when the player is near
+		#if player_near_time >= patience:
+			#take_damage(1, body)
+			#player_near_time = 0.0 # reset the timer
+	#else:
+		#player_near_time = 0.0 # reset the timer if the player isn't near
+		#
+#func is_player_near() -> bool:
+	#var sleep_radius: float = 100.0
+	#return position.distance_to(player.position) <= sleep_radius

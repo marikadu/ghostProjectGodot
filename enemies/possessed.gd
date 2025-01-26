@@ -52,7 +52,7 @@ func _ready() -> void:
 		
 
 	
-func _process(delta):
+func _process(_delta):
 	# smoothly oscillating rotation between -rotation_range and +rotation_range
 	rotation = sin(Time.get_ticks_msec() * rotation_speed * 0.001) * rotation_range
 	

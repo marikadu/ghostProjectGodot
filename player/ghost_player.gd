@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var max_stamina_sections = 3
 @export var dash_stamina_cost = 1
 @export var stamina_restore_time = 1.7 # time to restore 1 section
+@export var enemy_type: String = "player"
 
 
 var dashing = false
