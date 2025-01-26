@@ -1,8 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://c86ohxnlg8a"]
+[gd_scene load_steps=4 format=3 uid="uid://c86ohxnlg8a"]
 
 [ext_resource type="Script" path="res://player/dash.gd" id="1_jaq1m"]
-[ext_resource type="Texture2D" uid="uid://8xu3nhkumtb7" path="res://sprites/stamina_under.png" id="2_mj6rt"]
-[ext_resource type="Texture2D" uid="uid://btdhxt4orgqdr" path="res://sprites/stamina_progress.png" id="3_ko54r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3wp8u"]
 bg_color = Color(0.319298, 0.135033, 0.266769, 0.714)
@@ -19,45 +17,30 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jaq1m")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.115
-anchor_bottom = 0.046
-offset_right = 282.52
-offset_bottom = 11.256
-scale = Vector2(0.62, 0.62)
-value = 10.0
-texture_under = ExtResource("2_mj6rt")
-texture_progress = ExtResource("3_ko54r")
-
 [node name="stamina1" type="ProgressBar" parent="."]
-layout_mode = 0
-offset_top = 39.0
+layout_mode = 1
 offset_right = 80.0
-offset_bottom = 69.0
+offset_bottom = 30.0
 theme_override_styles/background = SubResource("StyleBoxFlat_3wp8u")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tcdlh")
 value = 32.53
 show_percentage = false
 
 [node name="stamina2" type="ProgressBar" parent="."]
-layout_mode = 0
-offset_left = 86.0
-offset_top = 39.0
-offset_right = 166.0
-offset_bottom = 69.0
+layout_mode = 1
+offset_left = 88.0
+offset_right = 168.0
+offset_bottom = 30.0
 theme_override_styles/background = SubResource("StyleBoxFlat_3wp8u")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tcdlh")
 value = 32.53
 show_percentage = false
 
 [node name="stamina3" type="ProgressBar" parent="."]
-layout_mode = 0
-offset_left = 173.0
-offset_top = 39.0
-offset_right = 253.0
-offset_bottom = 69.0
+layout_mode = 1
+offset_left = 176.0
+offset_right = 256.0
+offset_bottom = 30.0
 theme_override_styles/background = SubResource("StyleBoxFlat_3wp8u")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tcdlh")
 value = 32.53

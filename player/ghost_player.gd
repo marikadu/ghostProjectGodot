@@ -9,11 +9,13 @@ extends CharacterBody2D
 @export var dash_stamina_cost = 1
 @export var stamina_restore_time = 1.7 # time to restore 1 section
 
+
 var dashing = false
 
 var current_speed = 0.0
 var current_stamina = max_stamina_sections
 var restoring_stamina = false
+var can_move = true
 
 var input: Vector2 = Vector2.ZERO
 var playback: AnimationNodeStateMachinePlayback
@@ -29,11 +31,14 @@ signal is_dashing
 @onready var dash_timer_reset: Timer = $dash_timer_reset
 @onready var stamina_restore_timer : Timer = $stamina_restore_timer
 
-@onready var sprite: Sprite2D = $Sprite2D
 @onready var dash: AudioStreamPlayer2D = $dash
 @onready var dash_hit: AudioStreamPlayer2D = $dash_hit
 @onready var hit: AudioStreamPlayer2D = $hit
 @onready var ghost_dies: AudioStreamPlayer2D = $ghost_dies
+
+@onready var sprite_move: Sprite2D = $s_move
+@onready var sprite_gameover: AnimatedSprite2D = $sprite_gameover
+#@onready var s_gameover: Sprite2D = $s_gameover
 
 
 func _ready():
@@ -45,28 +50,37 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
-	input = Input.get_vector("left", "right", "up", "down")
 	
-	# dashing
-	if Input.is_action_just_pressed("dash") and input != Vector2.ZERO:
-		start_dash()
+	if Input.is_action_pressed("game_over_input"):
+		Global.is_game_over = true
+	
+	if can_move:
+		input = Input.get_vector("left", "right", "up", "down")
+		
+		# dashing
+		if Input.is_action_just_pressed("dash") and input != Vector2.ZERO:
+			start_dash()
 
-
-	# if the player is not moving or is standing -> sliding
-	if input == Vector2.ZERO:
-		apply_friction(friction * delta)
-
+		# if the player is not moving or is standing -> sliding
+		if input == Vector2.ZERO:
+			apply_friction(friction * delta)
+		else:
+			apply_movement(input * acceleration * delta)
+		
+		if dashing:
+			velocity = velocity.normalized() * dash_speed
+		
 	else:
-		apply_movement(input * acceleration * delta)
-	
-	if dashing:
-		velocity = velocity.normalized() * dash_speed
-		#velocity 
-		#current_speed = lerp(1200.0, 200.0, delta * 1200)
+		velocity = lerp(velocity, Vector2.ZERO, delta * 2)
+
 
 	move_and_slide()
 	select_animation()
 	update_animation_param()
+	sad_ghost()
+	
+	#sprite_move.scale.x = move_toward(sprite_move.scale.x, 1, 1 * delta)
+	#sprite_move.scale.y = move_toward(sprite_move.scale.y, 1, 1 * delta)
 	
 	
 # -------- ANIMATION --------
@@ -110,8 +124,9 @@ func start_dash() -> void:
 		dashing_t.start()
 		dash_timer_reset.start()
 		ghost_effect_timer.start()
-		print("dashing! current stamina: ", current_stamina)
+		#print("dashing! current stamina: ", current_stamina)
 		spawn_dash_effect()
+		#sprite_move.scale = Vector2(0.6, 1.5)
 		# for the dash restore animation of the indicator
 		
 		if not restoring_stamina:
@@ -120,18 +135,34 @@ func start_dash() -> void:
 			
 	else:
 		print("not enough stamina!")
+		
+
+# when game over
+func sad_ghost():
+	if Global.is_game_over:
+		can_move = false
+		playback.travel("idle")
+		sprite_gameover.visible = true
+		sprite_gameover.play("game_over")
+		#sprite_gameover.play("game_over_idle")
+		
+		sprite_move.visible = false
+		#await get_tree().create_timer(3).timeout
+		#sprite_gameover.play("game_over_idle")
+		
+		#velocity = Vector2.ZERO
+		#velocity = lerp(velocity, Vector2.ZERO, delta)
 # --------------------------
 
 
 
 func spawn_dash_effect():
-	# Spawn a dash effect
 	var dash_effect = dash_effect_scene.instantiate()
 	dash_effect.position = self.global_position
-	dash_effect.texture = sprite.texture
-	dash_effect.vframes = sprite.vframes
-	dash_effect.hframes = sprite.hframes
-	dash_effect.frame = sprite.frame
+	dash_effect.texture = sprite_move.texture
+	dash_effect.vframes = sprite_move.vframes
+	dash_effect.hframes = sprite_move.hframes
+	dash_effect.frame = sprite_move.frame
 	get_parent().add_child(dash_effect)
 
 # when dash ends (after 0.2 seconds after dash)
@@ -165,7 +196,7 @@ func _on_stamina_restore_timer_timeout() -> void:
 			
 #func update_stamina_ui():
 	#for i in range(max_stamina_sections):
-		## Smoothly transition each stamina bar
+		## smoothly transition each stamina bar
 		#if i < current_stamina:
 			#dash_stamina.stamina_bars[i].value = dash_stamina.stamina_bars[i].max_value  # Full
 		#else:

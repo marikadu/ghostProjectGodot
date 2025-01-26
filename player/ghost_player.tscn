@@ -1,11 +1,129 @@
-[gd_scene load_steps=36 format=3 uid="uid://cefk00qrd2w1n"]
+[gd_scene load_steps=61 format=3 uid="uid://cefk00qrd2w1n"]
 
 [ext_resource type="Script" path="res://player/ghost_player.gd" id="1_axoaw"]
+[ext_resource type="Texture2D" uid="uid://c7kve74w1tj38" path="res://sprites/GhostPlayer/game_over/game_over0000.png" id="2_vteki"]
 [ext_resource type="Texture2D" uid="uid://cshut5m13msik" path="res://sprites/GhostPlayer/walking+idle.png" id="2_yr74a"]
 [ext_resource type="AudioStream" uid="uid://ddqb2ykm2t4an" path="res://SFX/dash.ogg" id="3_8g16e"]
+[ext_resource type="Texture2D" uid="uid://cefre0cqi10hi" path="res://sprites/GhostPlayer/game_over/game_over0001.png" id="3_yarkc"]
+[ext_resource type="Texture2D" uid="uid://bg5ephevjkm0i" path="res://sprites/GhostPlayer/game_over/game_over0002.png" id="4_2rarc"]
 [ext_resource type="AudioStream" uid="uid://f2q1bbj0bkmt" path="res://SFX/dash_hit4.ogg" id="4_y56ns"]
+[ext_resource type="Texture2D" uid="uid://k5x6q47gr4b0" path="res://sprites/GhostPlayer/game_over/game_over0003.png" id="5_7hb3x"]
 [ext_resource type="AudioStream" uid="uid://cwqkcb7uy7cly" path="res://SFX/hit.ogg" id="5_s4a3m"]
+[ext_resource type="Texture2D" uid="uid://uqy2af731wjx" path="res://sprites/GhostPlayer/game_over/game_over0004.png" id="6_63q0r"]
 [ext_resource type="AudioStream" uid="uid://df8xu5lt6prr4" path="res://SFX/ghost_dies2.ogg" id="6_dco0i"]
+[ext_resource type="Texture2D" uid="uid://cl4fx52a4msdt" path="res://sprites/GhostPlayer/game_over/game_over0005.png" id="7_0xoca"]
+[ext_resource type="Texture2D" uid="uid://db1hdgvck3bkr" path="res://sprites/GhostPlayer/game_over/game_over0006.png" id="8_47kqa"]
+[ext_resource type="Texture2D" uid="uid://bavfsae7mdsgh" path="res://sprites/GhostPlayer/game_over/game_over0007.png" id="9_j3368"]
+[ext_resource type="Texture2D" uid="uid://dowwamq0dch4d" path="res://sprites/GhostPlayer/game_over/game_over0008.png" id="10_6sdd7"]
+[ext_resource type="Texture2D" uid="uid://cguvaea5cieel" path="res://sprites/GhostPlayer/game_over/game_over0009.png" id="11_hkbor"]
+[ext_resource type="Texture2D" uid="uid://be57h63f02gjb" path="res://sprites/GhostPlayer/game_over/game_over0010.png" id="12_o2mbl"]
+[ext_resource type="Texture2D" uid="uid://cgeabgo8n6llo" path="res://sprites/GhostPlayer/game_over/game_over0011.png" id="13_opucv"]
+[ext_resource type="Texture2D" uid="uid://ce8ehjyrlxqur" path="res://sprites/GhostPlayer/game_over/game_over0012.png" id="14_u1cce"]
+[ext_resource type="Texture2D" uid="uid://cq4qltj1vh3bm" path="res://sprites/GhostPlayer/game_over/game_over0013.png" id="15_d4545"]
+[ext_resource type="Texture2D" uid="uid://dvl7ooi1gcyp" path="res://sprites/GhostPlayer/game_over/game_over0014.png" id="16_4nvsi"]
+[ext_resource type="Texture2D" uid="uid://revhdaeypsim" path="res://sprites/GhostPlayer/game_over/game_over0015.png" id="17_erdx3"]
+[ext_resource type="Texture2D" uid="uid://b4wfb5r283msm" path="res://sprites/GhostPlayer/game_over/game_over0016.png" id="18_1j5fp"]
+[ext_resource type="Texture2D" uid="uid://bl46bw8otke3w" path="res://sprites/GhostPlayer/game_over/game_over0017.png" id="19_rbf8d"]
+[ext_resource type="Texture2D" uid="uid://blmo1qwl8fwdg" path="res://sprites/GhostPlayer/game_over/game_over0018.png" id="20_kwnbj"]
+[ext_resource type="Texture2D" uid="uid://xdqual45trfh" path="res://sprites/GhostPlayer/game_over/game_over0019.png" id="21_h6v3j"]
+[ext_resource type="Texture2D" uid="uid://chb3eex1t0w6s" path="res://sprites/GhostPlayer/game_over/game_over0020.png" id="22_dl0uc"]
+[ext_resource type="Texture2D" uid="uid://db2gubgwb2jxc" path="res://sprites/GhostPlayer/game_over/game_over0021.png" id="23_sy7ef"]
+[ext_resource type="Texture2D" uid="uid://cpn4s7j61pyyn" path="res://sprites/GhostPlayer/game_over/game_over0022.png" id="24_5iw4v"]
+[ext_resource type="Texture2D" uid="uid://helakkw1tx3a" path="res://sprites/GhostPlayer/game_over/game_over0023.png" id="25_v3nn5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eem0l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vteki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yarkc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2rarc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7hb3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_63q0r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0xoca")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_47kqa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_j3368")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_6sdd7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_hkbor")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_o2mbl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_opucv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_u1cce")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_d4545")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_4nvsi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_erdx3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_1j5fp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_rbf8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_kwnbj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_h6v3j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_dl0uc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_sy7ef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_5iw4v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_v3nn5")
+}],
+"loop": true,
+"name": &"game_over",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_sy7ef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_5iw4v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_v3nn5")
+}],
+"loop": true,
+"name": &"game_over_idle",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vc2pl"]
 radius = 75.11
@@ -15,7 +133,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("s_move:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -33,7 +151,7 @@ step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("s_move:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -51,7 +169,7 @@ step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("s_move:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -69,7 +187,7 @@ step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("s_move:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -87,7 +205,7 @@ step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("s_move:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -105,7 +223,7 @@ step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("s_move:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -123,7 +241,7 @@ step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("s_move:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -141,7 +259,7 @@ step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("s_move:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -159,7 +277,7 @@ step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("s_move:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -177,7 +295,7 @@ step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("s_move:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -267,12 +385,13 @@ blend_point_7/pos = Vector2(-0.7, 0.7)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ol1gt"]
+states/End/position = Vector2(716, 87)
 states/Start/position = Vector2(299, 87)
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_gicvp")
 states/idle/position = Vector2(538, 87)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_lobm1")
 states/walk/position = Vector2(434, 87)
-graph_offset = Vector2(48, -18)
+graph_offset = Vector2(-13, -29)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_178ir"]
 random_pitch = 1.04
@@ -292,7 +411,13 @@ collision_layer = 25
 collision_mask = 24
 script = ExtResource("1_axoaw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="sprite_gameover" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(1, 1)
+sprite_frames = SubResource("SpriteFrames_eem0l")
+animation = &"game_over"
+
+[node name="s_move" type="Sprite2D" parent="."]
 texture = ExtResource("2_yr74a")
 hframes = 9
 vframes = 3

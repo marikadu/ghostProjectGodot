@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://tnqjhgxd31yv"]
+[gd_scene load_steps=21 format=3 uid="uid://tnqjhgxd31yv"]
 
 [ext_resource type="Script" path="res://enemies/enemy_3.gd" id="1_fohts"]
 [ext_resource type="Texture2D" uid="uid://5188v7gd0hce" path="res://sprites/icon4.png" id="2_fjun3"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dtqiaglgxwr3i" path="res://sprites/enemies/red/red_die4.png" id="6_h2ubv"]
 [ext_resource type="Texture2D" uid="uid://b4h8su1vc4i6m" path="res://sprites/enemies/red/red_die5.png" id="7_8igm5"]
 [ext_resource type="Texture2D" uid="uid://g6blq2ucsrf5" path="res://sprites/enemies/red/red_die6.png" id="8_6pi8l"]
+[ext_resource type="Texture2D" uid="uid://ci7xokjdu7cpr" path="res://sprites/r_particle.png" id="13_cra6w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8psmm"]
 resource_local_to_scene = true
@@ -99,6 +100,10 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_27fh4"]
 radius = 67.42
 
+[sub_resource type="Curve" id="Curve_45xf2"]
+_data = [Vector2(0, 0.736264), 0.0, 0.0, 0, 0, Vector2(0.0539419, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.195021, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.975104, 0.406593), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [node name="enemy3" type="CharacterBody2D" groups=["enemy"]]
 editor_description = "enemy that goes to NPC"
 scale = Vector2(0.46, 0.46)
@@ -138,6 +143,21 @@ one_shot = true
 
 [node name="isHitAnimation" type="Timer" parent="."]
 wait_time = 0.7
+
+[node name="splash" type="CPUParticles2D" parent="."]
+emitting = false
+lifetime = 1.2
+one_shot = true
+speed_scale = 2.47
+explosiveness = 0.86
+randomness = 0.16
+texture = ExtResource("13_cra6w")
+spread = 176.55
+gravity = Vector2(0, 0)
+initial_velocity_min = 71.52
+initial_velocity_max = 102.3
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_45xf2")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]

@@ -8,9 +8,11 @@ var dead : bool
 
 # waiting time before disappearing for the death animation to play
 @export var wait_death_animation = 0.4
+@export var enemy_type: String = "enemy2"
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hit_flash = $AnimatedSprite2D/HitFlash
+@onready var splash: CPUParticles2D = $splash
 
 
 func _ready() -> void:
@@ -31,17 +33,32 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player:
-		dead = true
-		animated_sprite_2d.play("dies")
-		hit_flash.play("hit_flash")
+		die()
+		#dead = true
+		#animated_sprite_2d.play("dies")
+		#hit_flash.play("hit_flash")
 		player.ghost_dies.play()
-		player.hit.play()
-		Global.score += 10
-		await get_tree().create_timer(wait_death_animation).timeout
-		queue_free()  # remove the enemy from the scene
-		if player.dashing:
-			player.dash_hit.play()
+		#player.hit.play()
+		#Global.score += 10
+		#await get_tree().create_timer(wait_death_animation).timeout
+		#queue_free()  # remove the enemy from the scene
+		#if player.dashing:
+			#player.dash_hit.play()
 		
 	elif body == npc and not dead:
-		npc.take_damage(1) # damage the npc
+		npc.take_damage(1, self) # damage the npc
 		queue_free()
+		
+		
+func die():
+	dead = true
+	splash.emitting = true
+	animated_sprite_2d.play("dies")
+	#player.ghost_dies.play()
+	player.hit.play()
+	hit_flash.play("hit_flash")
+	Global.score += 10
+	await get_tree().create_timer(wait_death_animation).timeout
+	queue_free()  # remove the enemy from the scene
+	if player.dashing:
+		player.dash_hit.play()

@@ -2,6 +2,7 @@ extends Node
 
 # npc instance
 var npc_instance: Node = null
+var is_game_over : bool
 
 var score = 0
 var personal_best = 0

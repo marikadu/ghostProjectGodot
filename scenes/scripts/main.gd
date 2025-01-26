@@ -6,9 +6,10 @@ extends Control
 @onready var camera: Camera2D = %Camera2D
 @onready var win_game: ColorRect = $UI/WinScreen
 @onready var game_over: ColorRect = $UI/GameOverScreen
-@onready var is_game_over = false
+#@onready var is_game_over = false
 
 @onready var npc = preload("res://player/npc.tscn")
+@onready var player = preload("res://player/ghost_player.tscn")
 @onready var possessed_dies: AudioStreamPlayer2D = $possessed_dies
 @onready var possessed_hit: AudioStreamPlayer2D = $possessed_hit
 @onready var sfx_win: AudioStreamPlayer2D = $win
@@ -16,6 +17,7 @@ extends Control
 
 var possessed = preload("res://enemies/possessed.tscn")
 var npc_instance: Node = null  # Store the NPC instance
+var player_instance
 #var npc_instance = null
 
 # list of enemies
@@ -62,6 +64,13 @@ func _ready() -> void:
 		print("NPC ready")
 	else:
 		print("NPC already instantiated or error occured")
+		
+	player_instance = player.instantiate()
+	
+	
+func _physics_process(delta: float) -> void:
+	if Input.is_action_pressed("spawn_possessed"):
+		spawn_possessed()
 	
 	
 func show_win_game():
@@ -76,7 +85,10 @@ func show_win_game():
 
 	
 func show_game_over():
-	is_game_over = true
+	player_instance.can_move = false
+	#player_instance.set_physics_process(false)
+	#is_game_over = true
+	Global.is_game_over = true
 	game_over.show()
 	# show that the ghosts go back to hiding spots when sun rises
 	kill_all_enemies()
@@ -87,13 +99,14 @@ func show_game_over():
 	
 
 func _on_npc_died():
-	spawn_possessed_enemy()
+	spawn_possessed()
 	# maybe create some sort of effect?
 	# like change the colour / apply filter
 	kill_all_enemies()
 	can_spawn_enemies = false
 	
-func spawn_possessed_enemy():
+	
+func spawn_possessed():
 	var possessed_instance = possessed.instantiate()
 	#possessed_instance.position = Vector2(576, 390)
 	possessed_instance.position = Vector2(578, 426)
@@ -115,7 +128,8 @@ func kill_all_enemies():
 	for enemy in enemy_instances:
 #		if there are enemies present
 		if enemy != null and enemy.is_inside_tree():
-			enemy.queue_free()
+			enemy.die()
+			#enemy.queue_free()
 #	clear the list
 	enemy_instances.clear()
 
