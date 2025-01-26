@@ -1,16 +1,40 @@
-[gd_scene load_steps=20 format=3 uid="uid://ccq0ksogu3xkq"]
+[gd_scene load_steps=44 format=3 uid="uid://ccq0ksogu3xkq"]
 
 [ext_resource type="Script" path="res://player/npc.gd" id="1_05yxr"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_ia2t5"]
 [ext_resource type="Texture2D" uid="uid://bhsn6ehnsepq" path="res://sprites/NPC/dead.png" id="2_k635l"]
-[ext_resource type="Texture2D" uid="uid://1iu2lvhsfql6" path="res://sprites/NPC/sleeping.png" id="2_lxhe8"]
 [ext_resource type="Texture2D" uid="uid://cuqg0s5a605ki" path="res://sprites/NPC/sleeping3_hit.png" id="2_nyprd"]
-[ext_resource type="Texture2D" uid="uid://drtiyb8qvwv1e" path="res://sprites/NPC/sleeping2.png" id="3_bo8fs"]
 [ext_resource type="Texture2D" uid="uid://drkmvsp3apya1" path="res://sprites/NPC/gone.png" id="4_vveos"]
-[ext_resource type="Texture2D" uid="uid://hxdnj4nqthi" path="res://sprites/NPC/waking_up1.png" id="6_b3f61"]
-[ext_resource type="Texture2D" uid="uid://cy86tcce16sil" path="res://sprites/NPC/waking_up2.png" id="7_lewop"]
+[ext_resource type="Texture2D" uid="uid://ctptdwn5gcwdn" path="res://sprites/NPC/sleeping0000.png" id="6_atu4r"]
+[ext_resource type="Texture2D" uid="uid://btd6h3jjfyhwh" path="res://sprites/NPC/sleeping0001.png" id="7_tl4bq"]
+[ext_resource type="Texture2D" uid="uid://bjjyrju85plc6" path="res://sprites/NPC/waking_up0000.png" id="8_8k6ep"]
+[ext_resource type="Texture2D" uid="uid://d3ijpbq1bwhiq" path="res://sprites/NPC/sleeping0002.png" id="8_wts65"]
+[ext_resource type="Texture2D" uid="uid://b5uptmvta63u8" path="res://sprites/NPC/waking_up0001.png" id="9_5jcli"]
+[ext_resource type="Texture2D" uid="uid://dwu1toxgbfmt8" path="res://sprites/NPC/sleeping0003.png" id="9_q1uov"]
+[ext_resource type="Texture2D" uid="uid://r62abcbo2322" path="res://sprites/NPC/sleeping0004.png" id="10_04nrv"]
 [ext_resource type="AudioStream" uid="uid://jighd3tmh4ap" path="res://SFX/npc_hit.ogg" id="10_wccak"]
+[ext_resource type="Texture2D" uid="uid://d3hoxrykwrbk6" path="res://sprites/NPC/waking_up0002.png" id="10_y8xjb"]
 [ext_resource type="AudioStream" uid="uid://cwqkcb7uy7cly" path="res://SFX/hit.ogg" id="11_0l7xh"]
+[ext_resource type="Texture2D" uid="uid://cwrmlqfhl1if3" path="res://sprites/NPC/waking_up0003.png" id="11_oabgs"]
+[ext_resource type="Texture2D" uid="uid://cgyirxos7p6g3" path="res://sprites/NPC/sleeping0005.png" id="11_rne0d"]
+[ext_resource type="Texture2D" uid="uid://dnbulq26i03mu" path="res://sprites/NPC/sleeping0006.png" id="12_88l3y"]
+[ext_resource type="Texture2D" uid="uid://bm0ajvi3x6dbh" path="res://sprites/NPC/waking_up0004.png" id="12_cdgrk"]
+[ext_resource type="Texture2D" uid="uid://d0wi3ekxhd318" path="res://sprites/NPC/waking_up0005.png" id="13_pmnjo"]
+[ext_resource type="Texture2D" uid="uid://c26tkpvsviik0" path="res://sprites/NPC/sleeping0007.png" id="13_poopl"]
+[ext_resource type="Texture2D" uid="uid://becq2myo2axoc" path="res://sprites/NPC/waking_up0006.png" id="14_44ypr"]
+[ext_resource type="Texture2D" uid="uid://1vfa4r3820cx" path="res://sprites/NPC/sleeping0008.png" id="14_an3bv"]
+[ext_resource type="Texture2D" uid="uid://b0aar1yfcqbrk" path="res://sprites/NPC/waking_up0007.png" id="15_kjvsg"]
+[ext_resource type="Texture2D" uid="uid://86qm2t2n5v41" path="res://sprites/NPC/sleeping0009.png" id="15_x4s5h"]
+[ext_resource type="Texture2D" uid="uid://dh0ucs56e776r" path="res://sprites/NPC/sleeping0010.png" id="16_8ivi7"]
+[ext_resource type="Texture2D" uid="uid://6e8lkxbsoo72" path="res://sprites/NPC/waking_up0008.png" id="16_fxkds"]
+[ext_resource type="Texture2D" uid="uid://d1jdlj41mke" path="res://sprites/NPC/waking_up0009.png" id="17_pqjo1"]
+[ext_resource type="Texture2D" uid="uid://cwqaefh6t3r24" path="res://sprites/NPC/sleeping0011.png" id="17_q84fu"]
+[ext_resource type="Texture2D" uid="uid://bicwia44b7hjw" path="res://sprites/NPC/waking_up0010.png" id="18_1r7bg"]
+[ext_resource type="Texture2D" uid="uid://c0f3lpidktdw5" path="res://sprites/NPC/waking_up0011.png" id="19_daru6"]
+[ext_resource type="Texture2D" uid="uid://1318lsrmhh27" path="res://sprites/NPC/waking_up0012.png" id="20_2xqw2"]
+[ext_resource type="Texture2D" uid="uid://5o8vesti0th3" path="res://sprites/NPC/waking_up0013.png" id="21_ah6wu"]
+[ext_resource type="Texture2D" uid="uid://ook241jqrb3p" path="res://sprites/NPC/waking_up0015.png" id="22_m0fjg"]
+[ext_resource type="Texture2D" uid="uid://ickvddvx83jd" path="res://sprites/NPC/waking_up0014.png" id="23_xo46l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ngrvg"]
 resource_local_to_scene = true
@@ -46,25 +70,103 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_lxhe8")
+"texture": ExtResource("6_atu4r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_bo8fs")
+"texture": ExtResource("7_tl4bq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wts65")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_q1uov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_04nrv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_rne0d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_88l3y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_poopl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_an3bv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_x4s5h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_8ivi7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_q84fu")
 }],
 "loop": true,
 "name": &"sleeping",
-"speed": 2.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_b3f61")
+"texture": ExtResource("8_8k6ep")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_lewop")
+"texture": ExtResource("9_5jcli")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_y8xjb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_oabgs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_cdgrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_pmnjo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_44ypr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_kjvsg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_fxkds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_pqjo1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_1r7bg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_daru6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_2xqw2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_ah6wu")
+}, {
+"duration": 2.0,
+"texture": ExtResource("22_m0fjg")
+}, {
+"duration": 2.0,
+"texture": ExtResource("23_xo46l")
+}, {
+"duration": 3.0,
+"texture": ExtResource("22_m0fjg")
+}, {
+"duration": 3.0,
+"texture": ExtResource("23_xo46l")
 }],
 "loop": false,
 "name": &"waking_up",
-"speed": 1.0
+"speed": 6.0
 }]
 
 [sub_resource type="Animation" id="Animation_lueaj"]
@@ -125,8 +227,10 @@ script = ExtResource("1_05yxr")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ngrvg")
 sprite_frames = SubResource("SpriteFrames_6nsm2")
-animation = &"gone"
+animation = &"sleeping"
 autoplay = "sleeping"
+frame = 9
+frame_progress = 0.65343
 
 [node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://caqmoofobi37c"]
+[gd_scene load_steps=79 format=3 uid="uid://caqmoofobi37c"]
 
 [ext_resource type="Script" path="res://enemies/possessed.gd" id="1_n4ngr"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_vc6ox"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://cdip6phda2od7" path="res://sprites/enemies/b_possessed/b_possessed_die0001.png" id="5_bmn7t"]
 [ext_resource type="Texture2D" uid="uid://cjbepa0nk3574" path="res://sprites/enemies/b_possessed/b_possessed_hit.png" id="5_gqcef"]
 [ext_resource type="Texture2D" uid="uid://c85tpxrsidbgd" path="res://sprites/enemies/b_possessed/b_possessed_idle0000.png" id="5_xaimn"]
-[ext_resource type="Texture2D" uid="uid://dokboqpcappwk" path="res://sprites/enemies/r_possessed/rpossessed.png" id="6_24r78"]
 [ext_resource type="Texture2D" uid="uid://cemcmsx6u46sv" path="res://sprites/enemies/b_possessed/b_possessed_die0002.png" id="6_kmrly"]
 [ext_resource type="Texture2D" uid="uid://b0vf4m42prmho" path="res://sprites/enemies/b_possessed/b_possessed_idle0001.png" id="6_nmc0p"]
 [ext_resource type="Texture2D" uid="uid://drckcc5sqlaiu" path="res://sprites/enemies/b_possessed/b_possessed_die0003.png" id="7_3bmmg"]
@@ -20,15 +19,30 @@
 [ext_resource type="Texture2D" uid="uid://dhnt7dkqjfaq8" path="res://sprites/enemies/b_possessed/b_possessed_idle0005.png" id="10_f2scf"]
 [ext_resource type="Texture2D" uid="uid://cxth4t3eaiimx" path="res://sprites/enemies/b_possessed/b_possessed_die0006.png" id="10_vqnms"]
 [ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="10_yemxf"]
+[ext_resource type="Texture2D" uid="uid://dmyrdgmqug57s" path="res://sprites/enemies/p_possessed/p_possessed_die0000.png" id="11_nvqxf"]
 [ext_resource type="Texture2D" uid="uid://qo2578joa81w" path="res://sprites/enemies/b_possessed/b_possessed_idle0006.png" id="11_ximjq"]
 [ext_resource type="Texture2D" uid="uid://i1nki46hyx5t" path="res://sprites/enemies/b_possessed/b_possessed_idle0007.png" id="12_15xot"]
 [ext_resource type="Texture2D" uid="uid://1v88j3jyubg" path="res://sprites/enemies/p_possessed/p_possessed_hit.png" id="12_qpt3r"]
+[ext_resource type="Texture2D" uid="uid://liuga28a8n25" path="res://sprites/enemies/p_possessed/p_possessed_die0001.png" id="12_tuntr"]
+[ext_resource type="Texture2D" uid="uid://ckln4kuwbghln" path="res://sprites/enemies/p_possessed/p_possessed_die0002.png" id="13_1t0t0"]
 [ext_resource type="Texture2D" uid="uid://diwk8tkoewcos" path="res://sprites/enemies/b_possessed/b_possessed_idle0008.png" id="13_4kq3g"]
 [ext_resource type="Texture2D" uid="uid://bir6t5nhyab2d" path="res://sprites/enemies/b_possessed/b_possessed_idle0009.png" id="14_jsf8r"]
+[ext_resource type="Texture2D" uid="uid://dqwsuq3rdv2jf" path="res://sprites/enemies/p_possessed/p_possessed_die0003.png" id="14_juj42"]
 [ext_resource type="Texture2D" uid="uid://cyhrea3auvflx" path="res://sprites/enemies/b_possessed/b_possessed_idle0010.png" id="15_3jpae"]
+[ext_resource type="Texture2D" uid="uid://gkic23s8huuo" path="res://sprites/enemies/p_possessed/p_possessed_die0004.png" id="15_ig3n2"]
 [ext_resource type="Texture2D" uid="uid://b4ohlrg3lfelt" path="res://sprites/enemies/b_possessed/b_possessed_idle0011.png" id="16_5x5p7"]
+[ext_resource type="Texture2D" uid="uid://bg2dpp5o567tp" path="res://sprites/enemies/p_possessed/p_possessed_die0005.png" id="16_xiyqo"]
 [ext_resource type="Texture2D" uid="uid://dn8saygqm4suv" path="res://sprites/enemies/b_possessed/b_possessed_idle0012.png" id="17_mglru"]
+[ext_resource type="Texture2D" uid="uid://d8sbvbfd0cdd" path="res://sprites/enemies/p_possessed/p_possessed_die0006.png" id="17_mkahk"]
 [ext_resource type="Texture2D" uid="uid://dask6wrq11bwc" path="res://sprites/enemies/b_possessed/b_possessed_idle0013.png" id="18_f7u0b"]
+[ext_resource type="Texture2D" uid="uid://6s3pmx1midsy" path="res://sprites/enemies/r_possessed/r_possessed_die0000.png" id="18_s7yse"]
+[ext_resource type="Texture2D" uid="uid://d07bg8escqmvt" path="res://sprites/enemies/r_possessed/r_possessed_die0001.png" id="19_ytejj"]
+[ext_resource type="Texture2D" uid="uid://bt7qfpiw3ae2w" path="res://sprites/enemies/r_possessed/r_possessed_hit.png" id="20_jmskg"]
+[ext_resource type="Texture2D" uid="uid://b38b420wmktcs" path="res://sprites/enemies/r_possessed/r_possessed_die0002.png" id="20_oy12b"]
+[ext_resource type="Texture2D" uid="uid://c6dfw1184v6v2" path="res://sprites/enemies/r_possessed/r_possessed_die0003.png" id="21_0pmel"]
+[ext_resource type="Texture2D" uid="uid://dtgtnyq0y0hfs" path="res://sprites/enemies/r_possessed/r_possessed_die0004.png" id="22_mya0j"]
+[ext_resource type="Texture2D" uid="uid://bc7ibvelh610o" path="res://sprites/enemies/r_possessed/r_possessed_die0005.png" id="23_3b6ij"]
+[ext_resource type="Texture2D" uid="uid://ta3xdqdkuj1c" path="res://sprites/enemies/r_possessed/r_possessed_die0006.png" id="24_reeqi"]
 [ext_resource type="Texture2D" uid="uid://bsm1qg8k4q4yo" path="res://sprites/enemies/p_possessed/p_possessed_idle0000.png" id="26_e1yqo"]
 [ext_resource type="Texture2D" uid="uid://tscj5g6aa5cd" path="res://sprites/enemies/p_possessed/p_possessed_idle0001.png" id="27_8kpsy"]
 [ext_resource type="Texture2D" uid="uid://4ina13dp6fm6" path="res://sprites/enemies/p_possessed/p_possessed_idle0002.png" id="28_fn61p"]
@@ -43,6 +57,20 @@
 [ext_resource type="Texture2D" uid="uid://diyrvo1apfncx" path="res://sprites/enemies/p_possessed/p_possessed_idle0011.png" id="37_lswcn"]
 [ext_resource type="Texture2D" uid="uid://bqgob3yhaitpn" path="res://sprites/enemies/p_possessed/p_possessed_idle0012.png" id="38_gmrdp"]
 [ext_resource type="Texture2D" uid="uid://cwfupj1t1wsik" path="res://sprites/enemies/p_possessed/p_possessed_idle0013.png" id="39_eeoel"]
+[ext_resource type="Texture2D" uid="uid://1djcv0si46br" path="res://sprites/enemies/r_possessed/r_possessed_idle0000.png" id="48_beffr"]
+[ext_resource type="Texture2D" uid="uid://c3jkiob08t6cd" path="res://sprites/enemies/r_possessed/r_possessed_idle0001.png" id="49_ixt42"]
+[ext_resource type="Texture2D" uid="uid://bl4qhcj28ir8b" path="res://sprites/enemies/r_possessed/r_possessed_idle0002.png" id="50_nn6hd"]
+[ext_resource type="Texture2D" uid="uid://cku0wglb3d33m" path="res://sprites/enemies/r_possessed/r_possessed_idle0003.png" id="51_dofhr"]
+[ext_resource type="Texture2D" uid="uid://duit3mf5kssr1" path="res://sprites/enemies/r_possessed/r_possessed_idle0004.png" id="52_t73xb"]
+[ext_resource type="Texture2D" uid="uid://w8sg1roso2rx" path="res://sprites/enemies/r_possessed/r_possessed_idle0005.png" id="53_gbr4e"]
+[ext_resource type="Texture2D" uid="uid://c1ako41mkiaqu" path="res://sprites/enemies/r_possessed/r_possessed_idle0006.png" id="54_nhtpo"]
+[ext_resource type="Texture2D" uid="uid://di712emvpymi7" path="res://sprites/enemies/r_possessed/r_possessed_idle0007.png" id="55_dpsxo"]
+[ext_resource type="Texture2D" uid="uid://b2b5w2rtoqpj5" path="res://sprites/enemies/r_possessed/r_possessed_idle0008.png" id="56_gqsg7"]
+[ext_resource type="Texture2D" uid="uid://dc6r2yu7vov6x" path="res://sprites/enemies/r_possessed/r_possessed_idle0009.png" id="57_ffw2o"]
+[ext_resource type="Texture2D" uid="uid://4hr4h8f2owun" path="res://sprites/enemies/r_possessed/r_possessed_idle0010.png" id="58_wudu0"]
+[ext_resource type="Texture2D" uid="uid://b81f3g782s6hy" path="res://sprites/enemies/r_possessed/r_possessed_idle0011.png" id="59_sqguv"]
+[ext_resource type="Texture2D" uid="uid://c2r6gfi1v4v0h" path="res://sprites/enemies/r_possessed/r_possessed_idle0012.png" id="60_6frja"]
+[ext_resource type="Texture2D" uid="uid://ddb4rgaqsr" path="res://sprites/enemies/r_possessed/r_possessed_idle0013.png" id="61_0niul"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_622h7"]
 resource_local_to_scene = true
@@ -88,6 +116,58 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("11_nvqxf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_tuntr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_1t0t0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_juj42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ig3n2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_xiyqo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_mkahk")
+}],
+"loop": false,
+"name": &"death_purple",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_s7yse")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_ytejj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_oy12b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_0pmel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_mya0j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_3b6ij")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_reeqi")
+}],
+"loop": false,
+"name": &"death_red",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("5_gqcef")
 }, {
 "duration": 1.0,
@@ -118,6 +198,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"hit_purple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_jmskg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_jmskg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_jmskg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_jmskg")
+}],
+"loop": true,
+"name": &"hit_red",
 "speed": 5.0
 }, {
 "frames": [{
@@ -216,11 +313,50 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_24r78")
+"texture": ExtResource("48_beffr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_ixt42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_nn6hd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_dofhr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_t73xb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_gbr4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_nhtpo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_dpsxo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_gqsg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_ffw2o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_wudu0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_sqguv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_6frja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_0niul")
 }],
 "loop": true,
 "name": &"idle_red",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="Animation" id="Animation_lueaj"]
@@ -278,7 +414,9 @@ script = ExtResource("1_n4ngr")
 material = SubResource("ShaderMaterial_622h7")
 position = Vector2(0, 11.555)
 sprite_frames = SubResource("SpriteFrames_ibt27")
-animation = &"hit_purple"
+animation = &"death_red"
+frame = 6
+frame_progress = 0.119952
 
 [node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {

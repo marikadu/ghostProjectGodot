@@ -124,22 +124,22 @@ func take_damage():
 					animated_sprite.play("idle_blue")
 				
 			elif npc.killed_by == "enemy3":
-				animated_sprite.play("hit_blue")
+				animated_sprite.play("hit_red")
 				await get_tree().create_timer(0.6).timeout
 				if not dead:
 					animated_sprite.play("idle_red")
 	
 func die():
-	# if I put the sounds here, they don't work
-	# probably because of the "queue_free"
+	# if I put the sounds here, they don't work. probably because of the "queue_free"
 	dead = true
-	# death animation
+	# death animations
 	if npc.killed_by == "enemy1":
+		animated_sprite.play("death_purple")
+	elif npc.killed_by == "enemy2":
 		animated_sprite.play("death_blue")
-		
-		
-		
-	
+	elif npc.killed_by == "enemy3":
+		animated_sprite.play("death_red")
+
 	animated_sprite.scale = Vector2(1.2, 0.8)
 	hit.play()
 	camera_control.apply_shake(12, 3)
