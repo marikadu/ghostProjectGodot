@@ -37,7 +37,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		die()
 		player.ghost_dies.play()
 	elif body == npc and not dead:
-		npc.take_damage(1, self) # damage the npc, pass self
+		npc.take_damage(1.0, self) # damage the npc, pass self
 		queue_free()
 		
 func die():

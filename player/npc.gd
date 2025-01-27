@@ -22,8 +22,8 @@ extends CharacterBody2D
 @export var enemy_type: String = "npc"
 
 
-var health: int
-var max_health: int
+var health: float
+var max_health: float
 var is_alive: bool = true
 var is_player_near: bool = false
 #var player_near_time: float = 0.0
@@ -35,7 +35,7 @@ var body: Node
 
 func _ready():
 	player = get_tree().root.get_node("main/GhostPlayer")
-	max_health = 5
+	max_health = 10.0
 	health = max_health # at the start of the game, health is max
 	is_alive = true
 	
@@ -59,12 +59,10 @@ func _physics_process(delta: float) -> void:
 	#player_near = is_player_near()
 		
 
-func set_health(value: int):
+func set_health(value: float):
 	if not is_alive:
 		# doesn't update when is dead / when game over
 		return  
-		
-
 	# npc dies
 	health = value
 	if health <= 0:
@@ -74,7 +72,6 @@ func set_health(value: int):
 		animated_sprite.play("gone")
 		print("npc died. killed: ", killed_by)
 		switchValue()
-		#last_attacker = attacker.enemy_type if attacker.has_method("enemy_type") else "unknown"
 	else:
 		#print("NPC health: %d" % health)
 		pass
@@ -101,12 +98,10 @@ func _on_area_2d_body_entered(body: Node) -> void:
 	if is_alive:
 		if body.is_in_group("enemy"):
 			# reduce health by 1
-			take_damage(1, body)
+			take_damage(2.0, body)
 			
 		# apply damage if player is near
 		if body == player:
-			
-			#await get_tree().create_timer(3).timeout
 			camera_control.zoom_in()
 			player_near_sfx.play()
 			is_player_near = true
@@ -115,7 +110,10 @@ func _on_area_2d_body_entered(body: Node) -> void:
 			print(player_near_timer.wait_time)
 			player_near_timer.one_shot = false
 			animated_sprite.play("hit_player")
-			pass
+			
+		#if body.is_in_group("firefly"):
+			#print("firefly entered")
+			#heal(0.5)
 		
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body == player and is_alive:
@@ -130,7 +128,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		 #apply damage if player is near
 
 # take damage
-func take_damage(damage: int, enemy: Node):
+func take_damage(damage: float, enemy: Node):
 	killed_by = enemy.enemy_type
 	camera_control.apply_shake(1.2, 1)
 	npc_hit.play()
@@ -142,8 +140,20 @@ func take_damage(damage: int, enemy: Node):
 	animated_sprite.scale = Vector2(1.2, 0.8)
 	if hit_timer:
 		hit_timer.start()
+	
+func heal(healing: float):
+	#npc_hit.play()
+	animated_sprite.play("gone")
+	#hit_flash.play("hit_flash")
+#	update health
+	#health = min(health + healing, max_health)  # doesn't go beyond max_health
+	#set_health(health + healing)
+	set_health(min(health + healing, max_health))
+	animated_sprite.scale = Vector2(1.2, 0.8)
+	
+	
 		
-func restore_health(amount: int) -> void:
+func restore_health(amount: float) -> void:
 	# revive npc if dead and health is restored
 	#if not is_alive and health + amount > 0:
 	if not is_alive:
@@ -178,7 +188,7 @@ func _on_hit_timer_timeout():
 	
 func _on_player_near_timeout() -> void:
 	if is_alive:
-		take_damage(1, self)
+		take_damage(2.0, self)
 		print("NOTICED THE PLAYER")
 
 

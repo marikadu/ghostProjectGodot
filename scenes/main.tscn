@@ -104,6 +104,10 @@ metadata/_edit_use_anchors_ = true
 wait_time = 0.7
 autostart = true
 
+[node name="FireFlySpawnTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Stamina" parent="UI" instance=ExtResource("2_dpb76")]
@@ -265,3 +269,4 @@ position = Vector2(1212, 435)
 shape = SubResource("RectangleShape2D_g8ebb")
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="FireFlySpawnTimer" to="." method="_on_fire_fly_spawn_timer_timeout"]

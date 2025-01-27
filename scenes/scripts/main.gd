@@ -10,6 +10,7 @@ extends Control
 
 @onready var npc = preload("res://player/npc.tscn")
 @onready var player = preload("res://player/ghost_player.tscn")
+@onready var firefly = preload("res://player/firefly.tscn")
 @onready var possessed_dies: AudioStreamPlayer2D = $possessed_dies
 @onready var possessed_hit: AudioStreamPlayer2D = $possessed_hit
 @onready var sfx_win: AudioStreamPlayer2D = $win
@@ -32,6 +33,7 @@ var enemy_instances = []
 # control spawning
 @onready var can_spawn_enemies = true
 @onready var can_spawn_posessed = false
+@onready var can_spawn_fireflies = true
 #@onready var can_kill_possessed = true
 
 func _ready() -> void:
@@ -118,7 +120,7 @@ func _on_possessed_defeated():
 	possessed_hit.play()
 	can_spawn_enemies = true
 	if npc_instance != null:
-		npc_instance.restore_health(2)
+		npc_instance.restore_health(2.0)
 	else:
 		print("npc not found")
 
@@ -150,7 +152,26 @@ func spawn_enemy():
 	
 func _on_enemy_spawn_timer_timeout() -> void:
 	if can_spawn_enemies:
-		spawn_enemy()
+		#spawn_enemy()
+		pass
+	else:
+		return
+		
+		
+func spawn_firefly():
+	var firefly_instance = firefly.instantiate()
+	
+	%PathFollow2D.progress_ratio = randf() # get a random position from Path2D
+	firefly_instance.global_position = %PathFollow2D.global_position
+	add_child(firefly_instance) # spawn to the scene
+	#enemy_instances.append(enemy_instance) # store the instance of the enemy in the list
+	firefly_instance.add_to_group("firefly")
+	can_spawn_fireflies = true
+
+
+func _on_fire_fly_spawn_timer_timeout() -> void:
+	if can_spawn_fireflies:
+		spawn_firefly()
 		pass
 	else:
 		return

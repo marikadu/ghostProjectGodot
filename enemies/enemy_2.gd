@@ -46,7 +46,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			#player.dash_hit.play()
 		
 	elif body == npc and not dead:
-		npc.take_damage(1, self) # damage the npc
+		npc.take_damage(1.0, self) # damage the npc
 		queue_free()
 		
 		

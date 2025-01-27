@@ -27,7 +27,7 @@ func time_left_until_win():
 	return [minute, second]
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_pressed("time_minus"):
 		#print("timer down")
 		#time_left = 2.0
