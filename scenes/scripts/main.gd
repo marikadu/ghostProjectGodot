@@ -11,6 +11,7 @@ extends Control
 @onready var npc = preload("res://player/npc.tscn")
 @onready var player = preload("res://player/ghost_player.tscn")
 @onready var firefly = preload("res://player/firefly.tscn")
+@onready var fire_fly_spawn_timer: Timer = $FireFlySpawnTimer
 @onready var possessed_dies: AudioStreamPlayer2D = $possessed_dies
 @onready var possessed_hit: AudioStreamPlayer2D = $possessed_hit
 @onready var sfx_win: AudioStreamPlayer2D = $win
@@ -37,6 +38,8 @@ var enemy_instances = []
 #@onready var can_kill_possessed = true
 
 func _ready() -> void:
+	
+	#fire_fly_spawn_timer.start(randi_range(10,18)) 
 
 	# connecting to signals
 	Events.win_game.connect(show_win_game)

@@ -18,6 +18,7 @@ extends CharacterBody2D
 @onready var npc_hit: AudioStreamPlayer2D = $npc_hit
 @onready var hit: AudioStreamPlayer2D = $hit
 @onready var player_near_sfx: AudioStreamPlayer2D = $player_near_sfx
+@onready var healing: AudioStreamPlayer2D = $healing
 
 @export var enemy_type: String = "npc"
 
@@ -105,7 +106,7 @@ func _on_area_2d_body_entered(body: Node) -> void:
 			camera_control.zoom_in()
 			player_near_sfx.play()
 			is_player_near = true
-			print("player near")
+			#print("player near")
 			player_near_timer.start()
 			print(player_near_timer.wait_time)
 			player_near_timer.one_shot = false
@@ -124,7 +125,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		player_near_timer.set_wait_time(3.0) 
 		player_near_timer.one_shot = true
 		animated_sprite.play("sleeping")
-		print("player bye")
+		#print("player bye")
 		 #apply damage if player is near
 
 # take damage
@@ -174,7 +175,7 @@ func restore_health(amount: float) -> void:
 # when isHit timer finishes -> go back to sleeping animation if alive
 func _on_hit_timer_timeout():
 	if is_alive:
-		print("AAAAAAAAAAA")
+		#print("AAAAAAAAAAA")
 		animated_sprite.play("hit")
 		#await get_tree().create_timer(2).timeout
 		#take_damage(1, body)

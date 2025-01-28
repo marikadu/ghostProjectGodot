@@ -5,9 +5,9 @@ extends CharacterBody2D
 @export var friction = 600
 @export var dash_speed = 1300
 
-@export var max_stamina_sections = 3
+@export var max_stamina_sections = 5
 @export var dash_stamina_cost = 1
-@export var stamina_restore_time = 1.7 # time to restore 1 section
+@export var stamina_restore_time = 2.5 # time to restore 1 section
 @export var enemy_type: String = "player"
 
 
@@ -41,8 +41,11 @@ signal is_dashing
 @onready var sprite_gameover: AnimatedSprite2D = $sprite_gameover
 #@onready var s_gameover: Sprite2D = $s_gameover
 
+var dash_stamina_instance
+
 
 func _ready():
+	dash_stamina_instance = dash_stamina.instantiate()
 	current_speed = max_speed
 	playback = animation_tree["parameters/playback"]
 	animation_tree.active = true
@@ -129,6 +132,7 @@ func start_dash() -> void:
 		spawn_dash_effect()
 		#sprite_move.scale = Vector2(0.6, 1.5)
 		# for the dash restore animation of the indicator
+		#dash_stamina_instance.stamina_restore_anim.start()
 		
 		if not restoring_stamina:
 			restoring_stamina = true
@@ -176,6 +180,7 @@ func _on_dash_timer_timeout() -> void:
 		#print("stop wait timer")
 		dashing_t.stop()
 
+
 func _on_dash_timer_reset_timeout() -> void:
 	dash_timer_reset.stop()
 
@@ -183,8 +188,13 @@ func _on_ghost_effect_timer_timeout() -> void:
 	spawn_dash_effect()
 
 func _on_stamina_restore_timer_timeout() -> void:
+	restore_stamina()
+			
+			
+func restore_stamina():
 	if current_stamina < max_stamina_sections:
 		current_stamina += 1
+		#print("restore stamina from player function")
 		print("restored 1 stamina. stamina: ", current_stamina)
 		
 		#update_stamina_ui()
@@ -195,11 +205,3 @@ func _on_stamina_restore_timer_timeout() -> void:
 		else:
 			restoring_stamina = false
 			
-#func update_stamina_ui():
-	#for i in range(max_stamina_sections):
-		## smoothly transition each stamina bar
-		#if i < current_stamina:
-			#dash_stamina.stamina_bars[i].value = dash_stamina.stamina_bars[i].max_value  # Full
-		#else:
-			#dash_stamina.stamina_bars[i].value = 0  # Empty
-	#pass

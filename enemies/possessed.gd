@@ -2,7 +2,7 @@ extends CharacterBody2D
 # if I enable layer 1 or mask 1, the enemy stops when it reaches the player
 
 @export var speed = 145
-@export var health = 3
+@export var health = 9.0
 @export var rotation_speed: float = 2.0  # speed of rotation (degrees per second)
 @export var rotation_range: float = 2.0  # maximum rotation angle (in degrees) to the left and right
 @export var wait_death_animation = 0.8
@@ -83,29 +83,32 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body == player and !player.dashing:
-		print("touched player, ignore player")
+	if body == player and !player.dashing and not dead and not Global.is_game_over:
+		take_damage(1.0)
+		print("-1")
 		# show somehow that the possessed 
 		#doesn't care if you are not dashing
 		#queue_free()  # remove the enemy from the scene
 		pass
 		
 		
-	if body == player and player.dashing and not dead :
-		take_damage()
+	if body == player and player.dashing and not dead and not Global.is_game_over :
+		take_damage(3.0)
+		hit.play()
+		player.restore_stamina()
+		print("-3")
 		
 		#queue_free()  # remove the enemy from the scene
 		if health <= 0:
 			die()
 		
-func take_damage():
+func take_damage(damage: float):
 	# can't kill if game over
 	if not Global.is_game_over:
 		animated_sprite.scale = Vector2(1.6, 0.7)
 		possessed_hit.play()
-		hit.play()
 		hit_flash.play("hit_flash")
-		health -= 1
+		health -= 3
 		print("ow oww")
 		camera_control.apply_shake(3, 1)
 		

@@ -19,7 +19,7 @@ script = ExtResource("1_jaq1m")
 
 [node name="stamina1" type="ProgressBar" parent="."]
 layout_mode = 1
-offset_right = 80.0
+offset_right = 40.0
 offset_bottom = 30.0
 theme_override_styles/background = SubResource("StyleBoxFlat_3wp8u")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tcdlh")
@@ -28,8 +28,8 @@ show_percentage = false
 
 [node name="stamina2" type="ProgressBar" parent="."]
 layout_mode = 1
-offset_left = 88.0
-offset_right = 168.0
+offset_left = 47.0
+offset_right = 87.0
 offset_bottom = 30.0
 theme_override_styles/background = SubResource("StyleBoxFlat_3wp8u")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tcdlh")
@@ -38,8 +38,28 @@ show_percentage = false
 
 [node name="stamina3" type="ProgressBar" parent="."]
 layout_mode = 1
-offset_left = 176.0
-offset_right = 256.0
+offset_left = 93.0
+offset_right = 133.0
+offset_bottom = 30.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3wp8u")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tcdlh")
+value = 32.53
+show_percentage = false
+
+[node name="stamina4" type="ProgressBar" parent="."]
+layout_mode = 1
+offset_left = 140.0
+offset_right = 180.0
+offset_bottom = 30.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3wp8u")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tcdlh")
+value = 32.53
+show_percentage = false
+
+[node name="stamina5" type="ProgressBar" parent="."]
+layout_mode = 1
+offset_left = 187.0
+offset_right = 227.0
 offset_bottom = 30.0
 theme_override_styles/background = SubResource("StyleBoxFlat_3wp8u")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tcdlh")
@@ -48,3 +68,5 @@ show_percentage = false
 
 [node name="stamina_restore_anim" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="timeout" from="stamina_restore_anim" to="." method="_on_stamina_restore_anim_timeout"]

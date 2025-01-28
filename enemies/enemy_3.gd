@@ -19,6 +19,8 @@ var dead : bool
 @onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var speed_timer = $SpeedTimer  # timer to control gradual speed change
 @onready var splash: CPUParticles2D = $splash
+@onready var hit: AudioStreamPlayer2D = $hit
+@onready var camera_control = get_tree().root.get_node("main/CameraControl")
 
 
 func _ready() -> void:
@@ -57,20 +59,15 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player:
 		die()
-		#dead = true
-		#animated_sprite_2d.play("dies")
-		player.ghost_dies.play()
-		#player.hit.play()
-		#hit_flash.play("hit_flash")
-		#Global.score += 10
-		#await get_tree().create_timer(wait_death_animation).timeout
-		##if animated_sprite_2d.animation_finished:
-		#queue_free()  # remove the enemy from the scene
-		#if player.dashing:
-			#player.dash_hit.play()
+		
+	if body == player and player.dashing:
+		die()
+		player.restore_stamina()
+		hit.play()
+		camera_control.apply_shake(4, 5)
 		
 	elif body == npc and not dead:
-		npc.take_damage(1, self) # damage the npc
+		npc.take_damage(1.0, self) # damage the npc
 		queue_free()
 		
 		
@@ -85,10 +82,10 @@ func _on_speed_timer_timeout() -> void:
 	
 
 func die():
+	player.ghost_dies.play()
 	dead = true
 	splash.emitting = true
 	animated_sprite_2d.play("dies")
-	#player.ghost_dies.play()
 	player.hit.play()
 	hit_flash.play("hit_flash")
 	Global.score += 10

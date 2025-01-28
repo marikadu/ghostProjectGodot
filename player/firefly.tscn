@@ -1,47 +1,63 @@
-[gd_scene load_steps=6 format=3 uid="uid://piwyy3oovfys"]
+[gd_scene load_steps=11 format=3 uid="uid://piwyy3oovfys"]
 
 [ext_resource type="Texture2D" uid="uid://dkta7bmlosdw5" path="res://sprites/firefly.png" id="1_qx3wq"]
+[ext_resource type="Material" uid="uid://b2ohdvyq30h6u" path="res://player/wants_dash_2.tres" id="2_1e47i"]
 [ext_resource type="Script" path="res://player/firefly.gd" id="2_5t7sm"]
-[ext_resource type="Texture2D" uid="uid://s3jyk22y2cm4" path="res://sprites/b_particle.png" id="3_gtl24"]
-
-[sub_resource type="Curve" id="Curve_xxlr2"]
-_data = [Vector2(0, 0.736264), 0.0, 0.0, 0, 0, Vector2(0.0539419, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.195021, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.975104, 0.406593), 0.0, 0.0, 0, 0]
-point_count = 4
+[ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_le1f3"]
+[ext_resource type="Texture2D" uid="uid://bao32g14k8eki" path="res://sprites/firefly2.png" id="3_es8pb"]
+[ext_resource type="AudioStream" uid="uid://c3lxgsexbr5sy" path="res://SFX/healing.ogg" id="5_wbv0k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_af8kn"]
 radius = 17.53
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6hd0d"]
+radius = 88.17
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hgbvj"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("5_wbv0k")
+
+[sub_resource type="Curve" id="Curve_17rwe"]
+_data = [Vector2(0, 0.736264), 0.0, 0.0, 0, 0, Vector2(0.0539419, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.195021, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.975104, 0.406593), 0.0, 0.0, 0, 0]
+point_count = 4
+
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["firefly"]]
+modulate = Color(1.2, 1, 1, 1)
 collision_layer = 32
 collision_mask = 3
 script = ExtResource("2_5t7sm")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.976685, 0.973289, 0.746766, 1)
+energy = 0.2
+texture = ExtResource("2_le1f3")
+texture_scale = 0.2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3.42, 3.42)
 texture = ExtResource("1_qx3wq")
 
-[node name="splash" type="CPUParticles2D" parent="."]
+[node name="ReachableSprite" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1.1, 1, 1, 1)
+material = ExtResource("2_1e47i")
 scale = Vector2(3.42, 3.42)
-emitting = false
-lifetime = 1.2
-one_shot = true
-speed_scale = 2.47
-explosiveness = 0.86
-randomness = 0.16
-texture = ExtResource("3_gtl24")
-spread = 176.55
-gravity = Vector2(0, 0)
-initial_velocity_min = 71.52
-initial_velocity_max = 102.3
-scale_amount_max = 2.0
-scale_amount_curve = SubResource("Curve_xxlr2")
+texture = ExtResource("3_es8pb")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 32
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_af8kn")
+
+[node name="ReachableArea" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReachableArea"]
+shape = SubResource("CircleShape2D_6hd0d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -50,4 +66,27 @@ disabled = true
 
 [node name="ran_dir_timer" type="Timer" parent="."]
 
+[node name="pick_up" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(3.42, 3.42)
+stream = SubResource("AudioStreamRandomizer_hgbvj")
+pitch_scale = 1.15
+
+[node name="splash" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 10
+lifetime = 1.2
+one_shot = true
+speed_scale = 2.47
+explosiveness = 0.93
+randomness = 0.16
+texture = ExtResource("1_qx3wq")
+spread = 176.55
+gravity = Vector2(0, 0)
+initial_velocity_min = 55.26
+initial_velocity_max = 69.78
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_17rwe")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="ReachableArea" to="." method="_on_reachable_area_body_entered"]
+[connection signal="body_exited" from="ReachableArea" to="." method="_on_reachable_area_body_exited"]

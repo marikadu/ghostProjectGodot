@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://tnqjhgxd31yv"]
+[gd_scene load_steps=23 format=3 uid="uid://tnqjhgxd31yv"]
 
 [ext_resource type="Script" path="res://enemies/enemy_3.gd" id="1_fohts"]
 [ext_resource type="Texture2D" uid="uid://5188v7gd0hce" path="res://sprites/icon4.png" id="2_fjun3"]
+[ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_pw1r3"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="3_2flvk"]
 [ext_resource type="Texture2D" uid="uid://b48tudputncfg" path="res://sprites/enemies/red/red_die1.png" id="3_i03vt"]
 [ext_resource type="Texture2D" uid="uid://1v5jp44ku2bi" path="res://sprites/enemies/red/red1.png" id="3_o8luf"]
@@ -13,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://b4h8su1vc4i6m" path="res://sprites/enemies/red/red_die5.png" id="7_8igm5"]
 [ext_resource type="Texture2D" uid="uid://g6blq2ucsrf5" path="res://sprites/enemies/red/red_die6.png" id="8_6pi8l"]
 [ext_resource type="Texture2D" uid="uid://ci7xokjdu7cpr" path="res://sprites/r_particle.png" id="13_cra6w"]
+[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="15_pd6p0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8psmm"]
 resource_local_to_scene = true
@@ -112,6 +114,12 @@ collision_mask = 3
 collision_priority = 2.0
 script = ExtResource("1_fohts")
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.995322, 0.613775, 0.661468, 1)
+energy = 0.2
+texture = ExtResource("2_pw1r3")
+texture_scale = 0.67
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(0.881246, 0.441064, 0.339695, 1)
@@ -158,6 +166,9 @@ initial_velocity_min = 71.52
 initial_velocity_max = 102.3
 scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_45xf2")
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_pd6p0")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]

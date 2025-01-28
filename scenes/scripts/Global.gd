@@ -12,7 +12,7 @@ var personal_best = 0
 func update_personal_best():
 	if score > personal_best:
 		personal_best = score
-		print("New personal best:", personal_best)
+		print("new personal best:", personal_best)
 		
 		
 		
@@ -21,4 +21,5 @@ func update_personal_best():
 	#if file.open("user://personal_best.save", File.WRITE) == OK:
 		#file.store_var(personal_best)
 		#file.close()
-		#print("Personal best saved:", personal_best)
+		#print("personal best saved:", personal_best)
+		

@@ -1,6 +1,7 @@
-[gd_scene load_steps=79 format=3 uid="uid://caqmoofobi37c"]
+[gd_scene load_steps=80 format=3 uid="uid://caqmoofobi37c"]
 
 [ext_resource type="Script" path="res://enemies/possessed.gd" id="1_n4ngr"]
+[ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_ceemi"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_vc6ox"]
 [ext_resource type="Texture2D" uid="uid://bhsn6ehnsepq" path="res://sprites/NPC/dead.png" id="3_g2e6f"]
 [ext_resource type="Texture2D" uid="uid://c650xkuwx3tif" path="res://sprites/enemies/b_possessed/b_possessed_die0000.png" id="4_ogsjh"]
@@ -409,6 +410,11 @@ scale = Vector2(0.675, 0.675)
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_n4ngr")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.2
+texture = ExtResource("2_ceemi")
+texture_scale = 0.7
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_622h7")

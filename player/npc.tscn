@@ -1,6 +1,7 @@
-[gd_scene load_steps=46 format=3 uid="uid://ccq0ksogu3xkq"]
+[gd_scene load_steps=49 format=3 uid="uid://ccq0ksogu3xkq"]
 
 [ext_resource type="Script" path="res://player/npc.gd" id="1_05yxr"]
+[ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_ggpv7"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_ia2t5"]
 [ext_resource type="Texture2D" uid="uid://bhsn6ehnsepq" path="res://sprites/NPC/dead.png" id="2_k635l"]
 [ext_resource type="Texture2D" uid="uid://cuqg0s5a605ki" path="res://sprites/NPC/hit.png" id="2_nyprd"]
@@ -37,6 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://ook241jqrb3p" path="res://sprites/NPC/waking_up0015.png" id="22_m0fjg"]
 [ext_resource type="Texture2D" uid="uid://ickvddvx83jd" path="res://sprites/NPC/waking_up0014.png" id="23_xo46l"]
 [ext_resource type="AudioStream" uid="uid://b78m6xs2u8px2" path="res://SFX/player_near.ogg" id="37_hlo2i"]
+[ext_resource type="AudioStream" uid="uid://dwhfxeb35uw6v" path="res://SFX/pick_up.ogg" id="38_4hgb1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ngrvg"]
 resource_local_to_scene = true
@@ -226,6 +228,11 @@ random_pitch = 1.19
 streams_count = 1
 stream_0/stream = ExtResource("10_wccak")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bd7xo"]
+random_pitch = 1.12
+streams_count = 1
+stream_0/stream = ExtResource("38_4hgb1")
+
 [node name="NPC" type="CharacterBody2D"]
 z_index = -2
 scale = Vector2(0.47, 0.47)
@@ -233,6 +240,12 @@ collision_layer = 7
 collision_mask = 39
 collision_priority = 3.0
 script = ExtResource("1_05yxr")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.974255, 0.655935, 0.425441, 1)
+energy = 0.05
+texture = ExtResource("2_ggpv7")
+texture_scale = 0.67
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ngrvg")
@@ -273,6 +286,11 @@ stream = ExtResource("37_hlo2i")
 [node name="player_near" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="healing" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_bd7xo")
+volume_db = 3.225
+pitch_scale = 1.19
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2dnpc_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

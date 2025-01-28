@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cnv135ij7ykqo" path="res://sprites/hp.png" id="1_608r2"]
 [ext_resource type="Script" path="res://player/hp.gd" id="2_ww2b3"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gelca"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7keqe"]
 bg_color = Color(0.2, 0.0941176, 0.0941176, 0.54902)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mv755"]
@@ -32,21 +32,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_gelca")
+theme_override_styles/background = SubResource("StyleBoxFlat_7keqe")
 theme_override_styles/fill = SubResource("StyleBoxFlat_mv755")
 value = 89.35
 show_percentage = false
 
 [node name="Healingbar" type="ProgressBar" parent="."]
-z_index = -1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.72414
-offset_top = 63.7931
-offset_right = 1.72415
-offset_bottom = 63.7931
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_6qpo8")
@@ -62,5 +57,16 @@ one_shot = true
 wait_time = 0.8
 one_shot = true
 
+[node name="HealingDelayTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]
 [connection signal="timeout" from="HealingTimer" to="." method="_on_healing_timer_timeout"]
+[connection signal="timeout" from="HealingDelayTimer" to="." method="_on_healing_delay_timer_timeout"]
