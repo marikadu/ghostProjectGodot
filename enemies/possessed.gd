@@ -2,7 +2,7 @@ extends CharacterBody2D
 # if I enable layer 1 or mask 1, the enemy stops when it reaches the player
 
 @export var speed = 145
-@export var health = 9.0
+#@export var health = 9.0
 @export var rotation_speed: float = 2.0  # speed of rotation (degrees per second)
 @export var rotation_range: float = 2.0  # maximum rotation angle (in degrees) to the left and right
 @export var wait_death_animation = 0.8
@@ -10,6 +10,7 @@ extends CharacterBody2D
 var npc: CharacterBody2D
 var player: CharacterBody2D
 var dead : bool
+var health = 9.0
 
 @onready var can_hurt = true
 @onready var animated_sprite = $AnimatedSprite2D
@@ -22,15 +23,19 @@ var dead : bool
 @onready var possessed_hit: AudioStreamPlayer2D = $possessed_hit
 @onready var hit: AudioStreamPlayer2D = $hit
 @onready var main = get_tree().root.get_node("main")
+@onready var health_bar: TextureProgressBar = $CanvasLayer/HealthBar
+
 
 #var velocity = Vector2.ZERO
 var random_direction: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
+	#health = 9.0
 
 	player = get_tree().root.get_node("main/GhostPlayer")
 	npc = Global.npc_instance
+	health_bar.init_health(health)
 	
 	animated_sprite.play("dead")
 	
@@ -48,7 +53,7 @@ func _ready() -> void:
 #		npc_area.connect("body_entered", Callable(self, "_on_area_2d_body_entered"))
 		possessed_area.connect("body_exited", Callable(self, "_on_possessed_area_body_exited"))
 	else:
-		print("Possessed area is missing!")
+		print("possessed missing")
 		
 
 	
@@ -86,10 +91,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player and !player.dashing and not dead and not Global.is_game_over:
 		take_damage(1.0)
 		print("-1")
-		# show somehow that the possessed 
-		#doesn't care if you are not dashing
-		#queue_free()  # remove the enemy from the scene
-		pass
+		if health <= 0:
+			die()
 		
 		
 	if body == player and player.dashing and not dead and not Global.is_game_over :
@@ -108,7 +111,8 @@ func take_damage(damage: float):
 		animated_sprite.scale = Vector2(1.6, 0.7)
 		possessed_hit.play()
 		hit_flash.play("hit_flash")
-		health -= 3
+		health -= damage
+		health_bar.health = health
 		print("ow oww")
 		camera_control.apply_shake(3, 1)
 		
@@ -144,7 +148,7 @@ func die():
 		animated_sprite.play("death_red")
 
 	animated_sprite.scale = Vector2(1.2, 0.8)
-	hit.play()
+	#hit.play()
 	camera_control.apply_shake(12, 3)
 	Global.score += 100
 	print("Score: ", Global.score)

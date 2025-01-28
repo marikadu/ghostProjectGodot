@@ -133,11 +133,14 @@ func start_dash() -> void:
 		#sprite_move.scale = Vector2(0.6, 1.5)
 		# for the dash restore animation of the indicator
 		#dash_stamina_instance.stamina_restore_anim.start()
+		if Global.current_scene_name == "main_menu":
+			current_stamina = max_stamina_sections
 		
 		if not restoring_stamina:
 			restoring_stamina = true
 			stamina_restore_timer.start()
 			print("restoring sssstataksef")
+			
 			
 	else:
 		print("not enough stamina!")

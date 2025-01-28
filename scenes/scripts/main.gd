@@ -1,4 +1,6 @@
-extends Control
+#extends Control
+extends Node2D
+# -- LEVEL 3
 
 # CTRL + drag a script to put it here with @onready with $
 #@onready var camera_2d: Camera2D = $Camera2D
@@ -38,6 +40,7 @@ var enemy_instances = []
 #@onready var can_kill_possessed = true
 
 func _ready() -> void:
+	Global.current_scene_name = "level_3"
 	
 	#fire_fly_spawn_timer.start(randi_range(10,18)) 
 
@@ -52,10 +55,12 @@ func _ready() -> void:
 	print("resetting score:", Global.score)
 	
 #	checking if camera node is found
-	if camera == null:
-		print("camera is not found, where is camera?")
-	else:
-		print("camera found")
+	#if camera == null:
+		#print("camera is not found, where is camera?")
+	#else:
+		#print("camera found")
+		
+	print(Global.current_scene_name)
 		
 	#possessed.possessed_area.connect("body_exited", self, "_on_possessed_escapes_body_exited")
 		
@@ -66,9 +71,9 @@ func _ready() -> void:
 		npc_instance.position = get_viewport_rect().size/2
 		add_child(npc_instance)  # adding npc to the scene tree
 		Global.npc_instance = npc_instance # store the instance in the global variable
-		print("NPC ready")
-	else:
-		print("NPC already instantiated or error occured")
+		#print("NPC ready")
+	#else:
+		#print("NPC already instantiated or error occured")
 		
 	player_instance = player.instantiate()
 	
@@ -84,12 +89,14 @@ func show_win_game():
 	kill_all_enemies()
 	Global.update_personal_best() # updating personal best ONLY when won the game
 	can_spawn_enemies = false
+	npc_instance.npc_ignore_player = false
 	#get_tree().paused = true # pause game
 #	I don't know if I need to unpause it when I go to other screen, show check it later
 	pass
 
 	
 func show_game_over():
+	npc_instance.npc_ignore_player = false
 	player_instance.can_move = false
 	#player_instance.set_physics_process(false)
 	#is_game_over = true
@@ -155,7 +162,7 @@ func spawn_enemy():
 	
 func _on_enemy_spawn_timer_timeout() -> void:
 	if can_spawn_enemies:
-		#spawn_enemy()
+		spawn_enemy()
 		pass
 	else:
 		return

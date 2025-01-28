@@ -27,7 +27,7 @@ var health: float
 var max_health: float
 var is_alive: bool = true
 var is_player_near: bool = false
-var npc_ignores_player: bool = false
+var npc_ignore_player: bool = false
 #var player_near_time: float = 0.0
 #var patience: float = 3.0
 var player: CharacterBody2D
@@ -39,6 +39,7 @@ func _ready():
 	#get_tree().get_current_scene().get_name()
 	#if get_parent.name == "level1":
 		#print("yyyyy")
+	npc_ignore_player = false
 	player = get_tree().root.get_node("main/GhostPlayer")
 	max_health = 10.0
 	health = max_health # at the start of the game, health is max
@@ -107,13 +108,12 @@ func _on_area_2d_body_entered(body: Node) -> void:
 			take_damage(2.0, body)
 			
 		# apply damage if player is near
-		if body == player:
+		if body == player and not npc_ignore_player:
 			camera_control.zoom_in()
 			player_near_sfx.play()
 			is_player_near = true
 			#print("player near")
 			player_near_timer.start()
-			print(player_near_timer.wait_time)
 			player_near_timer.one_shot = false
 			animated_sprite.play("hit_player")
 			

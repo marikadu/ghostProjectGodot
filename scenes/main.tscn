@@ -52,15 +52,7 @@ size = Vector2(1217, 27)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g8ebb"]
 size = Vector2(30, 984)
 
-[node name="main" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 3.0
-offset_top = 5.0
-offset_right = 3.0
-offset_bottom = 5.0
-size_flags_horizontal = 6
-size_flags_vertical = 3
+[node name="main" type="Node2D"]
 script = ExtResource("1_y5ff8")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
@@ -96,7 +88,7 @@ rotation = -0.0397337
 [node name="CameraControl" type="Control" parent="."]
 unique_name_in_owner = true
 layout_direction = 1
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 0
 pivot_offset = Vector2(579, 423)
 script = ExtResource("2_eeje6")
@@ -112,21 +104,32 @@ autostart = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Stamina" parent="UI" instance=ExtResource("2_dpb76")]
-z_index = 6
-offset_left = 150.0
-offset_top = 33.0
-offset_right = 150.0
-offset_bottom = 33.0
-
-[node name="Score" parent="UI" instance=ExtResource("8_lcji7")]
-
 [node name="HealthBar" parent="UI" instance=ExtResource("11_rp7p5")]
 z_index = 6
-offset_left = 772.0
-offset_top = 31.0
-offset_right = 1187.0
-offset_bottom = 82.0
+offset_left = 756.0
+offset_top = 24.0
+offset_right = 1056.0
+offset_bottom = 64.0
+
+[node name="Stamina" parent="UI" instance=ExtResource("2_dpb76")]
+z_index = 6
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 137.0
+offset_top = 24.0
+offset_right = 137.0
+offset_bottom = 24.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Score" parent="UI" instance=ExtResource("8_lcji7")]
+offset_left = -119.0
+offset_top = -104.0
+offset_right = -119.0
+offset_bottom = -104.0
 
 [node name="CountDownTimer" parent="UI" instance=ExtResource("9_ag1hq")]
 unique_name_in_owner = true

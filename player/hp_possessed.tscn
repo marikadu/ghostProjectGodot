@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://giv47sl8et1g"]
+[gd_scene load_steps=7 format=3 uid="uid://b05dnstrmupl3"]
 
-[ext_resource type="Texture2D" uid="uid://cnv135ij7ykqo" path="res://sprites/hp.png" id="1_608r2"]
-[ext_resource type="Script" path="res://player/hp.gd" id="2_ww2b3"]
+[ext_resource type="Texture2D" uid="uid://duu8w88vch1ic" path="res://sprites/hp_possessed.png" id="1_go47d"]
+[ext_resource type="Script" path="res://player/hp_possessed.gd" id="2_n432x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7keqe"]
 bg_color = Color(0.2, 0.0941176, 0.0941176, 0.54902)
@@ -37,8 +37,8 @@ corner_radius_bottom_left = 6
 offset_right = 40.0
 offset_bottom = 40.0
 value = 100.0
-texture_progress = ExtResource("1_608r2")
-script = ExtResource("2_ww2b3")
+texture_progress = ExtResource("1_go47d")
+script = ExtResource("2_n432x")
 
 [node name="Damagebar" type="ProgressBar" parent="."]
 z_index = -1

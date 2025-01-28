@@ -44,5 +44,5 @@ layout_mode = 2
 theme = ExtResource("2_vbiwd")
 text = "Back"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_exit_pressed"]

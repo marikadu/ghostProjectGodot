@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://caqmoofobi37c"]
+[gd_scene load_steps=82 format=3 uid="uid://caqmoofobi37c"]
 
 [ext_resource type="Script" path="res://enemies/possessed.gd" id="1_n4ngr"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_ceemi"]
@@ -72,6 +72,8 @@
 [ext_resource type="Texture2D" uid="uid://b81f3g782s6hy" path="res://sprites/enemies/r_possessed/r_possessed_idle0011.png" id="59_sqguv"]
 [ext_resource type="Texture2D" uid="uid://c2r6gfi1v4v0h" path="res://sprites/enemies/r_possessed/r_possessed_idle0012.png" id="60_6frja"]
 [ext_resource type="Texture2D" uid="uid://ddb4rgaqsr" path="res://sprites/enemies/r_possessed/r_possessed_idle0013.png" id="61_0niul"]
+[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="73_pmgp3"]
+[ext_resource type="PackedScene" uid="uid://b05dnstrmupl3" path="res://player/hp_possessed.tscn" id="74_3ehnw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_622h7"]
 resource_local_to_scene = true
@@ -450,6 +452,31 @@ volume_db = -2.909
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_yemxf")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 387.0
+offset_top = 735.0
+offset_right = 531.0
+offset_bottom = 788.0
+theme = ExtResource("73_pmgp3")
+theme_override_font_sizes/font_size = 40
+text = "Possessed"
+
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource("74_3ehnw")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_top = -70.0
+offset_right = 110.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.4, 1)
 
 [connection signal="area_shape_entered" from="Area2DPossessed" to="." method="_on_area_2d_possessed_area_shape_entered"]
 [connection signal="body_entered" from="Area2DPossessed" to="." method="_on_area_2d_body_entered"]
