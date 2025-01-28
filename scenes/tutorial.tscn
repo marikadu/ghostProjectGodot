@@ -1,17 +1,72 @@
-[gd_scene load_steps=2 format=3 uid="uid://djb0frbwme6q3"]
+[gd_scene load_steps=4 format=3 uid="uid://djb0frbwme6q3"]
 
+[ext_resource type="Script" path="res://scenes/scripts/tutorial.gd" id="1_bom5o"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="1_ifomp"]
+[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="3_apkci"]
 
 [node name="Tutorial" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+script = ExtResource("1_bom5o")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label1" type="Label" parent="."]
 layout_mode = 0
-offset_right = 216.0
-offset_bottom = 53.0
+offset_left = 36.0
+offset_top = 578.0
+offset_right = 405.0
+offset_bottom = 743.0
 theme = ExtResource("1_ifomp")
 theme_override_font_sizes/font_size = 40
-text = "WASD to move"
+text = "WASD to move
+Shift to sprint
+Hit the text to continue"
+
+[node name="first" type="Area2D" parent="Label1"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label1/first"]
+polygon = PackedVector2Array(0, 167, 373, 161, 370, 119, 229, 119, 229, 4, -1, 3, -1, 158)
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 363.0
+offset_right = 475.0
+offset_bottom = 474.0
+theme = ExtResource("1_ifomp")
+theme_override_font_sizes/font_size = 40
+text = "Protect the sleeping human
+Hit the ghosts"
+
+[node name="second" type="Area2D" parent="Label2"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label2/second"]
+polygon = PackedVector2Array(-3, 107, 228, 111, 229, 56, 436, 55, 438, 7, -1, 3)
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 659.0
+offset_top = 619.0
+offset_right = 1091.0
+offset_bottom = 730.0
+theme = ExtResource("1_ifomp")
+theme_override_font_sizes/font_size = 40
+text = "Don't let it escape!"
+
+[node name="third" type="Area2D" parent="Label3"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label3/third"]
+polygon = PackedVector2Array(-3, 55, 306, 55, 306, 6, -1, 3)
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_apkci")
+
+[connection signal="body_entered" from="Label1/first" to="." method="_on_first_body_entered"]
+[connection signal="body_entered" from="Label2/second" to="." method="_on_second_body_entered"]
+[connection signal="body_entered" from="Label3/third" to="." method="_on_third_body_entered"]
+[connection signal="body_entered" from="Label3/third" to="." method="_on_second_body_entered"]

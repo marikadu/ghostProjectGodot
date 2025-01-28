@@ -28,6 +28,7 @@ var max_health: float
 var is_alive: bool = true
 var is_player_near: bool = false
 var npc_ignore_player: bool = false
+#var can_npc_take_damage: bool
 #var player_near_time: float = 0.0
 #var patience: float = 3.0
 var player: CharacterBody2D
@@ -142,6 +143,7 @@ func take_damage(damage: float, enemy: Node):
 	animated_sprite.play("hit")
 	hit_flash.play("hit_flash")
 #	update health
+	#if can_npc_take_damage:
 	set_health(health - damage)
 	animated_sprite.scale = Vector2(1.2, 0.8)
 	if hit_timer:

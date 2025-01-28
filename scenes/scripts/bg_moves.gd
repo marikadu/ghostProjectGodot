@@ -27,8 +27,13 @@ func _process(delta):
 	n_background.position = (player.position*delta) / 4
 	d_background.position = (player.position*delta) / 4
 	
-	await get_tree().create_timer(wait_before_sunrise).timeout
-	fade_out()
+	if !Global.current_scene_name == "level_1":
+		print("sunrise animation ready")
+		await get_tree().create_timer(wait_before_sunrise).timeout
+		fade_out()
+	else:
+		#print("delay sunrise")
+		pass
 	
 
 	#position = (player.position*delta) + camera_off # NEW CODE

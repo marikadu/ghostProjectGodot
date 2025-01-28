@@ -3,10 +3,17 @@
 [ext_resource type="Script" path="res://scenes/scripts/timer.gd" id="1_n6t8t"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_kly3c"]
 
-[node name="CountDownTimer" type="Node"]
+[node name="CountDownTimer" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+size_flags_vertical = 0
 script = ExtResource("1_n6t8t")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

@@ -65,7 +65,7 @@ func _on_timer_timeout() -> void:
 		return 
 		
 func _on_possessed_escaped():
-	print("stop the timer")
+	#print("stop the timer")
 	cd_timer.stop()
 	pass
 	
