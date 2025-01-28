@@ -1,7 +1,54 @@
-[gd_scene load_steps=3 format=3 uid="uid://dn4008nv06clk"]
+[gd_scene load_steps=12 format=3 uid="uid://dn4008nv06clk"]
 
 [ext_resource type="Script" path="res://scenes/scripts/main_menu.gd" id="1_60uys"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_36rfs"]
+[ext_resource type="Texture2D" uid="uid://bicv2shwkdaf8" path="res://sprites/bg_mainmenu2.png" id="3_lq80u"]
+[ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="4_sd2tg"]
+[ext_resource type="Texture2D" uid="uid://s3jyk22y2cm4" path="res://sprites/b_particle.png" id="5_p17an"]
+[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="6_7j32i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hou5a"]
+
+[sub_resource type="Animation" id="Animation_lueaj"]
+length = 0.0115
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isHit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4443o"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isHit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 0.217638),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tdvf1"]
+_data = {
+"RESET": SubResource("Animation_lueaj"),
+"hit_flash": SubResource("Animation_4443o")
+}
+
+[sub_resource type="Curve" id="Curve_6khei"]
+_data = [Vector2(0, 0.736264), 0.0, 0.0, 0, 0, Vector2(0.0539419, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.195021, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.975104, 0.406593), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -19,20 +66,33 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -35.0
-offset_top = -50.5
-offset_right = 35.0
-offset_bottom = 50.5
+offset_left = 183.0
+offset_top = -155.0
+offset_right = 407.0
+offset_bottom = 168.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_36rfs")
 text = "Play"
+
+[node name="Area2D" type="Area2D" parent="MarginContainer/VBoxContainer/Play"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Play/Area2D"]
+position = Vector2(112, 52)
+scale = Vector2(10.445, 4.265)
+shape = SubResource("RectangleShape2D_hou5a")
+
+[node name="HitFlash" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/Play"]
+libraries = {
+"": SubResource("AnimationLibrary_tdvf1")
+}
 
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -44,6 +104,34 @@ layout_mode = 2
 theme = ExtResource("2_36rfs")
 text = "Exit"
 
+[node name="BgMainmenu2" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(576, 458)
+texture = ExtResource("3_lq80u")
+
+[node name="GhostPlayer" parent="." instance=ExtResource("4_sd2tg")]
+z_index = 2
+position = Vector2(576, 210)
+
+[node name="splash" type="CPUParticles2D" parent="."]
+emitting = false
+lifetime = 1.2
+one_shot = true
+speed_scale = 2.47
+explosiveness = 0.86
+randomness = 0.16
+texture = ExtResource("5_p17an")
+spread = 176.55
+gravity = Vector2(0, 0)
+initial_velocity_min = 71.52
+initial_velocity_max = 102.3
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_6khei")
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_7j32i")
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Play/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

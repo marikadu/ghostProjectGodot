@@ -27,6 +27,7 @@ var health: float
 var max_health: float
 var is_alive: bool = true
 var is_player_near: bool = false
+var npc_ignores_player: bool = false
 #var player_near_time: float = 0.0
 #var patience: float = 3.0
 var player: CharacterBody2D
@@ -35,10 +36,14 @@ var body: Node
 
 
 func _ready():
+	#get_tree().get_current_scene().get_name()
+	#if get_parent.name == "level1":
+		#print("yyyyy")
 	player = get_tree().root.get_node("main/GhostPlayer")
 	max_health = 10.0
 	health = max_health # at the start of the game, health is max
 	is_alive = true
+	#get_tree().get_current_scene().filename
 	
 	#if player_near_timer:
 		#player_near_timer.set_wait_time(0.1) # checking if player is near every 0.1 seconds

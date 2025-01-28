@@ -17,6 +17,9 @@ var player: CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var ran_dir_timer: Timer = $ran_dir_timer
 @onready var pick_up: AudioStreamPlayer2D = $pick_up
+@onready var point_light: PointLight2D = $PointLight2D
+@onready var hit: AudioStreamPlayer2D = $hit
+
 
 
 #var velocity = Vector2.ZERO
@@ -36,33 +39,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	time += delta
 	
-	var towards_target = (npc.global_position - global_position).normalized()
-	
-	var perpendicular = Vector2(towards_target.y, -towards_target.x)
-	
-	global_position += (t * towards_target + p * perpendicular * sin(time)) * speed * delta
-	
-	#if npc:
-		#var direction = (npc.position - position).normalized()
-		#velocity = direction * speed
-		##look_at(npc.position)
-		#move_and_collide(velocity * delta)
-		#_on_changing_random_direction_timeout()
-		#move_and_slide()
+	if npc:
+		var towards_target = (npc.global_position - global_position).normalized()
 		
-
-#func get_random_direction() -> Vector2:
-	##random angle between 0 and 2PI radians
-	#var random_angle = randf_range(0, 2 * PI) 
-	 ##convert angle to vector directions
-	#return Vector2(cos(random_angle), sin(random_angle))
-	
-	
-#func _on_changing_random_direction_timeout() -> void:
-	 ##updating random direction every 1.4 seconds
-	#random_direction = get_random_direction()
-	 ##restart the timer to keep updating the direction
-	#ran_dir_timer.start(1.4)
+		var perpendicular = Vector2(towards_target.y, -towards_target.x)
+		
+		global_position += (t * towards_target + p * perpendicular * sin(time)) * speed * delta
 	
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -72,6 +54,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 	if body == player and player.dashing:
 		pick_up.play()
+		hit.play()
 		player.restore_stamina() # restore 2 stamina bars
 		player.restore_stamina()
 		splash.emitting = true
@@ -99,6 +82,7 @@ func fade_out():
 	tween.set_ease(Tween.EASE_OUT)
 	# tween modulation over 0.5 seconds
 	tween.tween_property(self, "modulate:a", 0.0, 0.5)
+	point_light.energy = lerp(0.3, 0.0, 1)
 	# callback when tween finishes
 	tween.tween_callback(Callable(self, "finished"))
 		
