@@ -1,11 +1,27 @@
-[gd_scene load_steps=12 format=3 uid="uid://dn4008nv06clk"]
+[gd_scene load_steps=16 format=3 uid="uid://dn4008nv06clk"]
 
 [ext_resource type="Script" path="res://scenes/scripts/main_menu.gd" id="1_60uys"]
+[ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_3r7k7"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_36rfs"]
+[ext_resource type="Shader" path="res://shaders/border.gdshader" id="2_go6j5"]
 [ext_resource type="Texture2D" uid="uid://bicv2shwkdaf8" path="res://sprites/bg_mainmenu2.png" id="3_lq80u"]
 [ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="4_sd2tg"]
 [ext_resource type="Texture2D" uid="uid://s3jyk22y2cm4" path="res://sprites/b_particle.png" id="5_p17an"]
 [ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="6_7j32i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qg754"]
+shader = ExtResource("2_go6j5")
+shader_parameter/rect_size = Vector2(1.935, 0.145)
+shader_parameter/bness = 5.45
+shader_parameter/fall_off_scale = 6.385
+shader_parameter/b_offset = 0.08
+shader_parameter/speed = 3.188
+shader_parameter/noise_intensity = 0.553
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2afgu"]
+shader = ExtResource("2_3r7k7")
+shader_parameter/isHit = false
+shader_parameter/Tint = Color(1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5fv83"]
 
@@ -59,6 +75,48 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_60uys")
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.876472, 0.86856, 0.940414, 1)
+
+[node name="Border" type="CanvasGroup" parent="."]
+modulate = Color(1, 1, 1, 0.235294)
+self_modulate = Color(0.347664, 0.245274, 0.85484, 1)
+position = Vector2(-4, -10)
+
+[node name="ColorRect" type="ColorRect" parent="Border"]
+material = SubResource("ShaderMaterial_qg754")
+offset_left = -7.0
+offset_top = -210.0
+offset_right = 33.0
+offset_bottom = -170.0
+scale = Vector2(30.04, 8)
+
+[node name="ColorRect2" type="ColorRect" parent="Border"]
+material = SubResource("ShaderMaterial_qg754")
+offset_left = 96.0
+offset_top = -182.0
+offset_right = 136.0
+offset_bottom = -142.0
+rotation = 1.57079
+scale = Vector2(30.04, 8)
+
+[node name="ColorRect4" type="ColorRect" parent="Border"]
+material = SubResource("ShaderMaterial_qg754")
+offset_left = 1380.0
+offset_top = -182.0
+offset_right = 1420.0
+offset_bottom = -142.0
+rotation = 1.57079
+scale = Vector2(30.04, 8)
+
+[node name="ColorRect3" type="ColorRect" parent="Border"]
+material = SubResource("ShaderMaterial_qg754")
+offset_left = -7.0
+offset_top = 779.0
+offset_right = 33.0
+offset_bottom = 819.0
+scale = Vector2(30.04, 8)
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 z_index = -3
 layout_mode = 1
@@ -80,14 +138,15 @@ layout_mode = 2
 alignment = 1
 
 [node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_2afgu")
 layout_mode = 2
 theme = ExtResource("2_36rfs")
 text = "Play"
 
-[node name="Area2D" type="Area2D" parent="MarginContainer/VBoxContainer/Play"]
+[node name="b_area" type="Area2D" parent="MarginContainer/VBoxContainer/Play"]
 input_pickable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Play/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Play/b_area"]
 position = Vector2(112, 52)
 scale = Vector2(10.445, 4.265)
 shape = SubResource("CircleShape2D_5fv83")
@@ -98,7 +157,7 @@ libraries = {
 }
 
 [node name="p_splash" type="CPUParticles2D" parent="MarginContainer/VBoxContainer/Play"]
-position = Vector2(113, 56)
+position = Vector2(96, 56)
 emitting = false
 lifetime = 1.2
 one_shot = true
@@ -118,6 +177,36 @@ layout_mode = 2
 theme = ExtResource("2_36rfs")
 text = "Options"
 
+[node name="o_area" type="Area2D" parent="MarginContainer/VBoxContainer/Options"]
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Options/o_area"]
+position = Vector2(112, 52)
+scale = Vector2(10.445, 4.265)
+shape = SubResource("CircleShape2D_5fv83")
+
+[node name="HitFlash2" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/Options"]
+root_node = NodePath("../../Play")
+libraries = {
+"": SubResource("AnimationLibrary_tdvf1")
+}
+
+[node name="o_splash" type="CPUParticles2D" parent="MarginContainer/VBoxContainer/Options"]
+position = Vector2(91, 49)
+emitting = false
+lifetime = 1.2
+one_shot = true
+speed_scale = 2.47
+explosiveness = 0.86
+randomness = 0.16
+texture = ExtResource("5_p17an")
+spread = 176.55
+gravity = Vector2(0, 0)
+initial_velocity_min = 71.52
+initial_velocity_max = 102.3
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_6khei")
+
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_36rfs")
@@ -136,6 +225,7 @@ position = Vector2(576, 210)
 stream = ExtResource("6_7j32i")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(0, -27)
 collision_layer = 15
 collision_mask = 15
 
@@ -143,9 +233,11 @@ collision_mask = 15
 position = Vector2(997.86, 548)
 scale = Vector2(1.03, 1.03)
 build_mode = 1
-polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1064.91, -472.816, -955.204, -473.786, -954.233, 298.058, 135.087, 299.029, 136.058, -472.816, -1063.94, -473.786, -1039.67, -561.165, 214.699, -561.165)
+polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1064.91, -499.029, -966.854, -504.854, -966.854, 332.039, 148.68, 333.01, 145.767, -504.854, -1054.23, -504.854, -1039.67, -561.165, 214.699, -561.165)
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="body_entered" from="MarginContainer/VBoxContainer/Play/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Play/b_area" to="." method="_on_b_area_body_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Options/o_area" to="." method="_on_b_options_body_entered"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Options/o_area" to="." method="_on_o_area_body_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

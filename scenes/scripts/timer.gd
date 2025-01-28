@@ -14,7 +14,6 @@ var npc: CharacterBody2D
 
 func _ready() -> void:
 	Events.possessed_escaped.connect(_on_possessed_escaped)
-	cd_timer.start()
 	
 #	initializing npc before accessing it
 	call_deferred("_initialize_npc")
@@ -25,8 +24,8 @@ func time_left_until_win():
 	var minute = floor(time_left / 60)
 	var second = int(time_left) % 60
 	return [minute, second]
-
-
+	
+	
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_pressed("time_minus"):
 		#print("timer down")

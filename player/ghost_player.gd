@@ -139,7 +139,6 @@ func start_dash() -> void:
 		if not restoring_stamina:
 			restoring_stamina = true
 			stamina_restore_timer.start()
-			print("restoring sssstataksef")
 			
 			
 	else:

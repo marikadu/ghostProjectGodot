@@ -177,23 +177,22 @@ func restore_health(amount: float) -> void:
 		
 	print("NPC health: ", health)
 
+
 # when isHit timer finishes -> go back to sleeping animation if alive
 func _on_hit_timer_timeout():
-	if is_alive:
+	if is_alive and not npc_ignore_player:
 		#print("AAAAAAAAAAA")
 		animated_sprite.play("hit")
-		#await get_tree().create_timer(2).timeout
-		#take_damage(1, body)
 		await get_tree().create_timer(1).timeout
 		$isHitAnimation.stop()
-		#print("Hit animation finished")
 		if is_alive and not is_player_near:
 			animated_sprite.play("sleeping")
 		elif is_alive and is_player_near:
 			animated_sprite.play("hit_player")
+
 	
 func _on_player_near_timeout() -> void:
-	if is_alive:
+	if is_alive and not npc_ignore_player:
 		take_damage(2.0, self)
 		print("NOTICED THE PLAYER")
 

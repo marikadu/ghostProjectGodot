@@ -1,6 +1,6 @@
 #extends Control
 extends Node2D
-# -- LEVEL 3
+# -- LEVEL 1
 
 # CTRL + drag a script to put it here with @onready with $
 #@onready var camera_2d: Camera2D = $Camera2D
@@ -40,7 +40,7 @@ var enemy_instances = []
 #@onready var can_kill_possessed = true
 
 func _ready() -> void:
-	Global.current_scene_name = "level_3"
+	Global.current_scene_name = "level_1"
 	
 	#fire_fly_spawn_timer.start(randi_range(10,18)) 
 
@@ -78,6 +78,14 @@ func _ready() -> void:
 	player_instance = player.instantiate()
 	
 	
+	if Global.current_scene_name == "level_1":
+		%CountDownTimer.cd_timer.autostart = false
+		%CountDownTimer.cd_timer.paused = true
+		print("chimichanga")
+		
+	npc_instance.npc_ignore_player = true
+	
+	
 func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("spawn_possessed"):
 		spawn_possessed()
@@ -90,17 +98,22 @@ func show_win_game():
 	Global.update_personal_best() # updating personal best ONLY when won the game
 	can_spawn_enemies = false
 	npc_instance.npc_ignore_player = true
-
+	#get_tree().paused = true # pause game
+#	I don't know if I need to unpause it when I go to other screen, show check it later
+	pass
 
 	
 func show_game_over():
+	npc_instance.npc_ignore_player = true
 	player_instance.can_move = false
+	#player_instance.set_physics_process(false)
+	#is_game_over = true
 	Global.is_game_over = true
 	game_over.show()
 	# show that the ghosts go back to hiding spots when sun rises
 	kill_all_enemies()
+	# main character (ghost) evaporates or is sad
 	can_spawn_enemies = false
-	npc_instance.npc_ignore_player = true
 	#get_tree().paused = true # pause game
 #	I don't know if I need to unpause it when I go to other screen, show check it later
 	
@@ -157,7 +170,7 @@ func spawn_enemy():
 	
 func _on_enemy_spawn_timer_timeout() -> void:
 	if can_spawn_enemies:
-		spawn_enemy()
+		#spawn_enemy()
 		pass
 	else:
 		return
