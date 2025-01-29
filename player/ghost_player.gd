@@ -45,12 +45,19 @@ var dash_stamina_instance
 
 
 func _ready():
+	can_move = true
+	sprite_gameover.visible = false
+	sprite_move.visible = true
+	sprite_gameover.stop()
+	
 	dash_stamina_instance = dash_stamina.instantiate()
 	current_speed = max_speed
 	playback = animation_tree["parameters/playback"]
 	animation_tree.active = true
 	
 	stamina_restore_timer.set_wait_time(stamina_restore_time)
+	
+	Events.game_over.connect(sad_ghost)
 
 
 func _physics_process(delta: float) -> void:
@@ -81,7 +88,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	select_animation()
 	update_animation_param()
-	sad_ghost()
+	#sad_ghost()
 	
 	#sprite_move.scale.x = move_toward(sprite_move.scale.x, 1, 1 * delta)
 	#sprite_move.scale.y = move_toward(sprite_move.scale.y, 1, 1 * delta)
@@ -142,12 +149,13 @@ func start_dash() -> void:
 			
 			
 	else:
-		print("not enough stamina!")
+		pass
+		#print("not enough stamina!")
 		
 
 # when game over
 func sad_ghost():
-	if Global.is_game_over:
+	#if Global.is_game_over:
 		can_move = false
 		playback.travel("idle")
 		sprite_gameover.visible = true
@@ -197,14 +205,10 @@ func _on_stamina_restore_timer_timeout() -> void:
 func restore_stamina():
 	if current_stamina < max_stamina_sections:
 		current_stamina += 1
-		#print("restore stamina from player function")
-		print("restored 1 stamina. stamina: ", current_stamina)
-		
-		#update_stamina_ui()
+		#print("restored 1 stamina. stamina: ", current_stamina)
 		
 		# if stamina less than max. -> continue restoring
 		if current_stamina < max_stamina_sections:
 			stamina_restore_timer.start()
 		else:
 			restoring_stamina = false
-			

@@ -59,7 +59,7 @@ func play_get_hit():
 	p_splash.emitting = true
 	player.hit.play()
 	#hit_flash.play("hit_flash")
-	play.scale = Vector2(1.5, 0.7)
+	play.scale = Vector2(1.4, 0.7)
 	if player.dashing:
 		player.dash_hit.play()
 
@@ -75,6 +75,6 @@ func options_get_hit():
 	o_splash.emitting = true
 	player.hit.play()
 	#hit_flash.play("hit_flash")
-	options.scale = Vector2(1.5, 0.7)
+	options.scale = Vector2(1.4, 0.7)
 	if player.dashing:
 		player.dash_hit.play()

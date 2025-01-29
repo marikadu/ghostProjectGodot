@@ -165,6 +165,7 @@ func show_game_over():
 	#player_instance.set_physics_process(false)
 	#is_game_over = true
 	Global.is_game_over = true
+	#Events.game_over.emit()
 	game_over.show()
 	# show that the ghosts go back to hiding spots when sun rises
 	kill_all_enemies()

@@ -18,6 +18,7 @@ var unlocked_levels = 1
 
 # personal best score
 # DONT add to the personal best if Game Over!!!
+# ALSO DONT add during the tutorial
 func update_personal_best():
 	if score > personal_best:
 		personal_best = score

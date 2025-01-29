@@ -219,7 +219,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2qos5"]
-size = Vector2(136.71, 204.73)
+size = Vector2(136.71, 163.83)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8d2p6"]
 
@@ -262,8 +262,7 @@ libraries = {
 visibility_layer = 5
 
 [node name="sleep_distance" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 2.12766)
-scale = Vector2(1.22, 1.22)
+scale = Vector2(1.9, 2)
 shape = SubResource("RectangleShape2D_2qos5")
 
 [node name="isHitAnimation" type="Timer" parent="."]

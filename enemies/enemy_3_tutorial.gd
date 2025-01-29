@@ -77,6 +77,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	elif body == npc and not dead:
 		npc.take_damage(1.0, self) # damage the npc
 		queue_free()
+		#Events.killed_scripted_enemy3.emit()
 		
 		
 		
@@ -109,6 +110,6 @@ func _on_send_scripted_enemy3():
 	send_scripted_enemy_3 = true
 	scripted_enemy3_move = true
 	speed_timer.paused = false
-	await get_tree().create_timer(5.5).timeout
+	await get_tree().create_timer(4).timeout
 	scripted_enemy3_move = false
 	

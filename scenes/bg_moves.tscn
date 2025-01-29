@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dnhtj68mhqb2u"]
+[gd_scene load_steps=23 format=3 uid="uid://dnhtj68mhqb2u"]
 
 [ext_resource type="Texture2D" uid="uid://cth7yboi1klpl" path="res://sprites/foreground_n.png" id="1_6sewi"]
 [ext_resource type="Script" path="res://scenes/scripts/bg_moves.gd" id="1_wo1p5"]
@@ -7,15 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://04pi5nvnnso4" path="res://sprites/background_n.png" id="2_vi5fq"]
 [ext_resource type="Texture2D" uid="uid://b2mbjhtlvxuid" path="res://sprites/moon.png" id="3_fe7de"]
 [ext_resource type="Texture2D" uid="uid://ibdwlbh40u73" path="res://sprites/sky_d.png" id="3_v65wt"]
-[ext_resource type="Script" path="res://scenes/scripts/sky_moon.gd" id="4_70v8j"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="6_2nxss"]
 [ext_resource type="Texture2D" uid="uid://dpjxqtqbkq382" path="res://sprites/sun.png" id="6_mp1xp"]
 [ext_resource type="Texture2D" uid="uid://x8ux2fb6gm08" path="res://sprites/stars.png" id="6_nok8x"]
 [ext_resource type="Texture2D" uid="uid://drasnc06wmkbx" path="res://sprites/background_d.png" id="7_16t37"]
-[ext_resource type="Script" path="res://scenes/scripts/sky_stars.gd" id="7_bgafi"]
 [ext_resource type="Texture2D" uid="uid://b40cjnsqspwh8" path="res://sprites/foreground_d.png" id="8_mdsfa"]
 [ext_resource type="Texture2D" uid="uid://bgxneldwm028q" path="res://sprites/middleground_d.png" id="9_6utk2"]
-[ext_resource type="Script" path="res://scenes/scripts/sky_sun.gd" id="9_77q60"]
 
 [sub_resource type="Animation" id="Animation_6bt76"]
 length = 0.001
@@ -147,7 +144,6 @@ texture = ExtResource("3_fe7de")
 libraries = {
 "": SubResource("AnimationLibrary_75ivp")
 }
-script = ExtResource("4_70v8j")
 
 [node name="PointLight2D" type="PointLight2D" parent="moon"]
 z_index = -1
@@ -164,7 +160,6 @@ texture = ExtResource("6_nok8x")
 libraries = {
 "": SubResource("AnimationLibrary_w1pcp")
 }
-script = ExtResource("7_bgafi")
 
 [node name="sun" type="Sprite2D" parent="."]
 position = Vector2(0, 206)
@@ -174,7 +169,6 @@ texture = ExtResource("6_mp1xp")
 libraries = {
 "": SubResource("AnimationLibrary_fckib")
 }
-script = ExtResource("9_77q60")
 
 [node name="d_background" type="Sprite2D" parent="."]
 texture = ExtResource("7_16t37")
@@ -193,3 +187,5 @@ texture = ExtResource("8_mdsfa")
 
 [node name="n_foreground" type="Sprite2D" parent="."]
 texture = ExtResource("1_6sewi")
+
+[node name="wait_before_sunrise" type="Timer" parent="."]

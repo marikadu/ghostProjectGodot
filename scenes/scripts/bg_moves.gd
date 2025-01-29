@@ -12,11 +12,36 @@ extends Node2D
 @onready var d_background: Sprite2D = $d_background
 @onready var d_sky: Sprite2D = $d_sky
 
+@onready var moon_player: AnimationPlayer = $moon/moon_player
+@onready var stars_player: AnimationPlayer = $stars/stars_player
+@onready var sun_player: AnimationPlayer = $sun/sun_player
+@onready var wait_before_sunrise_timer: Timer = $wait_before_sunrise
+
 
 @export var time = 15.0
-@export var wait_before_sunrise = 29.0
+@export var wait_before_sunrise = 45.0
+@export var rise_the_sun = 48.0
 
 var camera_off = Vector2(576,449)
+
+
+
+func _ready() -> void:
+	Events.start_counting_down.connect(tutorial_background)
+	
+	await get_tree().create_timer(0.1).timeout
+	if Global.current_scene_name == 1:
+		print("bg_moves: stop the bg!!!!!!")
+		#time = 8.0
+		wait_before_sunrise = 18.0
+		rise_the_sun = 22.0
+	
+	# animate background as normal
+	else:
+		background_animation_start()
+		print("bg_moves: ", Global.current_scene_name)
+		
+	#wait_before_sunrise_timer.set_wait_time(wait_before_sunrise) 
 
 
 func _process(delta):
@@ -31,12 +56,10 @@ func _process(delta):
 		#print("sunrise animation ready")
 		await get_tree().create_timer(wait_before_sunrise).timeout
 		fade_out()
+		pass
 	else:
-		#print("delay sunrise")
 		pass
 	
-
-	#position = (player.position*delta) + camera_off # NEW CODE
 	
 	
 func fade_out():
@@ -60,3 +83,24 @@ func fade_out():
 	tween_m.kill()
 	tween_b.kill()
 	tween_s.kill()
+	
+func tutorial_background():
+	background_animation_start()
+	await get_tree().create_timer(wait_before_sunrise).timeout
+	fade_out()
+
+func background_animation_start():
+	print("bg_moves: activate all bg")
+	if !Global.current_scene_name == 1:
+		moon_player.play("moon")
+		stars_player.play("stars")
+		await get_tree().create_timer(rise_the_sun).timeout
+		sun_player.play("sun")
+	else:
+		stars_player.play("stars")
+		await get_tree().create_timer(rise_the_sun).timeout
+		sun_player.play("sun")
+
+
+#func _on_wait_before_sunrise_timeout() -> void:
+	#fade_out()
