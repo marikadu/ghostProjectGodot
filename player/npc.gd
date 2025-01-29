@@ -130,7 +130,10 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		player_near_timer.stop()
 		player_near_timer.set_wait_time(3.0) 
 		player_near_timer.one_shot = true
-		animated_sprite.play("sleeping")
+		if not Global.is_game_won:
+			animated_sprite.play("sleeping")
+		else:
+			print("ignore player BECAUSE WIN")
 		#print("player bye")
 		 #apply damage if player is near
 
@@ -187,17 +190,19 @@ func _on_hit_timer_timeout():
 		animated_sprite.play("hit")
 		await get_tree().create_timer(1).timeout
 		$isHitAnimation.stop()
-		if is_alive and not is_player_near:
+		# don't make them go back to sleep after the game is won and they woke up lol
+		if is_alive and not is_player_near and not Global.is_game_won:
+			print("go back to sleeepe")
 			animated_sprite.play("sleeping")
 		elif is_alive and is_player_near:
 			animated_sprite.play("hit_player")
 
 	
 func _on_player_near_timeout() -> void:
-	if is_alive and not Global.current_scene_name == "level_1" and not npc_ignore_player:
+	if is_alive and not Global.current_scene_name == 1 and not npc_ignore_player:
 		take_damage(2.0, self)
 		print("NOTICED THE PLAYER ", health)
 	# npc gets damaged 1 hp instead of 2 for the tutorial
-	elif is_alive and Global.current_scene_name == "level_1" and not npc_ignore_player:
+	elif is_alive and Global.current_scene_name == 1 and not npc_ignore_player:
 		take_damage(1.0, self)
 		print("TUTORIAL: NOTICED THE PLAYER ", health)

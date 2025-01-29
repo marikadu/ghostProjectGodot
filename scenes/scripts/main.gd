@@ -40,7 +40,9 @@ var enemy_instances = []
 #@onready var can_kill_possessed = true
 
 func _ready() -> void:
-	Global.current_scene_name = "level_3"
+	Global.current_scene_name = 3
+	
+	Global.is_game_won = false
 	
 	#fire_fly_spawn_timer.start(randi_range(10,18)) 
 
@@ -84,6 +86,7 @@ func _physics_process(delta: float) -> void:
 	
 	
 func show_win_game():
+	Global.is_game_won = true
 	sfx_win.play()
 	win_game.show()
 	kill_all_enemies()

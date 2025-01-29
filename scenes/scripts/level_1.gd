@@ -39,13 +39,15 @@ var enemy_list = [
 	preload("res://enemies/enemy_2.tscn"),
 	preload("res://enemies/enemy_3.tscn")]
 	
+
+# for the tutorial: enemy showcase 
 var scripted_enemy_1 = preload("res://enemies/enemy_2_tutorial.tscn")
 var scripted_enemy_1_instance
 var scripted_enemy_2 = preload("res://enemies/enemy_1_tutorial.tscn")
 var scripted_enemy_2_instance
-	
-#var enemy = preload("res://enemies/enemy_2.tscn")
-#var enemy_instance
+var scripted_enemy_3 = preload("res://enemies/enemy_3_tutorial.tscn")
+var scripted_enemy_3_instance
+
 
 # store enemy instances
 var enemy_instances = []
@@ -60,7 +62,10 @@ func _ready() -> void:
 	#show_timer()
 	#show_health()
 	
-	Global.current_scene_name == 1
+	Global.current_scene_name = 1
+	print(Global.current_scene_name)
+	
+	Global.is_game_won = false
 	
 	#fire_fly_spawn_timer.start(randi_range(10,18)) 
 
@@ -68,19 +73,19 @@ func _ready() -> void:
 	Events.win_game.connect(show_win_game)
 	Events.game_over.connect(show_game_over)
 	Events.npc_died.connect(_on_npc_died)
-	
 	Events.possessed_defeated.connect(_on_possessed_defeated)
+	
+	# tutorial signals
 	Events.send_scripted_enemy.connect(_on_spawn_scripted_enemy)
 	Events.send_scripted_enemy2.connect(_on_spawn_scripted_enemy2)
-	Events.send_scripted_enemy2_killed.connect(_on_scripted_enemy2_killed)
+	Events.killed_scripted_enemy2.connect(_on_scripted_enemy2_killed)
+	Events.killed_scripted_enemy3.connect(_on_scripted_enemy3_killed)
 	Events.npc_is_scared_of_the_player2.connect(_on_npc_is_scared_of_the_player2)
 	
 	# resetting the score for every new game
 	Global.score = 0
 	print("resetting score:", Global.score)
 	
-	print(Global.current_scene_name)
-		
 
 	if npc_instance == null:  # check if the NPC instance exists
 		npc_instance = npc.instantiate()  # instance the NPC
@@ -105,18 +110,22 @@ func _ready() -> void:
 		scripted_enemy_1_instance.position = Vector2(368, -77)
 		add_child(scripted_enemy_1_instance)
 		
-	if scripted_enemy_2_instance == null:  # check if the scripted_1 instance exists
+	if scripted_enemy_2_instance == null:  # check if the scripted_2 instance exists
 		scripted_enemy_2_instance = scripted_enemy_2.instantiate()
 		scripted_enemy_2_instance.position = Vector2(1241, 335)
 		add_child(scripted_enemy_2_instance)
-		#Global.npc_instance = npc_instance # store the instance in the global variable
+		
+	if scripted_enemy_3_instance == null:  # check if the scripted_3 instance exists
+		scripted_enemy_3_instance = scripted_enemy_3.instantiate()
+		scripted_enemy_3_instance.position = Vector2(298, 997)
+		add_child(scripted_enemy_3_instance)
 	
 	
 	#npc_instance.can_npc_take_damage = false
 	#npc_instance.can_npc_take_damage = true
 	
 	
-	if Global.current_scene_name == "level_1":
+	if Global.current_scene_name == 1:
 		#%CountDownTimer.cd_timer.wait_time = 30.0
 		%CountDownTimer.cd_timer.autostart = false
 		#%CountDownTimer.cd_timer.set_wait_time(30.0)
@@ -134,6 +143,7 @@ func _physics_process(_delta: float) -> void:
 func show_win_game():
 	sfx_win.play()
 	win_game.show()
+	Global.is_game_won = true
 	kill_all_enemies()
 	#Global.update_personal_best() # updating personal best ONLY when won the game
 	# DON'T update personal best after the tutorial!
@@ -316,18 +326,11 @@ func _on_npc_is_scared_of_the_player2():
 
 	
 func _on_scripted_enemy2_killed():
-	Events.npc_is_scared_of_the_player.emit()
+	#Events.npc_is_scared_of_the_player.emit()
+	Events.send_scripted_enemy3.emit()
 	
-	#$EnemySpawnTimer.start()
-	#print("spawn enemies")
-	#await get_tree().create_timer(15).timeout
-	#$EnemySpawnTimer.stop()
-	#await get_tree().create_timer(3).timeout
-	#show_health()
-	#await get_tree().create_timer(5).timeout
-	#$EnemySpawnTimer.wait_time = 0.1
-	#$EnemySpawnTimer.start()
-
+func _on_scripted_enemy3_killed():
+	Events.npc_is_scared_of_the_player.emit()
 
 
 

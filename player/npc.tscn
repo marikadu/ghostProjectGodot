@@ -282,6 +282,7 @@ pitch_scale = 2.16
 
 [node name="player_near_sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("37_hlo2i")
+volume_db = 5.832
 
 [node name="player_near" type="Timer" parent="."]
 wait_time = 3.0

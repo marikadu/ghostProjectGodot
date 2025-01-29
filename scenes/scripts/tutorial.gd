@@ -31,7 +31,7 @@ func _ready() -> void:
 	label_5.visible = false
 	
 	
-	Events.send_scripted_enemy2_killed.connect(_on_npc_is_scared_of_the_player_text)
+	Events.killed_scripted_enemy3.connect(_on_npc_is_scared_of_the_player_text)
 	#Events.send_scripted_enemy2_killed.connect(_on_enemies_start_spawning)
 	Events.possessed_spawned_tutorial.connect(_on_possessed_spawned)
 	Events.possessed_defeated.connect(_on_possessed_defeated_first_time)

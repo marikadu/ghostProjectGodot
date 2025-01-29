@@ -38,7 +38,6 @@ func _physics_process(delta: float) -> void:
 		var direction = (player.position - position).normalized()
 		velocity = direction * speed
 	
-		
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -68,7 +67,10 @@ func die():
 	queue_free()  # remove the enemy from the scene
 	if player.dashing:
 		player.dash_hit.play()
-	Events.send_scripted_enemy2_killed.emit()
+	
+	Events.killed_scripted_enemy2.emit()
+	Events.send_scripted_enemy3.emit()
+	
 	
 func _on_send_scripted_enemy2():
 	send_scripted_enemy2 = true

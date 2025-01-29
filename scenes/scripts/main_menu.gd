@@ -20,7 +20,7 @@ var player: CharacterBody2D
 
 
 func _ready() -> void:
-	Global.current_scene_name = "main_menu"
+	Global.current_scene_name = 0
 	print(Global.current_scene_name)
 	player = get_tree().root.get_node("MainMenu/GhostPlayer")
 	

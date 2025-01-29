@@ -63,13 +63,17 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 		#fade_out()
 
-	if body == npc:
-		await get_tree().create_timer(1).timeout
-		fade_out()
+	if body == npc and npc.is_alive:
 		npc.heal(1)
 		npc.healing.play()
 		print("firefly got the npc, heal the npc ", npc.health)
-		#queue_free()
+		await get_tree().create_timer(1).timeout
+		fade_out()
+		
+	elif body == npc and not npc.is_alive:
+		print("don't heal npc", npc.health)
+		await get_tree().create_timer(1).timeout
+		fade_out()
 		
 	#elif body == npc and not dead:
 		#npc.take_damage(1, self) # damage the npc
