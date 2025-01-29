@@ -29,6 +29,8 @@ extends Node2D
 var possessed = preload("res://enemies/possessed.tscn")
 var npc_instance: Node = null  # Store the NPC instance
 var player_instance
+var times_defeated_possessed: int
+var player_is_speedrunning_the_tutorial: bool
 #var npc_instance = null
 
 # list of enemies
@@ -61,47 +63,51 @@ func _ready() -> void:
 	Events.win_game.connect(show_win_game)
 	Events.game_over.connect(show_game_over)
 	Events.npc_died.connect(_on_npc_died)
+	
 	Events.possessed_defeated.connect(_on_possessed_defeated)
 	Events.send_scripted_enemy.connect(_on_spawn_scripted_enemy)
 	Events.send_scripted_enemy2.connect(_on_spawn_scripted_enemy2)
 	Events.send_scripted_enemy2_killed.connect(_on_scripted_enemy2_killed)
+	Events.npc_is_scared_of_the_player2.connect(_on_npc_is_scared_of_the_player2)
 	
 	# resetting the score for every new game
 	Global.score = 0
 	print("resetting score:", Global.score)
 	
-#	checking if camera node is found
-	#if camera == null:
-		#print("camera is not found, where is camera?")
-	#else:
-		#print("camera found")
-		
 	print(Global.current_scene_name)
 		
-	#possessed.possessed_area.connect("body_exited", self, "_on_possessed_escapes_body_exited")
-		
-	
+
 	if npc_instance == null:  # check if the NPC instance exists
 		npc_instance = npc.instantiate()  # instance the NPC
 		#npc_instance.position = Vector2(576, 390)
 		npc_instance.position = get_viewport_rect().size/2
 		add_child(npc_instance)  # adding npc to the scene tree
 		Global.npc_instance = npc_instance # store the instance in the global variable
-		#print("NPC ready")
-	#else:
-		#print("NPC already instantiated or error occured")
+
 		
 	player_instance = player.instantiate()
+	times_defeated_possessed = 0
+	player_is_speedrunning_the_tutorial = false
+	
+	
+	#var scripted_enemy1_instance = possessed.instantiate()
+	#possessed_instance.position = Vector2(578, 426)
+	#possessed_instance.speed = 125
+	#call_deferred("add_child", possessed_instance)
+	
 	
 	#npc_instance.can_npc_take_damage = false
 	#npc_instance.can_npc_take_damage = true
 	
 	
 	if Global.current_scene_name == "level_1":
+		#%CountDownTimer.cd_timer.wait_time = 30.0
 		%CountDownTimer.cd_timer.autostart = false
+		#%CountDownTimer.cd_timer.set_wait_time(30.0)
+		%CountDownTimer.cd_timer.start(30.0)
 		%CountDownTimer.cd_timer.paused = true
-		print("chimichanga")
-	npc_instance.npc_ignore_player = true
+		print("TUTORIAL start")
+		npc_instance.npc_ignore_player = true
 	
 	
 func _physics_process(delta: float) -> void:
@@ -113,9 +119,15 @@ func show_win_game():
 	sfx_win.play()
 	win_game.show()
 	kill_all_enemies()
-	Global.update_personal_best() # updating personal best ONLY when won the game
+	#Global.update_personal_best() # updating personal best ONLY when won the game
+	# DON'T update personal best after the tutorial!
 	can_spawn_enemies = false
 	npc_instance.npc_ignore_player = true
+	if Global.unlocked_levels < 2 :
+		Global.unlocked_levels = 2
+		print("unlocked level 2!")
+	else:
+		print("you already have level 2 unlocked")
 	#get_tree().paused = true # pause game
 #	I don't know if I need to unpause it when I go to other screen, show check it later
 	pass
@@ -146,15 +158,23 @@ func _on_npc_died():
 	
 	
 func spawn_possessed():
-	Events.possessed_spawned_tutorial.emit()
 	var possessed_instance = possessed.instantiate()
 	possessed_instance.position = Vector2(578, 426)
+	possessed_instance.speed = 125
 	call_deferred("add_child", possessed_instance)
+	times_defeated_possessed += 1
+	print(times_defeated_possessed)
 	
 	# !!!!!!!!!!!!!!!! make it happen only once!!!!!!!!!!!
-	Engine.time_scale = 0.4
-	await get_tree().create_timer(1).timeout
-	Engine.time_scale = 1.0
+	# add to an int every time the possessed spawns and if >1 -> don't do this tutorial part again
+	if times_defeated_possessed <= 1:
+		#%CountDownTimer.cd_timer.wait_time = 30
+		Events.possessed_spawned_tutorial.emit()
+		Engine.time_scale = 0.3
+		await get_tree().create_timer(0.7).timeout
+		Engine.time_scale = 1.0
+	else:
+		print("already defeated the possessed, don't slow time")
 	
 
 func _on_possessed_defeated():
@@ -164,13 +184,23 @@ func _on_possessed_defeated():
 		npc_instance.restore_health(2.0)
 	else:
 		print("npc not found")
+	times_defeated_possessed += 1
+	print(times_defeated_possessed)
 		
 	# !!!!!!!!!!!!!! make this also happen only once!!!!!!!!!!!!!!!!!!!
-	await get_tree().create_timer(3).timeout
-	show_timer()
-	await get_tree().create_timer(3).timeout
-	can_spawn_enemies = true
-	%CountDownTimer.start()
+	if times_defeated_possessed <= 2:
+		Events.possessed_defeated.emit()
+		#%CountDownTimer.cd_timer.wait_time = 30
+		await get_tree().create_timer(3.5).timeout
+		show_timer()
+		await get_tree().create_timer(3.5).timeout
+		can_spawn_enemies = true
+		%CountDownTimer.cd_timer.paused = false
+		#%CountDownTimer.cd_timer.start()
+		Events.start_counting_down.emit()
+		print("startttt timer")
+	elif times_defeated_possessed > 3:
+		can_spawn_enemies = true
 	
 
 
@@ -207,7 +237,6 @@ func spawn_enemy():
 func _on_enemy_spawn_timer_timeout() -> void:
 	if can_spawn_enemies:
 		spawn_enemy()
-		pass
 	else:
 		return
 		
@@ -240,16 +269,37 @@ func _on_spawn_scripted_enemy2():
 	print("spawn enemy2 lmao")
 	scripted_enemy_2.play("scripted_enemy")
 	
-func _on_scripted_enemy2_killed():
+
+#func _on_npc_is_scared_of_the_player():
+func _on_npc_is_scared_of_the_player2():
+	if npc_instance.is_alive:
+		npc_instance.npc_ignore_player = false
+	await get_tree().create_timer(1.8).timeout
+	
 	$EnemySpawnTimer.start()
 	print("spawn enemies")
-	await get_tree().create_timer(15).timeout
+	await get_tree().create_timer(7).timeout
 	$EnemySpawnTimer.stop()
 	await get_tree().create_timer(3).timeout
 	show_health()
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(4).timeout
 	$EnemySpawnTimer.wait_time = 0.1
 	$EnemySpawnTimer.start()
+	
+
+	
+func _on_scripted_enemy2_killed():
+	Events.npc_is_scared_of_the_player.emit()
+	
+	#$EnemySpawnTimer.start()
+	#print("spawn enemies")
+	#await get_tree().create_timer(15).timeout
+	#$EnemySpawnTimer.stop()
+	#await get_tree().create_timer(3).timeout
+	#show_health()
+	#await get_tree().create_timer(5).timeout
+	#$EnemySpawnTimer.wait_time = 0.1
+	#$EnemySpawnTimer.start()
 
 
 

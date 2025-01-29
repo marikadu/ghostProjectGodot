@@ -18,6 +18,8 @@ func _ready() -> void:
 #	initializing npc before accessing it
 	call_deferred("_initialize_npc")
 	
+	#tutorial_mode()
+	
 
 func time_left_until_win():
 	time_left = cd_timer.time_left
@@ -69,17 +71,8 @@ func _on_possessed_escaped():
 	cd_timer.stop()
 	pass
 	
-	#var animated_sprite = npc.get_node_or_null("AnimatedSprite2D")
-	#if animated_sprite != null:
-		#animated_sprite.play("waking_up")
-	#else:
-		#print("AnimatedSprite2D node not found")
-
-	#if npc != null:
-		#var animated_sprite = npc.get_node_or_null("AnimatedSprite2D")
-		#if animated_sprite != null:
-			#animated_sprite.play("waking_up")
-		#else:
-			#print_debug("no animated sprite node")
-	#else:
-		#print_debug("no NPC is found")
+#func tutorial_mode():
+	#if Global.current_scene_name == "level_1":
+		#print("setting cd timer to 30 seconds")
+		#cd_timer.set_wait_time(30.0)
+	

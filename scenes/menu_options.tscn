@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://deo4gf8modmfl"]
+[gd_scene load_steps=3 format=3 uid="uid://byrlkolmk8xx5"]
 
 [ext_resource type="Script" path="res://scenes/scripts/menu_options.gd" id="1_vnu77"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_vbiwd"]
@@ -45,4 +45,3 @@ theme = ExtResource("2_vbiwd")
 text = "Back"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_exit_pressed"]

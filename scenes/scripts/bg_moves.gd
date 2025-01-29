@@ -28,7 +28,7 @@ func _process(delta):
 	d_background.position = (player.position*delta) / 4
 	
 	if !Global.current_scene_name == "level_1":
-		print("sunrise animation ready")
+		#print("sunrise animation ready")
 		await get_tree().create_timer(wait_before_sunrise).timeout
 		fade_out()
 	else:

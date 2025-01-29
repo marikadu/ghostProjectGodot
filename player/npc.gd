@@ -194,9 +194,12 @@ func _on_hit_timer_timeout():
 
 	
 func _on_player_near_timeout() -> void:
-	if is_alive and not npc_ignore_player:
+	if is_alive and not Global.current_scene_name == "level_1" and not npc_ignore_player:
 		take_damage(2.0, self)
-		print("NOTICED THE PLAYER")
+		print("NOTICED THE PLAYER ", health)
+	elif is_alive and Global.current_scene_name == "level_1" and not npc_ignore_player:
+		take_damage(1.0, self)
+		print("TUTORIAL: NOTICED THE PLAYER", health)
 
 
 #func _on_player_near_timeout() -> void:

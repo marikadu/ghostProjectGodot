@@ -6,6 +6,9 @@ extends AnimationPlayer
 
 
 func _ready() -> void:
-	await get_tree().create_timer(sun_wait_before_sunrise).timeout
-	play("sun")
+	if !Global.current_scene_name == "level_1":
+		await get_tree().create_timer(sun_wait_before_sunrise).timeout
+		play("sun")
+	else:
+		pass
 	
