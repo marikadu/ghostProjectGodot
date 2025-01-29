@@ -22,8 +22,8 @@ extends Node2D
 @onready var timer_animation_player: AnimationPlayer = $UI/CountDownTimer/timerPlayer
 @onready var health_animation_player: AnimationPlayer = $UI/HealthBar/healthPlayer
 @onready var tutorial: Control = $Tutorial
-@onready var scripted_enemy: AnimationPlayer = $enemy1/scripted_enemy
-@onready var scripted_enemy_2: AnimationPlayer = $enemy2/scripted_enemy2
+#@onready var scripted_enemy: AnimationPlayer = $enemy1/scripted_enemy
+#@onready var scripted_enemy_2: AnimationPlayer = $enemy2/scripted_enemy2
 
 
 var possessed = preload("res://enemies/possessed.tscn")
@@ -34,16 +34,21 @@ var player_is_speedrunning_the_tutorial: bool
 #var npc_instance = null
 
 # list of enemies
-#var enemy_list = [
-	#preload("res://enemies/enemy_1.tscn"),
-	#preload("res://enemies/enemy_2.tscn")]
-	#preload("res://enemies/enemy_3.tscn")]
+var enemy_list = [
+	preload("res://enemies/enemy_1.tscn"),
+	preload("res://enemies/enemy_2.tscn"),
+	preload("res://enemies/enemy_3.tscn")]
 	
-var enemy = preload("res://enemies/enemy_2.tscn")
-var enemy_instance
+var scripted_enemy_1 = preload("res://enemies/enemy_2_tutorial.tscn")
+var scripted_enemy_1_instance
+var scripted_enemy_2 = preload("res://enemies/enemy_1_tutorial.tscn")
+var scripted_enemy_2_instance
+	
+#var enemy = preload("res://enemies/enemy_2.tscn")
+#var enemy_instance
 
 # store enemy instances
-#var enemy_instances = []
+var enemy_instances = []
 
 # control spawning
 @onready var can_spawn_enemies = true
@@ -55,7 +60,7 @@ func _ready() -> void:
 	#show_timer()
 	#show_health()
 	
-	Global.current_scene_name = "level_1"
+	Global.current_scene_name == 1
 	
 	#fire_fly_spawn_timer.start(randi_range(10,18)) 
 
@@ -95,6 +100,17 @@ func _ready() -> void:
 	#possessed_instance.speed = 125
 	#call_deferred("add_child", possessed_instance)
 	
+	if scripted_enemy_1_instance == null:  # check if the scripted_1 instance exists
+		scripted_enemy_1_instance = scripted_enemy_1.instantiate()
+		scripted_enemy_1_instance.position = Vector2(368, -77)
+		add_child(scripted_enemy_1_instance)
+		
+	if scripted_enemy_2_instance == null:  # check if the scripted_1 instance exists
+		scripted_enemy_2_instance = scripted_enemy_2.instantiate()
+		scripted_enemy_2_instance.position = Vector2(1241, 335)
+		add_child(scripted_enemy_2_instance)
+		#Global.npc_instance = npc_instance # store the instance in the global variable
+	
 	
 	#npc_instance.can_npc_take_damage = false
 	#npc_instance.can_npc_take_damage = true
@@ -110,7 +126,7 @@ func _ready() -> void:
 		npc_instance.npc_ignore_player = true
 	
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_pressed("spawn_possessed"):
 		spawn_possessed()
 	
@@ -206,30 +222,39 @@ func _on_possessed_defeated():
 
  #kill all enemies
 func kill_all_enemies():
-	#for enemy in enemy_instance:
-##		if there are enemies present
-		#if enemy != null and enemy.is_inside_tree():
-			#enemy.die()
-			##enemy.queue_free()
-##	clear the list
-	#enemy_instance.clear()
-	for enemy_instance in get_tree().get_nodes_in_group("enemies"):
-		if enemy_instance != null and enemy_instance.is_inside_tree():
-			enemy_instance.die()
-			enemy_instance.queue_free()
+	for enemy in enemy_instances:
+#		if there are enemies present
+		if enemy != null and enemy.is_inside_tree():
+			enemy.die()
+			#enemy.queue_free()
+#	clear the list
+	enemy_instances.clear()
+	
+	## this is only for 1 enemy
+	#for enemy_instance in get_tree().get_nodes_in_group("enemies"):
+		#if enemy_instance != null and enemy_instance.is_inside_tree():
+			#enemy_instance.die()
+			#enemy_instance.queue_free()
 
 
 func spawn_enemy():
-	# randomly get an enemy from the list
-	# randi = random number
-	#var random_enemy = enemy_list[randi() % enemy_list.size()]
-	#enemy_instance
+	## --- this is for only 1 enemy to spawn ---
+	#var enemy_instance = enemy.instantiate() # selected enemy is instantiated
+	#%PathFollow2D.progress_ratio = randf() # get a random position from Path2D
+	#enemy_instance.global_position = %PathFollow2D.global_position
+	#add_child(enemy_instance) # spawn to the scene
+	##enemy_instance.append(enemy_instance) # store the instance of the enemy in the list
+	#enemy_instance.add_to_group("enemies") # add the enemy into the group
+	#can_spawn_enemies = true
 	
-	var enemy_instance = enemy.instantiate() # selected enemy is instantiated
+	# but I would like to add variety of enemies in the tutorial (as in the next levels)
+	var random_enemy = enemy_list[randi() % enemy_list.size()]
+	
+	var enemy_instance = random_enemy.instantiate() # selected enemy is instantiated
 	%PathFollow2D.progress_ratio = randf() # get a random position from Path2D
 	enemy_instance.global_position = %PathFollow2D.global_position
 	add_child(enemy_instance) # spawn to the scene
-	#enemy_instance.append(enemy_instance) # store the instance of the enemy in the list
+	enemy_instances.append(enemy_instance) # store the instance of the enemy in the list
 	enemy_instance.add_to_group("enemies") # add the enemy into the group
 	can_spawn_enemies = true
 	
@@ -263,11 +288,13 @@ func _on_fire_fly_spawn_timer_timeout() -> void:
 
 func _on_spawn_scripted_enemy():
 	print("spawn enemy lmao")
-	scripted_enemy.play("scripted_enemy2")
+	#scripted_enemy.play("scripted_enemy2")
+	scripted_enemy_1_instance.scripted_enemy.play("scripted_enemy2")
+	
 	
 func _on_spawn_scripted_enemy2():
 	print("spawn enemy2 lmao")
-	scripted_enemy_2.play("scripted_enemy")
+	#scripted_enemy_2.play("scripted_enemy")
 	
 
 #func _on_npc_is_scared_of_the_player():
@@ -278,7 +305,7 @@ func _on_npc_is_scared_of_the_player2():
 	
 	$EnemySpawnTimer.start()
 	print("spawn enemies")
-	await get_tree().create_timer(7).timeout
+	await get_tree().create_timer(7.5).timeout
 	$EnemySpawnTimer.stop()
 	await get_tree().create_timer(3).timeout
 	show_health()

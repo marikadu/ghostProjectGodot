@@ -1,46 +1,46 @@
-[gd_scene load_steps=22 format=3 uid="uid://buw5tjqxg07yk"]
+[gd_scene load_steps=22 format=3 uid="uid://b2x43nw74i57j"]
 
-[ext_resource type="Script" path="res://enemies/enemy_2.gd" id="1_r8gub"]
-[ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_1ddcs"]
-[ext_resource type="Texture2D" uid="uid://bwfiswkptjrem" path="res://sprites/enemies/blue1.png" id="3_356im"]
-[ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="3_ubkrg"]
-[ext_resource type="Texture2D" uid="uid://djqox1wxxv4is" path="res://sprites/enemies/blue/blue_dies1.png" id="3_w6v5t"]
-[ext_resource type="Texture2D" uid="uid://b8vimc462kwn0" path="res://sprites/enemies/blue/blue_dies2.png" id="4_c2stt"]
-[ext_resource type="Texture2D" uid="uid://ctsvoek0ul81t" path="res://sprites/enemies/blue2.png" id="4_tqix0"]
-[ext_resource type="Texture2D" uid="uid://bmlyl0cy4fflj" path="res://sprites/enemies/blue3.png" id="5_cb2fo"]
-[ext_resource type="Texture2D" uid="uid://cjmfaqln51fgf" path="res://sprites/enemies/blue/blue_dies3.png" id="5_wjd45"]
-[ext_resource type="Texture2D" uid="uid://bpj1ya2m2x2kp" path="res://sprites/enemies/blue/blue_dies4.png" id="6_4arn1"]
-[ext_resource type="Texture2D" uid="uid://c13w6hjrukn4r" path="res://sprites/enemies/blue/blue_dies5.png" id="7_ot2hr"]
-[ext_resource type="Texture2D" uid="uid://blgjy162l4syc" path="res://sprites/enemies/blue/blue_dies6.png" id="8_y0xou"]
-[ext_resource type="Texture2D" uid="uid://s3jyk22y2cm4" path="res://sprites/b_particle.png" id="13_lhw64"]
-[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="15_0bsbp"]
+[ext_resource type="Script" path="res://enemies/enemy_1_tutorial.gd" id="1_05pc1"]
+[ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_00bmx"]
+[ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="3_jvs5l"]
+[ext_resource type="Texture2D" uid="uid://70ld27bpj155" path="res://sprites/enemies/purple/purple_dies1.png" id="4_v60tw"]
+[ext_resource type="Texture2D" uid="uid://cjjy2nhs7g8tk" path="res://sprites/enemies/purple/purple_dies2.png" id="5_nppbp"]
+[ext_resource type="Texture2D" uid="uid://cy8sjdosup322" path="res://sprites/enemies/purple/purple_dies3.png" id="6_351dm"]
+[ext_resource type="Texture2D" uid="uid://cqi8gfqkoua0h" path="res://sprites/enemies/purple/purple_dies4.png" id="7_f2awe"]
+[ext_resource type="Texture2D" uid="uid://cpu5q0oh8few6" path="res://sprites/enemies/purple/purple_dies5.png" id="8_cfe2o"]
+[ext_resource type="Texture2D" uid="uid://3tslggekw40r" path="res://sprites/enemies/purple/purple_dies6.png" id="9_0qhct"]
+[ext_resource type="Texture2D" uid="uid://bywlh5h78s0bq" path="res://sprites/enemies/purple1.png" id="10_i8re0"]
+[ext_resource type="Texture2D" uid="uid://r58t6qn0b5dq" path="res://sprites/enemies/purple2.png" id="11_afbsy"]
+[ext_resource type="Texture2D" uid="uid://beachhw4bq7cx" path="res://sprites/enemies/purple3.png" id="12_fj0c0"]
+[ext_resource type="Texture2D" uid="uid://q517835lfj21" path="res://sprites/p_particle.png" id="13_qvmil"]
+[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="14_cxcgm"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3f1x"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jufo"]
 resource_local_to_scene = true
-shader = ExtResource("3_ubkrg")
+shader = ExtResource("3_jvs5l")
 shader_parameter/isHit = false
 shader_parameter/Tint = Color(1, 1, 1, 1)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_r536f"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_hgbdu"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_w6v5t")
+"texture": ExtResource("4_v60tw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_c2stt")
+"texture": ExtResource("5_nppbp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_wjd45")
+"texture": ExtResource("6_351dm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_4arn1")
+"texture": ExtResource("7_f2awe")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_ot2hr")
+"texture": ExtResource("8_cfe2o")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_y0xou")
+"texture": ExtResource("9_0qhct")
 }],
 "loop": false,
 "name": &"dies",
@@ -48,13 +48,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_356im")
+"texture": ExtResource("10_i8re0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_tqix0")
+"texture": ExtResource("11_afbsy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_cb2fo")
+"texture": ExtResource("12_fj0c0")
 }],
 "loop": true,
 "name": &"moving",
@@ -101,29 +101,29 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_27fh4"]
 radius = 67.42
 
-[sub_resource type="Curve" id="Curve_337lr"]
+[sub_resource type="Curve" id="Curve_lcko2"]
 _data = [Vector2(0, 0.736264), 0.0, 0.0, 0, 0, Vector2(0.0539419, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.195021, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.975104, 0.406593), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [node name="enemy1" type="CharacterBody2D" groups=["enemy"]]
-editor_description = "enemy that goes to NPC"
-scale = Vector2(0.46, 0.46)
+editor_description = "enemy that chases the player"
+scale = Vector2(0.45, 0.45)
 collision_layer = 4
-collision_mask = 3
+collision_mask = 2
 collision_priority = 2.0
-script = ExtResource("1_r8gub")
+script = ExtResource("1_05pc1")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-color = Color(0.730192, 0.695854, 0.992129, 1)
+color = Color(0.870588, 0.623529, 1, 1)
 energy = 0.2
-texture = ExtResource("2_1ddcs")
+texture = ExtResource("2_00bmx")
 texture_scale = 0.67
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_j3f1x")
-position = Vector2(2.17391, 0)
+material = SubResource("ShaderMaterial_5jufo")
+position = Vector2(6.66667, -1.43653e-14)
 rotation = 1.5708
-sprite_frames = SubResource("SpriteFrames_r536f")
+sprite_frames = SubResource("SpriteFrames_hgbdu")
 animation = &"dies"
 
 [node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
@@ -131,12 +131,14 @@ libraries = {
 "": SubResource("AnimationLibrary_tdvf1")
 }
 
-[node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
+[node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource("CircleShape2D_27fh4")
 
 [node name="CollisionShape2D_disabled" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_27fh4")
 disabled = true
 
@@ -150,15 +152,15 @@ one_shot = true
 speed_scale = 2.47
 explosiveness = 0.86
 randomness = 0.16
-texture = ExtResource("13_lhw64")
+texture = ExtResource("13_qvmil")
 spread = 176.55
 gravity = Vector2(0, 0)
 initial_velocity_min = 71.52
 initial_velocity_max = 102.3
 scale_amount_max = 2.0
-scale_amount_curve = SubResource("Curve_337lr")
+scale_amount_curve = SubResource("Curve_lcko2")
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("15_0bsbp")
+stream = ExtResource("14_cxcgm")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c3j6y2wng6s55"]
+[gd_scene load_steps=30 format=3 uid="uid://c3j6y2wng6s55"]
 
 [ext_resource type="Script" path="res://scenes/scripts/level_1.gd" id="1_k578h"]
 [ext_resource type="PackedScene" uid="uid://djb0frbwme6q3" path="res://scenes/tutorial.tscn" id="2_5b80t"]
@@ -15,11 +15,8 @@
 [ext_resource type="Shader" path="res://shaders/border.gdshader" id="12_nnpo6"]
 [ext_resource type="PackedScene" uid="uid://dnhtj68mhqb2u" path="res://scenes/bg_moves.tscn" id="13_8ilyv"]
 [ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="19_gbkel"]
-[ext_resource type="PackedScene" uid="uid://buw5tjqxg07yk" path="res://enemies/enemy_2.tscn" id="19_ixi8c"]
 [ext_resource type="AudioStream" uid="uid://c0o0nrc7kgl0t" path="res://SFX/possessed_dies2.ogg" id="20_pa4ra"]
-[ext_resource type="Script" path="res://enemies/enemy_2_tutorial.gd" id="20_tqsjr"]
 [ext_resource type="AudioStream" uid="uid://br1m6jylcxj0w" path="res://SFX/win.ogg" id="21_1tgxj"]
-[ext_resource type="Script" path="res://enemies/enemy_2_tutorial2.gd" id="21_yh20v"]
 [ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="22_1seex"]
 
 [sub_resource type="Curve2D" id="Curve2D_l6exe"]
@@ -122,60 +119,6 @@ size = Vector2(1217, 27)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g8ebb"]
 size = Vector2(30, 984)
 
-[sub_resource type="Animation" id="Animation_l3u02"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1241, 335)]
-}
-
-[sub_resource type="Animation" id="Animation_5if2l"]
-resource_name = "scripted_enemy"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0666667, 2.86667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1241, 335), Vector2(775, 426)]
-}
-
-[sub_resource type="Animation" id="Animation_cto74"]
-resource_name = "scripted_enemy2"
-length = 2.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 2.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(368, -77.0001), Vector2(497, 245)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_c8752"]
-_data = {
-"RESET": SubResource("Animation_l3u02"),
-"scripted_enemy": SubResource("Animation_5if2l"),
-"scripted_enemy2": SubResource("Animation_cto74")
-}
-
 [node name="main" type="Node2D"]
 script = ExtResource("1_k578h")
 
@@ -258,6 +201,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Score" parent="UI" instance=ExtResource("7_vf47i")]
+visible = false
 offset_left = -119.0
 offset_top = -104.0
 offset_right = -119.0
@@ -374,26 +318,6 @@ shape = SubResource("RectangleShape2D_g8ebb")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="PossessedEscapes"]
 position = Vector2(1212, 435)
 shape = SubResource("RectangleShape2D_g8ebb")
-
-[node name="enemy1" parent="." instance=ExtResource("19_ixi8c")]
-position = Vector2(1241, 335)
-rotation = 1.21617
-script = ExtResource("20_tqsjr")
-
-[node name="scripted_enemy" type="AnimationPlayer" parent="enemy1"]
-libraries = {
-"": SubResource("AnimationLibrary_c8752")
-}
-
-[node name="enemy2" parent="." instance=ExtResource("19_ixi8c")]
-position = Vector2(1241, 335)
-rotation = 2.98456
-script = ExtResource("21_yh20v")
-
-[node name="scripted_enemy2" type="AnimationPlayer" parent="enemy2"]
-libraries = {
-"": SubResource("AnimationLibrary_c8752")
-}
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
 [connection signal="timeout" from="FireFlySpawnTimer" to="." method="_on_fire_fly_spawn_timer_timeout"]

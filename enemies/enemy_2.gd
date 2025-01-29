@@ -15,6 +15,7 @@ var dead : bool
 @onready var splash: CPUParticles2D = $splash
 @onready var hit: AudioStreamPlayer2D = $hit
 @onready var camera_control = get_tree().root.get_node("main/CameraControl")
+#@onready var scripted_enemy: AnimationPlayer = $scripted_enemy
 
 
 func _ready() -> void:

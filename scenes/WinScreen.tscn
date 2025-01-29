@@ -36,6 +36,13 @@ theme_override_font_sizes/font_size = 50
 text = "You survived!"
 horizontal_alignment = 1
 
+[node name="NextLevel" type="Button" parent="WinScreen/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_0sg50")
+theme_override_font_sizes/font_size = 41
+text = "Next Level"
+icon_alignment = 1
+
 [node name="Level Selection" type="Button" parent="WinScreen/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_0sg50")
@@ -50,5 +57,6 @@ theme_override_font_sizes/font_size = 41
 text = "Main Menu"
 icon_alignment = 1
 
+[connection signal="pressed" from="WinScreen/VBoxContainer/NextLevel" to="WinScreen" method="_on_next_level_pressed"]
 [connection signal="pressed" from="WinScreen/VBoxContainer/Level Selection" to="WinScreen" method="_on_level_selection_pressed"]
 [connection signal="pressed" from="WinScreen/VBoxContainer/MainMenuButton" to="WinScreen" method="_on_main_menu_button_pressed"]

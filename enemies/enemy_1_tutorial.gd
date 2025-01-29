@@ -5,6 +5,8 @@ var speed = 100
 var npc: CharacterBody2D
 var player: CharacterBody2D
 var dead : bool
+var send_scripted_enemy2: bool
+var scripted_enemy2_move: bool
 
 # waiting time before disappearing for the death animation to play
 @export var wait_death_animation = 0.4
@@ -15,22 +17,27 @@ var dead : bool
 @onready var splash: CPUParticles2D = $splash
 @onready var hit: AudioStreamPlayer2D = $hit
 @onready var camera_control = get_tree().root.get_node("main/CameraControl")
-@onready var scripted_enemy: AnimationPlayer = $scripted_enemy
+#@onready var scripted_enemy: AnimationPlayer = $scripted_enemy
 
 
 func _ready() -> void:
 	player = get_tree().root.get_node("main/GhostPlayer")
 	npc = Global.npc_instance # reference to npc
 	animated_sprite_2d.play("moving")
+	#Events.send_scripted_enemy2.connect(send)
+	Events.send_scripted_enemy2.connect(_on_send_scripted_enemy2)
+	send_scripted_enemy2 = false
+	scripted_enemy2_move = false
 
 
-# chasing the NPC
-func _physics_process(_delta: float) -> void:
-	if npc:
-		#var direction = (npc.position - position).normalized()
-		#velocity = direction * speed
-		look_at(npc.position)
-		#move_and_collide(velocity * delta)
+# chasing the PLAYER
+func _physics_process(delta: float) -> void:
+	if player and send_scripted_enemy2 and scripted_enemy2_move:
+		move_and_collide(velocity * delta)
+		look_at(player.position)
+		var direction = (player.position - position).normalized()
+		velocity = direction * speed
+	
 		
 
 
@@ -61,4 +68,13 @@ func die():
 	queue_free()  # remove the enemy from the scene
 	if player.dashing:
 		player.dash_hit.play()
-	Events.send_scripted_enemy2.emit()
+	Events.send_scripted_enemy2_killed.emit()
+	
+func _on_send_scripted_enemy2():
+	send_scripted_enemy2 = true
+	scripted_enemy2_move = true
+	print("sending second eeeeeeeeee")
+	await get_tree().create_timer(5.5).timeout
+	# making enemy 2 stop for the player to hit it
+	scripted_enemy2_move = false
+	

@@ -197,20 +197,7 @@ func _on_player_near_timeout() -> void:
 	if is_alive and not Global.current_scene_name == "level_1" and not npc_ignore_player:
 		take_damage(2.0, self)
 		print("NOTICED THE PLAYER ", health)
+	# npc gets damaged 1 hp instead of 2 for the tutorial
 	elif is_alive and Global.current_scene_name == "level_1" and not npc_ignore_player:
 		take_damage(1.0, self)
-		print("TUTORIAL: NOTICED THE PLAYER", health)
-
-
-#func _on_player_near_timeout() -> void:
-	#if player_near:
-		#player_near_time += player_near_timer.wait_time # adding to the timer when the player is near
-		#if player_near_time >= patience:
-			#take_damage(1, body)
-			#player_near_time = 0.0 # reset the timer
-	#else:
-		#player_near_time = 0.0 # reset the timer if the player isn't near
-		#
-#func is_player_near() -> bool:
-	#var sleep_radius: float = 100.0
-	#return position.distance_to(player.position) <= sleep_radius
+		print("TUTORIAL: NOTICED THE PLAYER ", health)
