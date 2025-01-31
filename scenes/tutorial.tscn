@@ -17,27 +17,29 @@ script = ExtResource("1_bom5o")
 
 [node name="Label1" type="Label" parent="."]
 layout_mode = 0
-offset_left = 36.0
-offset_top = 578.0
-offset_right = 405.0
-offset_bottom = 743.0
+offset_left = 111.0
+offset_top = 566.0
+offset_right = 480.0
+offset_bottom = 843.0
 theme = ExtResource("1_ifomp")
 theme_override_font_sizes/font_size = 40
 text = "WASD to move
 Shift to sprint
-Hit the text to continue"
+Hit the text
+while dashing 
+to continue"
 
 [node name="first" type="Area2D" parent="Label1"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label1/first"]
-polygon = PackedVector2Array(0, 167, 373, 161, 370, 119, 229, 119, 229, 4, -1, 3, -1, 158)
+polygon = PackedVector2Array(-8, 272, 216, 277, 226, 211, 229, 119, 229, 4, -1, 3, -6, 138)
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 43.0
-offset_top = 363.0
-offset_right = 475.0
-offset_bottom = 474.0
+offset_left = 53.0
+offset_top = 446.0
+offset_right = 485.0
+offset_bottom = 557.0
 theme = ExtResource("1_ifomp")
 theme_override_font_sizes/font_size = 40
 text = "Protect the sleeping human
@@ -48,57 +50,90 @@ Hit the ghosts"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label2/second"]
 polygon = PackedVector2Array(-3, 107, 228, 111, 229, 56, 436, 55, 438, 7, -1, 3)
 
-[node name="Label5" type="Label" parent="."]
+[node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 43.0
-offset_top = 140.0
-offset_right = 475.0
-offset_bottom = 251.0
+offset_left = 66.0
+offset_top = 286.0
+offset_right = 498.0
+offset_bottom = 397.0
 theme = ExtResource("1_ifomp")
 theme_override_font_sizes/font_size = 40
 text = "Don't stand near the human
 for too long!"
 
-[node name="fifth" type="Area2D" parent="Label5"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label5/fifth"]
-polygon = PackedVector2Array(-3, 107, 228, 111, 229, 56, 436, 55, 438, 7, -1, 3)
-
-[node name="Label3" type="Label" parent="."]
-layout_mode = 0
-offset_left = 659.0
-offset_top = 619.0
-offset_right = 1091.0
-offset_bottom = 730.0
-theme = ExtResource("1_ifomp")
-theme_override_font_sizes/font_size = 40
-text = "Don't let it escape!"
-
 [node name="third" type="Area2D" parent="Label3"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label3/third"]
-polygon = PackedVector2Array(-3, 55, 306, 55, 306, 6, -1, 3)
+polygon = PackedVector2Array(-3, 107, 228, 111, 229, 56, 436, 55, 438, 7, -1, 3)
 
 [node name="Label4" type="Label" parent="."]
 layout_mode = 0
-offset_left = 734.0
-offset_top = 381.0
-offset_right = 1166.0
-offset_bottom = 492.0
+offset_left = 709.0
+offset_top = 297.0
+offset_right = 1141.0
+offset_bottom = 408.0
 theme = ExtResource("1_ifomp")
 theme_override_font_sizes/font_size = 40
-text = "Survive the night"
+text = "Fireflies heal the human
+if they reach them"
 
 [node name="fourth" type="Area2D" parent="Label4"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label4/fourth"]
+polygon = PackedVector2Array(-1, 114, 382, 112, 392, 2, -5, 3)
+
+[node name="Label4_2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 708.0
+offset_top = 421.0
+offset_right = 1115.0
+offset_bottom = 586.0
+theme = ExtResource("1_ifomp")
+theme_override_font_sizes/font_size = 40
+text = "If you hit the firefly 
+while dashing, it will 
+restore 2 stamina"
+
+[node name="fourth_2" type="Area2D" parent="Label4_2"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label4_2/fourth_2"]
+polygon = PackedVector2Array(-6, 163, 286, 160, 333, 92, 349, 6, -5, 3)
+
+[node name="Label5" type="Label" parent="."]
+offset_left = 715.0
+offset_top = 661.0
+offset_right = 1147.0
+offset_bottom = 772.0
+theme = ExtResource("1_ifomp")
+theme_override_font_sizes/font_size = 40
+text = "Survive the night"
+
+[node name="fifth" type="Area2D" parent="Label5"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label5/fifth"]
 polygon = PackedVector2Array(-3, 55, 306, 55, 306, 6, -1, 3)
+
+[node name="Label6" type="Label" parent="."]
+offset_left = 820.0
+offset_top = 734.0
+offset_right = 979.0
+offset_bottom = 798.0
+theme = ExtResource("1_ifomp")
+theme_override_font_sizes/font_size = 40
+text = "Good luck"
+
+[node name="sixth" type="Area2D" parent="Label6"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label6/sixth"]
+polygon = PackedVector2Array(-3, 50, 154, 49, 155, 5, -1, 3)
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_apkci")
 
 [connection signal="body_entered" from="Label1/first" to="." method="_on_first_body_entered"]
 [connection signal="body_entered" from="Label2/second" to="." method="_on_second_body_entered"]
-[connection signal="body_entered" from="Label5/fifth" to="." method="_on_fifth_body_entered"]
 [connection signal="body_entered" from="Label3/third" to="." method="_on_third_body_entered"]
 [connection signal="body_entered" from="Label4/fourth" to="." method="_on_fourth_body_entered"]
+[connection signal="body_entered" from="Label4_2/fourth_2" to="." method="_on_fourth_2_body_entered"]
+[connection signal="body_entered" from="Label5/fifth" to="." method="_on_fifth_body_entered"]
+[connection signal="body_entered" from="Label6/sixth" to="." method="_on_sixth_body_entered"]

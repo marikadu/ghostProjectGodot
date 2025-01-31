@@ -42,6 +42,6 @@ void fragment() {
     float time_step = floor(TIME * speed);
     float animated_falloff = fall_off_scale + noise(uv * 10.0, time_step) * noise_intensity;
 
-	// alpha calculation with animation
-    COLOR.a = -log(d2c * animated_falloff + b_offset) * bness;
+	//// alpha calculation with animation
+    //COLOR.a = -log(d2c * animated_falloff + b_offset) * bness;
 }

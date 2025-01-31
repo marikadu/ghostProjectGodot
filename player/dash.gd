@@ -1,6 +1,7 @@
 extends Control
 
-@onready var player: CharacterBody2D = get_node_or_null("../../GhostPlayer")
+#@onready var player: CharacterBody2D = get_node_or_null("../../GhostPlayer")
+@onready var player: CharacterBody2D = %GhostPlayer
 @onready var stamina_restore_anim: Timer = $stamina_restore_anim
 @onready var stamina_bars = [ # progress bar array
 	$stamina1,

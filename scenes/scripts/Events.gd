@@ -17,8 +17,12 @@ signal killed_scripted_enemy3
 
 signal npc_is_scared_of_the_player
 signal npc_is_scared_of_the_player2
-signal possessed_spawned_tutorial
+
+signal introduce_fireflies
+
 signal start_counting_down
+
+signal win_game_tutorial
 
 
 #func _ready() -> void:

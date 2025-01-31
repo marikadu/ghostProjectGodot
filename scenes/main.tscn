@@ -180,6 +180,7 @@ z_index = -10
 position = Vector2(576, 432)
 
 [node name="GhostPlayer" parent="." instance=ExtResource("1_wea8t")]
+unique_name_in_owner = true
 z_index = 2
 position = Vector2(576, 305)
 

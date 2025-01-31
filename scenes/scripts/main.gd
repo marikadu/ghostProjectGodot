@@ -92,6 +92,7 @@ func show_win_game():
 	kill_all_enemies()
 	Global.update_personal_best() # updating personal best ONLY when won the game
 	can_spawn_enemies = false
+	can_spawn_fireflies = false
 	npc_instance.npc_ignore_player = true
 
 
@@ -103,6 +104,7 @@ func show_game_over():
 	# show that the ghosts go back to hiding spots when sun rises
 	kill_all_enemies()
 	can_spawn_enemies = false
+	can_spawn_fireflies = false
 	npc_instance.npc_ignore_player = true
 	#get_tree().paused = true # pause game
 #	I don't know if I need to unpause it when I go to other screen, show check it later
@@ -120,6 +122,7 @@ func spawn_possessed():
 	var possessed_instance = possessed.instantiate()
 	possessed_instance.position = Vector2(578, 426)
 	call_deferred("add_child", possessed_instance)
+
 
 func _on_possessed_defeated():
 	possessed_dies.play()

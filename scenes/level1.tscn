@@ -170,7 +170,6 @@ wait_time = 2.0
 
 [node name="FireFlySpawnTimer" type="Timer" parent="."]
 wait_time = 7.0
-autostart = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -201,7 +200,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Score" parent="UI" instance=ExtResource("7_vf47i")]
-visible = false
 offset_left = -119.0
 offset_top = -104.0
 offset_right = -119.0
@@ -271,6 +269,7 @@ z_index = -10
 position = Vector2(576, 432)
 
 [node name="GhostPlayer" parent="." instance=ExtResource("19_gbkel")]
+unique_name_in_owner = true
 z_index = 2
 position = Vector2(576, 305)
 

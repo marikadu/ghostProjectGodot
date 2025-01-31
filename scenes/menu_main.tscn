@@ -1,13 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://dn4008nv06clk"]
+[gd_scene load_steps=18 format=3 uid="uid://dn4008nv06clk"]
 
 [ext_resource type="Script" path="res://scenes/scripts/main_menu.gd" id="1_60uys"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_3r7k7"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_36rfs"]
 [ext_resource type="Shader" path="res://shaders/border.gdshader" id="2_go6j5"]
+[ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="2_tp1el"]
 [ext_resource type="Texture2D" uid="uid://bicv2shwkdaf8" path="res://sprites/bg_mainmenu2.png" id="3_lq80u"]
 [ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="4_sd2tg"]
 [ext_resource type="Texture2D" uid="uid://s3jyk22y2cm4" path="res://sprites/b_particle.png" id="5_p17an"]
 [ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="6_7j32i"]
+[ext_resource type="PackedScene" uid="uid://bb0ojl4hx61c3" path="res://enemies/enemy_1.tscn" id="10_4fldv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qg754"]
 shader = ExtResource("2_go6j5")
@@ -75,6 +77,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_60uys")
 
+[node name="Stamina" parent="." instance=ExtResource("2_tp1el")]
+z_index = 6
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 137.0
+offset_top = 24.0
+offset_right = 137.0
+offset_bottom = 24.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.876472, 0.86856, 0.940414, 1)
 
@@ -86,9 +102,9 @@ position = Vector2(-4, -10)
 [node name="ColorRect" type="ColorRect" parent="Border"]
 material = SubResource("ShaderMaterial_qg754")
 offset_left = -7.0
-offset_top = -210.0
+offset_top = -159.0
 offset_right = 33.0
-offset_bottom = -170.0
+offset_bottom = -119.0
 scale = Vector2(30.04, 8)
 
 [node name="ColorRect2" type="ColorRect" parent="Border"]
@@ -218,6 +234,7 @@ position = Vector2(576, 458)
 texture = ExtResource("3_lq80u")
 
 [node name="GhostPlayer" parent="." instance=ExtResource("4_sd2tg")]
+unique_name_in_owner = true
 z_index = 2
 position = Vector2(576, 210)
 
@@ -233,11 +250,13 @@ collision_mask = 15
 position = Vector2(997.86, 548)
 scale = Vector2(1.03, 1.03)
 build_mode = 1
-polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1064.91, -499.029, -966.854, -504.854, -966.854, 332.039, 148.68, 333.01, 145.767, -504.854, -1054.23, -504.854, -1039.67, -561.165, 214.699, -561.165)
+polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1063.94, -435.922, -956.175, -434.951, -956.175, 318.447, 132.175, 318.447, 131.204, -433.981, -1050.35, -434.951, -1039.67, -561.165, 214.699, -561.165)
+
+[node name="enemy1" parent="StaticBody2D2/CollisionPolygon2D2" instance=ExtResource("10_4fldv")]
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="body_entered" from="MarginContainer/VBoxContainer/Play/b_area" to="." method="_on_b_area_body_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="body_entered" from="MarginContainer/VBoxContainer/Options/o_area" to="." method="_on_o_area_body_entered"]
 [connection signal="body_entered" from="MarginContainer/VBoxContainer/Options/o_area" to="." method="_on_b_options_body_entered"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Options/o_area" to="." method="_on_o_area_body_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

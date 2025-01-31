@@ -38,7 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://ook241jqrb3p" path="res://sprites/NPC/waking_up0015.png" id="22_m0fjg"]
 [ext_resource type="Texture2D" uid="uid://ickvddvx83jd" path="res://sprites/NPC/waking_up0014.png" id="23_xo46l"]
 [ext_resource type="AudioStream" uid="uid://b78m6xs2u8px2" path="res://SFX/player_near.ogg" id="37_hlo2i"]
-[ext_resource type="AudioStream" uid="uid://dwhfxeb35uw6v" path="res://SFX/pick_up.ogg" id="38_4hgb1"]
+[ext_resource type="AudioStream" uid="uid://c3lxgsexbr5sy" path="res://SFX/healing.ogg" id="39_m6il3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ngrvg"]
 resource_local_to_scene = true
@@ -231,7 +231,7 @@ stream_0/stream = ExtResource("10_wccak")
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bd7xo"]
 random_pitch = 1.12
 streams_count = 1
-stream_0/stream = ExtResource("38_4hgb1")
+stream_0/stream = ExtResource("39_m6il3")
 
 [node name="NPC" type="CharacterBody2D"]
 z_index = -2

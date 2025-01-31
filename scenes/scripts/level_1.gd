@@ -4,13 +4,9 @@ extends Node2D
 # -- aka TUTORIAL
 
 
-# CTRL + drag a script to put it here with @onready with $
-#@onready var camera_2d: Camera2D = $Camera2D
-
 @onready var camera: Camera2D = %Camera2D
 @onready var win_game: ColorRect = $UI/WinScreen
 @onready var game_over: ColorRect = $UI/GameOverScreen
-#@onready var is_game_over = false
 
 @onready var npc = preload("res://player/npc.tscn")
 @onready var player = preload("res://player/ghost_player.tscn")
@@ -22,16 +18,13 @@ extends Node2D
 @onready var timer_animation_player: AnimationPlayer = $UI/CountDownTimer/timerPlayer
 @onready var health_animation_player: AnimationPlayer = $UI/HealthBar/healthPlayer
 @onready var tutorial: Control = $Tutorial
-#@onready var scripted_enemy: AnimationPlayer = $enemy1/scripted_enemy
-#@onready var scripted_enemy_2: AnimationPlayer = $enemy2/scripted_enemy2
 
 
 var possessed = preload("res://enemies/possessed.tscn")
-var npc_instance: Node = null  # Store the NPC instance
+var npc_instance: Node = null  # store the NPC instance
 var player_instance
-var times_defeated_possessed: int
 var player_is_speedrunning_the_tutorial: bool
-#var npc_instance = null
+
 
 # list of enemies
 var enemy_list = [
@@ -54,9 +47,9 @@ var enemy_instances = []
 
 # control spawning
 @onready var can_spawn_enemies = true
-@onready var can_spawn_posessed = false
 @onready var can_spawn_fireflies = true
-#@onready var can_kill_possessed = true
+@onready var can_spawn_posessed = false
+
 
 func _ready() -> void:
 	#show_timer()
@@ -77,10 +70,13 @@ func _ready() -> void:
 	
 	# tutorial signals
 	Events.send_scripted_enemy.connect(_on_spawn_scripted_enemy)
-	Events.send_scripted_enemy2.connect(_on_spawn_scripted_enemy2)
+	#Events.send_scripted_enemy2.connect(_on_spawn_scripted_enemy2)
 	Events.killed_scripted_enemy2.connect(_on_scripted_enemy2_killed)
 	Events.killed_scripted_enemy3.connect(_on_scripted_enemy3_killed)
 	Events.npc_is_scared_of_the_player2.connect(_on_npc_is_scared_of_the_player2)
+	Events.introduce_fireflies.connect(_on_introduce_fireflies)
+	
+	
 	
 	# resetting the score for every new game
 	Global.score = 0
@@ -96,14 +92,8 @@ func _ready() -> void:
 
 		
 	player_instance = player.instantiate()
-	times_defeated_possessed = 0
 	player_is_speedrunning_the_tutorial = false
 	
-	
-	#var scripted_enemy1_instance = possessed.instantiate()
-	#possessed_instance.position = Vector2(578, 426)
-	#possessed_instance.speed = 125
-	#call_deferred("add_child", possessed_instance)
 	
 	if scripted_enemy_1_instance == null:  # check if the scripted_1 instance exists
 		scripted_enemy_1_instance = scripted_enemy_1.instantiate()
@@ -120,9 +110,6 @@ func _ready() -> void:
 		scripted_enemy_3_instance.position = Vector2(298, 997)
 		add_child(scripted_enemy_3_instance)
 	
-	
-	#npc_instance.can_npc_take_damage = false
-	#npc_instance.can_npc_take_damage = true
 	
 	
 	if Global.current_scene_name == 1:
@@ -145,10 +132,11 @@ func show_win_game():
 	win_game.show()
 	Global.is_game_won = true
 	kill_all_enemies()
-	#Global.update_personal_best() # updating personal best ONLY when won the game
-	# DON'T update personal best after the tutorial!
+	Global.update_personal_best() # updating personal best ONLY when won the game
 	can_spawn_enemies = false
+	can_spawn_fireflies = false
 	npc_instance.npc_ignore_player = true
+	Events.win_game_tutorial.emit()
 	if Global.unlocked_levels < 2 :
 		Global.unlocked_levels = 2
 		print("unlocked level 2!")
@@ -162,15 +150,13 @@ func show_win_game():
 func show_game_over():
 	npc_instance.npc_ignore_player = true
 	player_instance.can_move = false
-	#player_instance.set_physics_process(false)
-	#is_game_over = true
 	Global.is_game_over = true
-	#Events.game_over.emit()
 	game_over.show()
 	# show that the ghosts go back to hiding spots when sun rises
 	kill_all_enemies()
 	# main character (ghost) evaporates or is sad
 	can_spawn_enemies = false
+	can_spawn_fireflies = false
 	#get_tree().paused = true # pause game
 #	I don't know if I need to unpause it when I go to other screen, show check it later
 	
@@ -181,27 +167,14 @@ func _on_npc_died():
 	# like change the colour / apply filter
 	kill_all_enemies()
 	can_spawn_enemies = false
-	$EnemySpawnTimer.wait_time = 1.8
 	
 	
 func spawn_possessed():
 	var possessed_instance = possessed.instantiate()
 	possessed_instance.position = Vector2(578, 426)
-	possessed_instance.speed = 125
+	possessed_instance.speed = 120
 	call_deferred("add_child", possessed_instance)
-	times_defeated_possessed += 1
-	print(times_defeated_possessed)
 	
-	# !!!!!!!!!!!!!!!! make it happen only once!!!!!!!!!!!
-	# add to an int every time the possessed spawns and if >1 -> don't do this tutorial part again
-	if times_defeated_possessed <= 1:
-		#%CountDownTimer.cd_timer.wait_time = 30
-		Events.possessed_spawned_tutorial.emit()
-		Engine.time_scale = 0.3
-		await get_tree().create_timer(0.7).timeout
-		Engine.time_scale = 1.0
-	else:
-		print("already defeated the possessed, don't slow time")
 	
 
 func _on_possessed_defeated():
@@ -211,23 +184,7 @@ func _on_possessed_defeated():
 		npc_instance.restore_health(2.0)
 	else:
 		print("npc not found")
-	times_defeated_possessed += 1
-	print(times_defeated_possessed)
-		
-	# !!!!!!!!!!!!!! make this also happen only once!!!!!!!!!!!!!!!!!!!
-	if times_defeated_possessed <= 2:
-		Events.possessed_defeated.emit()
-		#%CountDownTimer.cd_timer.wait_time = 30
-		await get_tree().create_timer(3.5).timeout
-		show_timer()
-		await get_tree().create_timer(3.5).timeout
-		can_spawn_enemies = true
-		%CountDownTimer.cd_timer.paused = false
-		#%CountDownTimer.cd_timer.start()
-		Events.start_counting_down.emit()
-		print("startttt timer")
-	elif times_defeated_possessed > 3:
-		can_spawn_enemies = true
+	can_spawn_enemies = true
 	
 
 
@@ -241,24 +198,9 @@ func kill_all_enemies():
 #	clear the list
 	enemy_instances.clear()
 	
-	## this is only for 1 enemy
-	#for enemy_instance in get_tree().get_nodes_in_group("enemies"):
-		#if enemy_instance != null and enemy_instance.is_inside_tree():
-			#enemy_instance.die()
-			#enemy_instance.queue_free()
 
 
 func spawn_enemy():
-	## --- this is for only 1 enemy to spawn ---
-	#var enemy_instance = enemy.instantiate() # selected enemy is instantiated
-	#%PathFollow2D.progress_ratio = randf() # get a random position from Path2D
-	#enemy_instance.global_position = %PathFollow2D.global_position
-	#add_child(enemy_instance) # spawn to the scene
-	##enemy_instance.append(enemy_instance) # store the instance of the enemy in the list
-	#enemy_instance.add_to_group("enemies") # add the enemy into the group
-	#can_spawn_enemies = true
-	
-	# but I would like to add variety of enemies in the tutorial (as in the next levels)
 	var random_enemy = enemy_list[randi() % enemy_list.size()]
 	
 	var enemy_instance = random_enemy.instantiate() # selected enemy is instantiated
@@ -290,25 +232,24 @@ func spawn_firefly():
 
 func _on_fire_fly_spawn_timer_timeout() -> void:
 	if can_spawn_fireflies:
-		#spawn_firefly()
+		spawn_firefly()
 		pass
 	else:
 		return
 
+
+
 # ---- TUTORIAL PART ----
 
 func _on_spawn_scripted_enemy():
-	print("spawn enemy lmao")
-	#scripted_enemy.play("scripted_enemy2")
 	scripted_enemy_1_instance.scripted_enemy.play("scripted_enemy2")
 	
 	
-func _on_spawn_scripted_enemy2():
-	print("spawn enemy2 lmao")
+#func _on_spawn_scripted_enemy2():
+	#print("spawn enemy2 lmao")
 	#scripted_enemy_2.play("scripted_enemy")
 	
 
-#func _on_npc_is_scared_of_the_player():
 func _on_npc_is_scared_of_the_player2():
 	if npc_instance.is_alive:
 		npc_instance.npc_ignore_player = false
@@ -316,13 +257,53 @@ func _on_npc_is_scared_of_the_player2():
 	
 	$EnemySpawnTimer.start()
 	print("spawn enemies")
-	await get_tree().create_timer(7.5).timeout
+	await get_tree().create_timer(7.8).timeout
 	$EnemySpawnTimer.stop()
-	await get_tree().create_timer(3).timeout
+	print("stop enemy timer")
+	Events.introduce_fireflies.emit()
+
+	
+	# INTRODUCE TO THE FIREFLIES HERE
+func _on_introduce_fireflies():
+	#$FireFlySpawnTimer.start()
+	#$FireFlySpawnTimer.wait_time = 2.6
+	await get_tree().create_timer(2.2).timeout
 	show_health()
+	await get_tree().create_timer(3.5).timeout
+	
+	spawn_firefly()
+	await get_tree().create_timer(3).timeout
+	
+	$FireFlySpawnTimer.start()
+	$FireFlySpawnTimer.wait_time = 2.6
+	print("fireflies!!!!!!!!")
+	#show_health()
+	await get_tree().create_timer(3).timeout
+	
+	
+	await get_tree().create_timer(10).timeout
+	$FireFlySpawnTimer.start()
+	$FireFlySpawnTimer.wait_time = 5.6
+	_on_show_the_rest_of_ui()
+
+
+func _on_show_the_rest_of_ui():
+	#await get_tree().create_timer(3).timeout
+	#show_health()
 	await get_tree().create_timer(4).timeout
-	$EnemySpawnTimer.wait_time = 0.1
+	
+	# showing the timer
+	$EnemySpawnTimer.wait_time = 2.1
+	$FireFlySpawnTimer.wait_time = 8
+	show_timer()
+	
+	# starting the game
+	await get_tree().create_timer(3.5).timeout
+	%CountDownTimer.cd_timer.paused = false
+	Events.start_counting_down.emit()
+	print("start timer!")
 	$EnemySpawnTimer.start()
+	
 	
 
 	

@@ -16,7 +16,7 @@ var player: CharacterBody2D
 @onready var reachable_sprite: Sprite2D = $ReachableSprite
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var ran_dir_timer: Timer = $ran_dir_timer
-@onready var pick_up: AudioStreamPlayer2D = $pick_up
+#@onready var pick_up: AudioStreamPlayer2D = $pick_up
 @onready var point_light: PointLight2D = $PointLight2D
 @onready var hit: AudioStreamPlayer2D = $hit
 
@@ -32,6 +32,7 @@ var p = 0.5 # influences oscillating
 func _ready() -> void:
 	player = get_tree().root.get_node("main/GhostPlayer")
 	npc = Global.npc_instance
+	$Sprite2D2.visible = false
 	#animated_sprite_2d.play("moving")
 
 
@@ -53,9 +54,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		fade_out()
 		
 	if body == player and player.dashing:
-		pick_up.play()
+		#pick_up.play()
 		hit.play()
-		player.restore_stamina() # restore 2 stamina bars
+		player.restore_stamina() # restore 3 stamina bars
+		player.restore_stamina()
 		player.restore_stamina()
 		splash.emitting = true
 		print("yippie")
@@ -86,6 +88,7 @@ func fade_out():
 	tween.set_ease(Tween.EASE_OUT)
 	# tween modulation over 0.5 seconds
 	tween.tween_property(self, "modulate:a", 0.0, 0.5)
+	#tween.tween_property(self, "modulate:a", 0.0, 0.5)
 	point_light.energy = lerp(0.3, 0.0, 1)
 	# callback when tween finishes
 	tween.tween_callback(Callable(self, "finished"))
@@ -114,11 +117,14 @@ func _on_reachable_area_body_entered(body: Node2D) -> void:
 		#sprite.material.get_shader_parameter() = false
 		#material.get_shader_parameter() = false
 		#material.set_shader_param("visible", true)
-		reachable_sprite.visible = true
+		#reachable_sprite.visible = true
+		$Sprite2D2.visible = true
+
 		
 	pass # Replace with function body.
 
 
 func _on_reachable_area_body_exited(body: Node2D) -> void:
 	if body == player:
-		reachable_sprite.visible = false
+		#reachable_sprite.visible = false
+		$Sprite2D2.visible = false

@@ -19,7 +19,7 @@ extends Node2D
 @onready var possessed_dies: AudioStreamPlayer2D = $possessed_dies
 @onready var possessed_hit: AudioStreamPlayer2D = $possessed_hit
 @onready var sfx_win: AudioStreamPlayer2D = $win
-@onready var tutorial: Control = $Tutorial2
+#@onready var tutorial: Control = $Tutorial2
 
 
 

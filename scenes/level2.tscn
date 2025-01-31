@@ -1,10 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://xp25jb78ggwe"]
+[gd_scene load_steps=23 format=3 uid="uid://xp25jb78ggwe"]
 
 [ext_resource type="Script" path="res://scenes/scripts/level_2.gd" id="1_0ueb3"]
 [ext_resource type="Script" path="res://scenes/scripts/day_night_2.gd" id="2_op0iw"]
 [ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/daynightcycle-gradient-texture.tres" id="3_m0cwr"]
 [ext_resource type="Script" path="res://scenes/scripts/camera_2d2.gd" id="4_h1t0f"]
-[ext_resource type="PackedScene" uid="uid://ctq0wqkxya3ou" path="res://scenes/tutorial2.tscn" id="5_fr2ra"]
 [ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="6_gin3e"]
 [ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://player/hp.tscn" id="7_0vrtb"]
 [ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="8_7da7o"]
@@ -78,8 +77,6 @@ unique_name_in_owner = true
 position = Vector2(-84, -83)
 rotation = -0.0397337
 
-[node name="Tutorial2" parent="." instance=ExtResource("5_fr2ra")]
-
 [node name="CameraControl" type="Control" parent="."]
 unique_name_in_owner = true
 layout_direction = 1
@@ -123,7 +120,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Score" parent="UI" instance=ExtResource("9_gurfo")]
-visible = false
 offset_left = -119.0
 offset_top = -104.0
 offset_right = -119.0
@@ -186,6 +182,7 @@ z_index = -10
 position = Vector2(576, 432)
 
 [node name="GhostPlayer" parent="." instance=ExtResource("15_d5vjm")]
+unique_name_in_owner = true
 z_index = 2
 position = Vector2(576, 305)
 

@@ -67,7 +67,6 @@ func die():
 	queue_free()  # remove the enemy from the scene
 	if player.dashing:
 		player.dash_hit.play()
-	
 	Events.killed_scripted_enemy2.emit()
 	Events.send_scripted_enemy3.emit()
 	
