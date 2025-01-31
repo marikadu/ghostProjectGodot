@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dsvkbxp4kso86" path="res://enemies/button_play.tscn" id="2_4xdfe"]
 [ext_resource type="Script" path="res://scenes/scripts/day_night_2.gd" id="2_q0t7c"]
 [ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/daynightcycle-gradient-texture.tres" id="3_75waf"]
-[ext_resource type="Script" path="res://scenes/scripts/camera_2d2.gd" id="4_7ada3"]
+[ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="4_7ada3"]
 [ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="5_3agpu"]
 [ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="6_gqxd8"]
 [ext_resource type="PackedScene" uid="uid://d4eb43rmirjs8" path="res://scenes/score.tscn" id="7_kqkm7"]

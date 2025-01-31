@@ -2,6 +2,7 @@ extends Node
 
 signal win_game
 signal game_over
+signal game_over_woke_up_human
 signal npc_died
 signal possessed_defeated
 signal possessed_escaped

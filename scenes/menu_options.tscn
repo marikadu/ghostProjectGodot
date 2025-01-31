@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://byrlkolmk8xx5"]
+[gd_scene load_steps=4 format=3 uid="uid://byrlkolmk8xx5"]
 
 [ext_resource type="Script" path="res://scenes/scripts/menu_options.gd" id="1_vnu77"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_vbiwd"]
+[ext_resource type="Script" path="res://scenes/scripts/sfx_slider.gd" id="3_j7kgp"]
 
 [node name="OptionsMenu" type="Control"]
 layout_mode = 3
@@ -12,36 +13,216 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vnu77")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -45.5
-offset_top = -50.5
-offset_right = 45.5
-offset_bottom = 50.5
+offset_left = -450.0
+offset_top = -300.0
+offset_right = 450.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.205)
+
+[node name="TabContainer" type="TabContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_vbiwd")
+theme_override_font_sizes/font_size = 40
+current_tab = 1
+
+[node name="Graphics" type="MarginContainer" parent="ColorRect/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+metadata/_tab_index = 0
+
+[node name="TabBar" type="TabBar" parent="ColorRect/TabContainer/Graphics"]
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="ColorRect/TabContainer/Graphics/TabBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="SettingList" type="VBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VSync" type="HBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList"]
 layout_mode = 2
 
-[node name="Resolution" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="VSyncLabel" type="Label" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/VSync"]
+layout_mode = 2
+theme = ExtResource("2_vbiwd")
+theme_override_font_sizes/font_size = 40
+text = "VSync"
+
+[node name="VSyncToggle" type="CheckButton" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/VSync"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="Parallax" type="HBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList"]
+layout_mode = 2
+
+[node name="CameraLabel" type="Label" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/Parallax"]
+layout_mode = 2
+theme = ExtResource("2_vbiwd")
+theme_override_font_sizes/font_size = 40
+text = "Parallax"
+
+[node name="ParallaxToggle" type="CheckButton" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/Parallax"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="CameraShake" type="HBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList"]
+layout_mode = 2
+
+[node name="ShakeLabel" type="Label" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/CameraShake"]
+layout_mode = 2
+theme = ExtResource("2_vbiwd")
+theme_override_font_sizes/font_size = 40
+text = "Camera Shake"
+
+[node name="ShakeToggle" type="CheckButton" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/CameraShake"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="FlashWhenHit" type="HBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList"]
+layout_mode = 2
+
+[node name="FlashLabel" type="Label" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/FlashWhenHit"]
+layout_mode = 2
+theme = ExtResource("2_vbiwd")
+theme_override_font_sizes/font_size = 40
+text = "Flash When Hit"
+
+[node name="FlashToggle" type="CheckButton" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/FlashWhenHit"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -38.5
+offset_right = 140.0
+offset_bottom = 284.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resolution" type="Button" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_vbiwd")
 text = "Resolution"
 
-[node name="Volume" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_vbiwd")
-text = "Volume"
-
-[node name="Back" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Back" type="Button" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_vbiwd")
 text = "Back"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[node name="Volume" type="MarginContainer" parent="ColorRect/TabContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+metadata/_tab_index = 1
+
+[node name="TabBar" type="TabBar" parent="ColorRect/TabContainer/Volume"]
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="ColorRect/TabContainer/Volume/TabBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList"]
+layout_mode = 0
+offset_right = 448.0
+offset_bottom = 110.0
+
+[node name="Sound Effects" type="HBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer"]
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Sound Effects"]
+layout_mode = 2
+theme = ExtResource("2_vbiwd")
+theme_override_font_sizes/font_size = 40
+text = "Sound Effects"
+
+[node name="SFXSlider" type="HSlider" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Sound Effects"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+script = ExtResource("3_j7kgp")
+bus_name = "SFX"
+
+[node name="Music" type="HBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Music"]
+layout_mode = 2
+theme = ExtResource("2_vbiwd")
+theme_override_font_sizes/font_size = 40
+text = "Music"
+
+[node name="MSlider" type="HSlider" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -161.5
+offset_right = 140.0
+offset_bottom = 161.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_vbiwd")
+text = "Back"
+
+[connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/VSync/VSyncToggle" to="." method="_on_v_sync_toggle_toggled"]
+[connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/Parallax/ParallaxToggle" to="." method="_on_camera_toggle_toggled"]
+[connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/CameraShake/ShakeToggle" to="." method="_on_shake_toggle_toggled"]
+[connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/FlashWhenHit/FlashToggle" to="." method="_on_flash_toggle_toggled"]
+[connection signal="pressed" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="ColorRect/TabContainer/Volume/TabBar/ItemList/VBoxContainer/Back" to="." method="_on_back_pressed"]

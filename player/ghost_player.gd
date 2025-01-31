@@ -36,6 +36,7 @@ signal is_dashing
 @onready var dash_hit: AudioStreamPlayer2D = $dash_hit
 @onready var hit: AudioStreamPlayer2D = $hit
 @onready var ghost_dies: AudioStreamPlayer2D = $ghost_dies
+@onready var stamina_restored: AudioStreamPlayer2D = $stamina_restored
 
 @onready var sprite_move: Sprite2D = $s_move
 @onready var sprite_gameover: AnimatedSprite2D = $sprite_gameover
@@ -58,6 +59,7 @@ func _ready():
 	stamina_restore_timer.set_wait_time(stamina_restore_time)
 	
 	Events.game_over.connect(sad_ghost)
+	Events.game_over_woke_up_human.connect(sad_ghost)
 
 
 func _physics_process(delta: float) -> void:
@@ -214,3 +216,10 @@ func restore_stamina():
 			stamina_restore_timer.start()
 		else:
 			restoring_stamina = false
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("interact_dash"):
+		#$stamina_restored.play()
+		pass
+		

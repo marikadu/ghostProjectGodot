@@ -20,6 +20,8 @@ extends CharacterBody2D
 @onready var player_near_sfx: AudioStreamPlayer2D = $player_near_sfx
 @onready var healing: AudioStreamPlayer2D = $healing
 
+@onready var vfx_heal: CPUParticles2D = $vfx_heal
+
 @export var enemy_type: String = "npc"
 
 
@@ -77,29 +79,31 @@ func set_health(value: float):
 		health = 0
 		is_alive = false
 		camera_control.apply_shake(30.0, 5)
-		animated_sprite.play("gone")
 		print("npc died. killed: ", killed_by)
-		switchValue()
+		killedBy()
 	else:
-		#print("NPC health: %d" % health)
 		pass
 
 	if healthbar != null:
 #		if the healthbar is active -> update it
 		healthbar.health = health
 		
-func switchValue():
+func killedBy():
 	match killed_by:
 		"enemy1":
 			print("killed by PURPLE")
+			animated_sprite.play("gone")
 		"enemy2":
 			print("killed by BLUE")
+			animated_sprite.play("gone")
 		"enemy3":
 			print("killed by RED")
+			animated_sprite.play("gone")
 		_:
 			# DON'T SPAWN POSSESSED!
+			Events.game_over_woke_up_human.emit()
 			print("you woke the NPC up")
-	pass
+			animated_sprite.play("is_woken_up")
 
 # collision logic
 func _on_area_2d_body_entered(body: Node) -> void:
@@ -144,7 +148,8 @@ func take_damage(damage: float, enemy: Node):
 	npc_hit.play()
 	hit.play()
 	animated_sprite.play("hit")
-	hit_flash.play("hit_flash")
+	if Graphics.flash_when_hit_effect:
+		hit_flash.play("hit_flash")
 #	update health
 	#if can_npc_take_damage:
 	set_health(health - damage)
@@ -154,13 +159,16 @@ func take_damage(damage: float, enemy: Node):
 	
 func heal(healing: float):
 	#npc_hit.play()
-	animated_sprite.play("gone")
-	#hit_flash.play("hit_flash")
+	animated_sprite.play("healed")
+	vfx_heal.emitting = true
 #	update health
 	#health = min(health + healing, max_health)  # doesn't go beyond max_health
 	#set_health(health + healing)
 	set_health(min(health + healing, max_health))
 	animated_sprite.scale = Vector2(1.2, 0.8)
+	
+	await get_tree().create_timer(1).timeout
+	animated_sprite.play("sleeping")
 	
 	
 		

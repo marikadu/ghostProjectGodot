@@ -78,3 +78,13 @@ func options_get_hit():
 	options.scale = Vector2(1.4, 0.7)
 	if player.dashing:
 		player.dash_hit.play()
+
+
+func _on_play_mouse_entered() -> void:
+	$button_hover.play()
+
+func _on_options_mouse_entered() -> void:
+	$button_hover.play()
+
+func _on_exit_mouse_entered() -> void:
+	$button_hover.play()

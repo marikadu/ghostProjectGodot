@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://wu4f2v4h1o72" path="res://scenes/WinScreen.tscn" id="3_vi4qj"]
 [ext_resource type="PackedScene" uid="uid://b4cgmatdls027" path="res://scenes/GameOver.tscn" id="4_1o0n2"]
 [ext_resource type="Script" path="res://scenes/scripts/day_night_2.gd" id="4_vq2rb"]
-[ext_resource type="Script" path="res://scenes/scripts/camera_2d2.gd" id="6_01iy2"]
+[ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="6_01iy2"]
 [ext_resource type="PackedScene" uid="uid://d4eb43rmirjs8" path="res://scenes/score.tscn" id="8_lcji7"]
 [ext_resource type="PackedScene" uid="uid://bbobth255p4np" path="res://scenes/timer.tscn" id="9_ag1hq"]
 [ext_resource type="Shader" path="res://shaders/border.gdshader" id="10_be6vf"]

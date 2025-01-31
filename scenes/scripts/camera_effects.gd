@@ -33,9 +33,12 @@ func _process(delta):
 	
 	
 func apply_shake(custom_strength: float = -1.0, custom_fade: float = -1.0):
+	if Graphics.camera_shake:
 	# if no custom strength given -> use default
-	shake_strength = custom_strength if custom_strength >= 0 else def_randomStrength
-	shake_fade = custom_fade if custom_fade >= 0 else def_shakeFade
+		shake_strength = custom_strength if custom_strength >= 0 else def_randomStrength
+		shake_fade = custom_fade if custom_fade >= 0 else def_shakeFade
+	else:
+		pass
 
 func zoom_in():
 	#camera.zoom.x = lerp(1.0, 1.2, zoom_time)

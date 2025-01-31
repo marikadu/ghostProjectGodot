@@ -13,7 +13,6 @@ var vfx_instance
 @export var enemy_type: String = "enemy1"
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var animated_sprite_2d_2: AnimatedSprite2D = $AnimatedSprite2D2
 
 @onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var splash: CPUParticles2D = $splash
@@ -26,8 +25,6 @@ func _ready() -> void:
 	#player = get_tree().root.get_node("MainMenu/GhostPlayer")
 	npc = Global.npc_instance # reference to npc
 	animated_sprite_2d.play("moving")
-	animated_sprite_2d_2.play("moving")
-	animated_sprite_2d_2.visible = false
 
 
 # chasing the player
@@ -43,7 +40,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player:
 		die()
 		
-	if body == player and player.dashing:
+	if body == player and player.dashing and not dead:
 		die()
 		player.restore_stamina()
 		hit.play()
@@ -59,27 +56,11 @@ func die():
 	dead = true
 	splash.emitting = true
 	animated_sprite_2d.play("dies")
-	animated_sprite_2d_2.play("dies")
-	animated_sprite_2d_2.visible = false
 	player.hit.play()
-	hit_flash.play("hit_flash")
+	if Graphics.flash_when_hit_effect:
+		hit_flash.play("hit_flash")
 	Global.score += 10
 	await get_tree().create_timer(wait_death_animation).timeout
 	queue_free()  # remove the enemy from the scene
 	if player.dashing:
 		player.dash_hit.play()
-
-
-func _on_player_near_body_entered(body: Node2D) -> void:
-	if body == player:
-		animated_sprite_2d_2.visible = true
-		print("player near")
-	else:
-		pass
-	#pass # Replace with function body.
-
-
-func _on_player_near_body_exited(body: Node2D) -> void:
-	if body == player:
-		animated_sprite_2d_2.visible = false
-		print("player bye")

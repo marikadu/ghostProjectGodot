@@ -46,11 +46,12 @@ func _ready() -> void:
 
 func _process(delta):
 	#foreground.position = (player.position*delta) * 2
-	n_middleground.position = (player.position*delta) / 2
-	d_middleground.position = (player.position*delta) / 2
-	
-	n_background.position = (player.position*delta) / 4
-	d_background.position = (player.position*delta) / 4
+	if Graphics.camera_follow_player:
+		n_middleground.position = (player.position*delta) / 2
+		d_middleground.position = (player.position*delta) / 2
+		
+		n_background.position = (player.position*delta) / 4
+		d_background.position = (player.position*delta) / 4
 	
 	if !Global.current_scene_name == 1:
 		#print("sunrise animation ready")

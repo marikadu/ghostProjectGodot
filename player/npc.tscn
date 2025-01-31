@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://ccq0ksogu3xkq"]
+[gd_scene load_steps=70 format=3 uid="uid://ccq0ksogu3xkq"]
 
 [ext_resource type="Script" path="res://player/npc.gd" id="1_05yxr"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_ggpv7"]
@@ -7,38 +7,57 @@
 [ext_resource type="Texture2D" uid="uid://cuqg0s5a605ki" path="res://sprites/NPC/hit.png" id="2_nyprd"]
 [ext_resource type="Texture2D" uid="uid://drkmvsp3apya1" path="res://sprites/NPC/gone.png" id="4_vveos"]
 [ext_resource type="Texture2D" uid="uid://ctptdwn5gcwdn" path="res://sprites/NPC/sleeping0000.png" id="6_atu4r"]
+[ext_resource type="Texture2D" uid="uid://d2oa7dh4wnks" path="res://sprites/NPC/healed.png" id="6_lywlc"]
 [ext_resource type="Texture2D" uid="uid://m2832mlr2ddp" path="res://sprites/NPC/hit_player.png" id="6_u6dtu"]
 [ext_resource type="Texture2D" uid="uid://btd6h3jjfyhwh" path="res://sprites/NPC/sleeping0001.png" id="7_tl4bq"]
 [ext_resource type="Texture2D" uid="uid://bjjyrju85plc6" path="res://sprites/NPC/waking_up0000.png" id="8_8k6ep"]
+[ext_resource type="Texture2D" uid="uid://bw3iou7vyfd32" path="res://sprites/NPC/is_woken_up0000.png" id="8_w7x5j"]
 [ext_resource type="Texture2D" uid="uid://d3ijpbq1bwhiq" path="res://sprites/NPC/sleeping0002.png" id="8_wts65"]
 [ext_resource type="Texture2D" uid="uid://b5uptmvta63u8" path="res://sprites/NPC/waking_up0001.png" id="9_5jcli"]
 [ext_resource type="Texture2D" uid="uid://dwu1toxgbfmt8" path="res://sprites/NPC/sleeping0003.png" id="9_q1uov"]
+[ext_resource type="Texture2D" uid="uid://cafyi7emcjcd1" path="res://sprites/NPC/is_woken_up0001.png" id="9_xstwo"]
+[ext_resource type="Texture2D" uid="uid://dx8qmov0rnhsh" path="res://sprites/NPC/is_woken_up0002.png" id="10_4co1f"]
 [ext_resource type="Texture2D" uid="uid://r62abcbo2322" path="res://sprites/NPC/sleeping0004.png" id="10_04nrv"]
 [ext_resource type="AudioStream" uid="uid://jighd3tmh4ap" path="res://SFX/npc_hit.ogg" id="10_wccak"]
 [ext_resource type="Texture2D" uid="uid://d3hoxrykwrbk6" path="res://sprites/NPC/waking_up0002.png" id="10_y8xjb"]
 [ext_resource type="AudioStream" uid="uid://cwqkcb7uy7cly" path="res://SFX/hit.ogg" id="11_0l7xh"]
 [ext_resource type="Texture2D" uid="uid://cwrmlqfhl1if3" path="res://sprites/NPC/waking_up0003.png" id="11_oabgs"]
 [ext_resource type="Texture2D" uid="uid://cgyirxos7p6g3" path="res://sprites/NPC/sleeping0005.png" id="11_rne0d"]
+[ext_resource type="Texture2D" uid="uid://r181p8smbxkd" path="res://sprites/NPC/is_woken_up0003.png" id="11_vw17b"]
+[ext_resource type="Texture2D" uid="uid://ctffrwqypcjas" path="res://sprites/NPC/is_woken_up0004.png" id="12_5rrpm"]
 [ext_resource type="Texture2D" uid="uid://dnbulq26i03mu" path="res://sprites/NPC/sleeping0006.png" id="12_88l3y"]
 [ext_resource type="Texture2D" uid="uid://bm0ajvi3x6dbh" path="res://sprites/NPC/waking_up0004.png" id="12_cdgrk"]
+[ext_resource type="Texture2D" uid="uid://dcke8pou5m3gi" path="res://sprites/NPC/is_woken_up0005.png" id="13_5bi8h"]
 [ext_resource type="Texture2D" uid="uid://d0wi3ekxhd318" path="res://sprites/NPC/waking_up0005.png" id="13_pmnjo"]
 [ext_resource type="Texture2D" uid="uid://c26tkpvsviik0" path="res://sprites/NPC/sleeping0007.png" id="13_poopl"]
+[ext_resource type="Texture2D" uid="uid://b21xslmguh5cu" path="res://sprites/NPC/is_woken_up0006.png" id="14_3ajn7"]
 [ext_resource type="Texture2D" uid="uid://becq2myo2axoc" path="res://sprites/NPC/waking_up0006.png" id="14_44ypr"]
 [ext_resource type="Texture2D" uid="uid://1vfa4r3820cx" path="res://sprites/NPC/sleeping0008.png" id="14_an3bv"]
 [ext_resource type="Texture2D" uid="uid://b0aar1yfcqbrk" path="res://sprites/NPC/waking_up0007.png" id="15_kjvsg"]
 [ext_resource type="Texture2D" uid="uid://86qm2t2n5v41" path="res://sprites/NPC/sleeping0009.png" id="15_x4s5h"]
+[ext_resource type="Texture2D" uid="uid://x0w5pu3616sf" path="res://sprites/NPC/is_woken_up0007.png" id="15_yxqqt"]
 [ext_resource type="Texture2D" uid="uid://dh0ucs56e776r" path="res://sprites/NPC/sleeping0010.png" id="16_8ivi7"]
 [ext_resource type="Texture2D" uid="uid://6e8lkxbsoo72" path="res://sprites/NPC/waking_up0008.png" id="16_fxkds"]
+[ext_resource type="Texture2D" uid="uid://b0nofxofdeu71" path="res://sprites/NPC/is_woken_up0008.png" id="16_u6so6"]
 [ext_resource type="Texture2D" uid="uid://d1jdlj41mke" path="res://sprites/NPC/waking_up0009.png" id="17_pqjo1"]
 [ext_resource type="Texture2D" uid="uid://cwqaefh6t3r24" path="res://sprites/NPC/sleeping0011.png" id="17_q84fu"]
+[ext_resource type="Texture2D" uid="uid://dq2in5wu21luw" path="res://sprites/NPC/is_woken_up0009.png" id="17_xot7y"]
 [ext_resource type="Texture2D" uid="uid://bicwia44b7hjw" path="res://sprites/NPC/waking_up0010.png" id="18_1r7bg"]
+[ext_resource type="Texture2D" uid="uid://d0rv24euopnw2" path="res://sprites/NPC/is_woken_up0010.png" id="18_b6hwj"]
+[ext_resource type="Texture2D" uid="uid://dr1ui5u42edfm" path="res://sprites/NPC/is_woken_up0011.png" id="19_5icy6"]
 [ext_resource type="Texture2D" uid="uid://c0f3lpidktdw5" path="res://sprites/NPC/waking_up0011.png" id="19_daru6"]
 [ext_resource type="Texture2D" uid="uid://1318lsrmhh27" path="res://sprites/NPC/waking_up0012.png" id="20_2xqw2"]
+[ext_resource type="Texture2D" uid="uid://d36hrfwkjcj8e" path="res://sprites/NPC/is_woken_up0012.png" id="20_cygvf"]
+[ext_resource type="Texture2D" uid="uid://cnr68udg8n8gs" path="res://sprites/NPC/is_woken_up0013.png" id="21_2wxdy"]
 [ext_resource type="Texture2D" uid="uid://5o8vesti0th3" path="res://sprites/NPC/waking_up0013.png" id="21_ah6wu"]
+[ext_resource type="Texture2D" uid="uid://d1av2787ueonw" path="res://sprites/NPC/is_woken_up0014.png" id="22_gswcc"]
 [ext_resource type="Texture2D" uid="uid://ook241jqrb3p" path="res://sprites/NPC/waking_up0015.png" id="22_m0fjg"]
+[ext_resource type="Texture2D" uid="uid://w0mxu6cm3oyw" path="res://sprites/NPC/is_woken_up0015.png" id="23_3thy4"]
 [ext_resource type="Texture2D" uid="uid://ickvddvx83jd" path="res://sprites/NPC/waking_up0014.png" id="23_xo46l"]
+[ext_resource type="Texture2D" uid="uid://fm541wadsufe" path="res://sprites/NPC/is_woken_up0016.png" id="24_856jj"]
 [ext_resource type="AudioStream" uid="uid://b78m6xs2u8px2" path="res://SFX/player_near.ogg" id="37_hlo2i"]
 [ext_resource type="AudioStream" uid="uid://c3lxgsexbr5sy" path="res://SFX/healing.ogg" id="39_m6il3"]
+[ext_resource type="Texture2D" uid="uid://ltw2en237lr2" path="res://sprites/heal_particle.png" id="58_25nh4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ngrvg"]
 resource_local_to_scene = true
@@ -66,6 +85,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("6_lywlc")
+}],
+"loop": true,
+"name": &"healed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_nyprd")
 }],
 "loop": true,
@@ -79,6 +106,65 @@ animations = [{
 "loop": true,
 "name": &"hit_player",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_w7x5j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xstwo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_4co1f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_vw17b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_5rrpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_5bi8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_3ajn7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_yxqqt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_u6so6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_xot7y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_b6hwj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_5icy6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_cygvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_2wxdy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_gswcc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_3thy4")
+}, {
+"duration": 2.0,
+"texture": ExtResource("24_856jj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_3thy4")
+}],
+"loop": false,
+"name": &"is_woken_up",
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -233,6 +319,14 @@ random_pitch = 1.12
 streams_count = 1
 stream_0/stream = ExtResource("39_m6il3")
 
+[sub_resource type="Curve" id="Curve_xsol0"]
+_data = [Vector2(0, 0.736264), 0.0, 0.0, 0, 0, Vector2(0.0539419, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.195021, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.983607, 0.824176), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_78oki"]
+offsets = PackedFloat32Array(0.432258, 1)
+colors = PackedColorArray(0.918601, 0.924195, 0.904943, 1, 1, 1, 1, 0)
+
 [node name="NPC" type="CharacterBody2D"]
 z_index = -2
 scale = Vector2(0.47, 0.47)
@@ -250,7 +344,7 @@ texture_scale = 0.67
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_ngrvg")
 sprite_frames = SubResource("SpriteFrames_6nsm2")
-animation = &"hit_player"
+animation = &"healed"
 autoplay = "sleeping"
 
 [node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
@@ -259,6 +353,7 @@ libraries = {
 }
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 visibility_layer = 5
 
 [node name="sleep_distance" type="CollisionShape2D" parent="Area2D"]
@@ -274,14 +369,17 @@ shape = SubResource("RectangleShape2D_8d2p6")
 
 [node name="npc_hit" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_snm13")
+bus = &"SFX"
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_0l7xh")
 pitch_scale = 2.16
+bus = &"SFX"
 
 [node name="player_near_sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("37_hlo2i")
 volume_db = 5.832
+bus = &"SFX"
 
 [node name="player_near" type="Timer" parent="."]
 wait_time = 3.0
@@ -291,6 +389,27 @@ one_shot = true
 stream = SubResource("AudioStreamRandomizer_bd7xo")
 volume_db = 3.225
 pitch_scale = 1.19
+bus = &"SFX"
+
+[node name="vfx_heal" type="CPUParticles2D" parent="."]
+emitting = false
+lifetime = 2.5
+one_shot = true
+speed_scale = 2.64
+explosiveness = 0.85
+randomness = 0.35
+lifetime_randomness = 0.1
+texture = ExtResource("58_25nh4")
+spread = 176.55
+gravity = Vector2(0, -14.105)
+initial_velocity_min = 20.0
+initial_velocity_max = 39.8
+angular_velocity_max = 14.25
+orbit_velocity_min = -0.1
+orbit_velocity_max = 0.1
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_xsol0")
+color_ramp = SubResource("Gradient_78oki")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2dnpc_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

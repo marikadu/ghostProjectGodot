@@ -4,6 +4,7 @@ extends Control
 #@onready var 3: Button = %Level_3
 @onready var level_select: Control = $"."
 @onready var h_box_container: HBoxContainer = $MarginContainer/VBoxContainer/HBoxContainer
+@onready var personal_best: Label = $PersonalBest
 
 
 func _ready() -> void:
@@ -19,6 +20,9 @@ func _ready() -> void:
 				level.disabled = false
 			else:
 				level.disabled = true
+				
+func _process(delta: float) -> void:
+	personal_best.text = str(Global.personal_best)
 
 
 func _on_back_pressed() -> void:
@@ -38,4 +42,8 @@ func _on_2_pressed() -> void:
 
 func _on_3_pressed() -> void:
 	print("level 3 selected")
+	pass # Replace with function body.
+
+
+func _on_back_mouse_entered() -> void:
 	pass # Replace with function body.

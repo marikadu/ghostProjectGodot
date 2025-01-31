@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/scripts/level_2.gd" id="1_0ueb3"]
 [ext_resource type="Script" path="res://scenes/scripts/day_night_2.gd" id="2_op0iw"]
 [ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/daynightcycle-gradient-texture.tres" id="3_m0cwr"]
-[ext_resource type="Script" path="res://scenes/scripts/camera_2d2.gd" id="4_h1t0f"]
+[ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="4_h1t0f"]
 [ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="6_gin3e"]
 [ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://player/hp.tscn" id="7_0vrtb"]
 [ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="8_7da7o"]

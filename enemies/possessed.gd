@@ -37,17 +37,35 @@ func _ready() -> void:
 	npc = Global.npc_instance
 	health_bar.init_health(health)
 	
-	animated_sprite.play("dead")
+	#animated_sprite.play("dead")
 	
-	if npc.killed_by == "enemy1":
-		animated_sprite.play("idle_purple")
-		#print("spawn PURPLE possessed")
-	elif npc.killed_by == "enemy2":
-		animated_sprite.play("idle_blue")
-		#print("spawn BLUE possessed")
-	elif npc.killed_by == "enemy3":
-		animated_sprite.play("idle_red")
-		#print("spawn RED possessed")
+
+	match npc.killed_by:
+		"enemy1":
+			animated_sprite.play("idle_purple")
+			print("spawn LILLY possessed")
+		"enemy2":
+			animated_sprite.play("idle_blue")
+			print("spawn BLU possessed")
+		"enemy3":
+			animated_sprite.play("idle_red")
+			print("spawn REDDY possessed")
+		_:
+			# hidden 4th possessed
+			animated_sprite.play("dead")
+			#animated_sprite.play("woken_up_2")
+			print("dammmn you woke them up")
+	
+	
+	#if npc.killed_by == "enemy1":
+		#animated_sprite.play("idle_purple")
+		##print("spawn PURPLE possessed")
+	#elif npc.killed_by == "enemy2":
+		#animated_sprite.play("idle_blue")
+		##print("spawn BLUE possessed")
+	#elif npc.killed_by == "enemy3":
+		#animated_sprite.play("idle_red")
+		##print("spawn RED possessed")
 	
 	if possessed_area:
 #		npc_area.connect("body_entered", Callable(self, "_on_area_2d_body_entered"))
@@ -110,7 +128,8 @@ func take_damage(damage: float):
 	if not Global.is_game_over:
 		animated_sprite.scale = Vector2(1.6, 0.7)
 		possessed_hit.play()
-		hit_flash.play("hit_flash")
+		if Graphics.flash_when_hit_effect:
+			hit_flash.play("hit_flash")
 		health -= damage
 		health_bar.health = health
 		print("ow oww")

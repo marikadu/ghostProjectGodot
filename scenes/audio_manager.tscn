@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch0rvar102sy5"]
+
+[ext_resource type="AudioStream" uid="uid://btdl1ng72s6u8" path="res://SFX/button_pressed2.ogg" id="1_ha10p"]
+[ext_resource type="Script" path="res://scenes/scripts/audio_manager.gd" id="1_snhpj"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_snhpj")
+
+[node name="button_hover" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_ha10p")
+volume_db = 7.672
+panning_strength = 0.0

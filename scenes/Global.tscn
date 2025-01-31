@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://wu4f2v4h1o72" path="res://scenes/WinScreen.tscn" id="9_vr258"]
 [ext_resource type="PackedScene" uid="uid://b4cgmatdls027" path="res://scenes/GameOver.tscn" id="10_w0kc0"]
 [ext_resource type="Shader" path="res://shaders/border.gdshader" id="11_2akgn"]
-[ext_resource type="Script" path="res://scenes/scripts/camera_2d2.gd" id="12_22sbu"]
+[ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="12_22sbu"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_677e2"]
 random_pitch = 1.19

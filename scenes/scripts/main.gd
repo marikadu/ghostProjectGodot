@@ -43,6 +43,7 @@ func _ready() -> void:
 	Global.current_scene_name = 3
 	
 	Global.is_game_won = false
+	%CountDownTimer.cd_timer.paused = false
 	
 	#fire_fly_spawn_timer.start(randi_range(10,18)) 
 
@@ -106,16 +107,31 @@ func show_game_over():
 	can_spawn_enemies = false
 	can_spawn_fireflies = false
 	npc_instance.npc_ignore_player = true
+	%CountDownTimer.cd_timer.paused = true
 	#get_tree().paused = true # pause game
 #	I don't know if I need to unpause it when I go to other screen, show check it later
 	
 
+#func _on_npc_died():
+	#spawn_possessed()
+	## maybe create some sort of effect?
+	## like change the colour / apply filter
+	#kill_all_enemies()
+	#can_spawn_enemies = false
+	
 func _on_npc_died():
-	spawn_possessed()
-	# maybe create some sort of effect?
-	# like change the colour / apply filter
-	kill_all_enemies()
-	can_spawn_enemies = false
+	match npc_instance.killed_by:
+		"enemy1", "enemy2", "enemy3":
+			spawn_possessed()
+			kill_all_enemies()
+			can_spawn_enemies = false
+			can_spawn_fireflies = false
+		_:
+			print("dammmn you woke them up")
+			#kill_all_enemies()
+			show_game_over()
+			#can_spawn_enemies = false
+			#can_spawn_fireflies = false
 	
 	
 func spawn_possessed():

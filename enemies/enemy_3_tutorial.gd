@@ -68,7 +68,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player:
 		die()
 		
-	if body == player and player.dashing:
+	if body == player and player.dashing and not dead:
 		die()
 		player.restore_stamina()
 		hit.play()
@@ -96,7 +96,8 @@ func die():
 	splash.emitting = true
 	animated_sprite_2d.play("dies")
 	player.hit.play()
-	hit_flash.play("hit_flash")
+	if Graphics.flash_when_hit_effect:
+		hit_flash.play("hit_flash")
 	Global.score += 10
 	await get_tree().create_timer(wait_death_animation).timeout
 	queue_free()  # remove the enemy from the scene

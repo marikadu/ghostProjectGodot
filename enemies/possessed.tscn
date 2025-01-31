@@ -360,6 +360,11 @@ animations = [{
 "loop": true,
 "name": &"idle_red",
 "speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"woken_up_2",
+"speed": 5.0
 }]
 
 [sub_resource type="Animation" id="Animation_lueaj"]
@@ -422,9 +427,7 @@ texture_scale = 0.7
 material = SubResource("ShaderMaterial_622h7")
 position = Vector2(0, 11.555)
 sprite_frames = SubResource("SpriteFrames_ibt27")
-animation = &"death_red"
-frame = 6
-frame_progress = 0.119952
+animation = &"woken_up_2"
 
 [node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
@@ -449,9 +452,11 @@ wait_time = 0.7
 [node name="possessed_hit" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_axo24")
 volume_db = -2.909
+bus = &"SFX"
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_yemxf")
+bus = &"SFX"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

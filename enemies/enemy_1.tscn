@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bb0ojl4hx61c3"]
+[gd_scene load_steps=26 format=3 uid="uid://bb0ojl4hx61c3"]
 
 [ext_resource type="Shader" path="res://player/wants_dash.gdshader" id="1_j0mrd"]
 [ext_resource type="Script" path="res://enemies/enemy_1.gd" id="1_nl2ya"]
@@ -25,15 +25,11 @@ shader_parameter/b_offset = 0.0
 shader_parameter/speed = 4.517
 shader_parameter/noise_intensity = 0.5
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6iaa8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jufo"]
 resource_local_to_scene = true
-shader = ExtResource("1_j0mrd")
-shader_parameter/rect_size = Vector2(0.13, 0.095)
-shader_parameter/bness = 1.0
-shader_parameter/fall_off_scale = 3.0
-shader_parameter/b_offset = 0.0
-shader_parameter/speed = 1.0
-shader_parameter/noise_intensity = 0.126
+shader = ExtResource("3_4o8mh")
+shader_parameter/isHit = false
+shader_parameter/Tint = Color(1, 1, 1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hgbdu"]
 animations = [{
@@ -75,12 +71,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jufo"]
-resource_local_to_scene = true
-shader = ExtResource("3_4o8mh")
-shader_parameter/isHit = false
-shader_parameter/Tint = Color(1, 1, 1, 1)
-
 [sub_resource type="Animation" id="Animation_lueaj"]
 length = 0.0115
 tracks/0/type = "value"
@@ -117,9 +107,6 @@ _data = {
 "RESET": SubResource("Animation_lueaj"),
 "hit_flash": SubResource("Animation_4443o")
 }
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_vfol3"]
-radius = 216.68
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_27fh4"]
 radius = 67.42
@@ -163,16 +150,6 @@ energy = 0.2
 texture = ExtResource("2_7e2my")
 texture_scale = 0.67
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.898672, 0.978418, 0, 1)
-self_modulate = Color(0.912013, 0.899271, 7.70092e-07, 1)
-material = SubResource("ShaderMaterial_6iaa8")
-position = Vector2(4.987, 0)
-rotation = 1.5708
-scale = Vector2(1.205, 1.205)
-sprite_frames = SubResource("SpriteFrames_hgbdu")
-animation = &"dies"
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_5jufo")
 position = Vector2(6.66667, -1.43653e-14)
@@ -185,14 +162,7 @@ libraries = {
 "": SubResource("AnimationLibrary_tdvf1")
 }
 
-[node name="player_near" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="player_near"]
-shape = SubResource("CircleShape2D_vfol3")
-
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_27fh4")
@@ -222,12 +192,11 @@ scale_amount_curve = SubResource("Curve_lcko2")
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_oply8")
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_4re6e")
 }
 
-[connection signal="body_entered" from="player_near" to="." method="_on_player_near_body_entered"]
-[connection signal="body_exited" from="player_near" to="." method="_on_player_near_body_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

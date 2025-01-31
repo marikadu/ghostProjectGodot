@@ -13,7 +13,6 @@ var player: CharacterBody2D
 #@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 #@onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var splash: CPUParticles2D = $splash
-@onready var reachable_sprite: Sprite2D = $ReachableSprite
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var ran_dir_timer: Timer = $ran_dir_timer
 #@onready var pick_up: AudioStreamPlayer2D = $pick_up
@@ -32,7 +31,7 @@ var p = 0.5 # influences oscillating
 func _ready() -> void:
 	player = get_tree().root.get_node("main/GhostPlayer")
 	npc = Global.npc_instance
-	$Sprite2D2.visible = false
+	#$Sprite2D2.visible = false
 	#animated_sprite_2d.play("moving")
 
 
@@ -74,7 +73,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 	elif body == npc and not npc.is_alive:
 		print("don't heal npc", npc.health)
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(0.4).timeout
 		fade_out()
 		
 	#elif body == npc and not dead:
@@ -98,33 +97,3 @@ func finished() -> void:
 	queue_free()
 		
 		
-#func die():
-	#dead = true
-	#splash.emitting = true
-	##animated_sprite_2d.play("dies")
-	##player.ghost_dies.play()
-	#player.hit.play()
-	#hit_flash.play("hit_flash")
-	#Global.score += 10
-	#await get_tree().create_timer(wait_death_animation).timeout
-	#queue_free()  # remove the enemy from the scene
-	#if player.dashing:
-		#player.dash_hit.play()
-
-
-func _on_reachable_area_body_entered(body: Node2D) -> void:
-	if body == player:
-		#sprite.material.get_shader_parameter() = false
-		#material.get_shader_parameter() = false
-		#material.set_shader_param("visible", true)
-		#reachable_sprite.visible = true
-		$Sprite2D2.visible = true
-
-		
-	pass # Replace with function body.
-
-
-func _on_reachable_area_body_exited(body: Node2D) -> void:
-	if body == player:
-		#reachable_sprite.visible = false
-		$Sprite2D2.visible = false

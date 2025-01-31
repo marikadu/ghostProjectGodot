@@ -67,6 +67,7 @@ func _ready() -> void:
 	Events.game_over.connect(show_game_over)
 	Events.npc_died.connect(_on_npc_died)
 	Events.possessed_defeated.connect(_on_possessed_defeated)
+	Events.game_over_woke_up_human.connect(_on_woke_up_human)
 	
 	# tutorial signals
 	Events.send_scripted_enemy.connect(_on_spawn_scripted_enemy)
@@ -123,7 +124,7 @@ func _ready() -> void:
 	
 	
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_pressed("spawn_possessed"):
+	if Input.is_action_just_pressed("spawn_possessed"):
 		spawn_possessed()
 	
 	
@@ -159,22 +160,40 @@ func show_game_over():
 	can_spawn_fireflies = false
 	#get_tree().paused = true # pause game
 #	I don't know if I need to unpause it when I go to other screen, show check it later
-	
 
-func _on_npc_died():
-	spawn_possessed()
-	# maybe create some sort of effect?
-	# like change the colour / apply filter
+func _on_woke_up_human():
+	npc_instance.npc_ignore_player = true
+	player_instance.can_move = false
+	Global.is_game_over = true
+	game_over.show()
 	kill_all_enemies()
 	can_spawn_enemies = false
+	can_spawn_fireflies = false
+
+
+# NPC died
+# maybe create some sort of effect?
+# like change the colour / apply filter
+func _on_npc_died():
+	match npc_instance.killed_by:
+		"enemy1", "enemy2", "enemy3":
+			spawn_possessed()
+			kill_all_enemies()
+			can_spawn_enemies = false
+			can_spawn_fireflies = false
+		_:
+			print("dammmn you woke them up")
+			kill_all_enemies()
+			can_spawn_enemies = false
+			can_spawn_fireflies = false
 	
 	
 func spawn_possessed():
 	var possessed_instance = possessed.instantiate()
 	possessed_instance.position = Vector2(578, 426)
+	# lower speed for the tutorial
 	possessed_instance.speed = 120
 	call_deferred("add_child", possessed_instance)
-	
 	
 
 func _on_possessed_defeated():

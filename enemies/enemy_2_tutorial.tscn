@@ -214,6 +214,7 @@ scale_amount_curve = SubResource("Curve_337lr")
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_fny6b")
+bus = &"SFX"
 
 [node name="scripted_enemy" type="AnimationPlayer" parent="."]
 libraries = {

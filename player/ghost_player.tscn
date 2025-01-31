@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://cefk00qrd2w1n"]
+[gd_scene load_steps=64 format=3 uid="uid://cefk00qrd2w1n"]
 
 [ext_resource type="Script" path="res://player/ghost_player.gd" id="1_axoaw"]
 [ext_resource type="Texture2D" uid="uid://boaj7b3yhtx4l" path="res://sprites/GhostPlayer/game_over/frame0000.png" id="2_7v4g1"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://cx31tltcp0lo7" path="res://sprites/GhostPlayer/game_over/frame0022.png" id="24_kcpox"]
 [ext_resource type="Texture2D" uid="uid://ddrgahrix1587" path="res://sprites/GhostPlayer/game_over/frame0023.png" id="25_wnkfu"]
 [ext_resource type="Texture2D" uid="uid://bh3u6d2spetjm" path="res://sprites/GhostPlayer/walking+idle.png" id="26_mpc46"]
+[ext_resource type="AudioStream" uid="uid://cw3ee2ki3ggro" path="res://SFX/stamina_restored.ogg" id="32_lft5o"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eem0l"]
 animations = [{
@@ -405,6 +406,11 @@ random_pitch = 1.57
 streams_count = 1
 stream_0/stream = ExtResource("6_dco0i")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bdyac"]
+random_pitch = 1.05
+streams_count = 1
+stream_0/stream = ExtResource("32_lft5o")
+
 [node name="GhostPlayer" type="CharacterBody2D"]
 modulate = Color(1.1, 1, 1, 1)
 z_index = 1
@@ -431,7 +437,9 @@ texture = ExtResource("26_mpc46")
 hframes = 9
 vframes = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_vc2pl")
 
 [node name="dashing_t" type="Timer" parent="."]
@@ -463,20 +471,34 @@ scale = Vector2(2.24719, 2.24719)
 stream = ExtResource("3_8g16e")
 volume_db = -3.852
 pitch_scale = 2.57
+bus = &"SFX"
 
 [node name="dash_hit" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_178ir")
 volume_db = -0.085
 pitch_scale = 1.4
+bus = &"SFX"
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_s4a3m")
+bus = &"SFX"
 
 [node name="ghost_dies" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_28kjp")
 volume_db = -1.284
 max_polyphony = 3
+bus = &"SFX"
 
+[node name="stamina_restored" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(2.24719, 2.24719)
+stream = SubResource("AudioStreamRandomizer_bdyac")
+volume_db = 12.636
+bus = &"SFX"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vc2pl")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="dashing_t" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_timer_reset" to="." method="_on_dash_timer_reset_timeout"]
 [connection signal="timeout" from="GhostEffectTimer" to="." method="_on_ghost_effect_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dn4008nv06clk"]
+[gd_scene load_steps=19 format=3 uid="uid://dn4008nv06clk"]
 
 [ext_resource type="Script" path="res://scenes/scripts/main_menu.gd" id="1_60uys"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_3r7k7"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="4_sd2tg"]
 [ext_resource type="Texture2D" uid="uid://s3jyk22y2cm4" path="res://sprites/b_particle.png" id="5_p17an"]
 [ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="6_7j32i"]
-[ext_resource type="PackedScene" uid="uid://bb0ojl4hx61c3" path="res://enemies/enemy_1.tscn" id="10_4fldv"]
+[ext_resource type="AudioStream" uid="uid://r2uyjovl24fv" path="res://SFX/button_4.ogg" id="10_p1eh7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qg754"]
 shader = ExtResource("2_go6j5")
@@ -67,6 +67,11 @@ _data = {
 [sub_resource type="Curve" id="Curve_6khei"]
 _data = [Vector2(0, 0.736264), 0.0, 0.0, 0, 0, Vector2(0.0539419, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.195021, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.975104, 0.406593), 0.0, 0.0, 0, 0]
 point_count = 4
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3vm2v"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("10_p1eh7")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -252,11 +257,16 @@ scale = Vector2(1.03, 1.03)
 build_mode = 1
 polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1063.94, -435.922, -956.175, -434.951, -956.175, 318.447, 132.175, 318.447, 131.204, -433.981, -1050.35, -434.951, -1039.67, -561.165, 214.699, -561.165)
 
-[node name="enemy1" parent="StaticBody2D2/CollisionPolygon2D2" instance=ExtResource("10_4fldv")]
+[node name="button_hover" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_3vm2v")
+pitch_scale = 0.88
 
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="body_entered" from="MarginContainer/VBoxContainer/Play/b_area" to="." method="_on_b_area_body_entered"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="body_entered" from="MarginContainer/VBoxContainer/Options/o_area" to="." method="_on_b_options_body_entered"]
 [connection signal="body_entered" from="MarginContainer/VBoxContainer/Options/o_area" to="." method="_on_o_area_body_entered"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Options/o_area" to="." method="_on_b_options_body_entered"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
