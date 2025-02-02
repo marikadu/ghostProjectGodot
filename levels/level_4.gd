@@ -1,6 +1,6 @@
 #extends Control
 extends Node2D
-# -- LEVEL 2
+# -- LEVEL 4
 
 # CTRL + drag a script to put it here with @onready with $
 #@onready var camera_2d: Camera2D = $Camera2D
@@ -40,11 +40,10 @@ var enemy_instances = []
 #@onready var can_kill_possessed = true
 
 func _ready() -> void:
-	Global.current_scene_name = 2
+	Global.current_scene_name = 4
 	
 	Global.is_game_won = false
 	%CountDownTimer.cd_timer.paused = false
-	$EnemySpawnTimer.wait_time = 1.2
 	
 	#fire_fly_spawn_timer.start(randi_range(10,18)) 
 
@@ -57,12 +56,21 @@ func _ready() -> void:
 	# resetting the score for every new game
 	Global.score = 0
 	print("resetting score:", Global.score)
+	
+#	checking if camera node is found
+	#if camera == null:
+		#print("camera is not found, where is camera?")
+	#else:
+		#print("camera found")
 		
 	print(Global.current_scene_name)
+		
+	#possessed.possessed_area.connect("body_exited", self, "_on_possessed_escapes_body_exited")
 		
 	
 	if npc_instance == null:  # check if the NPC instance exists
 		npc_instance = npc.instantiate()  # instance the NPC
+		#npc_instance.position = Vector2(576, 390)
 		npc_instance.position = get_viewport_rect().size/2
 		add_child(npc_instance)  # adding npc to the scene tree
 		Global.npc_instance = npc_instance # store the instance in the global variable
@@ -87,11 +95,6 @@ func show_win_game():
 	can_spawn_enemies = false
 	can_spawn_fireflies = false
 	npc_instance.npc_ignore_player = true
-	if Global.unlocked_levels < 3 :
-		Global.unlocked_levels = 3
-		print("unlocked level 3!")
-	else:
-		print("you already have level 3 unlocked")
 
 
 	
@@ -134,8 +137,6 @@ func _on_npc_died():
 func spawn_possessed():
 	var possessed_instance = possessed.instantiate()
 	possessed_instance.position = Vector2(578, 426)
-	possessed_instance.speed = 130
-	possessed_instance.max_speed = 175
 	call_deferred("add_child", possessed_instance)
 
 

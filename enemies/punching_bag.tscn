@@ -1,0 +1,204 @@
+[gd_scene load_steps=23 format=3 uid="uid://c6l1nlaffyj1n"]
+
+[ext_resource type="Texture2D" uid="uid://cwlbah4c8d5di" path="res://sprites/screw.png" id="1_4p3ed"]
+[ext_resource type="Script" path="res://enemies/punching_bag.gd" id="1_wvmam"]
+[ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_t8684"]
+[ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="3_twf5v"]
+[ext_resource type="Texture2D" uid="uid://cphm0bunstpf0" path="res://sprites/enemies/dummy/hit_dummy0000.png" id="5_32h01"]
+[ext_resource type="Texture2D" uid="uid://bhpbvq5h0cort" path="res://sprites/enemies/dummy/hit_dummy0001.png" id="6_6jfmf"]
+[ext_resource type="Texture2D" uid="uid://b1f4nq8uy0cwl" path="res://sprites/enemies/dummy/hit_dummy0002.png" id="7_7i80f"]
+[ext_resource type="Texture2D" uid="uid://bknkp80cwesej" path="res://sprites/enemies/dummy/hit_dummy0003.png" id="8_6rh7e"]
+[ext_resource type="Texture2D" uid="uid://bhjc1xvencerj" path="res://sprites/enemies/dummy/hit_dummy0004.png" id="9_ci4ae"]
+[ext_resource type="Texture2D" uid="uid://7blcbd0cnd75" path="res://sprites/enemies/dummy/hit_dummy0005.png" id="10_y7m4c"]
+[ext_resource type="Texture2D" uid="uid://cili4fubtjkoj" path="res://sprites/enemies/dummy.png" id="11_rcxbx"]
+[ext_resource type="Texture2D" uid="uid://d0cgpbtelounr" path="res://sprites/enemies/dummy/d_particle.png" id="12_3u8p8"]
+[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="14_3ggyf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kkmvc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jufo"]
+resource_local_to_scene = true
+shader = ExtResource("3_twf5v")
+shader_parameter/isHit = false
+shader_parameter/Tint = Color(1, 1, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hgbdu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_32h01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6jfmf")
+}, {
+"duration": 2.0,
+"texture": ExtResource("7_7i80f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6rh7e")
+}, {
+"duration": 2.0,
+"texture": ExtResource("9_ci4ae")
+}, {
+"duration": 2.0,
+"texture": ExtResource("10_y7m4c")
+}],
+"loop": false,
+"name": &"dies",
+"speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_rcxbx")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_lueaj"]
+length = 0.0115
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isHit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_4443o"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/isHit")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 0.217638),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tdvf1"]
+_data = {
+"RESET": SubResource("Animation_lueaj"),
+"hit_flash": SubResource("Animation_4443o")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_27fh4"]
+radius = 67.42
+
+[sub_resource type="Curve" id="Curve_lcko2"]
+_data = [Vector2(0, 0.736264), 0.0, 0.0, 0, 0, Vector2(0.0539419, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.195021, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.975104, 0.406593), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_65ek8"]
+radius = 33.27
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 11)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(0, -5)
+scale = Vector2(0.615, 0.615)
+texture = ExtResource("1_4p3ed")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_kkmvc")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(0, 18)
+collision_layer = 0
+mass = 3.0
+sleeping = true
+
+[node name="punching_bag" type="CharacterBody2D" parent="RigidBody2D" groups=["enemy"]]
+editor_description = "enemy that chases the player"
+position = Vector2(0, -1)
+scale = Vector2(0.45, 0.45)
+collision_layer = 4
+collision_mask = 2
+collision_priority = 2.0
+script = ExtResource("1_wvmam")
+
+[node name="PointLight2D" type="PointLight2D" parent="RigidBody2D/punching_bag"]
+color = Color(0.870588, 0.623529, 1, 1)
+energy = 0.2
+texture = ExtResource("2_t8684")
+texture_scale = 0.67
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D/punching_bag"]
+material = SubResource("ShaderMaterial_5jufo")
+sprite_frames = SubResource("SpriteFrames_hgbdu")
+animation = &"dies"
+frame = 5
+frame_progress = 1.0
+
+[node name="HitFlash" type="AnimationPlayer" parent="RigidBody2D/punching_bag/AnimatedSprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_tdvf1")
+}
+
+[node name="Area2D" type="Area2D" parent="RigidBody2D/punching_bag"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/punching_bag/Area2D"]
+visible = false
+shape = SubResource("CircleShape2D_27fh4")
+
+[node name="CollisionShape2D_disabled" type="CollisionShape2D" parent="RigidBody2D/punching_bag"]
+visible = false
+shape = SubResource("CircleShape2D_27fh4")
+disabled = true
+
+[node name="isHitAnimation" type="Timer" parent="RigidBody2D/punching_bag"]
+wait_time = 0.7
+
+[node name="splash" type="CPUParticles2D" parent="RigidBody2D/punching_bag"]
+emitting = false
+lifetime = 1.2
+one_shot = true
+speed_scale = 2.47
+explosiveness = 0.86
+randomness = 0.16
+texture = ExtResource("12_3u8p8")
+spread = 176.55
+gravity = Vector2(0, 0)
+initial_velocity_min = 71.52
+initial_velocity_max = 102.3
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_lcko2")
+
+[node name="hit" type="AudioStreamPlayer2D" parent="RigidBody2D/punching_bag"]
+stream = ExtResource("14_3ggyf")
+bus = &"SFX"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_65ek8")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, 13)
+node_a = NodePath("../StaticBody2D")
+node_b = NodePath("../RigidBody2D")
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+position = Vector2(-3.8147e-06, 0)
+node_a = NodePath("../StaticBody2D")
+node_b = NodePath("../RigidBody2D")
+bias = 0.9
+length = 20.0
+rest_length = 20.0
+stiffness = 64.0
+damping = 3.0
+
+[connection signal="body_entered" from="RigidBody2D/punching_bag/Area2D" to="RigidBody2D/punching_bag" method="_on_area_2d_body_entered"]

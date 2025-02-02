@@ -28,16 +28,24 @@ func time_left_until_win():
 	return [minute, second]
 	
 	
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("time_minus"):
 		#print("timer down")
 		#time_left = 2.0
-		cd_timer.set_wait_time(2.0) 
+		cd_timer.set_wait_time(6.0) 
 		cd_timer.start()
+		
+	#label.scale.x = move_toward(label.scale.x, 1, 3 * delta)
+	#label.scale.y = move_toward(label.scale.y, 1, 3 * delta)
 
 
 func _process(_delta: float) -> void:
 	label.text = "%02d:%02d" % time_left_until_win()
+	
+	#if cd_timer.time_left <= 5.0:
+		#animate_timer()
+	#if cd_timer.time_left <= 0.0:
+		#stop_animate_timer()
 	
 	
 func _initialize_npc() -> void:
@@ -69,7 +77,14 @@ func _on_timer_timeout() -> void:
 func _on_possessed_escaped():
 	#print("stop the timer")
 	cd_timer.stop()
-	pass
+	
+#func animate_timer():
+	label.scale = Vector2(1.6, 0.7)
+	#await get_tree().create_timer(0.4).timeout
+	
+	#label.scale.x = move_toward(label.scale.x, 1, 3 * delta)
+	#label.scale.y = move_toward(label.scale.y, 1, 3 * delta)
+
 	
 #func tutorial_mode():
 	#if Global.current_scene_name == "level_1":

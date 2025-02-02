@@ -58,6 +58,7 @@ func play_get_hit():
 	#player.ghost_dies.play()
 	p_splash.emitting = true
 	player.hit.play()
+	player.restore_stamina()
 	#hit_flash.play("hit_flash")
 	play.scale = Vector2(1.4, 0.7)
 	if player.dashing:
@@ -74,6 +75,7 @@ func options_get_hit():
 	#player.ghost_dies.play()
 	o_splash.emitting = true
 	player.hit.play()
+	player.restore_stamina()
 	#hit_flash.play("hit_flash")
 	options.scale = Vector2(1.4, 0.7)
 	if player.dashing:

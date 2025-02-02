@@ -1,15 +1,18 @@
-[gd_scene load_steps=19 format=3 uid="uid://dn4008nv06clk"]
+[gd_scene load_steps=22 format=3 uid="uid://dn4008nv06clk"]
 
 [ext_resource type="Script" path="res://scenes/scripts/main_menu.gd" id="1_60uys"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_3r7k7"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_36rfs"]
 [ext_resource type="Shader" path="res://shaders/border.gdshader" id="2_go6j5"]
 [ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="2_tp1el"]
+[ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="3_dgiyq"]
 [ext_resource type="Texture2D" uid="uid://bicv2shwkdaf8" path="res://sprites/bg_mainmenu2.png" id="3_lq80u"]
+[ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="3_pcqfg"]
 [ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="4_sd2tg"]
 [ext_resource type="Texture2D" uid="uid://s3jyk22y2cm4" path="res://sprites/b_particle.png" id="5_p17an"]
 [ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="6_7j32i"]
-[ext_resource type="AudioStream" uid="uid://r2uyjovl24fv" path="res://SFX/button_4.ogg" id="10_p1eh7"]
+[ext_resource type="PackedScene" uid="uid://c6l1nlaffyj1n" path="res://enemies/punching_bag.tscn" id="8_jpx4s"]
+[ext_resource type="AudioStream" uid="uid://btdl1ng72s6u8" path="res://SFX/button_pressed2.ogg" id="10_70wp0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qg754"]
 shader = ExtResource("2_go6j5")
@@ -71,7 +74,7 @@ point_count = 4
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3vm2v"]
 random_pitch = 1.1
 streams_count = 1
-stream_0/stream = ExtResource("10_p1eh7")
+stream_0/stream = ExtResource("10_70wp0")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -95,6 +98,26 @@ grow_horizontal = 1
 grow_vertical = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+top_level = true
+position = Vector2(584, 449)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("3_dgiyq")
+
+[node name="CameraControl" type="Control" parent="."]
+unique_name_in_owner = true
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+pivot_offset = Vector2(579, 423)
+script = ExtResource("3_pcqfg")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.876472, 0.86856, 0.940414, 1)
@@ -233,6 +256,9 @@ layout_mode = 2
 theme = ExtResource("2_36rfs")
 text = "Exit"
 
+[node name="punching_bag" parent="." instance=ExtResource("8_jpx4s")]
+position = Vector2(576, 158)
+
 [node name="BgMainmenu2" type="Sprite2D" parent="."]
 z_index = -10
 position = Vector2(576, 458)
@@ -241,32 +267,31 @@ texture = ExtResource("3_lq80u")
 [node name="GhostPlayer" parent="." instance=ExtResource("4_sd2tg")]
 unique_name_in_owner = true
 z_index = 2
-position = Vector2(576, 210)
+position = Vector2(576, 271)
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_7j32i")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(0, -27)
-collision_layer = 15
-collision_mask = 15
-
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D2"]
-position = Vector2(997.86, 548)
-scale = Vector2(1.03, 1.03)
-build_mode = 1
-polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1063.94, -435.922, -956.175, -434.951, -956.175, 318.447, 132.175, 318.447, 131.204, -433.981, -1050.35, -434.951, -1039.67, -561.165, 214.699, -561.165)
-
 [node name="button_hover" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_3vm2v")
 pitch_scale = 0.88
+
+[node name="wall" type="StaticBody2D" parent="."]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="wall"]
+position = Vector2(1004, 559)
+scale = Vector2(1.03, 1.03)
+build_mode = 1
+polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1064.91, -466.019, -954.233, -465.049, -954.233, 298.058, 144.796, 298.058, 143.825, -473.786, -1063.94, -473.786, -1039.67, -561.165, 214.699, -561.165)
 
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="body_entered" from="MarginContainer/VBoxContainer/Play/b_area" to="." method="_on_b_area_body_entered"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="body_entered" from="MarginContainer/VBoxContainer/Options/o_area" to="." method="_on_o_area_body_entered"]
 [connection signal="body_entered" from="MarginContainer/VBoxContainer/Options/o_area" to="." method="_on_b_options_body_entered"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Options/o_area" to="." method="_on_o_area_body_entered"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

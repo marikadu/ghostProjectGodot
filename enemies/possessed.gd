@@ -1,7 +1,11 @@
 extends CharacterBody2D
 # if I enable layer 1 or mask 1, the enemy stops when it reaches the player
 
+@export var min_speed = 130
 @export var speed = 145
+@export var max_speed = 260
+@export var speed_increase_rate = 30.0
+@export var decrease_speed_when_hit = 60
 #@export var health = 9.0
 @export var rotation_speed: float = 2.0  # speed of rotation (degrees per second)
 @export var rotation_range: float = 2.0  # maximum rotation angle (in degrees) to the left and right
@@ -11,6 +15,8 @@ var npc: CharacterBody2D
 var player: CharacterBody2D
 var dead : bool
 var health = 9.0
+var current_speed: float
+var time_alive: float = 0.0
 
 @onready var can_hurt = true
 @onready var animated_sprite = $AnimatedSprite2D
@@ -24,6 +30,7 @@ var health = 9.0
 @onready var hit: AudioStreamPlayer2D = $hit
 @onready var main = get_tree().root.get_node("main")
 @onready var health_bar: TextureProgressBar = $CanvasLayer/HealthBar
+@onready var time_alive_timer: Timer = $timeAlive
 
 
 #var velocity = Vector2.ZERO
@@ -37,7 +44,9 @@ func _ready() -> void:
 	npc = Global.npc_instance
 	health_bar.init_health(health)
 	
-	#animated_sprite.play("dead")
+	current_speed = speed  # start at normal speed
+	
+	time_alive_timer.start()
 	
 
 	match npc.killed_by:
@@ -54,18 +63,7 @@ func _ready() -> void:
 			# hidden 4th possessed
 			animated_sprite.play("dead")
 			#animated_sprite.play("woken_up_2")
-			print("dammmn you woke them up")
-	
-	
-	#if npc.killed_by == "enemy1":
-		#animated_sprite.play("idle_purple")
-		##print("spawn PURPLE possessed")
-	#elif npc.killed_by == "enemy2":
-		#animated_sprite.play("idle_blue")
-		##print("spawn BLUE possessed")
-	#elif npc.killed_by == "enemy3":
-		#animated_sprite.play("idle_red")
-		##print("spawn RED possessed")
+			print("possessed: npc is woken up")
 	
 	if possessed_area:
 #		npc_area.connect("body_entered", Callable(self, "_on_area_2d_body_entered"))
@@ -79,24 +77,29 @@ func _process(_delta):
 	# smoothly oscillating rotation between -rotation_range and +rotation_range
 	rotation = sin(Time.get_ticks_msec() * rotation_speed * 0.001) * rotation_range
 	
-	#animated_sprite.scale.x = move_toward(animated_sprite.scale.x, 1, 1 * delta)
-	#animated_sprite.scale.y = move_toward(animated_sprite.scale.y, 1, 1 * delta)
 
-# chasing the player
+# running away from the player
 func _physics_process(delta: float) -> void:
+	#if dead or Global.is_game_over:
+		#return
+	
 	if player:
-		#var direction = (player.position - position).normalized()
-#		running away from the player
-
 		var direction = (position - player.position).normalized()
 		#velocity = get_random_direction() * speed
-		velocity = direction * speed
-		#look_at(player.position)
+		velocity = direction * current_speed
 		move_and_collide(velocity * delta)
 		
 	animated_sprite.scale.x = move_toward(animated_sprite.scale.x, 1, 3 * delta)
 	animated_sprite.scale.y = move_toward(animated_sprite.scale.y, 1, 3 * delta)
-		
+	
+	# gradually increase speed after being spawned
+	# to make the player want to kill it as soon as possible
+	# only increase speed if the possessed hasn't been hit
+	if current_speed < max_speed:
+		time_alive += delta
+		current_speed = min(current_speed + (time_alive * speed_increase_rate * delta), max_speed)
+	
+	#print(current_speed)
 		
 #func get_random_direction() -> Vector2:
 	#random angle between 0 and 2PI radians
@@ -134,6 +137,8 @@ func take_damage(damage: float):
 		health_bar.health = health
 		print("ow oww")
 		camera_control.apply_shake(3, 1)
+		# decrease current speed with every hit
+		current_speed = max(current_speed - decrease_speed_when_hit, min_speed)
 		
 		
 		if not dead:
@@ -173,6 +178,11 @@ func die():
 	print("Score: ", Global.score)
 	Events.possessed_defeated.emit()
 	print("posesses died")
+	time_alive_timer.stop()
+	# decrease speed to 0 in a span of 0.6 seconds when dies
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "current_speed", 0.0, 0.6).set_trans(Tween.TRANS_LINEAR)
+	
 	await get_tree().create_timer(wait_death_animation).timeout
 	queue_free()
 		

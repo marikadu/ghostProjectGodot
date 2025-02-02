@@ -1,23 +1,22 @@
-[gd_scene load_steps=30 format=3 uid="uid://c3j6y2wng6s55"]
+[gd_scene load_steps=23 format=3 uid="uid://c5clwicrdj2ky"]
 
-[ext_resource type="Script" path="res://scenes/scripts/level_1.gd" id="1_k578h"]
-[ext_resource type="PackedScene" uid="uid://djb0frbwme6q3" path="res://scenes/tutorial.tscn" id="2_5b80t"]
-[ext_resource type="Script" path="res://scenes/scripts/day_night.gd" id="2_bclx7"]
-[ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/daynightcycle-gradient-texture.tres" id="3_v48o3"]
-[ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="4_oqop8"]
-[ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="5_vdgd8"]
-[ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="6_lj43h"]
-[ext_resource type="PackedScene" uid="uid://d4eb43rmirjs8" path="res://scenes/score.tscn" id="7_vf47i"]
-[ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://player/hp.tscn" id="8_wxmaq"]
-[ext_resource type="PackedScene" uid="uid://bbobth255p4np" path="res://scenes/timer.tscn" id="9_r2elu"]
-[ext_resource type="PackedScene" uid="uid://wu4f2v4h1o72" path="res://scenes/WinScreen.tscn" id="10_fwygw"]
-[ext_resource type="PackedScene" uid="uid://b4cgmatdls027" path="res://scenes/GameOver.tscn" id="11_rfx4p"]
-[ext_resource type="Shader" path="res://shaders/border.gdshader" id="12_nnpo6"]
-[ext_resource type="PackedScene" uid="uid://dnhtj68mhqb2u" path="res://scenes/bg_moves.tscn" id="13_8ilyv"]
-[ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="19_gbkel"]
-[ext_resource type="AudioStream" uid="uid://c0o0nrc7kgl0t" path="res://SFX/possessed_dies2.ogg" id="20_pa4ra"]
-[ext_resource type="AudioStream" uid="uid://br1m6jylcxj0w" path="res://SFX/win.ogg" id="21_1tgxj"]
-[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="22_1seex"]
+[ext_resource type="Script" path="res://scenes/scripts/level_2_OLD.gd" id="1_phcqx"]
+[ext_resource type="Script" path="res://scenes/scripts/day_night.gd" id="2_ml4d1"]
+[ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/daynightcycle-gradient-texture.tres" id="3_0neoo"]
+[ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="4_mkvcv"]
+[ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="5_mdnv6"]
+[ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://player/hp.tscn" id="6_loudu"]
+[ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="7_su5qp"]
+[ext_resource type="PackedScene" uid="uid://d4eb43rmirjs8" path="res://scenes/score.tscn" id="8_m2v6m"]
+[ext_resource type="PackedScene" uid="uid://bbobth255p4np" path="res://scenes/timer.tscn" id="9_tsj6m"]
+[ext_resource type="PackedScene" uid="uid://wu4f2v4h1o72" path="res://scenes/WinScreen.tscn" id="10_b3ixm"]
+[ext_resource type="PackedScene" uid="uid://b4cgmatdls027" path="res://scenes/GameOver.tscn" id="11_kkkgg"]
+[ext_resource type="Shader" path="res://shaders/border.gdshader" id="12_6hy5k"]
+[ext_resource type="PackedScene" uid="uid://dnhtj68mhqb2u" path="res://scenes/bg_moves.tscn" id="13_8pcw6"]
+[ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="14_limkm"]
+[ext_resource type="AudioStream" uid="uid://c0o0nrc7kgl0t" path="res://SFX/possessed_dies2.ogg" id="15_g24y7"]
+[ext_resource type="AudioStream" uid="uid://br1m6jylcxj0w" path="res://SFX/win.ogg" id="16_5ir0v"]
+[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="17_oj08r"]
 
 [sub_resource type="Curve2D" id="Curve2D_l6exe"]
 _data = {
@@ -25,82 +24,8 @@ _data = {
 }
 point_count = 6
 
-[sub_resource type="Animation" id="Animation_oprp0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(756, -64)]
-}
-
-[sub_resource type="Animation" id="Animation_rgvwu"]
-resource_name = "show_health"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 1.63333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(756, -64), Vector2(756, 24)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u3dku"]
-_data = {
-"RESET": SubResource("Animation_oprp0"),
-"show_health": SubResource("Animation_rgvwu")
-}
-
-[sub_resource type="Animation" id="Animation_iifv3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(576, -118)]
-}
-
-[sub_resource type="Animation" id="Animation_o1m1c"]
-resource_name = "show_timer"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.76667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(576, -118), Vector2(576, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_nbdmb"]
-_data = {
-"RESET": SubResource("Animation_iifv3"),
-"show_timer": SubResource("Animation_o1m1c")
-}
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rmbww"]
-shader = ExtResource("12_nnpo6")
+shader = ExtResource("12_6hy5k")
 shader_parameter/rect_size = Vector2(1.935, 0.145)
 shader_parameter/bness = 5.45
 shader_parameter/fall_off_scale = 6.385
@@ -111,7 +36,7 @@ shader_parameter/noise_intensity = 0.553
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rwpst"]
 random_pitch = 1.19
 streams_count = 1
-stream_0/stream = ExtResource("20_pa4ra")
+stream_0/stream = ExtResource("15_g24y7")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ldot6"]
 size = Vector2(1217, 27)
@@ -120,7 +45,7 @@ size = Vector2(1217, 27)
 size = Vector2(30, 984)
 
 [node name="main" type="Node2D"]
-script = ExtResource("1_k578h")
+script = ExtResource("1_phcqx")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.795869, 0.802365, 0.885547, 1)
@@ -130,8 +55,8 @@ visible = false
 z_index = 1
 position = Vector2(576, 432)
 scale = Vector2(3.87, 3.87)
-script = ExtResource("2_bclx7")
-gradient_texture = ExtResource("3_v48o3")
+script = ExtResource("2_ml4d1")
+gradient_texture = ExtResource("3_0neoo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
@@ -140,7 +65,7 @@ position = Vector2(584, 449)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
-script = ExtResource("4_oqop8")
+script = ExtResource("4_mkvcv")
 
 [node name="Path2D" type="Path2D" parent="Camera2D"]
 position = Vector2(-525, -408)
@@ -152,8 +77,6 @@ unique_name_in_owner = true
 position = Vector2(-84, -83)
 rotation = -0.0397337
 
-[node name="Tutorial" parent="." instance=ExtResource("2_5b80t")]
-
 [node name="CameraControl" type="Control" parent="."]
 unique_name_in_owner = true
 layout_direction = 1
@@ -163,29 +86,26 @@ anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
 pivot_offset = Vector2(579, 423)
-script = ExtResource("5_vdgd8")
+script = ExtResource("5_mdnv6")
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 1.7
+wait_time = 2.0
+autostart = true
 
 [node name="FireFlySpawnTimer" type="Timer" parent="."]
 wait_time = 7.0
+autostart = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HealthBar" parent="UI" instance=ExtResource("8_wxmaq")]
+[node name="HealthBar" parent="UI" instance=ExtResource("6_loudu")]
 z_index = 6
 offset_left = 756.0
-offset_top = -64.0
+offset_top = 24.0
 offset_right = 1056.0
-offset_bottom = -24.0
+offset_bottom = 64.0
 
-[node name="healthPlayer" type="AnimationPlayer" parent="UI/HealthBar"]
-libraries = {
-"": SubResource("AnimationLibrary_u3dku")
-}
-
-[node name="Stamina" parent="UI" instance=ExtResource("6_lj43h")]
+[node name="Stamina" parent="UI" instance=ExtResource("7_su5qp")]
 z_index = 6
 anchors_preset = 0
 anchor_right = 0.0
@@ -199,29 +119,22 @@ grow_vertical = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Score" parent="UI" instance=ExtResource("7_vf47i")]
+[node name="Score" parent="UI" instance=ExtResource("8_m2v6m")]
 offset_left = -119.0
 offset_top = -104.0
 offset_right = -119.0
 offset_bottom = -104.0
 
-[node name="CountDownTimer" parent="UI" instance=ExtResource("9_r2elu")]
+[node name="CountDownTimer" parent="UI" instance=ExtResource("9_tsj6m")]
 unique_name_in_owner = true
-offset_top = -118.0
-offset_bottom = -118.0
 
-[node name="timerPlayer" type="AnimationPlayer" parent="UI/CountDownTimer"]
-libraries = {
-"": SubResource("AnimationLibrary_nbdmb")
-}
-
-[node name="WinScreen" parent="UI" instance=ExtResource("10_fwygw")]
+[node name="WinScreen" parent="UI" instance=ExtResource("10_b3ixm")]
 visible = false
 z_index = 10
 offset_top = 2.0
 offset_bottom = 2.0
 
-[node name="GameOverScreen" parent="UI" instance=ExtResource("11_rfx4p")]
+[node name="GameOverScreen" parent="UI" instance=ExtResource("11_kkkgg")]
 visible = false
 z_index = 10
 
@@ -264,11 +177,11 @@ offset_right = 33.0
 offset_bottom = 794.0
 scale = Vector2(30.04, 8)
 
-[node name="bg" parent="." instance=ExtResource("13_8ilyv")]
+[node name="bg" parent="." instance=ExtResource("13_8pcw6")]
 z_index = -10
 position = Vector2(576, 432)
 
-[node name="GhostPlayer" parent="." instance=ExtResource("19_gbkel")]
+[node name="GhostPlayer" parent="." instance=ExtResource("14_limkm")]
 unique_name_in_owner = true
 z_index = 2
 position = Vector2(576, 305)
@@ -280,19 +193,19 @@ pitch_scale = 1.22
 
 [node name="win" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(0.445, 0.445)
-stream = ExtResource("21_1tgxj")
+stream = ExtResource("16_5ir0v")
 volume_db = 1.455
 
 [node name="possessed_hit" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(0.445, 0.445)
-stream = ExtResource("22_1seex")
+stream = ExtResource("17_oj08r")
 pitch_scale = 2.16
 
-[node name="wall" type="StaticBody2D" parent="."]
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
 collision_layer = 15
 collision_mask = 15
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="wall"]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D2"]
 position = Vector2(1004, 559)
 scale = Vector2(1.03, 1.03)
 build_mode = 1

@@ -1,6 +1,7 @@
 extends Camera2D
 
-@onready var player = get_tree().root.get_node("main/GhostPlayer") # !!!!
+#@onready var player = get_tree().root.get_node("main/GhostPlayer") # !!!!
+@onready var player: CharacterBody2D = %GhostPlayer
 var camera_off = Vector2(576,449)
 
 func _process(delta):
@@ -22,6 +23,6 @@ func _process(delta):
 	
 	# maybe something similar to ori and the will of the whisps
 	if Graphics.camera_follow_player:
-		position = (player.position*delta) + camera_off # NEW CODE
-	else:
-		pass
+		position = (player.position*delta * 2) + camera_off # NEW CODE
+	#else:
+		#pass

@@ -121,6 +121,7 @@ func _ready() -> void:
 		%CountDownTimer.cd_timer.paused = true
 		print("TUTORIAL start")
 		npc_instance.npc_ignore_player = true
+		#possessed.
 	
 	
 func _physics_process(_delta: float) -> void:
@@ -152,6 +153,11 @@ func show_game_over():
 	npc_instance.npc_ignore_player = true
 	player_instance.can_move = false
 	Global.is_game_over = true
+	if Global.unlocked_levels < 2 :
+		Global.unlocked_levels = 2
+		print("unlocked level 2!")
+	else:
+		print("you already have level 2 unlocked")
 	game_over.show()
 	# show that the ghosts go back to hiding spots when sun rises
 	kill_all_enemies()
@@ -193,6 +199,7 @@ func spawn_possessed():
 	possessed_instance.position = Vector2(578, 426)
 	# lower speed for the tutorial
 	possessed_instance.speed = 120
+	possessed_instance.max_speed = 160
 	call_deferred("add_child", possessed_instance)
 	
 
@@ -298,9 +305,11 @@ func _on_introduce_fireflies():
 	print("fireflies!!!!!!!!")
 	#show_health()
 	await get_tree().create_timer(3).timeout
+	# enemies spawn slowly while introducing to the fireflies
+	$EnemySpawnTimer.wait_time = 2.7
+	$EnemySpawnTimer.start()
 	
-	
-	await get_tree().create_timer(10).timeout
+	await get_tree().create_timer(9).timeout
 	$FireFlySpawnTimer.start()
 	$FireFlySpawnTimer.wait_time = 5.6
 	_on_show_the_rest_of_ui()
@@ -312,7 +321,7 @@ func _on_show_the_rest_of_ui():
 	await get_tree().create_timer(4).timeout
 	
 	# showing the timer
-	$EnemySpawnTimer.wait_time = 2.1
+	$EnemySpawnTimer.wait_time = 1.7
 	$FireFlySpawnTimer.wait_time = 8
 	show_timer()
 	

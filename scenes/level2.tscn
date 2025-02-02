@@ -1,7 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://xp25jb78ggwe"]
+[gd_scene load_steps=23 format=3 uid="uid://d24fqqhp5n18b"]
 
 [ext_resource type="Script" path="res://scenes/scripts/level_2.gd" id="1_0ueb3"]
-[ext_resource type="Script" path="res://scenes/scripts/day_night_2.gd" id="2_op0iw"]
+[ext_resource type="Script" path="res://scenes/scripts/day_night.gd" id="2_op0iw"]
 [ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/daynightcycle-gradient-texture.tres" id="3_m0cwr"]
 [ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="4_h1t0f"]
 [ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="6_gin3e"]
@@ -48,7 +48,7 @@ size = Vector2(30, 984)
 script = ExtResource("1_0ueb3")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.795869, 0.802365, 0.885547, 1)
+color = Color(0.869731, 0.8842, 0.942701, 1)
 
 [node name="CanvasModulate2" type="CanvasModulate" parent="."]
 visible = false
@@ -81,15 +81,13 @@ rotation = -0.0397337
 unique_name_in_owner = true
 layout_direction = 1
 layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-grow_horizontal = 2
+anchors_preset = 0
 pivot_offset = Vector2(579, 423)
 script = ExtResource("6_gin3e")
+metadata/_edit_use_anchors_ = true
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.7
 autostart = true
 
 [node name="FireFlySpawnTimer" type="Timer" parent="."]
@@ -206,7 +204,7 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D2"]
-position = Vector2(1004, 559)
+position = Vector2(997.86, 548)
 scale = Vector2(1.03, 1.03)
 build_mode = 1
 polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1064.91, -466.019, -954.233, -465.049, -954.233, 298.058, 144.796, 298.058, 143.825, -473.786, -1063.94, -473.786, -1039.67, -561.165, 214.699, -561.165)
