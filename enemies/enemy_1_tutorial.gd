@@ -21,6 +21,7 @@ var scripted_enemy2_move: bool
 
 
 func _ready() -> void:
+	dead = false
 	player = get_tree().root.get_node("main/GhostPlayer")
 	npc = Global.npc_instance # reference to npc
 	animated_sprite_2d.play("moving")
@@ -41,14 +42,15 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body == player:
+	if body == player and not dead and not player.dashing:
 		die()
 		
 	if body == player and player.dashing and not dead:
 		die()
-		player.restore_stamina()
 		hit.play()
+		player.dash_hit.play()
 		camera_control.apply_shake(4, 5)
+		player.restore_stamina()
 		
 	elif body == npc and not dead:
 		npc.take_damage(1.0, self) # damage the npc, pass self to npc
@@ -66,10 +68,13 @@ func die():
 	Global.score += 10
 	await get_tree().create_timer(wait_death_animation).timeout
 	queue_free()  # remove the enemy from the scene
-	if player.dashing:
-		player.dash_hit.play()
 	Events.killed_scripted_enemy2.emit()
 	Events.send_scripted_enemy3.emit()
+	#if player.dashing:
+		#print("lmaodasdf")
+		#player.dash_hit.play()
+		#player.restore_stamina()
+		#camera_control.apply_shake(4, 5)
 	
 	
 func _on_send_scripted_enemy2():

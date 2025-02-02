@@ -1,0 +1,145 @@
+[gd_scene load_steps=4 format=3 uid="uid://deo4gf8modmfl"]
+
+[ext_resource type="Script" path="res://scenes/menus/level_selection.gd" id="1_4wo0t"]
+[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_exllh"]
+[ext_resource type="Texture2D" uid="uid://d3qjgeb0j3g32" path="res://sprites/bg_level_selection.png" id="2_o4b80"]
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4wo0t")
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+position = Vector2(575, 440)
+texture = ExtResource("2_o4b80")
+
+[node name="LevelSelection" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -145.5
+offset_top = 116.0
+offset_right = 145.5
+offset_bottom = 181.0
+grow_horizontal = 2
+theme = ExtResource("2_exllh")
+theme_override_font_sizes/font_size = 50
+text = "Level Selection"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -380.0
+offset_top = -197.0
+offset_right = 380.0
+offset_bottom = -87.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="1" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(110, 110)
+layout_mode = 2
+theme = ExtResource("2_exllh")
+text = "1"
+
+[node name="2" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(110, 110)
+layout_mode = 2
+theme = ExtResource("2_exllh")
+disabled = true
+text = "2"
+
+[node name="3" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(110, 110)
+layout_mode = 2
+theme = ExtResource("2_exllh")
+text = "3"
+
+[node name="4" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(110, 110)
+layout_mode = 2
+theme = ExtResource("2_exllh")
+text = "4"
+
+[node name="5" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(110, 110)
+layout_mode = 2
+theme = ExtResource("2_exllh")
+text = "5"
+
+[node name="6" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(110, 110)
+layout_mode = 2
+theme = ExtResource("2_exllh")
+text = "6"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="PersonalBest" type="Label" parent="."]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 779.0
+offset_right = 383.0
+offset_bottom = 832.0
+theme = ExtResource("2_exllh")
+theme_override_font_sizes/font_size = 40
+text = "0000"
+
+[node name="PersonalBest2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 779.0
+offset_right = 261.0
+offset_bottom = 832.0
+theme = ExtResource("2_exllh")
+theme_override_font_sizes/font_size = 40
+text = "Personal Best:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = 223.0
+offset_right = 90.0
+offset_bottom = 323.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+theme = ExtResource("2_exllh")
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/1" to="." method="_on_1_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/2" to="." method="_on_2_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/3" to="." method="_on_3_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/4" to="." method="_on_4_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/5" to="." method="_on_5_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/6" to="." method="_on_6_pressed"]

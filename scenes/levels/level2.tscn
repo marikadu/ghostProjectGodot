@@ -1,0 +1,245 @@
+[gd_scene load_steps=24 format=3 uid="uid://d24fqqhp5n18b"]
+
+[ext_resource type="Script" path="res://scenes/levels/level_2.gd" id="1_1aiyl"]
+[ext_resource type="Script" path="res://scenes/scripts/day_night.gd" id="2_pkoij"]
+[ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/daynightcycle-gradient-texture.tres" id="3_fwm6b"]
+[ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="4_4d887"]
+[ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="5_4tryh"]
+[ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://player/hp.tscn" id="6_d1x5c"]
+[ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="7_qyfa1"]
+[ext_resource type="PackedScene" uid="uid://d4eb43rmirjs8" path="res://scenes/score.tscn" id="8_wkhi1"]
+[ext_resource type="PackedScene" uid="uid://bbobth255p4np" path="res://scenes/timer.tscn" id="9_cbq72"]
+[ext_resource type="PackedScene" uid="uid://wu4f2v4h1o72" path="res://scenes/screens/WinScreen.tscn" id="10_4q4yt"]
+[ext_resource type="PackedScene" uid="uid://b4cgmatdls027" path="res://scenes/screens/GameOver.tscn" id="11_c8tim"]
+[ext_resource type="Shader" path="res://shaders/border.gdshader" id="12_7sask"]
+[ext_resource type="PackedScene" uid="uid://dnhtj68mhqb2u" path="res://scenes/bg_moves.tscn" id="13_q5l2k"]
+[ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="14_0vked"]
+[ext_resource type="AudioStream" uid="uid://c0o0nrc7kgl0t" path="res://SFX/possessed_dies2.ogg" id="15_4rcku"]
+[ext_resource type="AudioStream" uid="uid://br1m6jylcxj0w" path="res://SFX/win.ogg" id="16_ji3a4"]
+[ext_resource type="AudioStream" uid="uid://dk3oryayc0ls2" path="res://SFX/game_over.ogg" id="17_5oh84"]
+[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="17_rj742"]
+
+[sub_resource type="Curve2D" id="Curve2D_l6exe"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -84, -83, 0, 0, 0, 0, 332.663, -99.5643, 0, 0, 0, 0, 1254, -80, 0, 0, 0, 0, 1256, 969, 0, 0, 0, 0, -96, 960, 0, 0, 0, 0, -84, -83)
+}
+point_count = 6
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rmbww"]
+shader = ExtResource("12_7sask")
+shader_parameter/rect_size = Vector2(1.935, 0.145)
+shader_parameter/bness = 5.45
+shader_parameter/fall_off_scale = 6.385
+shader_parameter/b_offset = 0.08
+shader_parameter/speed = 3.188
+shader_parameter/noise_intensity = 0.553
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rwpst"]
+random_pitch = 1.19
+streams_count = 1
+stream_0/stream = ExtResource("15_4rcku")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ldot6"]
+size = Vector2(1217, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8ebb"]
+size = Vector2(30, 984)
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_1aiyl")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.869731, 0.8842, 0.942701, 1)
+
+[node name="CanvasModulate2" type="CanvasModulate" parent="."]
+visible = false
+z_index = 1
+position = Vector2(576, 432)
+scale = Vector2(3.87, 3.87)
+script = ExtResource("2_pkoij")
+gradient_texture = ExtResource("3_fwm6b")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+top_level = true
+position = Vector2(584, 449)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("4_4d887")
+
+[node name="Path2D" type="Path2D" parent="Camera2D"]
+position = Vector2(-525, -408)
+scale = Vector2(0.920002, 0.96)
+curve = SubResource("Curve2D_l6exe")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Camera2D/Path2D"]
+unique_name_in_owner = true
+position = Vector2(-84, -83)
+rotation = -0.0397337
+
+[node name="CameraControl" type="Control" parent="."]
+unique_name_in_owner = true
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(579, 423)
+script = ExtResource("5_4tryh")
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 0.7
+autostart = true
+
+[node name="FireFlySpawnTimer" type="Timer" parent="."]
+wait_time = 7.0
+autostart = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" parent="UI" instance=ExtResource("6_d1x5c")]
+z_index = 6
+offset_left = 756.0
+offset_top = 24.0
+offset_right = 1056.0
+offset_bottom = 64.0
+
+[node name="Stamina" parent="UI" instance=ExtResource("7_qyfa1")]
+z_index = 6
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 137.0
+offset_top = 24.0
+offset_right = 137.0
+offset_bottom = 24.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Score" parent="UI" instance=ExtResource("8_wkhi1")]
+offset_left = -119.0
+offset_top = -104.0
+offset_right = -119.0
+offset_bottom = -104.0
+
+[node name="CountDownTimer" parent="UI" instance=ExtResource("9_cbq72")]
+unique_name_in_owner = true
+
+[node name="WinScreen" parent="UI" instance=ExtResource("10_4q4yt")]
+visible = false
+z_index = 10
+offset_top = 2.0
+offset_bottom = 2.0
+
+[node name="GameOverScreen" parent="UI" instance=ExtResource("11_c8tim")]
+visible = false
+z_index = 10
+
+[node name="Border" type="CanvasGroup" parent="UI"]
+modulate = Color(1, 1, 1, 0.235294)
+self_modulate = Color(0.535276, 0.299479, 0.895856, 1)
+position = Vector2(-4, 10)
+
+[node name="ColorRect" type="ColorRect" parent="UI/Border"]
+material = SubResource("ShaderMaterial_rmbww")
+offset_left = -7.0
+offset_top = -182.0
+offset_right = 33.0
+offset_bottom = -142.0
+scale = Vector2(30.04, 8)
+
+[node name="ColorRect2" type="ColorRect" parent="UI/Border"]
+material = SubResource("ShaderMaterial_rmbww")
+offset_left = 96.0
+offset_top = -182.0
+offset_right = 136.0
+offset_bottom = -142.0
+rotation = 1.57079
+scale = Vector2(30.04, 8)
+
+[node name="ColorRect4" type="ColorRect" parent="UI/Border"]
+material = SubResource("ShaderMaterial_rmbww")
+offset_left = 1380.0
+offset_top = -182.0
+offset_right = 1420.0
+offset_bottom = -142.0
+rotation = 1.57079
+scale = Vector2(30.04, 8)
+
+[node name="ColorRect3" type="ColorRect" parent="UI/Border"]
+material = SubResource("ShaderMaterial_rmbww")
+offset_left = -7.0
+offset_top = 754.0
+offset_right = 33.0
+offset_bottom = 794.0
+scale = Vector2(30.04, 8)
+
+[node name="bg" parent="." instance=ExtResource("13_q5l2k")]
+z_index = -10
+position = Vector2(576, 432)
+
+[node name="GhostPlayer" parent="." instance=ExtResource("14_0vked")]
+unique_name_in_owner = true
+z_index = 2
+position = Vector2(576, 305)
+
+[node name="possessed_dies" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(0.445, 0.445)
+stream = SubResource("AudioStreamRandomizer_rwpst")
+pitch_scale = 1.22
+bus = &"SFX"
+
+[node name="win" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(0.445, 0.445)
+stream = ExtResource("16_ji3a4")
+volume_db = 1.455
+bus = &"Music"
+
+[node name="game_over" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(0.445, 0.445)
+stream = ExtResource("17_5oh84")
+volume_db = 1.455
+pitch_scale = 1.06
+panning_strength = 0.0
+bus = &"Music"
+
+[node name="possessed_hit" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(0.445, 0.445)
+stream = ExtResource("17_rj742")
+pitch_scale = 2.16
+bus = &"SFX"
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D2"]
+position = Vector2(997.86, 548)
+scale = Vector2(1.03, 1.03)
+build_mode = 1
+polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1064.91, -466.019, -954.233, -465.049, -954.233, 298.058, 144.796, 298.058, 143.825, -473.786, -1063.94, -473.786, -1039.67, -561.165, 214.699, -561.165)
+
+[node name="PossessedEscapes" type="Area2D" parent="."]
+collision_layer = 17
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PossessedEscapes"]
+position = Vector2(576, -24)
+shape = SubResource("RectangleShape2D_ldot6")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="PossessedEscapes"]
+position = Vector2(583, 939)
+shape = SubResource("RectangleShape2D_ldot6")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="PossessedEscapes"]
+position = Vector2(-33, 443)
+shape = SubResource("RectangleShape2D_g8ebb")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="PossessedEscapes"]
+position = Vector2(1212, 435)
+shape = SubResource("RectangleShape2D_g8ebb")
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
+[connection signal="timeout" from="FireFlySpawnTimer" to="." method="_on_fire_fly_spawn_timer_timeout"]

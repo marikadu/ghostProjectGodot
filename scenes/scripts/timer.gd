@@ -79,7 +79,7 @@ func _on_possessed_escaped():
 	cd_timer.stop()
 	
 #func animate_timer():
-	label.scale = Vector2(1.6, 0.7)
+	#label.scale = Vector2(1.6, 0.7)
 	#await get_tree().create_timer(0.4).timeout
 	
 	#label.scale.x = move_toward(label.scale.x, 1, 3 * delta)
