@@ -84,7 +84,7 @@ func _ready() -> void:
 	
 	
 func _physics_process(delta: float) -> void:
-	if Input.is_action_pressed("spawn_possessed"):
+	if Input.is_action_just_pressed("spawn_possessed"):
 		spawn_possessed()
 	
 	

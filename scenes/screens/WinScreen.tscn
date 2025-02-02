@@ -9,7 +9,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 0.0941176, 0.0627451)
+color = Color(0.948461, 0.922006, 0, 0.048)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 445.0
+offset_top = 162.0
+offset_right = 706.0
+offset_bottom = 227.0
+theme = ExtResource("2_0sg50")
+theme_override_font_sizes/font_size = 50
+text = "You survived!"
+horizontal_alignment = 1
 
 [node name="WinScreen" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -19,9 +30,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -159.0
-offset_top = -16.0
+offset_top = 74.0
 offset_right = 159.0
-offset_bottom = 343.0
+offset_bottom = 433.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g10im")
@@ -29,28 +40,24 @@ script = ExtResource("1_g10im")
 [node name="VBoxContainer" type="VBoxContainer" parent="WinScreen"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="WinScreen/VBoxContainer"]
+[node name="TryAgain" type="Button" parent="WinScreen/VBoxContainer"]
+custom_minimum_size = Vector2(220, 90)
 layout_mode = 2
 theme = ExtResource("2_0sg50")
-theme_override_font_sizes/font_size = 50
-text = "You survived!"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 41
+text = "Retry"
+icon_alignment = 1
 
 [node name="NextLevel" type="Button" parent="WinScreen/VBoxContainer"]
+custom_minimum_size = Vector2(220, 90)
 layout_mode = 2
 theme = ExtResource("2_0sg50")
 theme_override_font_sizes/font_size = 41
 text = "Next Level"
 icon_alignment = 1
 
-[node name="Level Selection" type="Button" parent="WinScreen/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_0sg50")
-theme_override_font_sizes/font_size = 41
-text = "Level Selection"
-icon_alignment = 1
-
 [node name="MainMenuButton" type="Button" parent="WinScreen/VBoxContainer"]
+custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme = ExtResource("2_0sg50")
 theme_override_font_sizes/font_size = 41
@@ -58,5 +65,4 @@ text = "Main Menu"
 icon_alignment = 1
 
 [connection signal="pressed" from="WinScreen/VBoxContainer/NextLevel" to="WinScreen" method="_on_next_level_pressed"]
-[connection signal="pressed" from="WinScreen/VBoxContainer/Level Selection" to="WinScreen" method="_on_level_selection_pressed"]
 [connection signal="pressed" from="WinScreen/VBoxContainer/MainMenuButton" to="WinScreen" method="_on_main_menu_button_pressed"]

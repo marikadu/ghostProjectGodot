@@ -38,6 +38,7 @@ signal is_dashing
 @onready var ghost_dies: AudioStreamPlayer2D = $ghost_dies
 @onready var stamina_restored: AudioStreamPlayer2D = $stamina_restored
 
+
 @onready var sprite_move: Sprite2D = $s_move
 @onready var sprite_gameover: AnimatedSprite2D = $sprite_gameover
 #@onready var s_gameover: Sprite2D = $s_gameover
@@ -139,13 +140,7 @@ func start_dash() -> void:
 		ghost_effect_timer.start()
 		#print("dashing! current stamina: ", current_stamina)
 		spawn_dash_effect()
-		#sprite_move.scale = Vector2(0.6, 1.5)
-		# for the dash restore animation of the indicator
-		#dash_stamina_instance.stamina_restore_anim.start()
-		
-		# in the main menu the stamina is always max
-		#if Global.current_scene_name == 0:
-			#current_stamina = max_stamina_sections
+
 		
 		if not restoring_stamina:
 			restoring_stamina = true
@@ -167,13 +162,8 @@ func sad_ghost():
 		#sprite_gameover.play("game_over_idle")
 		
 		sprite_move.visible = false
-		#await get_tree().create_timer(3).timeout
-		#sprite_gameover.play("game_over_idle")
-		
-		#velocity = Vector2.ZERO
-		#velocity = lerp(velocity, Vector2.ZERO, delta)
-# --------------------------
 
+# --------------------------
 
 
 func spawn_dash_effect():
@@ -209,6 +199,7 @@ func _on_stamina_restore_timer_timeout() -> void:
 func restore_stamina():
 	if current_stamina < max_stamina_sections:
 		current_stamina += 1
+		stamina_restored.play()
 		#print("restored 1 stamina. stamina: ", current_stamina)
 		
 		# if stamina less than max. -> continue restoring
@@ -220,6 +211,5 @@ func restore_stamina():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("interact_dash"):
-		#$stamina_restored.play()
 		pass
 		

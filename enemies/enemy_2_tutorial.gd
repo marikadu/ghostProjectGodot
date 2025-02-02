@@ -47,7 +47,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		player.restore_stamina()
 		
 	elif body == npc and not dead:
+		animated_sprite_2d.play("attack")
 		npc.take_damage(1.0, self) # damage the npc, pass self to npc
+		dead = true
+		
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "speed", 40.0, 0.3).set_trans(Tween.TRANS_LINEAR)
+		
+		await get_tree().create_timer(wait_death_animation).timeout
 		queue_free()
 		
 

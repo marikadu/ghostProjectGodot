@@ -31,7 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://cx31tltcp0lo7" path="res://sprites/GhostPlayer/game_over/frame0022.png" id="24_kcpox"]
 [ext_resource type="Texture2D" uid="uid://ddrgahrix1587" path="res://sprites/GhostPlayer/game_over/frame0023.png" id="25_wnkfu"]
 [ext_resource type="Texture2D" uid="uid://bh3u6d2spetjm" path="res://sprites/GhostPlayer/walking+idle.png" id="26_mpc46"]
-[ext_resource type="AudioStream" uid="uid://cw3ee2ki3ggro" path="res://SFX/stamina_restored.ogg" id="32_lft5o"]
+[ext_resource type="AudioStream" uid="uid://npjuitt28hls" path="res://SFX/stamina_restored_2.ogg" id="32_pf4ew"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eem0l"]
 animations = [{
@@ -406,10 +406,10 @@ random_pitch = 1.57
 streams_count = 1
 stream_0/stream = ExtResource("6_dco0i")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bdyac"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7h1ig"]
 random_pitch = 1.05
 streams_count = 1
-stream_0/stream = ExtResource("32_lft5o")
+stream_0/stream = ExtResource("32_pf4ew")
 
 [node name="GhostPlayer" type="CharacterBody2D"]
 modulate = Color(1.1, 1, 1, 1)
@@ -491,8 +491,10 @@ bus = &"SFX"
 
 [node name="stamina_restored" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(2.24719, 2.24719)
-stream = SubResource("AudioStreamRandomizer_bdyac")
-volume_db = 12.636
+stream = SubResource("AudioStreamRandomizer_7h1ig")
+volume_db = 1.2
+pitch_scale = 1.05
+panning_strength = 0.0
 bus = &"SFX"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

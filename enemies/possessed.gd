@@ -6,7 +6,6 @@ extends CharacterBody2D
 @export var max_speed = 260
 @export var speed_increase_rate = 30.0
 @export var decrease_speed_when_hit = 60
-#@export var health = 9.0
 @export var rotation_speed: float = 2.0  # speed of rotation (degrees per second)
 @export var rotation_range: float = 2.0  # maximum rotation angle (in degrees) to the left and right
 @export var wait_death_animation = 0.8
@@ -111,7 +110,7 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player and !player.dashing and not dead and not Global.is_game_over:
 		take_damage(1.0)
-		print("-1")
+		#print("-1")
 		if health <= 0:
 			die()
 		
@@ -120,7 +119,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		take_damage(3.0)
 		hit.play()
 		player.restore_stamina()
-		print("-3")
+		#print("-3")
 		
 		#queue_free()  # remove the enemy from the scene
 		if health <= 0:
@@ -135,7 +134,7 @@ func take_damage(damage: float):
 			hit_flash.play("hit_flash")
 		health -= damage
 		health_bar.health = health
-		print("ow oww")
+		#print("ow oww")
 		camera_control.apply_shake(3, 1)
 		# decrease current speed with every hit
 		current_speed = max(current_speed - decrease_speed_when_hit, min_speed)
@@ -177,7 +176,7 @@ func die():
 	Global.score += 100
 	print("Score: ", Global.score)
 	Events.possessed_defeated.emit()
-	print("posesses died")
+	#print("posesses died")
 	time_alive_timer.stop()
 	# decrease speed to 0 in a span of 0.6 seconds when dies
 	var tween = get_tree().create_tween()
@@ -195,10 +194,8 @@ func die():
 	# restart the timer to keep updating direction every 2 seconds
 	#ran_dir_timer.start(1.4)
 
-
+# possessed escaped
 func _on_area_2d_possessed_area_shape_entered(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
 	if area == possessed_escapes and not dead:
-		print("Possessed: possesed has escaped")
-		print("lmao possessed has escaped")
 		Events.game_over.emit()
 		Events.possessed_escaped.emit()

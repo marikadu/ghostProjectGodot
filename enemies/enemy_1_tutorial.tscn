@@ -1,11 +1,15 @@
-[gd_scene load_steps=22 format=3 uid="uid://b2x43nw74i57j"]
+[gd_scene load_steps=26 format=3 uid="uid://b2x43nw74i57j"]
 
 [ext_resource type="Script" path="res://enemies/enemy_1_tutorial.gd" id="1_05pc1"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_00bmx"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="3_jvs5l"]
+[ext_resource type="Texture2D" uid="uid://b7hvwbpp8f6xl" path="res://sprites/enemies/purple/purple_attack0000.png" id="4_axjcw"]
 [ext_resource type="Texture2D" uid="uid://70ld27bpj155" path="res://sprites/enemies/purple/purple_dies1.png" id="4_v60tw"]
 [ext_resource type="Texture2D" uid="uid://cjjy2nhs7g8tk" path="res://sprites/enemies/purple/purple_dies2.png" id="5_nppbp"]
+[ext_resource type="Texture2D" uid="uid://c1jkgnp1lo1wq" path="res://sprites/enemies/purple/purple_attack0001.png" id="5_yjldx"]
 [ext_resource type="Texture2D" uid="uid://cy8sjdosup322" path="res://sprites/enemies/purple/purple_dies3.png" id="6_351dm"]
+[ext_resource type="Texture2D" uid="uid://c5rm2j664gtvr" path="res://sprites/enemies/purple/purple_attack0002.png" id="6_p2sqm"]
+[ext_resource type="Texture2D" uid="uid://bahvnbsqx5o35" path="res://sprites/enemies/purple/purple_attack0003.png" id="7_dcqvt"]
 [ext_resource type="Texture2D" uid="uid://cqi8gfqkoua0h" path="res://sprites/enemies/purple/purple_dies4.png" id="7_f2awe"]
 [ext_resource type="Texture2D" uid="uid://cpu5q0oh8few6" path="res://sprites/enemies/purple/purple_dies5.png" id="8_cfe2o"]
 [ext_resource type="Texture2D" uid="uid://3tslggekw40r" path="res://sprites/enemies/purple/purple_dies6.png" id="9_0qhct"]
@@ -23,6 +27,23 @@ shader_parameter/Tint = Color(1, 1, 1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hgbdu"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_axjcw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yjldx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_p2sqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_dcqvt")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_v60tw")
@@ -124,7 +145,7 @@ material = SubResource("ShaderMaterial_5jufo")
 position = Vector2(6.66667, -1.43653e-14)
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_hgbdu")
-animation = &"dies"
+animation = &"attack"
 
 [node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
@@ -132,6 +153,7 @@ libraries = {
 }
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 visible = false

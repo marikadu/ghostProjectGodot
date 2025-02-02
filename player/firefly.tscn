@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://piwyy3oovfys"]
+[gd_scene load_steps=13 format=3 uid="uid://piwyy3oovfys"]
 
 [ext_resource type="Texture2D" uid="uid://dkta7bmlosdw5" path="res://sprites/firefly.png" id="1_qx3wq"]
 [ext_resource type="Script" path="res://player/firefly.gd" id="2_5t7sm"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_le1f3"]
 [ext_resource type="AudioStream" uid="uid://dwhfxeb35uw6v" path="res://SFX/pick_up.ogg" id="7_8qqsi"]
+[ext_resource type="AudioStream" uid="uid://npjuitt28hls" path="res://SFX/stamina_restored_2.ogg" id="7_aionn"]
 [ext_resource type="Texture2D" uid="uid://bqh0yk2j7rvtr" path="res://sprites/y_particle.png" id="7_hch3p"]
 [ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="7_u0shm"]
 
@@ -23,6 +24,11 @@ stream_0/stream = ExtResource("7_8qqsi")
 random_pitch = 1.24
 streams_count = 1
 stream_0/stream = ExtResource("7_u0shm")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_c10yu"]
+random_pitch = 1.05
+streams_count = 1
+stream_0/stream = ExtResource("7_aionn")
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["firefly"]]
 modulate = Color(1.2, 1, 1, 1)
@@ -79,6 +85,14 @@ bus = &"SFX"
 stream = SubResource("AudioStreamRandomizer_y27oy")
 volume_db = -1.612
 pitch_scale = 1.61
+bus = &"SFX"
+
+[node name="stamina_restored" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(2.24719, 2.24719)
+stream = SubResource("AudioStreamRandomizer_c10yu")
+volume_db = 1.2
+pitch_scale = 1.23
+panning_strength = 0.0
 bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

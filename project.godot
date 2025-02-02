@@ -34,11 +34,19 @@ window/size/resizable=false
 [file_customization]
 
 folder_colors={
+"res://SFX/": "green",
 "res://enemies/": "red",
 "res://player/": "orange",
 "res://scenes/levels/": "blue",
 "res://scenes/menus/": "purple",
-"res://scenes/screens/": "teal"
+"res://scenes/screens/": "teal",
+"res://sprites/enemies/b_possessed/": "blue",
+"res://sprites/enemies/blue/": "blue",
+"res://sprites/enemies/dummy/": "orange",
+"res://sprites/enemies/p_possessed/": "pink",
+"res://sprites/enemies/purple/": "pink",
+"res://sprites/enemies/r_possessed/": "red",
+"res://sprites/enemies/red/": "red"
 }
 
 [global_group]

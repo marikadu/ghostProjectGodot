@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://ccq0ksogu3xkq"]
+[gd_scene load_steps=72 format=3 uid="uid://ccq0ksogu3xkq"]
 
 [ext_resource type="Script" path="res://player/npc.gd" id="1_05yxr"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_ggpv7"]
@@ -57,6 +57,8 @@
 [ext_resource type="Texture2D" uid="uid://fm541wadsufe" path="res://sprites/NPC/is_woken_up0016.png" id="24_856jj"]
 [ext_resource type="AudioStream" uid="uid://b78m6xs2u8px2" path="res://SFX/player_near.ogg" id="37_hlo2i"]
 [ext_resource type="AudioStream" uid="uid://c3lxgsexbr5sy" path="res://SFX/healing.ogg" id="39_m6il3"]
+[ext_resource type="AudioStream" uid="uid://d7xvpqlch2my" path="res://SFX/npc_died.ogg" id="55_s6t17"]
+[ext_resource type="AudioStream" uid="uid://c0m7d31qwbhsp" path="res://SFX/health_restored.ogg" id="56_of0vu"]
 [ext_resource type="Texture2D" uid="uid://ltw2en237lr2" path="res://sprites/heal_particle.png" id="58_25nh4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ngrvg"]
@@ -369,6 +371,16 @@ shape = SubResource("RectangleShape2D_8d2p6")
 
 [node name="npc_hit" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_snm13")
+bus = &"SFX"
+
+[node name="npc_died" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("55_s6t17")
+panning_strength = 0.0
+bus = &"SFX"
+
+[node name="npc_back_from_dead" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("56_of0vu")
+panning_strength = 0.0
 bus = &"SFX"
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]

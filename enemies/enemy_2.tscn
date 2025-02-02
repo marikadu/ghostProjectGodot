@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://buw5tjqxg07yk"]
+[gd_scene load_steps=26 format=3 uid="uid://buw5tjqxg07yk"]
 
 [ext_resource type="Script" path="res://enemies/enemy_2.gd" id="1_r8gub"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_1ddcs"]
@@ -7,9 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://djqox1wxxv4is" path="res://sprites/enemies/blue/blue_dies1.png" id="3_w6v5t"]
 [ext_resource type="Texture2D" uid="uid://b8vimc462kwn0" path="res://sprites/enemies/blue/blue_dies2.png" id="4_c2stt"]
 [ext_resource type="Texture2D" uid="uid://ctsvoek0ul81t" path="res://sprites/enemies/blue2.png" id="4_tqix0"]
+[ext_resource type="Texture2D" uid="uid://78blqfl1tysu" path="res://sprites/enemies/blue/blue_attack0000.png" id="4_wf76q"]
 [ext_resource type="Texture2D" uid="uid://bmlyl0cy4fflj" path="res://sprites/enemies/blue3.png" id="5_cb2fo"]
 [ext_resource type="Texture2D" uid="uid://cjmfaqln51fgf" path="res://sprites/enemies/blue/blue_dies3.png" id="5_wjd45"]
+[ext_resource type="Texture2D" uid="uid://b6t7f75oq8a1h" path="res://sprites/enemies/blue/blue_attack0001.png" id="5_yxx2l"]
 [ext_resource type="Texture2D" uid="uid://bpj1ya2m2x2kp" path="res://sprites/enemies/blue/blue_dies4.png" id="6_4arn1"]
+[ext_resource type="Texture2D" uid="uid://3rh7ih602ye0" path="res://sprites/enemies/blue/blue_attack0002.png" id="6_k00mn"]
+[ext_resource type="Texture2D" uid="uid://bkarfyx5cr6tp" path="res://sprites/enemies/blue/blue_attack0003.png" id="7_km4qu"]
 [ext_resource type="Texture2D" uid="uid://c13w6hjrukn4r" path="res://sprites/enemies/blue/blue_dies5.png" id="7_ot2hr"]
 [ext_resource type="Texture2D" uid="uid://blgjy162l4syc" path="res://sprites/enemies/blue/blue_dies6.png" id="8_y0xou"]
 [ext_resource type="Texture2D" uid="uid://s3jyk22y2cm4" path="res://sprites/b_particle.png" id="13_lhw64"]
@@ -23,6 +27,23 @@ shader_parameter/Tint = Color(1, 1, 1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r536f"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_wf76q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yxx2l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_k00mn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_km4qu")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_w6v5t")
@@ -124,7 +145,7 @@ material = SubResource("ShaderMaterial_j3f1x")
 position = Vector2(2.17391, 0)
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_r536f")
-animation = &"dies"
+animation = &"attack"
 
 [node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {
@@ -132,11 +153,13 @@ libraries = {
 }
 
 [node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_27fh4")
 
 [node name="CollisionShape2D_disabled" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_27fh4")
 disabled = true
 
