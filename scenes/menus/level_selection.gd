@@ -33,18 +33,23 @@ func _on_back_pressed() -> void:
 
 func _on_1_pressed() -> void:
 	print("level 1 selected")
+	Transition.transition()
+	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level1.tscn")
-	
 
 
 func _on_2_pressed() -> void:
 	print("level 2 selected")
+	Transition.transition()
+	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level2.tscn")
 	#pass # Replace with function body.
 
 
 func _on_3_pressed() -> void:
 	print("level 3 selected")
+	Transition.transition()
+	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level3.tscn")
 
 
@@ -54,15 +59,20 @@ func _on_back_mouse_entered() -> void:
 
 func _on_4_pressed() -> void:
 	print("level 4 selected")
+	Transition.transition()
+	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level4.tscn")
 
 
 func _on_5_pressed() -> void:
 	print("level 5 selected")
+	Transition.transition()
+	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level5.tscn")
 
 
 func _on_6_pressed() -> void:
 	print("level 6 selected")
+	Transition.transition()
+	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level6.tscn")
-	pass # Replace with function body.

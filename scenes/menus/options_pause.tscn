@@ -1,0 +1,358 @@
+[gd_scene load_steps=17 format=3 uid="uid://r7ir436tp4xh"]
+
+[ext_resource type="Script" path="res://scenes/menus/options_pause.gd" id="1_3gp18"]
+[ext_resource type="Texture2D" uid="uid://d3xuonkxbhvvq" path="res://sprites/bg_options.png" id="2_lo44l"]
+[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="3_puuho"]
+[ext_resource type="Texture2D" uid="uid://kgbn0t3xvn68" path="res://sprites/toggle_enabled.png" id="4_8m7uv"]
+[ext_resource type="Texture2D" uid="uid://clsl35fkfvrwn" path="res://sprites/toggle_disabled.png" id="5_t7f7s"]
+[ext_resource type="Script" path="res://scenes/scripts/sfx_slider.gd" id="6_fryyg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_whudj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7bk0l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qf8ku"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h6faa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d4via"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t67y8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oqis1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oefrd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s5oca"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lkgjs"]
+
+[node name="OptionsMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3gp18")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.013, 0.01, 0.075, 0.167)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0.871559, 0.838903, 0.927476, 1)
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(575, 440)
+texture = ExtResource("2_lo44l")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -300.0
+offset_right = 450.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="TabContainer" type="TabContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 69.0
+offset_right = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_puuho")
+theme_override_font_sizes/font_size = 36
+current_tab = 1
+
+[node name="Graphics" type="MarginContainer" parent="ColorRect/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+metadata/_tab_index = 0
+
+[node name="TabBar" type="TabBar" parent="ColorRect/TabContainer/Graphics"]
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="ColorRect/TabContainer/Graphics/TabBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_whudj")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7bk0l")
+theme_override_styles/selected = SubResource("StyleBoxEmpty_qf8ku")
+
+[node name="SettingList" type="VBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VSync" type="HBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList"]
+layout_mode = 2
+
+[node name="VSyncLabel" type="Label" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/VSync"]
+layout_mode = 2
+theme = ExtResource("3_puuho")
+theme_override_font_sizes/font_size = 30
+text = "VSync"
+
+[node name="VSyncToggle" type="CheckButton" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/VSync"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_constants/icon_max_width = 60
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h6faa")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d4via")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_t67y8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oqis1")
+theme_override_icons/checked = ExtResource("4_8m7uv")
+theme_override_icons/unchecked = ExtResource("5_t7f7s")
+
+[node name="Parallax" type="HBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList"]
+layout_mode = 2
+
+[node name="CameraLabel" type="Label" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/Parallax"]
+layout_mode = 2
+theme = ExtResource("3_puuho")
+theme_override_font_sizes/font_size = 30
+text = "Parallax"
+
+[node name="ParallaxToggle" type="CheckButton" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/Parallax"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_constants/icon_max_width = 60
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h6faa")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d4via")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_t67y8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oqis1")
+theme_override_icons/checked = ExtResource("4_8m7uv")
+theme_override_icons/unchecked = ExtResource("5_t7f7s")
+
+[node name="CameraShake" type="HBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList"]
+layout_mode = 2
+
+[node name="ShakeLabel" type="Label" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/CameraShake"]
+layout_mode = 2
+theme = ExtResource("3_puuho")
+theme_override_font_sizes/font_size = 30
+text = "Camera Shake"
+
+[node name="ShakeToggle" type="CheckButton" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/CameraShake"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_constants/icon_max_width = 60
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h6faa")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d4via")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_t67y8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oqis1")
+theme_override_icons/checked = ExtResource("4_8m7uv")
+theme_override_icons/unchecked = ExtResource("5_t7f7s")
+
+[node name="FlashWhenHit" type="HBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList"]
+layout_mode = 2
+
+[node name="FlashLabel" type="Label" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/FlashWhenHit"]
+layout_mode = 2
+theme = ExtResource("3_puuho")
+theme_override_font_sizes/font_size = 30
+text = "Flash When Hit"
+
+[node name="FlashToggle" type="CheckButton" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/FlashWhenHit"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_constants/icon_max_width = 60
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h6faa")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d4via")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_t67y8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oqis1")
+theme_override_icons/checked = ExtResource("4_8m7uv")
+theme_override_icons/unchecked = ExtResource("5_t7f7s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = 126.5
+offset_right = 90.0
+offset_bottom = 226.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/VBoxContainer"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+theme = ExtResource("3_puuho")
+text = "Back"
+
+[node name="Volume" type="MarginContainer" parent="ColorRect/TabContainer"]
+layout_mode = 2
+theme = ExtResource("3_puuho")
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+metadata/_tab_index = 1
+
+[node name="TabBar" type="TabBar" parent="ColorRect/TabContainer/Volume"]
+layout_mode = 2
+
+[node name="ItemList" type="ItemList" parent="ColorRect/TabContainer/Volume/TabBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_oefrd")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_s5oca")
+theme_override_styles/selected = SubResource("StyleBoxEmpty_lkgjs")
+
+[node name="HBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList"]
+layout_mode = 0
+offset_right = 448.0
+offset_bottom = 110.0
+
+[node name="Sound Effects" type="HBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer"]
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Sound Effects"]
+layout_mode = 2
+theme = ExtResource("3_puuho")
+theme_override_font_sizes/font_size = 30
+text = "Sound Effects"
+
+[node name="SFXSlider" type="HSlider" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Sound Effects"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+script = ExtResource("6_fryyg")
+bus_name = "SFX"
+
+[node name="Music" type="HBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Music"]
+layout_mode = 2
+theme = ExtResource("3_puuho")
+theme_override_font_sizes/font_size = 30
+text = "Music"
+
+[node name="MSlider" type="HSlider" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Music"]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = 126.5
+offset_right = 90.0
+offset_bottom = 226.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/VBoxContainer"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+theme = ExtResource("3_puuho")
+text = "Back"
+
+[connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/VSync/VSyncToggle" to="." method="_on_v_sync_toggle_toggled"]
+[connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/Parallax/ParallaxToggle" to="." method="_on_parallax_toggle_toggled"]
+[connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/CameraShake/ShakeToggle" to="." method="_on_shake_toggle_toggled"]
+[connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/FlashWhenHit/FlashToggle" to="." method="_on_flash_toggle_toggled"]
+[connection signal="pressed" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="ColorRect/TabContainer/Volume/TabBar/ItemList/VBoxContainer/Back" to="." method="_on_back_pressed"]

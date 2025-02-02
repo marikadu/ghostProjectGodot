@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://bc740oneqgdlf"]
+[gd_scene load_steps=25 format=3 uid="uid://bc740oneqgdlf"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_4.gd" id="1_taymm"]
 [ext_resource type="Script" path="res://scenes/scripts/day_night.gd" id="2_gdotc"]
 [ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/daynightcycle-gradient-texture.tres" id="3_abv2v"]
 [ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="4_bnb8b"]
+[ext_resource type="PackedScene" uid="uid://dj3b8i7bdcu8j" path="res://scenes/screens/Pause.tscn" id="4_qr6ra"]
 [ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="5_b23un"]
 [ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://player/hp.tscn" id="6_35vdn"]
 [ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="7_iwro6"]
@@ -58,6 +59,10 @@ position = Vector2(576, 432)
 scale = Vector2(3.87, 3.87)
 script = ExtResource("2_gdotc")
 gradient_texture = ExtResource("3_abv2v")
+
+[node name="Pause" type="CanvasLayer" parent="."]
+
+[node name="Pause" parent="Pause" instance=ExtResource("4_qr6ra")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true

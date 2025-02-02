@@ -49,7 +49,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and not picked_up:
 		hit.play()
 		# restore 3 stamina bars
-		$stamina_restored.play()
+		$stamina_restored.play() # different sound
 		player.restore_stamina()
 		player.restore_stamina()
 		player.restore_stamina()

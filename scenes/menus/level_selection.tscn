@@ -143,3 +143,4 @@ text = "Back"
 [connection signal="pressed" from="MarginContainer/HBoxContainer/4" to="." method="_on_4_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/5" to="." method="_on_5_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/6" to="." method="_on_6_pressed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

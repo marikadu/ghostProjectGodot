@@ -1,11 +1,11 @@
 [gd_scene load_steps=17 format=3 uid="uid://byrlkolmk8xx5"]
 
-[ext_resource type="Script" path="res://scenes/menus/menu_options.gd" id="1_vnu77"]
-[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_vbiwd"]
-[ext_resource type="Texture2D" uid="uid://d3xuonkxbhvvq" path="res://sprites/bg_options.png" id="2_yuwmu"]
-[ext_resource type="Script" path="res://scenes/scripts/sfx_slider.gd" id="3_j7kgp"]
-[ext_resource type="Texture2D" uid="uid://kgbn0t3xvn68" path="res://sprites/toggle_enabled.png" id="4_w46wq"]
-[ext_resource type="Texture2D" uid="uid://clsl35fkfvrwn" path="res://sprites/toggle_disabled.png" id="5_jv6mk"]
+[ext_resource type="Script" path="res://scenes/menus/options.gd" id="1_86o0v"]
+[ext_resource type="Texture2D" uid="uid://d3xuonkxbhvvq" path="res://sprites/bg_options.png" id="2_bw28m"]
+[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="3_p4r2c"]
+[ext_resource type="Texture2D" uid="uid://kgbn0t3xvn68" path="res://sprites/toggle_enabled.png" id="4_m1ccm"]
+[ext_resource type="Texture2D" uid="uid://clsl35fkfvrwn" path="res://sprites/toggle_disabled.png" id="5_uvwqm"]
+[ext_resource type="Script" path="res://scenes/scripts/sfx_slider.gd" id="6_jt7dd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_whudj"]
 
@@ -34,14 +34,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_vnu77")
+script = ExtResource("1_86o0v")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.871559, 0.838903, 0.927476, 1)
 
 [node name="BackgroundSprite" type="Sprite2D" parent="."]
 position = Vector2(575, 440)
-texture = ExtResource("2_yuwmu")
+texture = ExtResource("2_bw28m")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -67,7 +67,7 @@ offset_left = 69.0
 offset_right = -71.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_vbiwd")
+theme = ExtResource("3_p4r2c")
 theme_override_font_sizes/font_size = 36
 current_tab = 1
 
@@ -104,7 +104,7 @@ layout_mode = 2
 
 [node name="VSyncLabel" type="Label" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/VSync"]
 layout_mode = 2
-theme = ExtResource("2_vbiwd")
+theme = ExtResource("3_p4r2c")
 theme_override_font_sizes/font_size = 30
 text = "VSync"
 
@@ -130,15 +130,15 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_h6faa")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_d4via")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_t67y8")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_oqis1")
-theme_override_icons/checked = ExtResource("4_w46wq")
-theme_override_icons/unchecked = ExtResource("5_jv6mk")
+theme_override_icons/checked = ExtResource("4_m1ccm")
+theme_override_icons/unchecked = ExtResource("5_uvwqm")
 
 [node name="Parallax" type="HBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList"]
 layout_mode = 2
 
 [node name="CameraLabel" type="Label" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/Parallax"]
 layout_mode = 2
-theme = ExtResource("2_vbiwd")
+theme = ExtResource("3_p4r2c")
 theme_override_font_sizes/font_size = 30
 text = "Parallax"
 
@@ -164,15 +164,15 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_h6faa")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_d4via")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_t67y8")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_oqis1")
-theme_override_icons/checked = ExtResource("4_w46wq")
-theme_override_icons/unchecked = ExtResource("5_jv6mk")
+theme_override_icons/checked = ExtResource("4_m1ccm")
+theme_override_icons/unchecked = ExtResource("5_uvwqm")
 
 [node name="CameraShake" type="HBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList"]
 layout_mode = 2
 
 [node name="ShakeLabel" type="Label" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/CameraShake"]
 layout_mode = 2
-theme = ExtResource("2_vbiwd")
+theme = ExtResource("3_p4r2c")
 theme_override_font_sizes/font_size = 30
 text = "Camera Shake"
 
@@ -198,15 +198,15 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_h6faa")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_d4via")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_t67y8")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_oqis1")
-theme_override_icons/checked = ExtResource("4_w46wq")
-theme_override_icons/unchecked = ExtResource("5_jv6mk")
+theme_override_icons/checked = ExtResource("4_m1ccm")
+theme_override_icons/unchecked = ExtResource("5_uvwqm")
 
 [node name="FlashWhenHit" type="HBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList"]
 layout_mode = 2
 
 [node name="FlashLabel" type="Label" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/FlashWhenHit"]
 layout_mode = 2
-theme = ExtResource("2_vbiwd")
+theme = ExtResource("3_p4r2c")
 theme_override_font_sizes/font_size = 30
 text = "Flash When Hit"
 
@@ -232,8 +232,8 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_h6faa")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_d4via")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_t67y8")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_oqis1")
-theme_override_icons/checked = ExtResource("4_w46wq")
-theme_override_icons/unchecked = ExtResource("5_jv6mk")
+theme_override_icons/checked = ExtResource("4_m1ccm")
+theme_override_icons/unchecked = ExtResource("5_uvwqm")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList"]
 layout_mode = 1
@@ -252,12 +252,12 @@ grow_vertical = 2
 [node name="Back" type="Button" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/VBoxContainer"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
-theme = ExtResource("2_vbiwd")
+theme = ExtResource("3_p4r2c")
 text = "Back"
 
 [node name="Volume" type="MarginContainer" parent="ColorRect/TabContainer"]
 layout_mode = 2
-theme = ExtResource("2_vbiwd")
+theme = ExtResource("3_p4r2c")
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
@@ -288,7 +288,7 @@ layout_mode = 2
 
 [node name="SFXLabel" type="Label" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Sound Effects"]
 layout_mode = 2
-theme = ExtResource("2_vbiwd")
+theme = ExtResource("3_p4r2c")
 theme_override_font_sizes/font_size = 30
 text = "Sound Effects"
 
@@ -300,7 +300,7 @@ size_flags_horizontal = 10
 size_flags_vertical = 1
 max_value = 1.0
 step = 0.01
-script = ExtResource("3_j7kgp")
+script = ExtResource("6_jt7dd")
 bus_name = "SFX"
 
 [node name="Music" type="HBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer"]
@@ -308,7 +308,7 @@ layout_mode = 2
 
 [node name="MusicLabel" type="Label" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Music"]
 layout_mode = 2
-theme = ExtResource("2_vbiwd")
+theme = ExtResource("3_p4r2c")
 theme_override_font_sizes/font_size = 30
 text = "Music"
 
@@ -335,7 +335,7 @@ grow_vertical = 2
 [node name="Back" type="Button" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/VBoxContainer"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
-theme = ExtResource("2_vbiwd")
+theme = ExtResource("3_p4r2c")
 text = "Back"
 
 [connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/VSync/VSyncToggle" to="." method="_on_v_sync_toggle_toggled"]

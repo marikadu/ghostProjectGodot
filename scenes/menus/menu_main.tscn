@@ -220,27 +220,27 @@ initial_velocity_max = 102.3
 scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_6khei")
 
-[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme = ExtResource("2_36rfs")
-text = "Options"
+text = "Settings"
 
-[node name="o_area" type="Area2D" parent="MarginContainer/VBoxContainer/Options"]
+[node name="o_area" type="Area2D" parent="MarginContainer/VBoxContainer/Settings"]
 input_pickable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Options/o_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Settings/o_area"]
 position = Vector2(112, 46)
 scale = Vector2(10.445, 4.265)
 shape = SubResource("CircleShape2D_5fv83")
 
-[node name="HitFlash2" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/Options"]
+[node name="HitFlash2" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/Settings"]
 root_node = NodePath("../../Play")
 libraries = {
 "": SubResource("AnimationLibrary_tdvf1")
 }
 
-[node name="o_splash" type="CPUParticles2D" parent="MarginContainer/VBoxContainer/Options"]
+[node name="o_splash" type="CPUParticles2D" parent="MarginContainer/VBoxContainer/Settings"]
 position = Vector2(91, 49)
 emitting = false
 lifetime = 1.2
@@ -311,9 +311,9 @@ polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1064.91, -466.019, -8
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="body_entered" from="MarginContainer/VBoxContainer/Play/b_area" to="." method="_on_b_area_body_entered"]
-[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_mouse_entered"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="body_entered" from="MarginContainer/VBoxContainer/Options/o_area" to="." method="_on_b_options_body_entered"]
-[connection signal="body_entered" from="MarginContainer/VBoxContainer/Options/o_area" to="." method="_on_o_area_body_entered"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_options_mouse_entered"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_options_pressed"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Settings/o_area" to="." method="_on_b_options_body_entered"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Settings/o_area" to="." method="_on_o_area_body_entered"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
