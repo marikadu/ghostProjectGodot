@@ -6,7 +6,7 @@
 [ext_resource type="Shader" path="res://shaders/border.gdshader" id="2_go6j5"]
 [ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="2_tp1el"]
 [ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="3_dgiyq"]
-[ext_resource type="Texture2D" uid="uid://bicv2shwkdaf8" path="res://sprites/bg_mainmenu2.png" id="3_lq80u"]
+[ext_resource type="Texture2D" uid="uid://bicv2shwkdaf8" path="res://sprites/background/bg_mainmenu2.png" id="3_lq80u"]
 [ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="3_pcqfg"]
 [ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="4_sd2tg"]
 [ext_resource type="Texture2D" uid="uid://s3jyk22y2cm4" path="res://sprites/b_particle.png" id="5_p17an"]
@@ -14,8 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://c6l1nlaffyj1n" path="res://enemies/punching_bag.tscn" id="8_jpx4s"]
 [ext_resource type="AudioStream" uid="uid://btdl1ng72s6u8" path="res://SFX/button_pressed2.ogg" id="10_70wp0"]
 [ext_resource type="Script" path="res://scenes/menus/bg_main_menu.gd" id="10_t81fx"]
-[ext_resource type="Texture2D" uid="uid://bksvvake7ja0d" path="res://sprites/bg_mainmenu3.png" id="12_undaw"]
-[ext_resource type="Texture2D" uid="uid://dk65pd0y7rjyc" path="res://sprites/bg_mainmenu4.png" id="13_qikvg"]
+[ext_resource type="Texture2D" uid="uid://bksvvake7ja0d" path="res://sprites/background/bg_mainmenu3.png" id="12_undaw"]
+[ext_resource type="Texture2D" uid="uid://dk65pd0y7rjyc" path="res://sprites/background/bg_mainmenu4.png" id="13_qikvg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qg754"]
 shader = ExtResource("2_go6j5")
@@ -313,7 +313,7 @@ polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1064.91, -466.019, -8
 [connection signal="body_entered" from="MarginContainer/VBoxContainer/Play/b_area" to="." method="_on_b_area_body_entered"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_options_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_options_pressed"]
-[connection signal="body_entered" from="MarginContainer/VBoxContainer/Settings/o_area" to="." method="_on_b_options_body_entered"]
 [connection signal="body_entered" from="MarginContainer/VBoxContainer/Settings/o_area" to="." method="_on_o_area_body_entered"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Settings/o_area" to="." method="_on_b_options_body_entered"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

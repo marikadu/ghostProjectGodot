@@ -1,10 +1,10 @@
 [gd_scene load_steps=17 format=3 uid="uid://byrlkolmk8xx5"]
 
 [ext_resource type="Script" path="res://scenes/menus/options.gd" id="1_86o0v"]
-[ext_resource type="Texture2D" uid="uid://d3xuonkxbhvvq" path="res://sprites/bg_options.png" id="2_bw28m"]
+[ext_resource type="Texture2D" uid="uid://d3xuonkxbhvvq" path="res://sprites/background/bg_options.png" id="2_bw28m"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="3_p4r2c"]
-[ext_resource type="Texture2D" uid="uid://kgbn0t3xvn68" path="res://sprites/toggle_enabled.png" id="4_m1ccm"]
-[ext_resource type="Texture2D" uid="uid://clsl35fkfvrwn" path="res://sprites/toggle_disabled.png" id="5_uvwqm"]
+[ext_resource type="Texture2D" uid="uid://kgbn0t3xvn68" path="res://sprites/UI/toggle_enabled.png" id="4_m1ccm"]
+[ext_resource type="Texture2D" uid="uid://clsl35fkfvrwn" path="res://sprites/UI/toggle_disabled.png" id="5_uvwqm"]
 [ext_resource type="Script" path="res://scenes/scripts/sfx_slider.gd" id="6_jt7dd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_whudj"]

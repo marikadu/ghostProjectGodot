@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://enemies/button_play.gd" id="1_6goso"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_tfuc6"]
-[ext_resource type="Texture2D" uid="uid://cmo1udpdma6tk" path="res://sprites/button_play.png" id="3_s7j2t"]
+[ext_resource type="Texture2D" uid="uid://cmo1udpdma6tk" path="res://sprites/UI/button_play.png" id="3_s7j2t"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="4_orff5"]
 [ext_resource type="Texture2D" uid="uid://djqox1wxxv4is" path="res://sprites/enemies/blue/blue_dies1.png" id="5_xmol0"]
 [ext_resource type="Texture2D" uid="uid://b8vimc462kwn0" path="res://sprites/enemies/blue/blue_dies2.png" id="6_3i0l4"]

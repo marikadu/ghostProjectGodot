@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://deintl13smq2"]
 
 [ext_resource type="Script" path="res://scenes/scripts/day_night.gd" id="2_ml4d1"]
-[ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/daynightcycle-gradient-texture.tres" id="3_0neoo"]
+[ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/background/daynightcycle-gradient-texture.tres" id="3_0neoo"]
 [ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="4_mkvcv"]
 [ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="5_mdnv6"]
 [ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://player/hp.tscn" id="6_loudu"]

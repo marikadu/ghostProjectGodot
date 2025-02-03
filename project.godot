@@ -41,13 +41,18 @@ folder_colors={
 "res://scenes/levels/": "blue",
 "res://scenes/menus/": "purple",
 "res://scenes/screens/": "teal",
+"res://sprites/": "yellow",
+"res://sprites/GhostPlayer/": "orange",
+"res://sprites/background/": "green",
+"res://sprites/enemies/": "red",
 "res://sprites/enemies/b_possessed/": "blue",
 "res://sprites/enemies/blue/": "blue",
 "res://sprites/enemies/dummy/": "orange",
 "res://sprites/enemies/p_possessed/": "pink",
 "res://sprites/enemies/purple/": "pink",
 "res://sprites/enemies/r_possessed/": "red",
-"res://sprites/enemies/red/": "red"
+"res://sprites/enemies/red/": "red",
+"res://sprites/orial/": "blue"
 }
 
 [global_group]

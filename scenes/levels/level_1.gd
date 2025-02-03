@@ -41,6 +41,8 @@ var scripted_enemy_2 = preload("res://enemies/enemy_1_tutorial.tscn")
 var scripted_enemy_2_instance
 var scripted_enemy_3 = preload("res://enemies/enemy_3_tutorial.tscn")
 var scripted_enemy_3_instance
+var orial = preload("res://player/orial.tscn")
+var orial_instance
 
 
 # store enemy instances
@@ -111,6 +113,11 @@ func _ready() -> void:
 		scripted_enemy_3_instance = scripted_enemy_3.instantiate()
 		scripted_enemy_3_instance.position = Vector2(298, 997)
 		add_child(scripted_enemy_3_instance)
+		
+	if orial_instance == null:
+		orial_instance = orial.instantiate()
+		orial_instance.position = Vector2(-98, 642)
+		add_child(orial_instance)
 	
 	
 	

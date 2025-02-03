@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/levels/level_1.gd" id="1_sol85"]
 [ext_resource type="Script" path="res://scenes/scripts/day_night.gd" id="2_57ex4"]
-[ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/daynightcycle-gradient-texture.tres" id="3_pun4j"]
+[ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/background/daynightcycle-gradient-texture.tres" id="3_pun4j"]
 [ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="4_yg7kr"]
 [ext_resource type="PackedScene" uid="uid://djb0frbwme6q3" path="res://scenes/tutorial.tscn" id="5_d0cm3"]
 [ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="6_crvya"]
@@ -155,6 +155,7 @@ position = Vector2(-84, -83)
 rotation = -0.0397337
 
 [node name="Pause" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Pause" parent="Pause" instance=ExtResource("7_v0bxg")]
 

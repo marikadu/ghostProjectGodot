@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/menus/level_selection.gd" id="1_4wo0t"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_exllh"]
-[ext_resource type="Texture2D" uid="uid://d3qjgeb0j3g32" path="res://sprites/bg_level_selection.png" id="2_o4b80"]
+[ext_resource type="Texture2D" uid="uid://d3qjgeb0j3g32" path="res://sprites/background/bg_level_selection.png" id="2_o4b80"]
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3

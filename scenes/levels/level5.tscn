@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/levels/level_5.gd" id="1_2wanh"]
 [ext_resource type="Script" path="res://scenes/scripts/day_night.gd" id="2_djp5m"]
-[ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/daynightcycle-gradient-texture.tres" id="3_2rgd5"]
+[ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/background/daynightcycle-gradient-texture.tres" id="3_2rgd5"]
 [ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="4_5vvgi"]
 [ext_resource type="PackedScene" uid="uid://dj3b8i7bdcu8j" path="res://scenes/screens/Pause.tscn" id="4_pvyn0"]
 [ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="5_jdwdd"]
