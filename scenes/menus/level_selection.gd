@@ -4,7 +4,8 @@ extends Control
 #@onready var 3: Button = %Level_3
 @onready var level_select: Control = $"."
 @onready var h_box_container: HBoxContainer = $MarginContainer/HBoxContainer
-@onready var v_box_container: VBoxContainer = $MarginContainer/VBoxContainer
+@onready var v_box_infinite_night: VBoxContainer = $VBoxInfiniteNight
+#@onready var v_box_container: VBoxContainer = $MarginContainer/VBoxContainer
 @onready var personal_best: Label = $PersonalBest
 
 
@@ -21,6 +22,11 @@ func _ready() -> void:
 				level.disabled = false
 			else:
 				level.disabled = true
+				
+	v_box_infinite_night.hide()
+
+	if Global.unlocked_levels == 6:
+		v_box_infinite_night.show()
 				
 func _process(_delta: float) -> void:
 	personal_best.text = str(Global.personal_best)
@@ -76,3 +82,11 @@ func _on_6_pressed() -> void:
 	Transition.transition()
 	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level6.tscn")
+	
+
+## infinite night
+#func _on_7_pressed() -> void:
+	#print("level 7 selected")
+	#Transition.transition()
+	#await Transition.on_transition_finished
+	#get_tree().change_scene_to_file("res://scenes/levels/level7.tscn")

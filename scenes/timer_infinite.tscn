@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4imiel5hhnep"]
+
+[ext_resource type="Script" path="res://scenes/scripts/timer_infinite.gd" id="1_cm6f1"]
+[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_wbh5y"]
+
+[node name="CountDownTimer" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+size_flags_vertical = 0
+script = ExtResource("1_cm6f1")
+
+[node name="Minutes" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -101.0
+offset_top = 10.0
+offset_right = 35.0
+offset_bottom = 80.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("2_wbh5y")
+theme_override_font_sizes/font_size = 51
+text = "00:"
+horizontal_alignment = 1
+
+[node name="Seconds" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -33.0
+offset_top = 10.0
+offset_right = 103.0
+offset_bottom = 80.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("2_wbh5y")
+theme_override_font_sizes/font_size = 51
+text = "00"
+horizontal_alignment = 1

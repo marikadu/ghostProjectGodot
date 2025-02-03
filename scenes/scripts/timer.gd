@@ -1,9 +1,7 @@
 extends Node
-# to restart the same scene
-# get_tree().reload_current_scene()
 
-# slow down time
-# Engine.time_scale = 0.5 (would be cool for lose screen)
+# timer for the normal gamemode
+
 
 @onready var label = $Label
 @onready var cd_timer = $CountDownTimerTimer

@@ -97,7 +97,7 @@ wait_time = 0.7
 autostart = true
 
 [node name="FireFlySpawnTimer" type="Timer" parent="."]
-wait_time = 7.0
+wait_time = 11.0
 autostart = true
 
 [node name="UI" type="CanvasLayer" parent="."]

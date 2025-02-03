@@ -87,32 +87,40 @@ layout_mode = 2
 theme = ExtResource("2_exllh")
 text = "6"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-visible = false
+[node name="VBoxInfiniteNight" type="VBoxContainer" parent="."]
 layout_mode = 2
+offset_left = 409.0
+offset_top = 368.0
+offset_right = 749.0
+offset_bottom = 482.0
 alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="7" type="Button" parent="VBoxInfiniteNight"]
+custom_minimum_size = Vector2(110, 110)
 layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
+theme = ExtResource("2_exllh")
+text = "Infinite Night"
 
 [node name="PersonalBest" type="Label" parent="."]
+modulate = Color(0.126205, 0.0960744, 0.245993, 0.789)
 layout_mode = 0
-offset_left = 284.0
-offset_top = 779.0
-offset_right = 383.0
-offset_bottom = 832.0
+offset_left = 377.0
+offset_top = 717.0
+offset_right = 476.0
+offset_bottom = 770.0
+rotation = 0.0248291
 theme = ExtResource("2_exllh")
 theme_override_font_sizes/font_size = 40
 text = "0000"
 
 [node name="PersonalBest2" type="Label" parent="."]
+modulate = Color(0.126205, 0.0960744, 0.245993, 0.789)
 layout_mode = 0
-offset_left = 46.0
-offset_top = 779.0
-offset_right = 261.0
-offset_bottom = 832.0
+offset_left = 154.0
+offset_top = 707.0
+offset_right = 369.0
+offset_bottom = 760.0
+rotation = 0.0375228
 theme = ExtResource("2_exllh")
 theme_override_font_sizes/font_size = 40
 text = "Personal Best:"
@@ -125,9 +133,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -90.0
-offset_top = 223.0
+offset_top = 157.0
 offset_right = 90.0
-offset_bottom = 323.0
+offset_bottom = 257.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -143,4 +151,5 @@ text = "Back"
 [connection signal="pressed" from="MarginContainer/HBoxContainer/4" to="." method="_on_4_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/5" to="." method="_on_5_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/6" to="." method="_on_6_pressed"]
+[connection signal="pressed" from="VBoxInfiniteNight/7" to="." method="_on_1_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

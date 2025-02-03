@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://wu4f2v4h1o72"]
+[gd_scene load_steps=3 format=3 uid="uid://b76i5xp1pry61"]
 
-[ext_resource type="Script" path="res://scenes/screens/win_screen.gd" id="1_g10im"]
-[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_0sg50"]
+[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="1_1xnw8"]
+[ext_resource type="Script" path="res://scenes/screens/win_screen_game_completed.gd" id="2_28gsj"]
 
-[node name="WinScreen" type="ColorRect"]
+[node name="WinScreen_completed_game" type="ColorRect"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,9 +17,46 @@ offset_left = 445.0
 offset_top = 162.0
 offset_right = 706.0
 offset_bottom = 227.0
-theme = ExtResource("2_0sg50")
+theme = ExtResource("1_1xnw8")
 theme_override_font_sizes/font_size = 50
 text = "You survived!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -207.0
+offset_right = 320.0
+offset_bottom = -142.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1xnw8")
+theme_override_font_sizes/font_size = 40
+text = "Thank you for playing the game!"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -139.0
+offset_right = 320.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1xnw8")
+theme_override_font_sizes/font_size = 30
+text = "New Gamemode Unlocked
+in the Level Selection"
 horizontal_alignment = 1
 
 [node name="WinScreen" type="CenterContainer" parent="."]
@@ -35,23 +72,15 @@ offset_right = 159.0
 offset_bottom = 373.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_g10im")
+script = ExtResource("2_28gsj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="WinScreen"]
 layout_mode = 2
 
-[node name="NextLevel" type="Button" parent="WinScreen/VBoxContainer"]
-custom_minimum_size = Vector2(220, 90)
-layout_mode = 2
-theme = ExtResource("2_0sg50")
-theme_override_font_sizes/font_size = 41
-text = "Next Level"
-icon_alignment = 1
-
 [node name="Replay" type="Button" parent="WinScreen/VBoxContainer"]
 custom_minimum_size = Vector2(220, 90)
 layout_mode = 2
-theme = ExtResource("2_0sg50")
+theme = ExtResource("1_1xnw8")
 theme_override_font_sizes/font_size = 41
 text = "Replay"
 icon_alignment = 1
@@ -59,11 +88,10 @@ icon_alignment = 1
 [node name="MainMenuButton" type="Button" parent="WinScreen/VBoxContainer"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
-theme = ExtResource("2_0sg50")
+theme = ExtResource("1_1xnw8")
 theme_override_font_sizes/font_size = 41
 text = "Main Menu"
 icon_alignment = 1
 
-[connection signal="pressed" from="WinScreen/VBoxContainer/NextLevel" to="WinScreen" method="_on_next_level_pressed"]
 [connection signal="pressed" from="WinScreen/VBoxContainer/Replay" to="WinScreen" method="_on_replay_pressed"]
 [connection signal="pressed" from="WinScreen/VBoxContainer/MainMenuButton" to="WinScreen" method="_on_main_menu_button_pressed"]

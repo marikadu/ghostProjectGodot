@@ -25,7 +25,3 @@ signal introduce_fireflies
 signal start_counting_down
 
 signal win_game_tutorial
-
-
-#func _ready() -> void:
-	#health_bar.connect("spawn_posessed", event_node, "_on_spawn_posessed")

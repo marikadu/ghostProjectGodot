@@ -305,7 +305,7 @@ func _on_introduce_fireflies():
 	await get_tree().create_timer(3).timeout
 	
 	$FireFlySpawnTimer.start()
-	$FireFlySpawnTimer.wait_time = 2.6
+	$FireFlySpawnTimer.wait_time = 2.7
 	print("fireflies!!!!!!!!")
 	#show_health()
 	await get_tree().create_timer(3).timeout
@@ -325,7 +325,7 @@ func _on_show_the_rest_of_ui():
 	await get_tree().create_timer(4).timeout
 	
 	# showing the timer
-	$EnemySpawnTimer.wait_time = 1.7
+	$EnemySpawnTimer.wait_time = 1.5
 	$FireFlySpawnTimer.wait_time = 8
 	show_timer()
 	

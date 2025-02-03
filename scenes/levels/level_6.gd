@@ -1,12 +1,12 @@
 #extends Control
 extends Node2D
-# -- LEVEL 5
+# -- LEVEL 6
 
 # CTRL + drag a script to put it here with @onready with $
 #@onready var camera_2d: Camera2D = $Camera2D
 
 @onready var camera: Camera2D = %Camera2D
-@onready var win_game: ColorRect = $UI/WinScreen
+@onready var win_game: ColorRect = $UI/WinScreen_completed_game
 @onready var game_over: ColorRect = $UI/GameOverScreen
 #@onready var is_game_over = false
 
@@ -41,11 +41,11 @@ var enemy_instances = []
 #@onready var can_kill_possessed = true
 
 func _ready() -> void:
-	Global.current_scene_name = 5
+	Global.current_scene_name = 6
 	
 	Global.is_game_won = false
 	%CountDownTimer.cd_timer.paused = false
-	$EnemySpawnTimer.wait_time = 0.4
+	$EnemySpawnTimer.wait_time = 0.3
 	
 	#fire_fly_spawn_timer.start(randi_range(10,18)) 
 
@@ -145,9 +145,9 @@ func _on_npc_died():
 func spawn_possessed():
 	var possessed_instance = possessed.instantiate()
 	possessed_instance.position = Vector2(578, 426)
-	possessed_instance.min_speed = 155
-	possessed_instance.speed = 160
-	possessed_instance.max_speed = 280
+	possessed_instance.min_speed = 160
+	possessed_instance.speed = 180
+	possessed_instance.max_speed = 300
 	call_deferred("add_child", possessed_instance)
 
 

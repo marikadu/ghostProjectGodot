@@ -16,11 +16,12 @@ extends Node2D
 @onready var stars_player: AnimationPlayer = $stars/stars_player
 @onready var sun_player: AnimationPlayer = $sun/sun_player
 @onready var wait_before_sunrise_timer: Timer = $wait_before_sunrise
-
+@onready var moon_timer: Timer = $moon_timer
 
 @export var time = 15.0
 @export var wait_before_sunrise = 45.0
 @export var rise_the_sun = 48.0
+
 
 var camera_off = Vector2(576,449)
 
@@ -34,6 +35,13 @@ func _ready() -> void:
 		print("bg_moves: stop the bg!!!!!!")
 		#time = 8.0
 		wait_before_sunrise = 18.0
+		rise_the_sun = 22.0
+		
+	# different background for the infinite mode
+	elif Global.current_scene_name == 7:
+		print("bg moves: infinite mode")
+		background_animation_start()
+		wait_before_sunrise = null
 		rise_the_sun = 22.0
 	
 	# animate background as normal
@@ -53,13 +61,15 @@ func _process(delta):
 		n_background.position = (player.position*delta) / 4
 		d_background.position = (player.position*delta) / 4
 	
-	if !Global.current_scene_name == 1:
-		#print("sunrise animation ready")
+	if Global.current_scene_name == 1:
+		return
+		
+	elif Global.current_scene_name == 7:
+		return
+	
+	else:
 		await get_tree().create_timer(wait_before_sunrise).timeout
 		fade_out()
-		pass
-	else:
-		pass
 	
 	
 	
@@ -85,23 +95,36 @@ func fade_out():
 	tween_b.kill()
 	tween_s.kill()
 	
+
 func tutorial_background():
 	background_animation_start()
 	await get_tree().create_timer(wait_before_sunrise).timeout
 	fade_out()
+	
 
 func background_animation_start():
 	print("bg_moves: activate all bg")
-	if !Global.current_scene_name == 1:
+
+	if Global.current_scene_name == 1:
+		stars_player.play("stars")
+		await get_tree().create_timer(rise_the_sun).timeout
+		sun_player.play("sun")
+		
+	elif Global.current_scene_name == 7:
+		# infinite mode:
+		# infinite stars, no sun, moon every 1 minute
+		moon_timer.start()
+		stars_player.play("stars")
+		#moon_player.play("moon")
+		
+		
+	else:
 		moon_player.play("moon")
 		stars_player.play("stars")
 		await get_tree().create_timer(rise_the_sun).timeout
 		sun_player.play("sun")
-	else:
-		stars_player.play("stars")
-		await get_tree().create_timer(rise_the_sun).timeout
-		sun_player.play("sun")
+		
 
 
-#func _on_wait_before_sunrise_timeout() -> void:
-	#fade_out()
+func _on_moon_timer_timeout() -> void:
+	moon_player.play("moon")

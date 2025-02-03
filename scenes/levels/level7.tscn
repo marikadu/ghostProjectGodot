@@ -1,24 +1,24 @@
-[gd_scene load_steps=25 format=3 uid="uid://bjbicq8gup158"]
+[gd_scene load_steps=25 format=3 uid="uid://baj813x6wfxgd"]
 
-[ext_resource type="Script" path="res://scenes/levels/level_5.gd" id="1_2wanh"]
-[ext_resource type="Script" path="res://scenes/scripts/day_night.gd" id="2_djp5m"]
-[ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/background/daynightcycle-gradient-texture.tres" id="3_2rgd5"]
-[ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="4_5vvgi"]
-[ext_resource type="PackedScene" uid="uid://dj3b8i7bdcu8j" path="res://scenes/screens/Pause.tscn" id="4_pvyn0"]
-[ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="5_jdwdd"]
-[ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://player/hp.tscn" id="6_dnv0x"]
-[ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="7_mq82v"]
-[ext_resource type="PackedScene" uid="uid://d4eb43rmirjs8" path="res://scenes/score.tscn" id="8_02nlf"]
-[ext_resource type="PackedScene" uid="uid://bbobth255p4np" path="res://scenes/timer.tscn" id="9_wxude"]
-[ext_resource type="PackedScene" uid="uid://wu4f2v4h1o72" path="res://scenes/screens/WinScreen.tscn" id="10_fnnee"]
-[ext_resource type="PackedScene" uid="uid://b4cgmatdls027" path="res://scenes/screens/GameOver.tscn" id="11_irrer"]
-[ext_resource type="Shader" path="res://shaders/border.gdshader" id="12_7u5tj"]
-[ext_resource type="PackedScene" uid="uid://dnhtj68mhqb2u" path="res://scenes/bg_moves.tscn" id="13_6lhhn"]
-[ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="14_0ewtu"]
-[ext_resource type="AudioStream" uid="uid://c0o0nrc7kgl0t" path="res://SFX/possessed_dies2.ogg" id="15_fufbo"]
-[ext_resource type="AudioStream" uid="uid://br1m6jylcxj0w" path="res://SFX/win.ogg" id="16_51dwu"]
-[ext_resource type="AudioStream" uid="uid://dk3oryayc0ls2" path="res://SFX/game_over.ogg" id="16_okdpl"]
-[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="17_6chng"]
+[ext_resource type="Script" path="res://scenes/levels/level_7.gd" id="1_npqnj"]
+[ext_resource type="Script" path="res://scenes/scripts/day_night.gd" id="2_65w32"]
+[ext_resource type="Texture2D" uid="uid://cc7t2pmj3xv2k" path="res://sprites/background/daynightcycle-gradient-texture.tres" id="3_6my06"]
+[ext_resource type="PackedScene" uid="uid://dj3b8i7bdcu8j" path="res://scenes/screens/Pause.tscn" id="4_4g6s8"]
+[ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="5_yejgr"]
+[ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="6_y2s3n"]
+[ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://player/hp.tscn" id="7_r4283"]
+[ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="8_gsayh"]
+[ext_resource type="PackedScene" uid="uid://d4eb43rmirjs8" path="res://scenes/score.tscn" id="9_7ykog"]
+[ext_resource type="PackedScene" uid="uid://b76i5xp1pry61" path="res://scenes/screens/WinScreen_level_6_completed.tscn" id="11_prvdu"]
+[ext_resource type="PackedScene" uid="uid://c4imiel5hhnep" path="res://scenes/timer_infinite.tscn" id="11_s8645"]
+[ext_resource type="PackedScene" uid="uid://b4cgmatdls027" path="res://scenes/screens/GameOver.tscn" id="12_kptr0"]
+[ext_resource type="Shader" path="res://shaders/border.gdshader" id="13_pcpjg"]
+[ext_resource type="PackedScene" uid="uid://dnhtj68mhqb2u" path="res://scenes/bg_moves.tscn" id="14_f4nuh"]
+[ext_resource type="PackedScene" uid="uid://cefk00qrd2w1n" path="res://player/ghost_player.tscn" id="15_t3rol"]
+[ext_resource type="AudioStream" uid="uid://c0o0nrc7kgl0t" path="res://SFX/possessed_dies2.ogg" id="16_3brat"]
+[ext_resource type="AudioStream" uid="uid://br1m6jylcxj0w" path="res://SFX/win.ogg" id="17_r1dx2"]
+[ext_resource type="AudioStream" uid="uid://dk3oryayc0ls2" path="res://SFX/game_over.ogg" id="18_1i026"]
+[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="19_8xvmu"]
 
 [sub_resource type="Curve2D" id="Curve2D_l6exe"]
 _data = {
@@ -27,7 +27,7 @@ _data = {
 point_count = 6
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rmbww"]
-shader = ExtResource("12_7u5tj")
+shader = ExtResource("13_pcpjg")
 shader_parameter/rect_size = Vector2(1.935, 0.145)
 shader_parameter/bness = 5.45
 shader_parameter/fall_off_scale = 6.385
@@ -38,7 +38,7 @@ shader_parameter/noise_intensity = 0.553
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rwpst"]
 random_pitch = 1.19
 streams_count = 1
-stream_0/stream = ExtResource("15_fufbo")
+stream_0/stream = ExtResource("16_3brat")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ldot6"]
 size = Vector2(1217, 27)
@@ -47,7 +47,7 @@ size = Vector2(1217, 27)
 size = Vector2(30, 984)
 
 [node name="main" type="Node2D"]
-script = ExtResource("1_2wanh")
+script = ExtResource("1_npqnj")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.869731, 0.8842, 0.942701, 1)
@@ -57,12 +57,12 @@ visible = false
 z_index = 1
 position = Vector2(576, 432)
 scale = Vector2(3.87, 3.87)
-script = ExtResource("2_djp5m")
-gradient_texture = ExtResource("3_2rgd5")
+script = ExtResource("2_65w32")
+gradient_texture = ExtResource("3_6my06")
 
 [node name="Pause" type="CanvasLayer" parent="."]
 
-[node name="Pause" parent="Pause" instance=ExtResource("4_pvyn0")]
+[node name="Pause" parent="Pause" instance=ExtResource("4_4g6s8")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
@@ -71,7 +71,7 @@ position = Vector2(584, 449)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
-script = ExtResource("4_5vvgi")
+script = ExtResource("5_yejgr")
 
 [node name="Path2D" type="Path2D" parent="Camera2D"]
 position = Vector2(-525, -408)
@@ -89,7 +89,7 @@ layout_direction = 1
 layout_mode = 3
 anchors_preset = 0
 pivot_offset = Vector2(579, 423)
-script = ExtResource("5_jdwdd")
+script = ExtResource("6_y2s3n")
 metadata/_edit_use_anchors_ = true
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
@@ -97,19 +97,19 @@ wait_time = 0.7
 autostart = true
 
 [node name="FireFlySpawnTimer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 17.0
 autostart = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HealthBar" parent="UI" instance=ExtResource("6_dnv0x")]
+[node name="HealthBar" parent="UI" instance=ExtResource("7_r4283")]
 z_index = 6
 offset_left = 756.0
 offset_top = 24.0
 offset_right = 1056.0
 offset_bottom = 64.0
 
-[node name="Stamina" parent="UI" instance=ExtResource("7_mq82v")]
+[node name="Stamina" parent="UI" instance=ExtResource("8_gsayh")]
 z_index = 6
 anchors_preset = 0
 anchor_right = 0.0
@@ -123,22 +123,19 @@ grow_vertical = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Score" parent="UI" instance=ExtResource("8_02nlf")]
+[node name="Score" parent="UI" instance=ExtResource("9_7ykog")]
 offset_left = -119.0
 offset_top = -104.0
 offset_right = -119.0
 offset_bottom = -104.0
 
-[node name="CountDownTimer" parent="UI" instance=ExtResource("9_wxude")]
+[node name="Timer" parent="UI" instance=ExtResource("11_s8645")]
 unique_name_in_owner = true
 
-[node name="WinScreen" parent="UI" instance=ExtResource("10_fnnee")]
+[node name="WinScreen_completed_game" parent="UI" instance=ExtResource("11_prvdu")]
 visible = false
-z_index = 10
-offset_top = 2.0
-offset_bottom = 2.0
 
-[node name="GameOverScreen" parent="UI" instance=ExtResource("11_irrer")]
+[node name="GameOverScreen" parent="UI" instance=ExtResource("12_kptr0")]
 visible = false
 z_index = 10
 
@@ -181,11 +178,11 @@ offset_right = 33.0
 offset_bottom = 794.0
 scale = Vector2(30.04, 8)
 
-[node name="bg" parent="." instance=ExtResource("13_6lhhn")]
+[node name="bg" parent="." instance=ExtResource("14_f4nuh")]
 z_index = -10
 position = Vector2(576, 432)
 
-[node name="GhostPlayer" parent="." instance=ExtResource("14_0ewtu")]
+[node name="GhostPlayer" parent="." instance=ExtResource("15_t3rol")]
 unique_name_in_owner = true
 z_index = 2
 position = Vector2(576, 305)
@@ -198,13 +195,13 @@ bus = &"SFX"
 
 [node name="win" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(0.445, 0.445)
-stream = ExtResource("16_51dwu")
+stream = ExtResource("17_r1dx2")
 volume_db = 1.455
 bus = &"Music"
 
 [node name="game_over" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(0.445, 0.445)
-stream = ExtResource("16_okdpl")
+stream = ExtResource("18_1i026")
 volume_db = 1.455
 pitch_scale = 1.06
 panning_strength = 0.0
@@ -212,7 +209,7 @@ bus = &"Music"
 
 [node name="possessed_hit" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(0.445, 0.445)
-stream = ExtResource("17_6chng")
+stream = ExtResource("19_8xvmu")
 pitch_scale = 2.16
 bus = &"SFX"
 

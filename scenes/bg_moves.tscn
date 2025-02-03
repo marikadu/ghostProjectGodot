@@ -189,3 +189,11 @@ texture = ExtResource("8_mdsfa")
 texture = ExtResource("1_6sewi")
 
 [node name="wait_before_sunrise" type="Timer" parent="."]
+
+[node name="moon_timer" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[connection signal="timeout" from="moon_timer" to="." method="_on_moon_timer_timeout"]

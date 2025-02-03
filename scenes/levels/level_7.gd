@@ -1,12 +1,12 @@
 #extends Control
 extends Node2D
-# -- LEVEL 5
+# -- LEVEL 7
 
 # CTRL + drag a script to put it here with @onready with $
 #@onready var camera_2d: Camera2D = $Camera2D
 
 @onready var camera: Camera2D = %Camera2D
-@onready var win_game: ColorRect = $UI/WinScreen
+@onready var win_game: ColorRect = $UI/WinScreen_completed_game
 @onready var game_over: ColorRect = $UI/GameOverScreen
 #@onready var is_game_over = false
 
@@ -41,16 +41,18 @@ var enemy_instances = []
 #@onready var can_kill_possessed = true
 
 func _ready() -> void:
-	Global.current_scene_name = 5
+	Global.current_scene_name = 7
 	
 	Global.is_game_won = false
-	%CountDownTimer.cd_timer.paused = false
-	$EnemySpawnTimer.wait_time = 0.4
+	#%CountDownTimer.cd_timer.paused = false
+	#%Timer.cd_timer.paused = false
+	# start with slower and gradually go to faster
+	$EnemySpawnTimer.wait_time = 1.8
 	
 	#fire_fly_spawn_timer.start(randi_range(10,18)) 
 
 	# connecting to signals
-	Events.win_game.connect(show_win_game)
+	#Events.win_game.connect(show_win_game)
 	Events.game_over.connect(show_game_over)
 	Events.npc_died.connect(_on_npc_died)
 	Events.possessed_defeated.connect(_on_possessed_defeated)
@@ -88,20 +90,20 @@ func _physics_process(delta: float) -> void:
 		spawn_possessed()
 	
 	
-func show_win_game():
-	Global.is_game_won = true
-	sfx_win.play()
-	win_game.show()
-	kill_all_enemies()
-	Global.update_personal_best() # updating personal best ONLY when won the game
-	can_spawn_enemies = false
-	can_spawn_fireflies = false
-	npc_instance.npc_ignore_player = true
-	if Global.unlocked_levels < 6 :
-		Global.unlocked_levels = 6
-		print("unlocked level 6!")
-	else:
-		print("you already have level 6 unlocked")
+#func show_win_game():
+	#Global.is_game_won = true
+	#sfx_win.play()
+	#win_game.show()
+	#kill_all_enemies()
+	#Global.update_personal_best() # updating personal best ONLY when won the game
+	#can_spawn_enemies = false
+	#can_spawn_fireflies = false
+	#npc_instance.npc_ignore_player = true
+	#if Global.unlocked_levels < 6 :
+		#Global.unlocked_levels = 6
+		#print("unlocked level 6!")
+	#else:
+		#print("you already have level 6 unlocked")
 
 
 	
@@ -115,7 +117,8 @@ func show_game_over():
 	can_spawn_enemies = false
 	can_spawn_fireflies = false
 	npc_instance.npc_ignore_player = true
-	%CountDownTimer.cd_timer.paused = true
+	#%CountDownTimer
+	%Timer.cd_timer.paused = true
 	#get_tree().paused = true # pause game
 #	I don't know if I need to unpause it when I go to other screen, show check it later
 	
@@ -145,9 +148,9 @@ func _on_npc_died():
 func spawn_possessed():
 	var possessed_instance = possessed.instantiate()
 	possessed_instance.position = Vector2(578, 426)
-	possessed_instance.min_speed = 155
-	possessed_instance.speed = 160
-	possessed_instance.max_speed = 280
+	possessed_instance.min_speed = 160
+	possessed_instance.speed = 180
+	possessed_instance.max_speed = 300
 	call_deferred("add_child", possessed_instance)
 
 

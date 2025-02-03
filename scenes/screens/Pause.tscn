@@ -76,6 +76,7 @@ text = "Main Menu"
 icon_alignment = 1
 
 [node name="OptionsMenu" parent="." instance=ExtResource("2_62cup")]
+visible = false
 z_index = 1
 layout_mode = 1
 
