@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dnhtj68mhqb2u"]
+[gd_scene load_steps=24 format=3 uid="uid://dnhtj68mhqb2u"]
 
 [ext_resource type="Texture2D" uid="uid://cth7yboi1klpl" path="res://sprites/background/foreground_n.png" id="1_6sewi"]
 [ext_resource type="Script" path="res://scenes/scripts/bg_moves.gd" id="1_wo1p5"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ibdwlbh40u73" path="res://sprites/background/sky_d.png" id="3_v65wt"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="6_2nxss"]
 [ext_resource type="Texture2D" uid="uid://dpjxqtqbkq382" path="res://sprites/background/sun.png" id="6_mp1xp"]
+[ext_resource type="Texture2D" uid="uid://ckxjik6ycia2i" path="res://sprites/background/stars_infinite.png" id="6_n5pha"]
 [ext_resource type="Texture2D" uid="uid://x8ux2fb6gm08" path="res://sprites/background/stars.png" id="6_nok8x"]
 [ext_resource type="Texture2D" uid="uid://drasnc06wmkbx" path="res://sprites/background/background_d.png" id="7_16t37"]
 [ext_resource type="Texture2D" uid="uid://b40cjnsqspwh8" path="res://sprites/background/foreground_d.png" id="8_mdsfa"]
@@ -151,6 +152,12 @@ color = Color(0.730192, 0.695854, 0.992129, 1)
 energy = 0.1
 texture = ExtResource("6_2nxss")
 texture_scale = 0.67
+
+[node name="stars_infinite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 2)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("6_n5pha")
 
 [node name="stars" type="Sprite2D" parent="."]
 position = Vector2(0, 2)
