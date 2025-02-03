@@ -407,7 +407,7 @@ streams_count = 1
 stream_0/stream = ExtResource("6_dco0i")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7h1ig"]
-random_pitch = 1.05
+random_pitch = 1.02
 streams_count = 1
 stream_0/stream = ExtResource("32_pf4ew")
 
@@ -493,7 +493,7 @@ bus = &"SFX"
 scale = Vector2(2.24719, 2.24719)
 stream = SubResource("AudioStreamRandomizer_7h1ig")
 volume_db = 1.2
-pitch_scale = 1.05
+pitch_scale = 1.04
 panning_strength = 0.0
 bus = &"SFX"
 

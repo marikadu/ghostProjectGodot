@@ -155,7 +155,6 @@ position = Vector2(-84, -83)
 rotation = -0.0397337
 
 [node name="Pause" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Pause" parent="Pause" instance=ExtResource("7_v0bxg")]
 

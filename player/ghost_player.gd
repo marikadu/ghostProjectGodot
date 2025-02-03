@@ -23,7 +23,7 @@ var playback: AnimationNodeStateMachinePlayback
 
 signal is_dashing
 
-@onready var dash_effect_scene = preload("res://scenes/DashGhost.tscn")
+@onready var dash_effect_scene = preload("res://player/DashGhost.tscn")
 @onready var dash_stamina = preload("res://player/dash_stamina.tscn")
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var dashing_t: Timer = $dashing_t
@@ -199,7 +199,7 @@ func _on_stamina_restore_timer_timeout() -> void:
 func restore_stamina():
 	if current_stamina < max_stamina_sections:
 		current_stamina += 1
-		stamina_restored.play()
+		#stamina_restored.play()
 		#print("restored 1 stamina. stamina: ", current_stamina)
 		
 		# if stamina less than max. -> continue restoring

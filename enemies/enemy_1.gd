@@ -43,6 +43,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and not dead:
 		die()
 		hit.play()
+		player.stamina_restored.play()
 		player.dash_hit.play()
 		camera_control.apply_shake(4, 5)
 		player.restore_stamina()

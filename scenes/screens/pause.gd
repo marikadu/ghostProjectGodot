@@ -11,18 +11,20 @@ func _ready() -> void:
 
 
 
-func _process(delta: float) -> void:
-	# if not in the paused state and pressed esc
-	if Input.is_action_just_pressed("pause") and get_tree().paused == false:
-		pause()
+func _process(_delta: float) -> void:
+	# don't trigger pause when game over or win
+	if not (Global.is_game_over or Global.is_game_won):
+		# if not in the paused state and pressed esc
+		if Input.is_action_just_pressed("pause") and get_tree().paused == false:
+			pause()
+			
+		# if in the paused state and pressed esc | AND NOT in the settings
+		elif Input.is_action_just_pressed("pause") and get_tree().paused and not options_pause.visible:
+			resume()
 		
-	# if in the paused state and pressed esc | AND NOT in the settings
-	elif Input.is_action_just_pressed("pause") and get_tree().paused and not options_pause.visible:
-		resume()
-	
-	# if in the paused state and pressed esc | AND in the settings
-	elif Input.is_action_just_pressed("pause") and get_tree().paused and options_pause.visible:
-		options_pause.hide()
+		# if in the paused state and pressed esc | AND in the settings
+		elif Input.is_action_just_pressed("pause") and get_tree().paused and options_pause.visible:
+			options_pause.hide()
 
 
 func resume():

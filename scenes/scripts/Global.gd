@@ -19,7 +19,7 @@ var unlocked_levels = 1
 
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("personal_best_set"):
 		personal_best = 4412
 		update_personal_best()

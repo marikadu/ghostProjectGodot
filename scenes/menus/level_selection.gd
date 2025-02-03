@@ -22,7 +22,7 @@ func _ready() -> void:
 			else:
 				level.disabled = true
 				
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	personal_best.text = str(Global.personal_best)
 
 

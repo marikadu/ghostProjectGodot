@@ -118,6 +118,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and not dead and not Global.is_game_over :
 		take_damage(3.0)
 		hit.play()
+		player.stamina_restored.play()
 		player.restore_stamina()
 		#print("-3")
 		

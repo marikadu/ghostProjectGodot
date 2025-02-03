@@ -355,7 +355,6 @@ libraries = {
 }
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 visibility_layer = 5
 
 [node name="sleep_distance" type="CollisionShape2D" parent="Area2D"]

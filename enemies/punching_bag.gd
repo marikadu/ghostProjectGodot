@@ -45,6 +45,7 @@ func die():
 	if player.dashing:
 		player.dash_hit.play()
 		player.restore_stamina()
+		player.stamina_restored.play()
 		camera_control.apply_shake(4, 5)
 	await get_tree().create_timer(wait_death_animation).timeout
 	animated_sprite_2d.play("moving")

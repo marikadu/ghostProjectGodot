@@ -37,6 +37,7 @@ var body: Node
 func _ready():
 	npc_ignore_player = false
 	player = get_tree().root.get_node("main/GhostPlayer")
+	#orial = get_tree().root.get_node("main/orial")
 	max_health = 10.0
 	health = max_health # at the start of the game, health is max
 	is_alive = true
@@ -124,6 +125,9 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		else:
 			#print("ignore player BECAUSE WIN")
 			pass
+		
+	if body.is_in_group("orial"):
+		print("detected")
 
 
 # take damage

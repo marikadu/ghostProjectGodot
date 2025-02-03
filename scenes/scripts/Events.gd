@@ -8,6 +8,7 @@ signal possessed_defeated
 signal possessed_escaped
 
 # --- tutorial signals ---
+signal tutorial_start
 signal send_scripted_enemy
 
 signal send_scripted_enemy2

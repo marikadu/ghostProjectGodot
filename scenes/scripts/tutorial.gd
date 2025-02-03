@@ -4,6 +4,8 @@ extends Control
 @onready var label_2: Label = $Label2
 @onready var label_3: Label = $Label3
 @onready var label_4: Label = $Label4
+@onready var bg_4: NinePatchRect = $Label4/bg4
+@onready var bg_4_2: NinePatchRect = $Label4_2/bg4_2
 @onready var label_4_2: Label = $Label4_2
 @onready var label_5: Label = $Label5
 @onready var label_6: Label = $Label6
@@ -22,7 +24,7 @@ var can_hit_5
 var can_hit_6
 
 func _ready() -> void:
-	can_hit_1 = true
+	can_hit_1 = false
 	can_hit_2 = false
 	can_hit_3 = false
 	can_hit_4 = false
@@ -30,7 +32,7 @@ func _ready() -> void:
 	can_hit_5 = false
 	can_hit_6 = false
 
-	label_1.visible = true
+	label_1.visible = false
 	label_2.visible = false
 	label_3.visible = false
 	label_4.visible = false
@@ -38,7 +40,7 @@ func _ready() -> void:
 	label_5.visible = false
 	label_6.visible = false
 	
-	
+	Events.tutorial_start.connect(_on_tutorial_start)
 	Events.killed_scripted_enemy3.connect(_on_npc_is_scared_of_the_player_text)
 	Events.introduce_fireflies.connect(_on_introduce_fireflies)
 	Events.start_counting_down.connect(_on_start_counting_down)
@@ -77,6 +79,10 @@ func _on_first_body_entered(body: Node2D) -> void:
 	#if body == player and player.dashing:
 		#first_get_hit()
 		#print("yo yo")
+func _on_tutorial_start():
+	label_1.visible = true
+	can_hit_1 = true
+
 
 func first_get_hit():
 	#player.ghost_dies.play()
@@ -105,6 +111,7 @@ func _on_second_body_entered(body: Node2D) -> void:
 	
 func _on_npc_is_scared_of_the_player_text():
 	Events.npc_is_scared_of_the_player2.emit()
+	
 	label_3.visible = true
 	can_hit_3 = true
 	
@@ -118,15 +125,20 @@ func _on_npc_is_scared_of_the_player_text():
 func _on_enemies_start_spawning():
 	#label_2.visible = false
 	#can_hit_2 = false
+	await get_tree().create_timer(2).timeout
 	label_3.visible = false
 	can_hit_3 = false
 	
 	
 func _on_introduce_fireflies():
+	
 	await get_tree().create_timer(8).timeout
 	label_4.visible = true
 	can_hit_4 = true
+	bg_4.visible = true
 	await get_tree().create_timer(3).timeout
+	bg_4.visible = false
+	bg_4_2.visible = true
 	label_4_2.visible = true
 	can_hit_4_2 = true
 	
@@ -178,6 +190,7 @@ func _on_start_counting_down():
 	
 	label_4_2.visible = false
 	can_hit_4_2= false
+	bg_4_2.visible = false
 	
 	label_5.visible = true
 	can_hit_5 = true
@@ -189,3 +202,6 @@ func _on_win_game():
 	
 	label_6.visible = true
 	can_hit_6 = true
+	await get_tree().create_timer(6).timeout
+	label_6.visible = false
+	can_hit_6 = false

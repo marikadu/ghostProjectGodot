@@ -64,6 +64,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		die()
 		hit.play()
 		player.dash_hit.play()
+		player.stamina_restored.play()
 		camera_control.apply_shake(4, 5)
 		player.restore_stamina()
 		
