@@ -63,7 +63,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	# heal npc once reached
 	if body == npc and npc.is_alive and not picked_up:
 		npc.heal(1)
-		npc.healing.play()
+		npc.sfx_healing.play()
 		print("firefly got the npc, heal the npc ", npc.health)
 		await get_tree().create_timer(1).timeout
 		picked_up = true
