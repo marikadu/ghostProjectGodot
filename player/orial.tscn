@@ -1,13 +1,9 @@
-[gd_scene load_steps=43 format=3 uid="uid://cn2xqtixlnh2p"]
+[gd_scene load_steps=39 format=3 uid="uid://cn2xqtixlnh2p"]
 
 [ext_resource type="Shader" path="res://player/wants_dash.gdshader" id="1_u11qh"]
 [ext_resource type="Script" path="res://player/orial.gd" id="2_w4vmx"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="3_si5me"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="4_15yti"]
-[ext_resource type="Texture2D" uid="uid://b7hvwbpp8f6xl" path="res://sprites/enemies/purple/purple_attack0000.png" id="5_6mat1"]
-[ext_resource type="Texture2D" uid="uid://c1jkgnp1lo1wq" path="res://sprites/enemies/purple/purple_attack0001.png" id="6_cs5ru"]
-[ext_resource type="Texture2D" uid="uid://c5rm2j664gtvr" path="res://sprites/enemies/purple/purple_attack0002.png" id="7_rk76l"]
-[ext_resource type="Texture2D" uid="uid://bahvnbsqx5o35" path="res://sprites/enemies/purple/purple_attack0003.png" id="8_lkomr"]
 [ext_resource type="Texture2D" uid="uid://dy52cntvh4y8p" path="res://sprites/orial/o_hit0000.png" id="9_1vpd3"]
 [ext_resource type="Texture2D" uid="uid://2pmk331sti6x" path="res://sprites/orial/o_hit0001.png" id="10_axuwo"]
 [ext_resource type="Texture2D" uid="uid://pb1w4k7mytxf" path="res://sprites/orial/o_hit0002.png" id="11_e27qi"]
@@ -46,23 +42,6 @@ shader_parameter/Tint = Color(1, 1, 1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hgbdu"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_6mat1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_cs5ru")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_rk76l")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_lkomr")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 10.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("9_1vpd3")
@@ -223,9 +202,9 @@ tracks/0/keys = {
 "values": [Vector2(-98, 642), Vector2(103, 642)]
 }
 
-[sub_resource type="Animation" id="Animation_0pord"]
-resource_name = "show_human"
-length = 2.2
+[sub_resource type="Animation" id="Animation_1857a"]
+resource_name = "bye"
+length = 2.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -233,10 +212,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 2.03333),
+"times": PackedFloat32Array(0.166667, 2.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(103, 642), Vector2(368, 522)]
+"values": [Vector2(205, 432), Vector2(-76, 425)]
 }
 
 [sub_resource type="Animation" id="Animation_087r8"]
@@ -255,9 +234,9 @@ tracks/0/keys = {
 "values": [Vector2(368, 522), Vector2(205, 432)]
 }
 
-[sub_resource type="Animation" id="Animation_1857a"]
-resource_name = "bye"
-length = 2.3
+[sub_resource type="Animation" id="Animation_0pord"]
+resource_name = "show_human"
+length = 2.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -265,10 +244,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.166667, 2.2),
+"times": PackedFloat32Array(0.0333333, 2.03333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(205, 432), Vector2(-76, 425)]
+"values": [Vector2(103, 642), Vector2(368, 522)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7b6q2"]
@@ -301,7 +280,7 @@ texture_scale = 0.67
 material = SubResource("ShaderMaterial_5jufo")
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_hgbdu")
-animation = &"left_hit"
+animation = &"idle"
 
 [node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {

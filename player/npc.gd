@@ -14,7 +14,7 @@ extends CharacterBody2D
 @onready var npc_back_from_dead: AudioStreamPlayer2D = $npc_back_from_dead
 @onready var npc_died: AudioStreamPlayer2D = $npc_died
 @onready var player_near_sfx: AudioStreamPlayer2D = $player_near_sfx
-@onready var healing: AudioStreamPlayer2D = $healing
+@onready var sfx_healing: AudioStreamPlayer2D = $healing
 
 @onready var vfx_heal: CPUParticles2D = $vfx_heal
 
@@ -31,7 +31,7 @@ var npc_ignore_player: bool = false
 #var patience: float = 3.0
 var player: CharacterBody2D
 var killed_by: String = ""
-var body: Node
+#var body: Node
 
 
 func _ready():
@@ -95,14 +95,14 @@ func killedBy():
 			animated_sprite.play("is_woken_up")
 
 # collision logic
-func _on_area_2d_body_entered(body: Node) -> void:
+func _on_area_2d_body_entered(body_e: Node) -> void:
 	if is_alive:
-		if body.is_in_group("enemy"):
+		if body_e.is_in_group("enemy"):
 			# reduce health by 1
-			take_damage(2.0, body)
+			take_damage(2.0, body_e)
 			
 		# apply damage if player is near
-		if body == player and not npc_ignore_player:
+		if body_e == player and not npc_ignore_player:
 			camera_control.zoom_in()
 			player_near_sfx.play()
 			is_player_near = true

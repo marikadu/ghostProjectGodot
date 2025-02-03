@@ -4,11 +4,8 @@
 [ext_resource type="Script" path="res://enemies/enemy_1.gd" id="1_nl2ya"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_7e2my"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="3_4o8mh"]
-[ext_resource type="Texture2D" uid="uid://bywlh5h78s0bq" path="res://sprites/enemies/purple1.png" id="3_v0wlu"]
-[ext_resource type="Texture2D" uid="uid://r58t6qn0b5dq" path="res://sprites/enemies/purple2.png" id="4_o0i3y"]
 [ext_resource type="Texture2D" uid="uid://70ld27bpj155" path="res://sprites/enemies/purple/purple_dies1.png" id="4_qpt75"]
 [ext_resource type="Texture2D" uid="uid://b7hvwbpp8f6xl" path="res://sprites/enemies/purple/purple_attack0000.png" id="5_0kjyq"]
-[ext_resource type="Texture2D" uid="uid://beachhw4bq7cx" path="res://sprites/enemies/purple3.png" id="5_pb6be"]
 [ext_resource type="Texture2D" uid="uid://cjjy2nhs7g8tk" path="res://sprites/enemies/purple/purple_dies2.png" id="5_rmfq1"]
 [ext_resource type="Texture2D" uid="uid://c1jkgnp1lo1wq" path="res://sprites/enemies/purple/purple_attack0001.png" id="6_lcaah"]
 [ext_resource type="Texture2D" uid="uid://cy8sjdosup322" path="res://sprites/enemies/purple/purple_dies3.png" id="6_plwqg"]
@@ -19,6 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://3tslggekw40r" path="res://sprites/enemies/purple/purple_dies6.png" id="9_1pb5e"]
 [ext_resource type="Texture2D" uid="uid://q517835lfj21" path="res://sprites/p_particle.png" id="12_wy7ln"]
 [ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="14_oply8"]
+[ext_resource type="Texture2D" uid="uid://c355d8r0dqkhg" path="res://sprites/enemies/purple/purple1.png" id="15_a7pjj"]
+[ext_resource type="Texture2D" uid="uid://bdjvr1tqvg5jn" path="res://sprites/enemies/purple/purple2.png" id="16_do6rd"]
+[ext_resource type="Texture2D" uid="uid://ck4xlbv3lj03f" path="res://sprites/enemies/purple/purple3.png" id="17_2eew0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pbie8"]
 shader = ExtResource("1_j0mrd")
@@ -79,13 +79,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_v0wlu")
+"texture": ExtResource("15_a7pjj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_o0i3y")
+"texture": ExtResource("16_do6rd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_pb6be")
+"texture": ExtResource("17_2eew0")
 }],
 "loop": true,
 "name": &"moving",
@@ -176,7 +176,7 @@ material = SubResource("ShaderMaterial_5jufo")
 position = Vector2(6.66667, -1.43653e-14)
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_hgbdu")
-animation = &"attack"
+animation = &"dies"
 
 [node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {

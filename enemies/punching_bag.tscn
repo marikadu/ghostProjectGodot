@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bknkp80cwesej" path="res://sprites/enemies/dummy/hit_dummy0003.png" id="8_6rh7e"]
 [ext_resource type="Texture2D" uid="uid://bhjc1xvencerj" path="res://sprites/enemies/dummy/hit_dummy0004.png" id="9_ci4ae"]
 [ext_resource type="Texture2D" uid="uid://7blcbd0cnd75" path="res://sprites/enemies/dummy/hit_dummy0005.png" id="10_y7m4c"]
-[ext_resource type="Texture2D" uid="uid://cili4fubtjkoj" path="res://sprites/enemies/dummy.png" id="11_rcxbx"]
+[ext_resource type="Texture2D" uid="uid://cdjih4xi16y5c" path="res://sprites/enemies/dummy/dummy.png" id="11_g8nev"]
 [ext_resource type="Texture2D" uid="uid://d0cgpbtelounr" path="res://sprites/enemies/dummy/d_particle.png" id="12_3u8p8"]
 [ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="14_3ggyf"]
 
@@ -49,7 +49,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_rcxbx")
+"texture": ExtResource("11_g8nev")
 }],
 "loop": true,
 "name": &"moving",
@@ -141,9 +141,7 @@ texture_scale = 0.67
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D/punching_bag"]
 material = SubResource("ShaderMaterial_5jufo")
 sprite_frames = SubResource("SpriteFrames_hgbdu")
-animation = &"dies"
-frame = 5
-frame_progress = 1.0
+animation = &"moving"
 
 [node name="HitFlash" type="AnimationPlayer" parent="RigidBody2D/punching_bag/AnimatedSprite2D"]
 libraries = {
