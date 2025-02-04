@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dnhtj68mhqb2u"]
+[gd_scene load_steps=22 format=3 uid="uid://dnhtj68mhqb2u"]
 
 [ext_resource type="Texture2D" uid="uid://cth7yboi1klpl" path="res://sprites/background/foreground_n.png" id="1_6sewi"]
 [ext_resource type="Script" path="res://scenes/scripts/bg_moves.gd" id="1_wo1p5"]
@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://b2mbjhtlvxuid" path="res://sprites/background/moon.png" id="3_fe7de"]
 [ext_resource type="Texture2D" uid="uid://ibdwlbh40u73" path="res://sprites/background/sky_d.png" id="3_v65wt"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="6_2nxss"]
+[ext_resource type="Shader" path="res://scenes/scroll.gdshader" id="6_6a2jm"]
 [ext_resource type="Texture2D" uid="uid://dpjxqtqbkq382" path="res://sprites/background/sun.png" id="6_mp1xp"]
 [ext_resource type="Texture2D" uid="uid://ckxjik6ycia2i" path="res://sprites/background/stars_infinite.png" id="6_n5pha"]
-[ext_resource type="Texture2D" uid="uid://x8ux2fb6gm08" path="res://sprites/background/stars.png" id="6_nok8x"]
 [ext_resource type="Texture2D" uid="uid://drasnc06wmkbx" path="res://sprites/background/background_d.png" id="7_16t37"]
 [ext_resource type="Texture2D" uid="uid://b40cjnsqspwh8" path="res://sprites/background/foreground_d.png" id="8_mdsfa"]
 [ext_resource type="Texture2D" uid="uid://bgxneldwm028q" path="res://sprites/background/middleground_d.png" id="9_6utk2"]
@@ -52,42 +52,9 @@ _data = {
 "moon": SubResource("Animation_1mdwt")
 }
 
-[sub_resource type="Animation" id="Animation_cligc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 2)]
-}
-
-[sub_resource type="Animation" id="Animation_ufiqn"]
-resource_name = "stars"
-length = 40.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 37.3333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 2), Vector2(0, -525)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w1pcp"]
-_data = {
-"RESET": SubResource("Animation_cligc"),
-"stars": SubResource("Animation_ufiqn")
-}
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_arwrf"]
+shader = ExtResource("6_6a2jm")
+shader_parameter/speed = 0.02
 
 [sub_resource type="Animation" id="Animation_ffqpo"]
 length = 0.001
@@ -154,19 +121,10 @@ texture = ExtResource("6_2nxss")
 texture_scale = 0.67
 
 [node name="stars_infinite" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, 2)
-scale = Vector2(1.1, 1.1)
+texture_repeat = 2
+material = SubResource("ShaderMaterial_arwrf")
+position = Vector2(-35, -75)
 texture = ExtResource("6_n5pha")
-
-[node name="stars" type="Sprite2D" parent="."]
-position = Vector2(0, 2)
-texture = ExtResource("6_nok8x")
-
-[node name="stars_player" type="AnimationPlayer" parent="stars"]
-libraries = {
-"": SubResource("AnimationLibrary_w1pcp")
-}
 
 [node name="sun" type="Sprite2D" parent="."]
 position = Vector2(0, 206)
@@ -200,7 +158,5 @@ texture = ExtResource("1_6sewi")
 [node name="moon_timer" type="Timer" parent="."]
 wait_time = 60.0
 autostart = true
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [connection signal="timeout" from="moon_timer" to="." method="_on_moon_timer_timeout"]

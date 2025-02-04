@@ -13,7 +13,7 @@ extends Node2D
 @onready var d_sky: Sprite2D = $d_sky
 
 @onready var moon_player: AnimationPlayer = $moon/moon_player
-@onready var stars_player: AnimationPlayer = $stars/stars_player
+@onready var stars_infinite: Sprite2D = $stars_infinite
 @onready var sun_player: AnimationPlayer = $sun/sun_player
 @onready var wait_before_sunrise_timer: Timer = $wait_before_sunrise
 @onready var moon_timer: Timer = $moon_timer
@@ -21,6 +21,7 @@ extends Node2D
 @export var time = 15.0
 @export var wait_before_sunrise = 45.0
 @export var rise_the_sun = 48.0
+@export var stars_fading_out_time = 10.0
 
 
 var camera_off = Vector2(576,449)
@@ -69,6 +70,7 @@ func _process(delta):
 	
 	else:
 		await get_tree().create_timer(wait_before_sunrise).timeout
+		fade_out_stars()
 		fade_out()
 	
 	
@@ -100,13 +102,17 @@ func tutorial_background():
 	background_animation_start()
 	await get_tree().create_timer(wait_before_sunrise).timeout
 	fade_out()
+	fade_out_stars()
 	
 
 func background_animation_start():
 	print("bg_moves: activate all bg")
 
 	if Global.current_scene_name == 1:
-		stars_player.play("stars")
+		moon_player.stop(false) # no moon for the first level
+		$moon_timer.stop()
+		print("bg: level tutorial!")
+		#stars_player.play("stars")
 		await get_tree().create_timer(rise_the_sun).timeout
 		sun_player.play("sun")
 		
@@ -114,17 +120,30 @@ func background_animation_start():
 		# infinite mode:
 		# infinite stars, no sun, moon every 1 minute
 		moon_timer.start()
-		stars_player.play("stars")
+		#stars_player.play("stars")
 		#moon_player.play("moon")
 		
-		
 	else:
+		print("other levels!")
 		moon_player.play("moon")
-		stars_player.play("stars")
+		#stars_player.play("stars")
 		await get_tree().create_timer(rise_the_sun).timeout
 		sun_player.play("sun")
 		
 
+func fade_out_stars():
+	print("fading out the stars")
+	var tween: Tween = get_tree().create_tween()
+	# transitions and ease for the tweens
+	tween.set_trans(Tween.TRANS_QUART)
+	tween.set_ease(Tween.EASE_OUT)
+	# tween modulation
+	tween.tween_property(stars_infinite, "modulate:a", 0.0, stars_fading_out_time)
+	tween.tween_callback(func():
+		stars_infinite.visible = false
+		print("stars are gone"))
+
 
 func _on_moon_timer_timeout() -> void:
+	print("moon go!")
 	moon_player.play("moon")
