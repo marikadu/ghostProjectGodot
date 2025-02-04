@@ -9,6 +9,9 @@ var current_scene_name: int
 var score = 0
 var personal_best = 0
 
+var time_recorded = 0
+var personal_best_time = 0
+
 var levels = []
 var unlocked_levels = 1
 
@@ -23,12 +26,22 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("personal_best_set"):
 		personal_best = 4412
 		update_personal_best()
+		
+	if Input.is_action_just_pressed("unlock_all_levels"):
+		Global.unlocked_levels = 6
 
 
 # personal best score
 # DONT add to the personal best if Game Over!!!
+# unless it's level 7: infinite night
 func update_personal_best():
 	if score > personal_best:
 		personal_best = score
 		#print("New personal best:", personal_best)
 		#save_file.store_string(personal_best)
+		
+
+# personal best time
+func update_personal_best_time():
+	if time_recorded > personal_best_time:
+		personal_best_time = time_recorded

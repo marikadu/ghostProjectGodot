@@ -55,6 +55,7 @@ func _ready() -> void:
 
 func _process(delta):
 	#foreground.position = (player.position*delta) * 2
+	# parallax effect
 	if Graphics.camera_follow_player:
 		n_middleground.position = (player.position*delta) / 2
 		d_middleground.position = (player.position*delta) / 2

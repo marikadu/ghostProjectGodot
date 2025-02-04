@@ -23,6 +23,9 @@ func _process(delta):
 	
 	# maybe something similar to ori and the will of the whisps
 	if Graphics.camera_follow_player:
-		position = (player.position*delta * 2) + camera_off # NEW CODE
-	#else:
+		#pass
+		position = (player.position * delta * 2 ) + camera_off # NEW CODE
+		#position = lerp(position, ((player.position)+ camera_off), delta/2)
+	else:
+		offset = Vector2(-6, 1)
 		#pass

@@ -17,6 +17,10 @@ script = ExtResource("1_4wo0t")
 position = Vector2(575, 440)
 texture = ExtResource("2_o4b80")
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+position = Vector2(430.5, 116)
+color = Color(0.871559, 0.838903, 0.927476, 1)
+
 [node name="LevelSelection" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
@@ -101,19 +105,26 @@ layout_mode = 2
 theme = ExtResource("2_exllh")
 text = "Infinite Night"
 
-[node name="PersonalBest" type="Label" parent="."]
+[node name="BestScore" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 12.0
+offset_right = 40.0
+offset_bottom = 52.0
+
+[node name="PersonalBestNumber" type="Label" parent="BestScore"]
+unique_name_in_owner = true
 modulate = Color(0.126205, 0.0960744, 0.245993, 0.789)
 layout_mode = 0
-offset_left = 377.0
-offset_top = 717.0
-offset_right = 476.0
-offset_bottom = 770.0
-rotation = 0.0248291
+offset_left = 471.0
+offset_top = 721.0
+offset_right = 570.0
+offset_bottom = 774.0
+rotation = 0.0297973
 theme = ExtResource("2_exllh")
 theme_override_font_sizes/font_size = 40
 text = "0000"
 
-[node name="PersonalBest2" type="Label" parent="."]
+[node name="PersonalBestTitle" type="Label" parent="BestScore"]
 modulate = Color(0.126205, 0.0960744, 0.245993, 0.789)
 layout_mode = 0
 offset_left = 154.0
@@ -123,7 +134,37 @@ offset_bottom = 760.0
 rotation = 0.0375228
 theme = ExtResource("2_exllh")
 theme_override_font_sizes/font_size = 40
-text = "Personal Best:"
+text = "Personal Best Score:"
+
+[node name="BestTime" type="Control" parent="."]
+anchors_preset = 0
+offset_top = -62.0
+offset_right = 40.0
+offset_bottom = -22.0
+
+[node name="PersonalBestTime" type="Label" parent="BestTime"]
+modulate = Color(0.126205, 0.0960744, 0.245993, 0.789)
+layout_mode = 0
+offset_left = 465.0
+offset_top = 744.0
+offset_right = 564.0
+offset_bottom = 797.0
+rotation = 0.0248291
+theme = ExtResource("2_exllh")
+theme_override_font_sizes/font_size = 40
+text = "0000"
+
+[node name="PersonalBestTitleTime" type="Label" parent="BestTime"]
+modulate = Color(0.126205, 0.0960744, 0.245993, 0.789)
+layout_mode = 0
+offset_left = 154.0
+offset_top = 729.0
+offset_right = 369.0
+offset_bottom = 782.0
+rotation = 0.0375228
+theme = ExtResource("2_exllh")
+theme_override_font_sizes/font_size = 40
+text = "Personal Best Time:"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -133,9 +174,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -90.0
-offset_top = 157.0
+offset_top = 121.0
 offset_right = 90.0
-offset_bottom = 257.0
+offset_bottom = 221.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -152,4 +193,5 @@ text = "Back"
 [connection signal="pressed" from="MarginContainer/HBoxContainer/5" to="." method="_on_5_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/6" to="." method="_on_6_pressed"]
 [connection signal="pressed" from="VBoxInfiniteNight/7" to="." method="_on_1_pressed"]
+[connection signal="pressed" from="VBoxInfiniteNight/7" to="." method="_on_7_infinite_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

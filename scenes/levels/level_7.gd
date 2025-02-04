@@ -19,6 +19,11 @@ extends Node2D
 @onready var sfx_win: AudioStreamPlayer2D = $win
 @onready var sfx_game_over: AudioStreamPlayer2D = $game_over
 
+# level 7 special
+@onready var spawn_timer_decrease: Timer = $SpawnTimerDecrease
+var min_spawn_time = 0.4
+var decrease_amount = 0.2 # for how much to decrease every 20 seconds
+var decrease_interval = 20.0
 
 var possessed = preload("res://enemies/possessed.tscn")
 var npc_instance: Node = null  # Store the NPC instance
@@ -44,10 +49,11 @@ func _ready() -> void:
 	Global.current_scene_name = 7
 	
 	Global.is_game_won = false
-	#%CountDownTimer.cd_timer.paused = false
-	#%Timer.cd_timer.paused = false
+	
 	# start with slower and gradually go to faster
-	$EnemySpawnTimer.wait_time = 1.8
+	# every 20 seconds the time is decreased by 0.2
+	$EnemySpawnTimer.wait_time = 1.7
+	spawn_timer_decrease.wait_time = decrease_interval
 	
 	#fire_fly_spawn_timer.start(randi_range(10,18)) 
 
@@ -90,6 +96,7 @@ func _physics_process(delta: float) -> void:
 		spawn_possessed()
 	
 	
+	
 #func show_win_game():
 	#Global.is_game_won = true
 	#sfx_win.play()
@@ -111,6 +118,8 @@ func show_game_over():
 	player_instance.can_move = false
 	Global.is_game_over = true
 	game_over.show()
+	Global.update_personal_best() # update personal best when game over only for level 7
+	Global.upupdate_personal_best_time() # personal best time
 	sfx_game_over.play()
 	# show that the ghosts go back to hiding spots when sun rises
 	kill_all_enemies()
@@ -214,3 +223,9 @@ func _on_fire_fly_spawn_timer_timeout() -> void:
 		pass
 	else:
 		return
+
+
+func _on_spawn_timer_decrease_timeout() -> void:
+	pass # Replace with function body.
+	$EnemySpawnTimer.wait_time = max($EnemySpawnTimer.wait_time - decrease_amount, min_spawn_time)
+	print("spawn rate decreased: ", $EnemySpawnTimer.wait_time)
