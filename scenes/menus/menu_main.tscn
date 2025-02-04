@@ -319,7 +319,7 @@ polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1064.91, -466.019, -8
 [connection signal="body_entered" from="MarginContainer/VBoxContainer/Play/b_area" to="." method="_on_b_area_body_entered"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_options_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_options_pressed"]
-[connection signal="body_entered" from="MarginContainer/VBoxContainer/Settings/o_area" to="." method="_on_b_options_body_entered"]
 [connection signal="body_entered" from="MarginContainer/VBoxContainer/Settings/o_area" to="." method="_on_o_area_body_entered"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Settings/o_area" to="." method="_on_b_options_body_entered"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

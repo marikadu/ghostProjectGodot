@@ -21,7 +21,7 @@ extends Node2D
 
 
 var possessed = preload("res://enemies/possessed.tscn")
-var npc_instance: Node = null  # Store the NPC instance
+var npc_instance: Node = null
 var player_instance
 #var npc_instance = null
 

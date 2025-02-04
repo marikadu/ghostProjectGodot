@@ -7,7 +7,7 @@ extends Control
 @onready var v_box_infinite_night: VBoxContainer = $VBoxInfiniteNight
 #@onready var v_box_container: VBoxContainer = $MarginContainer/VBoxContainer
 @onready var personal_best: Label = %PersonalBestNumber
-@onready var personal_best_time: Label = $BestTime/PersonalBestTime
+@onready var personal_best_time_label: Label = $BestTime/PersonalBestTime
 
 
 func _ready() -> void:
@@ -34,8 +34,8 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	personal_best.text = str(Global.personal_best)
-	personal_best_time.text = str(Global.personal_best_time)
-
+	# storing personal best time as int for later to compare previous time and new time
+	personal_best_time_label.text = "%02d:%02d" % [int(Global.personal_best_time) / 60, int(Global.personal_best_time) % 60]
 
 func _on_back_pressed() -> void:
 	print("back")

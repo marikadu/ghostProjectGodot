@@ -41,6 +41,7 @@ var scripted_enemy_2 = preload("res://enemies/enemy_1_tutorial.tscn")
 var scripted_enemy_2_instance
 var scripted_enemy_3 = preload("res://enemies/enemy_3_tutorial.tscn")
 var scripted_enemy_3_instance
+# tutorial ghost
 var orial = preload("res://player/orial.tscn")
 var orial_instance
 

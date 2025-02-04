@@ -24,9 +24,10 @@ extends Node2D
 var min_spawn_time = 0.4
 var decrease_amount = 0.2 # for how much to decrease every 20 seconds
 var decrease_interval = 20.0
+var times_possessed_is_spawned = 0
 
 var possessed = preload("res://enemies/possessed.tscn")
-var npc_instance: Node = null  # Store the NPC instance
+var npc_instance: Node = null
 var player_instance
 #var npc_instance = null
 
@@ -58,7 +59,6 @@ func _ready() -> void:
 	#fire_fly_spawn_timer.start(randi_range(10,18)) 
 
 	# connecting to signals
-	#Events.win_game.connect(show_win_game)
 	Events.game_over.connect(show_game_over)
 	Events.npc_died.connect(_on_npc_died)
 	Events.possessed_defeated.connect(_on_possessed_defeated)
@@ -66,18 +66,10 @@ func _ready() -> void:
 	# resetting the score for every new game
 	Global.score = 0
 	print("resetting score:", Global.score)
-	
-#	checking if camera node is found
-	#if camera == null:
-		#print("camera is not found, where is camera?")
-	#else:
-		#print("camera found")
-		
+
 	print(Global.current_scene_name)
-		
-	#possessed.possessed_area.connect("body_exited", self, "_on_possessed_escapes_body_exited")
-		
-	
+
+
 	if npc_instance == null:  # check if the NPC instance exists
 		npc_instance = npc.instantiate()  # instance the NPC
 		#npc_instance.position = Vector2(576, 390)
@@ -91,46 +83,26 @@ func _ready() -> void:
 	player_instance = player.instantiate()
 	
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("spawn_possessed"):
 		spawn_possessed()
-	
-	
-	
-#func show_win_game():
-	#Global.is_game_won = true
-	#sfx_win.play()
-	#win_game.show()
-	#kill_all_enemies()
-	#Global.update_personal_best() # updating personal best ONLY when won the game
-	#can_spawn_enemies = false
-	#can_spawn_fireflies = false
-	#npc_instance.npc_ignore_player = true
-	#if Global.unlocked_levels < 6 :
-		#Global.unlocked_levels = 6
-		#print("unlocked level 6!")
-	#else:
-		#print("you already have level 6 unlocked")
 
 
-	
 func show_game_over():
 	player_instance.can_move = false
 	Global.is_game_over = true
 	game_over.show()
 	Global.update_personal_best() # update personal best when game over only for level 7
-	Global.upupdate_personal_best_time() # personal best time
+	# personal best time
+	Global.time_recorded = $"%Timer".get_time_formatted()
+	Global.update_personal_best_time()
 	sfx_game_over.play()
 	# show that the ghosts go back to hiding spots when sun rises
 	kill_all_enemies()
 	can_spawn_enemies = false
 	can_spawn_fireflies = false
 	npc_instance.npc_ignore_player = true
-	#%CountDownTimer
-	%Timer.cd_timer.paused = true
-	#get_tree().paused = true # pause game
-#	I don't know if I need to unpause it when I go to other screen, show check it later
-	
+
 
 #func _on_npc_died():
 	#spawn_possessed()
@@ -138,6 +110,7 @@ func show_game_over():
 	## like change the colour / apply filter
 	#kill_all_enemies()
 	#can_spawn_enemies = false
+	
 	
 func _on_npc_died():
 	match npc_instance.killed_by:
@@ -157,10 +130,22 @@ func _on_npc_died():
 func spawn_possessed():
 	var possessed_instance = possessed.instantiate()
 	possessed_instance.position = Vector2(578, 426)
-	possessed_instance.min_speed = 160
-	possessed_instance.speed = 180
-	possessed_instance.max_speed = 300
+	
 	call_deferred("add_child", possessed_instance)
+	
+	# increase speed every time the possessed is spawned
+	var min_speed_increase = times_possessed_is_spawned * 8
+	var speed_increase = times_possessed_is_spawned * 10
+	var max_speed_increase = times_possessed_is_spawned * 3
+	
+	possessed_instance.min_speed = 130 + min_speed_increase
+	possessed_instance.speed = 145 + speed_increase
+	possessed_instance.max_speed = 260 + max_speed_increase
+	
+	times_possessed_is_spawned += 1
+	
+	print("times possessed is spawned: ", times_possessed_is_spawned)
+	
 
 
 func _on_possessed_defeated():
@@ -226,6 +211,11 @@ func _on_fire_fly_spawn_timer_timeout() -> void:
 
 
 func _on_spawn_timer_decrease_timeout() -> void:
-	pass # Replace with function body.
 	$EnemySpawnTimer.wait_time = max($EnemySpawnTimer.wait_time - decrease_amount, min_spawn_time)
 	print("spawn rate decreased: ", $EnemySpawnTimer.wait_time)
+	
+	# the possessed's speed changes
+	#possessed_instance.min_speed = 160
+	#possessed_instance.speed = 180
+	#possessed_instance.max_speed = 300
+	

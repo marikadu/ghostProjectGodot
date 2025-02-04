@@ -1,5 +1,5 @@
 extends CharacterBody2D
-# if I enable layer 1 or mask 1, the enemy stops when it reaches the player
+
 
 @export var min_speed = 130
 @export var speed = 145
@@ -37,7 +37,6 @@ var random_direction: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
-	#health = 9.0
 
 	player = get_tree().root.get_node("main/GhostPlayer")
 	npc = Global.npc_instance
