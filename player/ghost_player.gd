@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 @export var max_speed = 460
 @export var acceleration = 2700
-@export var friction = 600
-@export var dash_speed = 1300
+@export var friction = 900
+@export var dash_speed = 1330
 
 @export var max_stamina_sections = 5
 @export var dash_stamina_cost = 1
@@ -17,6 +17,7 @@ var current_speed = 0.0
 var current_stamina = max_stamina_sections
 var restoring_stamina = false
 var can_move = true
+
 
 var input: Vector2 = Vector2.ZERO
 var playback: AnimationNodeStateMachinePlayback
@@ -73,6 +74,7 @@ func _physics_process(delta: float) -> void:
 		
 		# dashing
 		if Input.is_action_just_pressed("dash") and input != Vector2.ZERO:
+			#print("dashing!")
 			start_dash()
 
 		# if the player is not moving or is standing -> sliding
@@ -82,16 +84,29 @@ func _physics_process(delta: float) -> void:
 			apply_movement(input * acceleration * delta)
 		
 		if dashing:
+			#apply_movement(velocity * delta * dash_speed)
 			velocity = velocity.normalized() * dash_speed
+			#apply_friction(friction * delta)
+			
+			
+			#velocity = velocity.normalized() * dash_speed # the player is sliding after dashing
+			# BUT if the player quickly changes direction and dashes, the player will go the initial
+			# direciton which makes the controlls unresponsive
+			
+			#velocity = input.normalized() * dash_speed # the player is in full controll of the directions
+			# BUT the player is not sliding after dashing
+			
+			#apply_friction(friction * delta)
+			#apply_movement(input * acceleration * delta) * dash_speed
 		
 	else:
+		# slowly slide
 		velocity = lerp(velocity, Vector2.ZERO, delta * 2)
 
 
 	move_and_slide()
 	select_animation()
 	update_animation_param()
-	#sad_ghost()
 	
 	#sprite_move.scale.x = move_toward(sprite_move.scale.x, 1, 1 * delta)
 	#sprite_move.scale.y = move_toward(sprite_move.scale.y, 1, 1 * delta)
@@ -176,10 +191,16 @@ func spawn_dash_effect():
 	get_parent().add_child(dash_effect)
 
 # when dash ends (after 0.2 seconds after dash)
-# make the UI stamina bar to restore here!!!!!!!
 func _on_dash_timer_timeout() -> void:
 	ghost_effect_timer.stop()
 	dashing = false
+	#print("no more dashing")
+	
+	#if velocity.length() > 0:
+		#velocity -= velocity.normalized() * 200
+		#if velocity.length() < 0.1:
+			#velocity = Vector2.ZERO
+			
 	#print("waiting...wating...")
 	if dash_timer_reset.is_stopped():
 		#print("stop wait timer")

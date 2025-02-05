@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dn4008nv06clk"]
+[gd_scene load_steps=27 format=3 uid="uid://dn4008nv06clk"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_60uys"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_3r7k7"]
@@ -32,7 +32,8 @@ shader = ExtResource("2_3r7k7")
 shader_parameter/isHit = false
 shader_parameter/Tint = Color(1, 1, 1, 1)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5fv83"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3j8o7"]
+size = Vector2(20.3925, 18.2884)
 
 [sub_resource type="Animation" id="Animation_lueaj"]
 length = 0.0115
@@ -75,6 +76,9 @@ _data = {
 _data = [Vector2(0, 0.736264), 0.0, 0.0, 0, 0, Vector2(0.0539419, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.195021, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.975104, 0.406593), 0.0, 0.0, 0, 0]
 point_count = 4
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ge2x"]
+size = Vector2(20.584, 19.1442)
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3vm2v"]
 random_pitch = 1.1
 streams_count = 1
@@ -89,15 +93,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_60uys")
 
-[node name="Stamina" parent="." instance=ExtResource("2_tp1el")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Stamina" parent="CanvasLayer" instance=ExtResource("2_tp1el")]
 z_index = 6
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 137.0
-offset_top = 49.0
+offset_top = 36.0
 offset_right = 137.0
-offset_bottom = 49.0
+offset_bottom = 36.0
 grow_horizontal = 1
 grow_vertical = 1
 size_flags_horizontal = 4
@@ -170,9 +176,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 183.0
-offset_top = -155.0
+offset_top = -201.0
 offset_right = 407.0
-offset_bottom = 168.0
+offset_bottom = 324.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(113, 53)
@@ -188,13 +194,13 @@ layout_mode = 2
 theme = ExtResource("2_36rfs")
 text = "Play"
 
-[node name="b_area" type="Area2D" parent="MarginContainer/VBoxContainer/Play"]
+[node name="p_area" type="Area2D" parent="MarginContainer/VBoxContainer/Play"]
 input_pickable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Play/b_area"]
-position = Vector2(112, 44)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Play/p_area"]
+position = Vector2(111.5, 45)
 scale = Vector2(10.445, 4.265)
-shape = SubResource("CircleShape2D_5fv83")
+shape = SubResource("RectangleShape2D_3j8o7")
 
 [node name="HitFlash" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/Play"]
 libraries = {
@@ -217,6 +223,10 @@ initial_velocity_max = 102.3
 scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_6khei")
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
 [node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
@@ -227,9 +237,9 @@ text = "Settings"
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Settings/o_area"]
-position = Vector2(112, 46)
+position = Vector2(112.5, 44.175)
 scale = Vector2(10.445, 4.265)
-shape = SubResource("CircleShape2D_5fv83")
+shape = SubResource("RectangleShape2D_8ge2x")
 
 [node name="HitFlash2" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/Settings"]
 root_node = NodePath("../../Play")
@@ -253,11 +263,40 @@ initial_velocity_max = 102.3
 scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_6khei")
 
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme = ExtResource("2_36rfs")
 text = "Exit"
+
+[node name="e_area" type="Area2D" parent="MarginContainer/VBoxContainer/Exit"]
+position = Vector2(0, 1)
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarginContainer/VBoxContainer/Exit/e_area"]
+position = Vector2(112.5, 44.175)
+scale = Vector2(10.445, 4.265)
+shape = SubResource("RectangleShape2D_8ge2x")
+
+[node name="e_splash" type="CPUParticles2D" parent="MarginContainer/VBoxContainer/Exit"]
+position = Vector2(91, 48)
+emitting = false
+lifetime = 1.2
+one_shot = true
+speed_scale = 2.47
+explosiveness = 0.86
+randomness = 0.16
+texture = ExtResource("5_p17an")
+spread = 176.55
+gravity = Vector2(0, 0)
+initial_velocity_min = 71.52
+initial_velocity_max = 102.3
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_6khei")
 
 [node name="punching_bag" parent="." instance=ExtResource("8_jpx4s")]
 position = Vector2(253, 544)
@@ -291,6 +330,7 @@ position = Vector2(576, 271)
 unique_name_in_owner = true
 top_level = true
 position = Vector2(584, 449)
+zoom = Vector2(0.9, 0.9)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
@@ -316,10 +356,10 @@ polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1064.91, -466.019, -8
 
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="body_entered" from="MarginContainer/VBoxContainer/Play/b_area" to="." method="_on_b_area_body_entered"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Play/p_area" to="." method="_on_p_area_body_entered"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_options_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_options_pressed"]
 [connection signal="body_entered" from="MarginContainer/VBoxContainer/Settings/o_area" to="." method="_on_o_area_body_entered"]
-[connection signal="body_entered" from="MarginContainer/VBoxContainer/Settings/o_area" to="." method="_on_b_options_body_entered"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="body_entered" from="MarginContainer/VBoxContainer/Exit/e_area" to="." method="_on_e_area_body_entered"]

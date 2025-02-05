@@ -11,6 +11,8 @@ extends Control
 @onready var label_6: Label = $Label6
 
 @onready var hit: AudioStreamPlayer2D = $hit
+@onready var voice: AudioStreamPlayer2D = $voice
+
 #@onready var player = preload("res://player/ghost_player.tscn")
 #var player: CharacterBody2D
 @onready var player = get_tree().root.get_node("main/GhostPlayer")
@@ -82,38 +84,51 @@ func _on_first_body_entered(body: Node2D) -> void:
 func _on_tutorial_start():
 	label_1.visible = true
 	can_hit_1 = true
+	voice.play()
 
 
 func first_get_hit():
-	#player.ghost_dies.play()
 	player.hit.play()
-	#hit_flash.play("hit_flash")
+	can_hit_1 = false
 	label_1.scale = Vector2(1.5, 0.7)
 	player.dash_hit.play()
 	await get_tree().create_timer(0.4).timeout
 	label_1.visible = false
-	can_hit_1 = false
-	#label_1.queue_free()
 	label_2.visible = true
 	can_hit_2 = true
+	voice.play()
 	Events.send_scripted_enemy.emit()
 	
 
 
 func _on_second_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and can_hit_2:
+		can_hit_2 = false
 		player.hit.play()
 		label_2.scale = Vector2(1.5, 0.7)
 		player.dash_hit.play()
-		#await get_tree().create_timer(0.2).timeout
-		print("you are so cool_2")
-		
+		#print("you are so cool_2")
+		await get_tree().create_timer(0.4).timeout
+		can_hit_2 = true
+
+
+func _on_third_body_entered(body: Node2D) -> void:
+	if body == player and player.dashing and can_hit_3:
+		can_hit_3 = false
+		player.hit.play()
+		label_3.scale = Vector2(1.5, 0.7)
+		player.dash_hit.play()
+		print("you are so cool3")
+		await get_tree().create_timer(0.4).timeout
+		can_hit_3 = true
+
 	
 func _on_npc_is_scared_of_the_player_text():
 	Events.npc_is_scared_of_the_player2.emit()
 	
 	label_3.visible = true
 	can_hit_3 = true
+	voice.play()
 	
 	label_2.visible = false
 	can_hit_2 = false
@@ -136,52 +151,63 @@ func _on_introduce_fireflies():
 	label_4.visible = true
 	can_hit_4 = true
 	bg_4.visible = true
+	voice.play()
 	await get_tree().create_timer(3).timeout
 	bg_4.visible = false
+	
+	label_4.visible = false
+	can_hit_4 = false
+	
 	bg_4_2.visible = true
 	label_4_2.visible = true
 	can_hit_4_2 = true
+	voice.play()
 	
 
-func _on_third_body_entered(body: Node2D) -> void:
-	if body == player and player.dashing and can_hit_3:
-		player.hit.play()
-		label_3.scale = Vector2(1.5, 0.7)
-		player.dash_hit.play()
-		print("you are so cool3")
-		
 
 func _on_fourth_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and can_hit_4:
+		can_hit_4 = false
 		player.hit.play()
 		label_4.scale = Vector2(1.5, 0.7)
 		player.dash_hit.play()
 		print("you are so cool4")
+		await get_tree().create_timer(0.4).timeout
+		can_hit_4 = true
 
 
 func _on_fourth_2_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and can_hit_4_2:
+		can_hit_4_2 = false
 		player.hit.play()
 		label_4_2.scale = Vector2(1.5, 0.7)
 		player.dash_hit.play()
 		print("you are so cool4_2")
+		await get_tree().create_timer(0.4).timeout
+		can_hit_4_2 = true
 
 
 
 func _on_fifth_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and can_hit_5:
+		can_hit_5 = false
 		player.hit.play()
 		label_5.scale = Vector2(1.5, 0.7)
 		player.dash_hit.play()
 		print("you are so cool5")
+		await get_tree().create_timer(0.4).timeout
+		can_hit_5 = true
 
 
 func _on_sixth_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and can_hit_6:
+		can_hit_6 = false
 		player.hit.play()
 		label_6.scale = Vector2(1.5, 0.7)
 		player.dash_hit.play()
 		print("you are so cool6")
+		await get_tree().create_timer(0.4).timeout
+		can_hit_6 = true
 	
 	
 func _on_start_counting_down():
@@ -194,6 +220,7 @@ func _on_start_counting_down():
 	
 	label_5.visible = true
 	can_hit_5 = true
+	voice.play()
 
 
 func _on_win_game():
@@ -202,6 +229,7 @@ func _on_win_game():
 	
 	label_6.visible = true
 	can_hit_6 = true
+	voice.play()
 	await get_tree().create_timer(6).timeout
 	label_6.visible = false
 	can_hit_6 = false

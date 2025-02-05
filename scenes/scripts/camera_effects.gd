@@ -8,7 +8,8 @@ var shake_strength: float = 0.0
 var shake_fade: float = 0.0
 var camZoom = Vector2.ZERO
 var zoom_camera: bool
-var zoom = Vector2(1.0, 1.0)
+#var zoom = Vector2(1.0, 1.0)
+var zoom = Vector2(0.9, 0.9)
 #var zoom_speed = 0.3
 var zoom_speed = 1
 
@@ -43,10 +44,10 @@ func apply_shake(custom_strength: float = -1.0, custom_fade: float = -1.0):
 func zoom_in():
 	#camera.zoom.x = lerp(1.0, 1.2, zoom_time)
 	#camera.zoom.y = lerp(1.0, 1.2, zoom_time)
-	zoom = Vector2(1.02, 1.02)
+	zoom = Vector2(1.01, 1.01)
 	
 func zoom_out():
-	zoom = Vector2(1.0, 1.0)
+	zoom = Vector2(0.9, 0.9)
 	
 	
 	

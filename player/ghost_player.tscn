@@ -492,8 +492,8 @@ bus = &"SFX"
 [node name="stamina_restored" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(2.24719, 2.24719)
 stream = SubResource("AudioStreamRandomizer_7h1ig")
-volume_db = 1.2
-pitch_scale = 1.04
+volume_db = 0.6
+pitch_scale = 1.02
 panning_strength = 0.0
 bus = &"SFX"
 

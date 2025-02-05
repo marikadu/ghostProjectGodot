@@ -53,7 +53,7 @@ func _ready() -> void:
 	
 	# start with slower and gradually go to faster
 	# every 20 seconds the time is decreased by 0.2
-	$EnemySpawnTimer.wait_time = 1.7
+	$EnemySpawnTimer.wait_time = 1.4
 	spawn_timer_decrease.wait_time = decrease_interval
 	
 	#fire_fly_spawn_timer.start(randi_range(10,18)) 
@@ -89,19 +89,20 @@ func _physics_process(_delta: float) -> void:
 
 
 func show_game_over():
-	player_instance.can_move = false
-	Global.is_game_over = true
-	game_over.show()
-	Global.update_personal_best() # update personal best when game over only for level 7
-	# personal best time
-	Global.time_recorded = $"%Timer".get_time_formatted()
-	Global.update_personal_best_time()
-	sfx_game_over.play()
-	# show that the ghosts go back to hiding spots when sun rises
-	kill_all_enemies()
-	can_spawn_enemies = false
-	can_spawn_fireflies = false
-	npc_instance.npc_ignore_player = true
+	if not Global.is_game_over: # don't trigget game over if there is already game over
+		player_instance.can_move = false
+		Global.is_game_over = true
+		game_over.show()
+		Global.update_personal_best() # update personal best when game over only for level 7
+		# personal best time
+		Global.time_recorded = $"%Timer".get_time_formatted()
+		Global.update_personal_best_time()
+		sfx_game_over.play()
+		# show that the ghosts go back to hiding spots when sun rises
+		kill_all_enemies()
+		can_spawn_enemies = false
+		can_spawn_fireflies = false
+		npc_instance.npc_ignore_player = true
 
 
 #func _on_npc_died():
@@ -134,9 +135,9 @@ func spawn_possessed():
 	call_deferred("add_child", possessed_instance)
 	
 	# increase speed every time the possessed is spawned
-	var min_speed_increase = times_possessed_is_spawned * 8
-	var speed_increase = times_possessed_is_spawned * 10
-	var max_speed_increase = times_possessed_is_spawned * 3
+	var min_speed_increase = times_possessed_is_spawned * 10
+	var speed_increase = times_possessed_is_spawned * 12
+	var max_speed_increase = times_possessed_is_spawned * 4
 	
 	possessed_instance.min_speed = 130 + min_speed_increase
 	possessed_instance.speed = 145 + speed_increase

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://djb0frbwme6q3"]
+[gd_scene load_steps=12 format=3 uid="uid://djb0frbwme6q3"]
 
 [ext_resource type="Script" path="res://scenes/scripts/tutorial.gd" id="1_bom5o"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="1_ifomp"]
@@ -9,6 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://dppdryiaemd4a" path="res://sprites/UI/speech_bubble5.png" id="6_8loot"]
 [ext_resource type="Texture2D" uid="uid://cqp33f4v4x1wr" path="res://sprites/UI/speech_bubble6.png" id="7_c86df"]
 [ext_resource type="Texture2D" uid="uid://bjx5mgkgwxtvm" path="res://sprites/UI/speech_bubble7.png" id="8_uo8cp"]
+[ext_resource type="AudioStream" uid="uid://cuv87knktx10p" path="res://SFX/ghost_voice.ogg" id="10_ug0wv"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xcntx"]
+random_pitch = 1.26
+streams_count = 1
+stream_0/stream = ExtResource("10_ug0wv")
 
 [node name="Tutorial" type="Control"]
 layout_mode = 3
@@ -138,18 +144,19 @@ texture = ExtResource("5_ov3fr")
 polygon = PackedVector2Array(-8, 116, 188, 122, 275, 94, 363, 50, 357, -3, 287, -16, 199, -9, 48, -16, -13, 2)
 
 [node name="Label4_2" type="Label" parent="."]
-visible = false
 layout_mode = 0
-offset_left = 92.0
-offset_top = 121.0
-offset_right = 499.0
-offset_bottom = 286.0
+offset_left = 90.0
+offset_top = 136.0
+offset_right = 497.0
+offset_bottom = 383.0
 theme = ExtResource("1_ifomp")
 theme_override_colors/font_color = Color(0.215686, 0.419608, 0.603922, 1)
 theme_override_font_sizes/font_size = 36
 text = "If you hit the firefly 
 while dashing, it will 
-restore 2 stamina bars"
+restore 2 stamina bars
+Fireflies heal the human
+if they reach them"
 
 [node name="bg4_2" type="NinePatchRect" parent="Label4_2"]
 z_index = -1
@@ -164,7 +171,7 @@ texture = ExtResource("6_8loot")
 [node name="fourth_2" type="Area2D" parent="Label4_2"]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label4_2/fourth_2"]
-polygon = PackedVector2Array(-14, 163, 343, 164, 340, 91, 326, 7, 237, -27, 34, -18, -17, 17)
+polygon = PackedVector2Array(-10, 270, 181, 283, 346, 229, 340, 91, 330, 10, 237, -27, -8, -12, -20, 73)
 
 [node name="Label5" type="Label" parent="."]
 visible = false
@@ -222,6 +229,13 @@ polygon = PackedVector2Array(-3, 50, 154, 49, 155, 5, -1, 3)
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_apkci")
+
+[node name="voice" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_xcntx")
+volume_db = 6.067
+pitch_scale = 0.93
+panning_strength = 0.1
+bus = &"SFX"
 
 [connection signal="body_entered" from="Label1/first" to="." method="_on_first_body_entered"]
 [connection signal="body_entered" from="Label2/second" to="." method="_on_second_body_entered"]

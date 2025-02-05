@@ -1,7 +1,7 @@
 extends CharacterBody2D
 # if I enable layer 1 or mask 1, the enemy stops when it reaches the player
 
-var speed = 100
+var speed = 130
 var npc: CharacterBody2D
 var player: CharacterBody2D
 var dead : bool

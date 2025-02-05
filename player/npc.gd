@@ -154,8 +154,9 @@ func heal(healing: float):
 	set_health(min(health + healing, max_health))
 	animated_sprite.scale = Vector2(1.2, 0.8)
 	
-	await get_tree().create_timer(1).timeout
-	animated_sprite.play("sleeping")
+	if not Global.is_game_won:
+		await get_tree().create_timer(1).timeout
+		animated_sprite.play("sleeping")
 	
 	
 func restore_health(amount: float) -> void:

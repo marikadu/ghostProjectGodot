@@ -23,7 +23,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_l6exe"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -84, -83, 0, 0, 0, 0, 332.663, -99.5643, 0, 0, 0, 0, 1254, -80, 0, 0, 0, 0, 1256, 969, 0, 0, 0, 0, -96, 960, 0, 0, 0, 0, -84, -83)
+"points": PackedVector2Array(0, 0, 0, 0, -144.565, -96.875, 0, 0, 0, 0, 332.663, -99.5643, 0, 0, 0, 0, 1295.65, -101.042, 0, 0, 0, 0, 1302.17, 965.625, 0, 0, 0, 0, -151.087, 966.667, 0, 0, 0, 0, -148.913, -82.2917)
 }
 point_count = 6
 
@@ -52,10 +52,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 1.63333),
+"times": PackedFloat32Array(0.0333333, 1.76667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(756, -64), Vector2(756, 24)]
+"values": [Vector2(756, -87), Vector2(756, 16)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u3dku"]
@@ -139,6 +139,7 @@ gradient_texture = ExtResource("3_pun4j")
 unique_name_in_owner = true
 top_level = true
 position = Vector2(584, 449)
+zoom = Vector2(0.9, 0.9)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
@@ -151,8 +152,8 @@ curve = SubResource("Curve2D_l6exe")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Camera2D/Path2D"]
 unique_name_in_owner = true
-position = Vector2(-84, -83)
-rotation = -0.0397337
+position = Vector2(-144.565, -96.875)
+rotation = -0.00563518
 
 [node name="Pause" type="CanvasLayer" parent="."]
 
@@ -182,9 +183,9 @@ wait_time = 7.0
 [node name="HealthBar" parent="UI" instance=ExtResource("7_p4hff")]
 z_index = 6
 offset_left = 756.0
-offset_top = -64.0
+offset_top = 16.0
 offset_right = 1056.0
-offset_bottom = -24.0
+offset_bottom = 56.0
 
 [node name="healthPlayer" type="AnimationPlayer" parent="UI/HealthBar"]
 libraries = {
@@ -197,9 +198,9 @@ anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 137.0
-offset_top = 24.0
+offset_top = 16.0
 offset_right = 137.0
-offset_bottom = 24.0
+offset_bottom = 16.0
 grow_horizontal = 1
 grow_vertical = 1
 size_flags_horizontal = 4
@@ -239,25 +240,25 @@ position = Vector2(-4, 10)
 [node name="ColorRect" type="ColorRect" parent="UI/Border"]
 material = SubResource("ShaderMaterial_rmbww")
 offset_left = -7.0
-offset_top = -182.0
+offset_top = -192.0
 offset_right = 33.0
-offset_bottom = -142.0
+offset_bottom = -152.0
 scale = Vector2(30.04, 8)
 
 [node name="ColorRect2" type="ColorRect" parent="UI/Border"]
 material = SubResource("ShaderMaterial_rmbww")
-offset_left = 96.0
+offset_left = 104.0
 offset_top = -182.0
-offset_right = 136.0
+offset_right = 144.0
 offset_bottom = -142.0
 rotation = 1.57079
 scale = Vector2(30.04, 8)
 
 [node name="ColorRect4" type="ColorRect" parent="UI/Border"]
 material = SubResource("ShaderMaterial_rmbww")
-offset_left = 1380.0
+offset_left = 1375.0
 offset_top = -182.0
-offset_right = 1420.0
+offset_right = 1415.0
 offset_bottom = -142.0
 rotation = 1.57079
 scale = Vector2(30.04, 8)
@@ -265,9 +266,9 @@ scale = Vector2(30.04, 8)
 [node name="ColorRect3" type="ColorRect" parent="UI/Border"]
 material = SubResource("ShaderMaterial_rmbww")
 offset_left = -7.0
-offset_top = 754.0
+offset_top = 752.0
 offset_right = 33.0
-offset_bottom = 794.0
+offset_bottom = 792.0
 scale = Vector2(30.04, 8)
 
 [node name="bg" parent="." instance=ExtResource("14_lav7a")]
@@ -277,7 +278,7 @@ position = Vector2(576, 432)
 [node name="GhostPlayer" parent="." instance=ExtResource("15_r4u87")]
 unique_name_in_owner = true
 z_index = 2
-position = Vector2(576, 305)
+position = Vector2(576, 239)
 
 [node name="possessed_dies" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(0.445, 0.445)
@@ -313,26 +314,26 @@ collision_mask = 15
 position = Vector2(1004, 559)
 scale = Vector2(1.03, 1.03)
 build_mode = 1
-polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1064.91, -466.019, -954.233, -465.049, -954.233, 298.058, 144.796, 298.058, 143.825, -473.786, -1063.94, -473.786, -1039.67, -561.165, 214.699, -561.165)
+polygon = PackedVector2Array(310, 410, -1100, 410, -1100, -510, -1018, -510, -1018, 333, 194, 333, 194, -508, -1066, -508, -1066, -561.165, 310, -561.165)
 
 [node name="PossessedEscapes" type="Area2D" parent="."]
 collision_layer = 17
 collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PossessedEscapes"]
-position = Vector2(576, -24)
+position = Vector2(576, -41)
 shape = SubResource("RectangleShape2D_ldot6")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="PossessedEscapes"]
-position = Vector2(583, 939)
+position = Vector2(583, 956)
 shape = SubResource("RectangleShape2D_ldot6")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="PossessedEscapes"]
-position = Vector2(-33, 443)
+position = Vector2(-73, 443)
 shape = SubResource("RectangleShape2D_g8ebb")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="PossessedEscapes"]
-position = Vector2(1212, 435)
+position = Vector2(1237, 435)
 shape = SubResource("RectangleShape2D_g8ebb")
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]

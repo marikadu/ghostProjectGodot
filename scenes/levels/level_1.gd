@@ -107,7 +107,7 @@ func _ready() -> void:
 		
 	if scripted_enemy_2_instance == null:  # check if the scripted_2 instance exists
 		scripted_enemy_2_instance = scripted_enemy_2.instantiate()
-		scripted_enemy_2_instance.position = Vector2(1241, 335)
+		scripted_enemy_2_instance.position = Vector2(1300, 335)
 		add_child(scripted_enemy_2_instance)
 		
 	if scripted_enemy_3_instance == null:  # check if the scripted_3 instance exists
@@ -159,18 +159,19 @@ func show_win_game():
 
 	
 func show_game_over():
-	npc_instance.npc_ignore_player = true
-	player_instance.can_move = false
-	Global.is_game_over = true
-	game_over.show()
-	sfx_game_over.play()
-	# show that the ghosts go back to hiding spots when sun rises
-	kill_all_enemies()
-	# main character (ghost) evaporates or is sad
-	can_spawn_enemies = false
-	can_spawn_fireflies = false
-	#get_tree().paused = true # pause game
-#	I don't know if I need to unpause it when I go to other screen, show check it later
+	if not Global.is_game_over: # don't trigget game over if there is already game over
+		npc_instance.npc_ignore_player = true
+		player_instance.can_move = false
+		Global.is_game_over = true
+		game_over.show()
+		sfx_game_over.play()
+		# show that the ghosts go back to hiding spots when sun rises
+		kill_all_enemies()
+		# main character (ghost) evaporates or is sad
+		can_spawn_enemies = false
+		can_spawn_fireflies = false
+		#get_tree().paused = true # pause game
+	#	I don't know if I need to unpause it when I go to other screen, show check it later
 
 func _on_woke_up_human():
 	npc_instance.npc_ignore_player = true
@@ -212,7 +213,7 @@ func _on_possessed_defeated():
 	possessed_dies.play()
 	possessed_hit.play()
 	if npc_instance != null:
-		npc_instance.restore_health(2.0)
+		npc_instance.restore_health(5.0)
 	else:
 		print("npc not found")
 	can_spawn_enemies = true

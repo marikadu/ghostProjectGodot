@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://ccq0ksogu3xkq"]
+[gd_scene load_steps=71 format=3 uid="uid://ccq0ksogu3xkq"]
 
 [ext_resource type="Script" path="res://player/npc.gd" id="1_05yxr"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_ggpv7"]
@@ -306,9 +306,6 @@ _data = {
 "hit_flash": SubResource("Animation_4443o")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qos5"]
-size = Vector2(136.71, 163.83)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8d2p6"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_snm13"]
@@ -357,9 +354,9 @@ libraries = {
 [node name="Area2D" type="Area2D" parent="."]
 visibility_layer = 5
 
-[node name="sleep_distance" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2(1.9, 2)
-shape = SubResource("RectangleShape2D_2qos5")
+[node name="sleep_distance" type="CollisionPolygon2D" parent="Area2D"]
+scale = Vector2(2.315, 2.315)
+polygon = PackedVector2Array(0, -130, -130, -65, -120, 110, 120, 110, 130, -65)
 
 [node name="isHitAnimation" type="Timer" parent="."]
 wait_time = 0.7

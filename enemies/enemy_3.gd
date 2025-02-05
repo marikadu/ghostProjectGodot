@@ -2,12 +2,12 @@ extends CharacterBody2D
 # if I enable layer 1 or mask 1, the enemy stops when it reaches the player
 
 var speed = 40
-var max_speed = 300
+var max_speed = 320
 var npc: CharacterBody2D
 var player: CharacterBody2D
-var time_to_max_speed = 2.0 # time to reach the max.speed
+var time_to_max_speed = 1.5 # time to reach the max.speed
 var elapsed_time = 0.0  # time tracker for speed increase
-var delay_before_acceleration = 2.0 # wait before setting to max.speed
+var delay_before_acceleration = 2.3 # wait before setting to max.speed
 var is_accelerating = false
 var dead : bool
 

@@ -106,18 +106,19 @@ func show_win_game():
 
 	
 func show_game_over():
-	player_instance.can_move = false
-	Global.is_game_over = true
-	game_over.show()
-	sfx_game_over.play()
-	# show that the ghosts go back to hiding spots when sun rises
-	kill_all_enemies()
-	can_spawn_enemies = false
-	can_spawn_fireflies = false
-	npc_instance.npc_ignore_player = true
-	%CountDownTimer.cd_timer.paused = true
-	#get_tree().paused = true # pause game
-#	I don't know if I need to unpause it when I go to other screen, show check it later
+	if not Global.is_game_over: # don't trigget game over if there is already game over
+		player_instance.can_move = false
+		Global.is_game_over = true
+		game_over.show()
+		sfx_game_over.play()
+		# show that the ghosts go back to hiding spots when sun rises
+		kill_all_enemies()
+		can_spawn_enemies = false
+		can_spawn_fireflies = false
+		npc_instance.npc_ignore_player = true
+		%CountDownTimer.cd_timer.paused = true
+		#get_tree().paused = true # pause game
+	#	I don't know if I need to unpause it when I go to other screen, show check it later
 	
 
 #func _on_npc_died():
@@ -155,7 +156,7 @@ func _on_possessed_defeated():
 	possessed_hit.play()
 	can_spawn_enemies = true
 	if npc_instance != null:
-		npc_instance.restore_health(2.0)
+		npc_instance.restore_health(3.0)
 	else:
 		print("npc not found")
 

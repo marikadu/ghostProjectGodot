@@ -133,7 +133,7 @@ func background_animation_start():
 		
 
 func fade_out_stars():
-	print("fading out the stars")
+	#print("fading out the stars")
 	var tween: Tween = get_tree().create_tween()
 	# transitions and ease for the tweens
 	tween.set_trans(Tween.TRANS_QUART)
