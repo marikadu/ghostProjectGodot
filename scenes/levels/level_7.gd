@@ -21,7 +21,7 @@ extends Node2D
 
 # level 7 special
 @onready var spawn_timer_decrease: Timer = $SpawnTimerDecrease
-var min_spawn_time = 0.4
+var min_spawn_time = 0.3
 var decrease_amount = 0.2 # for how much to decrease every 20 seconds
 var decrease_interval = 20.0
 var times_possessed_is_spawned = 0
