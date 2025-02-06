@@ -129,7 +129,7 @@ func _update_action_list(button, event):
 
 
 func _on_reset_button_pressed() -> void:
-	# reset button has focus "none"
+	AudioManager.play_button_pressed()
 	print("resetting keybindings")
 	InputMap.load_from_project_settings()
 	for action in input_actions:
@@ -140,6 +140,9 @@ func _on_reset_button_pressed() -> void:
 	
 	# getting the actions from the project settings
 	_create_action_list()
+	
+func _on_reset_button_mouse_entered() -> void:
+	AudioManager.play_button_hover()
 
 # ------------------------
 
@@ -149,13 +152,6 @@ func _on_reset_button_pressed() -> void:
 func _on_parallax_toggle_toggled(toggled_on: bool) -> void:
 	ConfigFileHandler.save_video_settings("parallax", toggled_on)
 	Graphics.camera_follow_player = toggled_on
-	#if toggled_on:
-		#Graphics.camera_follow_player = true
-		#ConfigFileHandler.save_video_settings("parallax", toggled_on)
-		#print("camera follow player = true")
-	#else:
-		#Graphics.camera_follow_player = false
-		#print("camera follow player = false")
 
 
 # vsync
@@ -165,46 +161,29 @@ func _on_v_sync_toggle_toggled(toggled_on: bool) -> void:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-	#if toggled_on:
-		#Graphics.vsync_enabled = true
-		#ConfigFileHandler.save_video_settings("vsync", toggled_on)
-		#print("menu: vsync true")
-	#else:
-		#Graphics.vsync_enabled = false
-		#print("menu: vsync false")
 
 
 # camera shake
 func _on_shake_toggle_toggled(toggled_on: bool) -> void:
 	ConfigFileHandler.save_video_settings("screen_shake", toggled_on)
 	Graphics.camera_shake = toggled_on
-	#if toggled_on:
-		#Graphics.camera_shake = true
-		#ConfigFileHandler.save_video_settings("screen_shake", toggled_on)
-		#print("camera shake = true")
-	#else:
-		#Graphics.camera_shake = false
-		#print("camera shake = false")
 
 
 # flash when hit effect
 func _on_flash_toggle_toggled(toggled_on: bool) -> void:
 	ConfigFileHandler.save_video_settings("flash", toggled_on)
 	Graphics.flash_when_hit_effect = toggled_on
-	#if toggled_on:
-		#Graphics.flash_when_hit_effect = true
-		#print("flash hit = true")
-	#else:
-		#Graphics.flash_when_hit_effect = false
-		#print("flash hit = false")
-		
+
 # -----------
 
 
 func _on_back_pressed() -> void:
+	AudioManager.play_button_pressed()
 	print("back")
 	get_tree().change_scene_to_file("res://scenes/menus/menu_main.tscn")
 
+func _on_back_mouse_entered() -> void:
+	AudioManager.play_button_hover()
 
 func _on_master_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:

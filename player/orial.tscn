@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cn2xqtixlnh2p"]
+[gd_scene load_steps=38 format=3 uid="uid://cn2xqtixlnh2p"]
 
 [ext_resource type="Shader" path="res://player/wants_dash.gdshader" id="1_u11qh"]
 [ext_resource type="Script" path="res://player/orial.gd" id="2_w4vmx"]
@@ -18,7 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://dn4ymg6j770xc" path="res://sprites/orial/o_left_hit0000.png" id="18_wlahg"]
 [ext_resource type="Texture2D" uid="uid://n6fx3j70r6ev" path="res://sprites/orial/o_left_up0001.png" id="19_3k0t8"]
 [ext_resource type="Texture2D" uid="uid://bwhv6dbcfjhx6" path="res://sprites/orial/o_left_hit0001.png" id="19_i3bb5"]
-[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="19_upnd1"]
 [ext_resource type="Texture2D" uid="uid://djxcvrn5q2ohu" path="res://sprites/orial/o_left_hit0002.png" id="20_mxebc"]
 [ext_resource type="Texture2D" uid="uid://cj5apiq6r0ra3" path="res://sprites/orial/o_left_up0002.png" id="20_pclep"]
 [ext_resource type="Texture2D" uid="uid://c2y7dbdvo1tnf" path="res://sprites/orial/o_left_up_hit0000.png" id="21_iqisa"]
@@ -314,10 +313,6 @@ initial_velocity_min = 71.52
 initial_velocity_max = 102.3
 scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_lcko2")
-
-[node name="hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("19_upnd1")
-bus = &"SFX"
 
 [node name="movement" type="AnimationPlayer" parent="."]
 libraries = {

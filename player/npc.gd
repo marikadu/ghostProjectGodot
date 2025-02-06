@@ -9,13 +9,6 @@ extends CharacterBody2D
 @onready var player_near_timer: Timer = $player_near
 @onready var camera_control = get_tree().root.get_node("main/CameraControl")
 
-@onready var npc_hit: AudioStreamPlayer2D = $npc_hit
-@onready var hit: AudioStreamPlayer2D = $hit
-@onready var npc_back_from_dead: AudioStreamPlayer2D = $npc_back_from_dead
-@onready var npc_died: AudioStreamPlayer2D = $npc_died
-@onready var player_near_sfx: AudioStreamPlayer2D = $player_near_sfx
-@onready var sfx_healing: AudioStreamPlayer2D = $healing
-
 @onready var vfx_heal: CPUParticles2D = $vfx_heal
 
 @export var enemy_type: String = "npc"
@@ -66,7 +59,7 @@ func set_health(value: float):
 	if health <= 0:
 		health = 0
 		is_alive = false
-		npc_died.play() # death sound
+		AudioManager.play_npc_died()
 		camera_control.apply_shake(30.0, 5)
 		print("npc died. killed: ", killed_by)
 		killedBy()
@@ -104,7 +97,7 @@ func _on_area_2d_body_entered(body_e: Node) -> void:
 		# apply damage if player is near
 		if body_e == player and not npc_ignore_player:
 			camera_control.zoom_in()
-			player_near_sfx.play()
+			AudioManager.play_player_near()
 			is_player_near = true
 			#print("player near")
 			player_near_timer.start()
@@ -115,7 +108,8 @@ func _on_area_2d_body_entered(body_e: Node) -> void:
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body == player and is_alive:
 		camera_control.zoom_out()
-		player_near_sfx.stop()
+		#player_near_sfx.stop()
+		AudioManager.stop_player_near()
 		is_player_near = false
 		player_near_timer.stop()
 		player_near_timer.set_wait_time(3.0) 
@@ -134,8 +128,8 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 func take_damage(damage: float, enemy: Node):
 	killed_by = enemy.enemy_type
 	camera_control.apply_shake(1.2, 1)
-	npc_hit.play()
-	hit.play()
+	AudioManager.play_hit_npc_voice()
+	AudioManager.play_hit_npc_impact()
 	animated_sprite.play("hit")
 	if Graphics.flash_when_hit_effect:
 		hit_flash.play("hit_flash")
@@ -163,7 +157,7 @@ func restore_health(amount: float) -> void:
 	# revive npc if dead and health is restored
 	# if not is_alive and health + amount > 0:
 	if not is_alive:
-		npc_back_from_dead.play()
+		AudioManager.play_npc_back_from_dead()
 		is_alive = true
 		animated_sprite.play("sleeping")
 		print("npc back from the dead")

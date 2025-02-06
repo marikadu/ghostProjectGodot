@@ -1,7 +1,6 @@
 extends Control
 
 @onready var pause_menu: Control = $"."
-#@onready var options_pause = preload("res://scenes/menus/options_pause.tscn")
 @onready var options_pause: Control = $OptionsMenu
 
 
@@ -38,9 +37,11 @@ func pause():
 
 # --- buttons ---
 func _on_resume_pressed() -> void:
+	AudioManager.play_button_pressed()
 	resume()
 
 func _on_main_menu_button_pressed() -> void:
+	AudioManager.play_button_pressed()
 	pause_menu.hide()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/menus/menu_main.tscn")
@@ -48,4 +49,15 @@ func _on_main_menu_button_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
+	AudioManager.play_button_pressed()
 	options_pause.show()
+
+
+func _on_resume_mouse_entered() -> void:
+	AudioManager.play_button_hover()
+
+func _on_settings_mouse_entered() -> void:
+	AudioManager.play_button_hover()
+
+func _on_main_menu_button_mouse_entered() -> void:
+	AudioManager.play_button_hover()

@@ -14,10 +14,6 @@ extends Node2D
 @onready var player = preload("res://player/ghost_player.tscn")
 @onready var firefly = preload("res://player/firefly.tscn")
 @onready var fire_fly_spawn_timer: Timer = $FireFlySpawnTimer
-@onready var possessed_dies: AudioStreamPlayer2D = $possessed_dies
-@onready var possessed_hit: AudioStreamPlayer2D = $possessed_hit
-@onready var sfx_win: AudioStreamPlayer2D = $win
-@onready var sfx_game_over: AudioStreamPlayer2D = $game_over
 
 # level 7 special
 @onready var spawn_timer_decrease: Timer = $SpawnTimerDecrease
@@ -97,7 +93,7 @@ func show_game_over():
 		# personal best time
 		Global.time_recorded = $"%Timer".get_time_formatted()
 		Global.update_personal_best_time()
-		sfx_game_over.play()
+		AudioManager.play_game_over()
 		# show that the ghosts go back to hiding spots when sun rises
 		kill_all_enemies()
 		can_spawn_enemies = false
@@ -150,8 +146,8 @@ func spawn_possessed():
 
 
 func _on_possessed_defeated():
-	possessed_dies.play()
-	possessed_hit.play()
+	AudioManager.play_posessed_dies()
+	AudioManager.play_posessed_hit()
 	can_spawn_enemies = true
 	if npc_instance != null:
 		npc_instance.restore_health(2.0)

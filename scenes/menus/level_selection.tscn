@@ -193,4 +193,5 @@ text = "Back"
 [connection signal="pressed" from="MarginContainer/HBoxContainer/5" to="." method="_on_5_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/6" to="." method="_on_6_pressed"]
 [connection signal="pressed" from="VBoxInfiniteNight/7" to="." method="_on_7_infinite_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Back" to="." method="_on_back_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

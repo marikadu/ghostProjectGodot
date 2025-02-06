@@ -12,10 +12,7 @@ extends Node2D
 @onready var player = preload("res://player/ghost_player.tscn")
 @onready var firefly = preload("res://player/firefly.tscn")
 @onready var fire_fly_spawn_timer: Timer = $FireFlySpawnTimer
-@onready var possessed_dies: AudioStreamPlayer2D = $possessed_dies
-@onready var possessed_hit: AudioStreamPlayer2D = $possessed_hit
-@onready var sfx_win: AudioStreamPlayer2D = $win
-@onready var sfx_game_over: AudioStreamPlayer2D = $game_over
+
 @onready var timer_animation_player: AnimationPlayer = $UI/CountDownTimer/timerPlayer
 @onready var health_animation_player: AnimationPlayer = $UI/HealthBar/healthPlayer
 @onready var tutorial: Control = $Tutorial
@@ -139,7 +136,7 @@ func _physics_process(_delta: float) -> void:
 	
 	
 func show_win_game():
-	sfx_win.play()
+	AudioManager.play_win()
 	win_game.show()
 	Global.is_game_won = true
 	kill_all_enemies()
@@ -164,7 +161,7 @@ func show_game_over():
 		player_instance.can_move = false
 		Global.is_game_over = true
 		game_over.show()
-		sfx_game_over.play()
+		AudioManager.play_game_over()
 		# show that the ghosts go back to hiding spots when sun rises
 		kill_all_enemies()
 		# main character (ghost) evaporates or is sad
@@ -210,8 +207,8 @@ func spawn_possessed():
 	
 
 func _on_possessed_defeated():
-	possessed_dies.play()
-	possessed_hit.play()
+	AudioManager.play_posessed_dies()
+	AudioManager.play_posessed_hit()
 	if npc_instance != null:
 		npc_instance.restore_health(5.0)
 	else:

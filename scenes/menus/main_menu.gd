@@ -9,8 +9,6 @@ extends Control
 @onready var e_splash: CPUParticles2D = $MarginContainer/VBoxContainer/Exit/e_splash
 @onready var camera_2d: Camera2D = %Camera2D
 
-@onready var hit: AudioStreamPlayer2D = $hit
-
 var player: CharacterBody2D
 
 var can_hit_play: bool
@@ -41,20 +39,17 @@ func _physics_process(delta: float) -> void:
 
 func _on_play_pressed() -> void:
 	AudioManager.play_button_pressed()
-	print("play")
 	get_tree().change_scene_to_file("res://scenes/menus/level_selection.tscn")
 
 
 func _on_options_pressed() -> void:
 	AudioManager.play_button_pressed()
-	print("options")
 	get_tree().change_scene_to_file("res://scenes/menus/options.tscn")
 
 
 func _on_exit_pressed() -> void:
 	# add "are you sure you want to leave window"
 	AudioManager.play_button_pressed()
-	print("quit")
 	Transition.transition()
 	await Transition.on_transition_finished
 	get_tree().quit()
@@ -70,10 +65,11 @@ func _on_p_area_body_entered(body: Node2D) -> void:
 func play_get_hit():
 	can_hit_play = false
 	p_splash.emitting = true
-	player.hit.play()
+	AudioManager.play_hit2()
+	AudioManager.play_dash_hit()
 	player.restore_stamina()
+	AudioManager.play_stamina_restored()
 	play.scale = Vector2(1.4, 0.7)
-	player.dash_hit.play()
 	# cooldown timer to restrict the player from hitting it multiple times at once
 	await get_tree().create_timer(0.8).timeout
 	can_hit_play = true
@@ -88,10 +84,11 @@ func _on_o_area_body_entered(body: Node2D) -> void:
 func options_get_hit():
 	can_hit_settings = false
 	o_splash.emitting = true
-	player.hit.play()
+	AudioManager.play_hit2()
+	AudioManager.play_dash_hit()
+	AudioManager.play_stamina_restored()
 	player.restore_stamina()
 	settings.scale = Vector2(1.4, 0.7)
-	player.dash_hit.play()
 	await get_tree().create_timer(0.8).timeout
 	can_hit_settings = true
 
@@ -104,10 +101,11 @@ func _on_e_area_body_entered(body: Node2D) -> void:
 func exit_get_hit():
 	can_hit_exit = false
 	e_splash.emitting = true
-	player.hit.play()
+	AudioManager.play_hit2()
+	AudioManager.play_dash_hit()
+	AudioManager.play_stamina_restored()
 	player.restore_stamina()
 	exit.scale = Vector2(1.4, 0.7)
-	player.dash_hit.play()
 	await get_tree().create_timer(0.8).timeout
 	can_hit_exit = true
 

@@ -15,7 +15,7 @@ var vfx_instance
 
 @onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var splash: CPUParticles2D = $splash
-@onready var hit: AudioStreamPlayer2D = $hit
+#@onready var hit: AudioStreamPlayer2D = $hit
 @onready var camera_control = get_tree().root.get_node("main/CameraControl")
 @onready var movement: AnimationPlayer = $movement
 
@@ -51,8 +51,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 	if body == player and player.dashing and not dead:
 		die()
-		hit.play()
-		player.dash_hit.play()
+		#hit.play()
+		#player.dash_hit.play()
+		AudioManager.play_dash_hit()
 		camera_control.apply_shake(4, 5)
 		player.restore_stamina()
 
@@ -72,7 +73,7 @@ func die():
 	elif moving_direction == "left":
 		animated_sprite_2d.play("left_hit")
 	
-	AudioManager.play_hit()
+	AudioManager.play_hit2()
 	#player.hit.play()
 	if Graphics.flash_when_hit_effect:
 		hit_flash.play("hit_flash")

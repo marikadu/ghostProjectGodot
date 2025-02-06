@@ -13,7 +13,6 @@ var dead : bool
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var splash: CPUParticles2D = $splash
-@onready var hit: AudioStreamPlayer2D = $hit
 @onready var camera_control = get_tree().root.get_node("main/CameraControl")
 @onready var scripted_enemy: AnimationPlayer = $scripted_enemy
 
@@ -41,9 +40,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 	if body == player and player.dashing and not dead:
 		die()
-		hit.play()
-		player.stamina_restored.play()
-		player.dash_hit.play()
+		AudioManager.play_hit2()
+		AudioManager.play_dash_hit()
+		AudioManager.play_stamina_restored()
 		camera_control.apply_shake(4, 5)
 		player.restore_stamina()
 		
@@ -60,11 +59,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 
 func die():
-	player.ghost_dies.play()
+	AudioManager.play_ghost_dies()
+	AudioManager.play_hit2()
 	dead = true
 	splash.emitting = true
 	animated_sprite_2d.play("dies")
-	player.hit.play()
 	if Graphics.flash_when_hit_effect:
 		hit_flash.play("hit_flash")
 	Global.score += 10

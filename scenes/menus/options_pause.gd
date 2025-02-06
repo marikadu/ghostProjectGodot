@@ -116,7 +116,7 @@ func _update_action_list(button, event):
 
 
 func _on_reset_button_pressed() -> void:
-	# reset button has focus "none"
+	AudioManager.play_button_pressed()
 	print("resetting keybindings")
 	InputMap.load_from_project_settings()
 	for action in input_actions:
@@ -127,6 +127,10 @@ func _on_reset_button_pressed() -> void:
 	
 	# getting the actions from the project settings
 	_create_action_list()
+	
+func _on_reset_button_mouse_entered() -> void:
+	AudioManager.play_button_hover()
+
 
 # ------------------------
 
@@ -154,8 +158,13 @@ func _on_flash_toggle_toggled(toggled_on: bool) -> void:
 # -----------
 
 func _on_back_pressed() -> void:
+	AudioManager.play_button_pressed()
 	print("back from settings inside pause")
 	$".".hide()
+	
+
+func _on_back_mouse_entered() -> void:
+	AudioManager.play_button_hover()
 
 
 func _on_master_slider_drag_ended(value_changed: bool) -> void:

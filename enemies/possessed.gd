@@ -25,8 +25,7 @@ var time_alive: float = 0.0
 @onready var hit_timer = $isHitAnimation
 @onready var possessed_escapes = get_tree().root.get_node("main/PossessedEscapes")
 @onready var camera_control = get_tree().root.get_node("main/CameraControl")
-@onready var possessed_hit: AudioStreamPlayer2D = $possessed_hit
-@onready var hit: AudioStreamPlayer2D = $hit
+
 @onready var main = get_tree().root.get_node("main")
 @onready var health_bar: TextureProgressBar = $CanvasLayer/HealthBar
 @onready var time_alive_timer: Timer = $timeAlive
@@ -116,12 +115,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 	if body == player and player.dashing and not dead and not Global.is_game_over :
 		take_damage(3.0)
-		hit.play()
-		player.stamina_restored.play()
+		AudioManager.play_hit2()
+		AudioManager.play_stamina_restored()
 		player.restore_stamina()
-		#print("-3")
-		
-		#queue_free()  # remove the enemy from the scene
 		if health <= 0:
 			die()
 		
@@ -129,7 +125,8 @@ func take_damage(damage: float):
 	# can't kill if game over
 	if not Global.is_game_over:
 		animated_sprite.scale = Vector2(1.6, 0.7)
-		possessed_hit.play()
+		AudioManager.play_posessed_hit()
+		#possessed_hit.play()
 		if Graphics.flash_when_hit_effect:
 			hit_flash.play("hit_flash")
 		health -= damage

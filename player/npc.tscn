@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://ccq0ksogu3xkq"]
+[gd_scene load_steps=63 format=3 uid="uid://ccq0ksogu3xkq"]
 
 [ext_resource type="Script" path="res://player/npc.gd" id="1_05yxr"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_ggpv7"]
@@ -18,9 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://cafyi7emcjcd1" path="res://sprites/NPC/is_woken_up0001.png" id="9_xstwo"]
 [ext_resource type="Texture2D" uid="uid://dx8qmov0rnhsh" path="res://sprites/NPC/is_woken_up0002.png" id="10_4co1f"]
 [ext_resource type="Texture2D" uid="uid://r62abcbo2322" path="res://sprites/NPC/sleeping0004.png" id="10_04nrv"]
-[ext_resource type="AudioStream" uid="uid://jighd3tmh4ap" path="res://SFX/npc_hit.ogg" id="10_wccak"]
 [ext_resource type="Texture2D" uid="uid://d3hoxrykwrbk6" path="res://sprites/NPC/waking_up0002.png" id="10_y8xjb"]
-[ext_resource type="AudioStream" uid="uid://cwqkcb7uy7cly" path="res://SFX/hit.ogg" id="11_0l7xh"]
 [ext_resource type="Texture2D" uid="uid://cwrmlqfhl1if3" path="res://sprites/NPC/waking_up0003.png" id="11_oabgs"]
 [ext_resource type="Texture2D" uid="uid://cgyirxos7p6g3" path="res://sprites/NPC/sleeping0005.png" id="11_rne0d"]
 [ext_resource type="Texture2D" uid="uid://r181p8smbxkd" path="res://sprites/NPC/is_woken_up0003.png" id="11_vw17b"]
@@ -55,10 +53,6 @@
 [ext_resource type="Texture2D" uid="uid://w0mxu6cm3oyw" path="res://sprites/NPC/is_woken_up0015.png" id="23_3thy4"]
 [ext_resource type="Texture2D" uid="uid://ickvddvx83jd" path="res://sprites/NPC/waking_up0014.png" id="23_xo46l"]
 [ext_resource type="Texture2D" uid="uid://fm541wadsufe" path="res://sprites/NPC/is_woken_up0016.png" id="24_856jj"]
-[ext_resource type="AudioStream" uid="uid://b78m6xs2u8px2" path="res://SFX/player_near.ogg" id="37_hlo2i"]
-[ext_resource type="AudioStream" uid="uid://c3lxgsexbr5sy" path="res://SFX/healing.ogg" id="39_m6il3"]
-[ext_resource type="AudioStream" uid="uid://d7xvpqlch2my" path="res://SFX/npc_died.ogg" id="55_s6t17"]
-[ext_resource type="AudioStream" uid="uid://c0m7d31qwbhsp" path="res://SFX/health_restored.ogg" id="56_of0vu"]
 [ext_resource type="Texture2D" uid="uid://ltw2en237lr2" path="res://sprites/heal_particle.png" id="58_25nh4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ngrvg"]
@@ -308,16 +302,6 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8d2p6"]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_snm13"]
-random_pitch = 1.19
-streams_count = 1
-stream_0/stream = ExtResource("10_wccak")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bd7xo"]
-random_pitch = 1.12
-streams_count = 1
-stream_0/stream = ExtResource("39_m6il3")
-
 [sub_resource type="Curve" id="Curve_xsol0"]
 _data = [Vector2(0, 0.736264), 0.0, 0.0, 0, 0, Vector2(0.0539419, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.195021, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.983607, 0.824176), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -361,43 +345,13 @@ polygon = PackedVector2Array(0, -130, -130, -65, -120, 110, 120, 110, 130, -65)
 [node name="isHitAnimation" type="Timer" parent="."]
 wait_time = 0.7
 
-[node name="NPCCollisionShape2D2" type="CollisionShape2D" parent="."]
-scale = Vector2(4.785, 7.213)
-shape = SubResource("RectangleShape2D_8d2p6")
-
-[node name="npc_hit" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_snm13")
-bus = &"SFX"
-
-[node name="npc_died" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("55_s6t17")
-panning_strength = 0.0
-bus = &"SFX"
-
-[node name="npc_back_from_dead" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("56_of0vu")
-panning_strength = 0.0
-bus = &"SFX"
-
-[node name="hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_0l7xh")
-pitch_scale = 2.16
-bus = &"SFX"
-
-[node name="player_near_sfx" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("37_hlo2i")
-volume_db = 5.832
-bus = &"SFX"
-
 [node name="player_near" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
-[node name="healing" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_bd7xo")
-volume_db = 3.225
-pitch_scale = 1.19
-bus = &"SFX"
+[node name="NPCCollisionShape2D2" type="CollisionShape2D" parent="."]
+scale = Vector2(4.785, 7.213)
+shape = SubResource("RectangleShape2D_8d2p6")
 
 [node name="vfx_heal" type="CPUParticles2D" parent="."]
 emitting = false

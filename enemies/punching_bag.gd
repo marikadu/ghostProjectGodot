@@ -37,11 +37,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func die():
 	#player.ghost_dies.play()
 	AudioManager.play_ghost_dies()
+	AudioManager.play_hit2()
 	dead = true
 	splash.emitting = true
 	animated_sprite_2d.play("dies")
-	#player.hit.play()
-	AudioManager.play_hit2()
 	if Graphics.flash_when_hit_effect:
 		hit_flash.play("hit_flash")
 	#Global.score += 10

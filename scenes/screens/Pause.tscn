@@ -80,6 +80,9 @@ visible = false
 z_index = 1
 layout_mode = 1
 
+[connection signal="mouse_entered" from="ColorRect/PauseScreen/VBoxContainer/Resume" to="." method="_on_resume_mouse_entered"]
 [connection signal="pressed" from="ColorRect/PauseScreen/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="mouse_entered" from="ColorRect/PauseScreen/VBoxContainer/Settings" to="." method="_on_settings_mouse_entered"]
 [connection signal="pressed" from="ColorRect/PauseScreen/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="mouse_entered" from="ColorRect/PauseScreen/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_mouse_entered"]
 [connection signal="pressed" from="ColorRect/PauseScreen/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

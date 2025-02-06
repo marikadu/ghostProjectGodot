@@ -41,8 +41,8 @@ func _physics_process(delta: float) -> void:
 	
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	# not picking up the firefly
 	if body == player and not player.dashing and not picked_up:
-		print("not caught the firefly")
 		picked_up = true
 		fade_out()
 		
@@ -55,23 +55,20 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		player.restore_stamina()
 		splash.emitting = true
 		picked_up = true
-		print("yippie restore stamina")
-		#print("yippie")
 		Global.score += 10
 		fade_out()
 		
 	# heal npc once reached
 	if body == npc and npc.is_alive and not picked_up:
 		npc.heal(1)
-		npc.sfx_healing.play()
+		AudioManager.play_healing()
 		print("firefly got the npc, heal the npc ", npc.health)
 		await get_tree().create_timer(1).timeout
 		picked_up = true
-		print("healing npc")
 		fade_out()
 		
+	# don't heal the npc
 	elif body == npc and not npc.is_alive and not picked_up:
-		print("don't heal npc", npc.health)
 		await get_tree().create_timer(0.4).timeout
 		picked_up = true
 		fade_out()

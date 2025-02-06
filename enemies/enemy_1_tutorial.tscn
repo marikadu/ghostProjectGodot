@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b2x43nw74i57j"]
+[gd_scene load_steps=25 format=3 uid="uid://b2x43nw74i57j"]
 
 [ext_resource type="Script" path="res://enemies/enemy_1_tutorial.gd" id="1_05pc1"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_00bmx"]
@@ -17,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://bdjvr1tqvg5jn" path="res://sprites/enemies/purple/purple2.png" id="11_afbsy"]
 [ext_resource type="Texture2D" uid="uid://ck4xlbv3lj03f" path="res://sprites/enemies/purple/purple3.png" id="12_fj0c0"]
 [ext_resource type="Texture2D" uid="uid://q517835lfj21" path="res://sprites/p_particle.png" id="13_qvmil"]
-[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="14_cxcgm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5jufo"]
 resource_local_to_scene = true
@@ -181,9 +180,5 @@ initial_velocity_min = 71.52
 initial_velocity_max = 102.3
 scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_lcko2")
-
-[node name="hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("14_cxcgm")
-bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

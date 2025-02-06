@@ -42,9 +42,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 	if body == player and player.dashing and not dead:
 		die()
-		hit.play()
-		player.stamina_restored.play()
-		player.dash_hit.play()
+		AudioManager.play_hit2()
+		AudioManager.play_stamina_restored()
+		AudioManager.play_dash_hit()
 		camera_control.apply_shake(4, 5)
 		player.restore_stamina()
 		
@@ -61,11 +61,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func die():
-	player.ghost_dies.play()
+	AudioManager.play_ghost_dies()
 	dead = true
 	splash.emitting = true
 	animated_sprite_2d.play("dies")
-	player.hit.play()
+	AudioManager.play_hit2()
 	if Graphics.flash_when_hit_effect:
 		hit_flash.play("hit_flash")
 	Global.score += 10
