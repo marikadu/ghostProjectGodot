@@ -70,7 +70,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_p4r2c")
 theme_override_font_sizes/font_size = 36
-current_tab = 2
+current_tab = 1
 
 [node name="Graphics" type="MarginContainer" parent="ColorRect/TabContainer"]
 visible = false
@@ -257,7 +257,6 @@ theme = ExtResource("3_p4r2c")
 text = "Back"
 
 [node name="Volume" type="MarginContainer" parent="ColorRect/TabContainer"]
-visible = false
 layout_mode = 2
 theme = ExtResource("3_p4r2c")
 theme_override_constants/margin_left = 40
@@ -284,6 +283,26 @@ theme_override_styles/selected = SubResource("StyleBoxEmpty_lkgjs")
 layout_mode = 0
 offset_right = 448.0
 offset_bottom = 110.0
+
+[node name="Master Volume" type="HBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer"]
+layout_mode = 2
+
+[node name="MasterVolumeLabel" type="Label" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Master Volume"]
+layout_mode = 2
+theme = ExtResource("3_p4r2c")
+theme_override_font_sizes/font_size = 30
+text = "Master Volume"
+
+[node name="MasterSlider" type="HSlider" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Master Volume"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+script = ExtResource("6_jt7dd")
+bus_name = "Master"
 
 [node name="Sound Effects" type="HBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer"]
 layout_mode = 2
@@ -341,6 +360,7 @@ theme = ExtResource("3_p4r2c")
 text = "Back"
 
 [node name="Controls" type="MarginContainer" parent="ColorRect/TabContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("3_p4r2c")
 theme_override_constants/margin_left = 40
@@ -403,6 +423,8 @@ text = "Reset to Default"
 [connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/CameraShake/ShakeToggle" to="." method="_on_shake_toggle_toggled"]
 [connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/FlashWhenHit/FlashToggle" to="." method="_on_flash_toggle_toggled"]
 [connection signal="pressed" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="drag_ended" from="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Master Volume/MasterSlider" to="." method="_on_master_slider_drag_ended"]
+[connection signal="drag_ended" from="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Sound Effects/SFXSlider" to="." method="_on_sfx_slider_drag_ended"]
 [connection signal="pressed" from="ColorRect/TabContainer/Volume/TabBar/ItemList/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="ColorRect/TabContainer/Controls/TabBar/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="ColorRect/TabContainer/Controls/TabBar/Reset/ResetButton" to="." method="_on_reset_button_pressed"]

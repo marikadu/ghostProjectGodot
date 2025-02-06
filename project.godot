@@ -23,6 +23,7 @@ Events="*res://scenes/scripts/Events.gd"
 Global="*res://scenes/scripts/Global.gd"
 Graphics="*res://scenes/scripts/Graphics.gd"
 Transition="*res://scenes/transition.tscn"
+ConfigFileHandler="*res://scenes/scripts/ConfigFileHandler.gd"
 
 [debug]
 
