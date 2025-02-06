@@ -1,12 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://piwyy3oovfys"]
+[gd_scene load_steps=7 format=3 uid="uid://piwyy3oovfys"]
 
 [ext_resource type="Texture2D" uid="uid://dkta7bmlosdw5" path="res://sprites/firefly.png" id="1_qx3wq"]
 [ext_resource type="Script" path="res://player/firefly.gd" id="2_5t7sm"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_le1f3"]
-[ext_resource type="AudioStream" uid="uid://dwhfxeb35uw6v" path="res://SFX/pick_up.ogg" id="7_8qqsi"]
-[ext_resource type="AudioStream" uid="uid://npjuitt28hls" path="res://SFX/stamina_restored_2.ogg" id="7_aionn"]
 [ext_resource type="Texture2D" uid="uid://bqh0yk2j7rvtr" path="res://sprites/y_particle.png" id="7_hch3p"]
-[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="7_u0shm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_af8kn"]
 radius = 17.53
@@ -14,21 +11,6 @@ radius = 17.53
 [sub_resource type="Curve" id="Curve_17rwe"]
 _data = [Vector2(0, 0.736264), 0.0, 0.0, 0, 0, Vector2(0.0539419, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.195021, 0.912088), 0.0, 0.0, 0, 0, Vector2(0.975104, 0.406593), 0.0, 0.0, 0, 0]
 point_count = 4
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hgbvj"]
-random_pitch = 1.1
-streams_count = 1
-stream_0/stream = ExtResource("7_8qqsi")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_y27oy"]
-random_pitch = 1.24
-streams_count = 1
-stream_0/stream = ExtResource("7_u0shm")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_c10yu"]
-random_pitch = 1.05
-streams_count = 1
-stream_0/stream = ExtResource("7_aionn")
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["firefly"]]
 modulate = Color(1.2, 1, 1, 1)
@@ -74,25 +56,5 @@ initial_velocity_min = 55.26
 initial_velocity_max = 69.78
 scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_17rwe")
-
-[node name="pick_up" type="AudioStreamPlayer2D" parent="."]
-scale = Vector2(3.42, 3.42)
-stream = SubResource("AudioStreamRandomizer_hgbvj")
-pitch_scale = 1.15
-bus = &"SFX"
-
-[node name="hit" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_y27oy")
-volume_db = -1.612
-pitch_scale = 1.61
-bus = &"SFX"
-
-[node name="stamina_restored" type="AudioStreamPlayer2D" parent="."]
-scale = Vector2(2.24719, 2.24719)
-stream = SubResource("AudioStreamRandomizer_c10yu")
-volume_db = 1.2
-pitch_scale = 1.23
-panning_strength = 0.0
-bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

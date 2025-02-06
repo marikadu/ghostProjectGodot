@@ -10,7 +10,7 @@ var player: CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var ran_dir_timer: Timer = $ran_dir_timer
 @onready var point_light: PointLight2D = $PointLight2D
-@onready var hit: AudioStreamPlayer2D = $hit
+#@onready var hit: AudioStreamPlayer2D = $hit
 
 
 
@@ -47,9 +47,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		fade_out()
 		
 	if body == player and player.dashing and not picked_up:
-		hit.play()
+		AudioManager.play_firefly_hit()
+		AudioManager.play_firefly_stamina_restored()
 		# restore 3 stamina bars
-		$stamina_restored.play() # different sound
 		player.restore_stamina()
 		player.restore_stamina()
 		player.restore_stamina()

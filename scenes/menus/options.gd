@@ -148,6 +148,7 @@ func _on_reset_button_pressed() -> void:
 # camera follows player parralax effext
 func _on_parallax_toggle_toggled(toggled_on: bool) -> void:
 	ConfigFileHandler.save_video_settings("parallax", toggled_on)
+	Graphics.camera_follow_player = toggled_on
 	#if toggled_on:
 		#Graphics.camera_follow_player = true
 		#ConfigFileHandler.save_video_settings("parallax", toggled_on)
@@ -160,6 +161,10 @@ func _on_parallax_toggle_toggled(toggled_on: bool) -> void:
 # vsync
 func _on_v_sync_toggle_toggled(toggled_on: bool) -> void:
 	ConfigFileHandler.save_video_settings("vsync", toggled_on)
+	if toggled_on:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 	#if toggled_on:
 		#Graphics.vsync_enabled = true
 		#ConfigFileHandler.save_video_settings("vsync", toggled_on)
@@ -172,6 +177,7 @@ func _on_v_sync_toggle_toggled(toggled_on: bool) -> void:
 # camera shake
 func _on_shake_toggle_toggled(toggled_on: bool) -> void:
 	ConfigFileHandler.save_video_settings("screen_shake", toggled_on)
+	Graphics.camera_shake = toggled_on
 	#if toggled_on:
 		#Graphics.camera_shake = true
 		#ConfigFileHandler.save_video_settings("screen_shake", toggled_on)
@@ -184,6 +190,7 @@ func _on_shake_toggle_toggled(toggled_on: bool) -> void:
 # flash when hit effect
 func _on_flash_toggle_toggled(toggled_on: bool) -> void:
 	ConfigFileHandler.save_video_settings("flash", toggled_on)
+	Graphics.flash_when_hit_effect = toggled_on
 	#if toggled_on:
 		#Graphics.flash_when_hit_effect = true
 		#print("flash hit = true")
@@ -201,9 +208,9 @@ func _on_back_pressed() -> void:
 
 func _on_master_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
-		ConfigFileHandler.save_audio_settings("master_volume", %MasterSlider.value * 100)
+		ConfigFileHandler.save_audio_settings("master_volume", %MasterSlider.value / 100)
 
 
 func _on_sfx_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
-		ConfigFileHandler.save_audio_settings("sfx_volume", %SFXSlider.value * 100)
+		ConfigFileHandler.save_audio_settings("sfx_volume", %SFXSlider.value / 100)

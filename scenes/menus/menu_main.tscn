@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dn4008nv06clk"]
+[gd_scene load_steps=25 format=3 uid="uid://dn4008nv06clk"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_60uys"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_3r7k7"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://s3jyk22y2cm4" path="res://sprites/b_particle.png" id="5_p17an"]
 [ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="6_7j32i"]
 [ext_resource type="PackedScene" uid="uid://c6l1nlaffyj1n" path="res://enemies/punching_bag.tscn" id="8_jpx4s"]
-[ext_resource type="AudioStream" uid="uid://btdl1ng72s6u8" path="res://SFX/button_pressed2.ogg" id="10_70wp0"]
 [ext_resource type="Script" path="res://scenes/menus/bg_main_menu.gd" id="10_t81fx"]
 [ext_resource type="Texture2D" uid="uid://bksvvake7ja0d" path="res://sprites/background/bg_mainmenu3.png" id="12_undaw"]
 [ext_resource type="Texture2D" uid="uid://dk65pd0y7rjyc" path="res://sprites/background/bg_mainmenu4.png" id="13_qikvg"]
@@ -78,11 +77,6 @@ point_count = 4
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ge2x"]
 size = Vector2(20.584, 19.1442)
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3vm2v"]
-random_pitch = 1.1
-streams_count = 1
-stream_0/stream = ExtResource("10_70wp0")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -338,11 +332,6 @@ script = ExtResource("3_dgiyq")
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_7j32i")
-
-[node name="button_hover" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_3vm2v")
-pitch_scale = 0.88
-bus = &"SFX"
 
 [node name="wall" type="StaticBody2D" parent="."]
 collision_layer = 15

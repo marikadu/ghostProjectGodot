@@ -88,10 +88,12 @@ func _on_tutorial_start():
 
 
 func first_get_hit():
-	player.hit.play()
+	#player.hit.play()
+	AudioManager.play_hit2()
 	can_hit_1 = false
 	label_1.scale = Vector2(1.5, 0.7)
-	player.dash_hit.play()
+	#player.dash_hit.play()
+	AudioManager.play_dash_hit()
 	await get_tree().create_timer(0.4).timeout
 	label_1.visible = false
 	label_2.visible = true
@@ -104,9 +106,9 @@ func first_get_hit():
 func _on_second_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and can_hit_2:
 		can_hit_2 = false
-		player.hit.play()
+		AudioManager.play_hit2()
 		label_2.scale = Vector2(1.5, 0.7)
-		player.dash_hit.play()
+		AudioManager.play_dash_hit()
 		#print("you are so cool_2")
 		await get_tree().create_timer(0.4).timeout
 		can_hit_2 = true
@@ -115,9 +117,9 @@ func _on_second_body_entered(body: Node2D) -> void:
 func _on_third_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and can_hit_3:
 		can_hit_3 = false
-		player.hit.play()
+		AudioManager.play_hit2()
 		label_3.scale = Vector2(1.5, 0.7)
-		player.dash_hit.play()
+		AudioManager.play_dash_hit()
 		print("you are so cool3")
 		await get_tree().create_timer(0.4).timeout
 		can_hit_3 = true
@@ -168,9 +170,9 @@ func _on_introduce_fireflies():
 func _on_fourth_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and can_hit_4:
 		can_hit_4 = false
-		player.hit.play()
+		AudioManager.play_hit2()
 		label_4.scale = Vector2(1.5, 0.7)
-		player.dash_hit.play()
+		AudioManager.play_dash_hit()
 		print("you are so cool4")
 		await get_tree().create_timer(0.4).timeout
 		can_hit_4 = true
@@ -179,9 +181,9 @@ func _on_fourth_body_entered(body: Node2D) -> void:
 func _on_fourth_2_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and can_hit_4_2:
 		can_hit_4_2 = false
-		player.hit.play()
+		AudioManager.play_hit2()
 		label_4_2.scale = Vector2(1.5, 0.7)
-		player.dash_hit.play()
+		AudioManager.play_dash_hit()
 		print("you are so cool4_2")
 		await get_tree().create_timer(0.4).timeout
 		can_hit_4_2 = true
@@ -191,9 +193,9 @@ func _on_fourth_2_body_entered(body: Node2D) -> void:
 func _on_fifth_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and can_hit_5:
 		can_hit_5 = false
-		player.hit.play()
+		AudioManager.play_hit2()
 		label_5.scale = Vector2(1.5, 0.7)
-		player.dash_hit.play()
+		AudioManager.play_dash_hit()
 		print("you are so cool5")
 		await get_tree().create_timer(0.4).timeout
 		can_hit_5 = true
@@ -202,9 +204,9 @@ func _on_fifth_body_entered(body: Node2D) -> void:
 func _on_sixth_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and can_hit_6:
 		can_hit_6 = false
-		player.hit.play()
+		AudioManager.play_hit2()
 		label_6.scale = Vector2(1.5, 0.7)
-		player.dash_hit.play()
+		AudioManager.play_dash_hit()
 		print("you are so cool6")
 		await get_tree().create_timer(0.4).timeout
 		can_hit_6 = true

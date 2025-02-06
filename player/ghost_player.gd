@@ -33,13 +33,6 @@ signal is_dashing
 @onready var dash_timer_reset: Timer = $dash_timer_reset
 @onready var stamina_restore_timer : Timer = $stamina_restore_timer
 
-@onready var dash: AudioStreamPlayer2D = $dash
-@onready var dash_hit: AudioStreamPlayer2D = $dash_hit
-@onready var hit: AudioStreamPlayer2D = $hit
-@onready var ghost_dies: AudioStreamPlayer2D = $ghost_dies
-@onready var stamina_restored: AudioStreamPlayer2D = $stamina_restored
-
-
 @onready var sprite_move: Sprite2D = $s_move
 @onready var sprite_gameover: AnimatedSprite2D = $sprite_gameover
 #@onready var s_gameover: Sprite2D = $s_gameover
@@ -146,7 +139,8 @@ func apply_movement(accel: Vector2) -> void:
 
 func start_dash() -> void:
 	if current_stamina >= dash_stamina_cost:
-		dash.play()
+		AudioManager.play_dash()
+		#dash.play()
 		dashing = true
 		current_stamina -= dash_stamina_cost
 		# starting the timer once the player is dashing

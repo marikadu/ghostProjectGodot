@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://r7ir436tp4xh"]
+[gd_scene load_steps=18 format=3 uid="uid://r7ir436tp4xh"]
 
 [ext_resource type="Script" path="res://scenes/menus/options_pause.gd" id="1_3gp18"]
 [ext_resource type="Texture2D" uid="uid://d3xuonkxbhvvq" path="res://sprites/background/bg_options.png" id="2_lo44l"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://kgbn0t3xvn68" path="res://sprites/UI/toggle_enabled.png" id="4_8m7uv"]
 [ext_resource type="Texture2D" uid="uid://clsl35fkfvrwn" path="res://sprites/UI/toggle_disabled.png" id="5_t7f7s"]
 [ext_resource type="Script" path="res://scenes/scripts/sfx_slider.gd" id="6_fryyg"]
+[ext_resource type="PackedScene" uid="uid://cwdqy54mxlmps" path="res://scenes/input_button.tscn" id="7_yxoqt"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_whudj"]
 
@@ -81,7 +82,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_puuho")
 theme_override_font_sizes/font_size = 36
-current_tab = 1
+current_tab = 2
 
 [node name="Graphics" type="MarginContainer" parent="ColorRect/TabContainer"]
 visible = false
@@ -268,6 +269,7 @@ theme = ExtResource("3_puuho")
 text = "Back"
 
 [node name="Volume" type="MarginContainer" parent="ColorRect/TabContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("3_puuho")
 theme_override_constants/margin_left = 40
@@ -290,10 +292,50 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_oefrd")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_s5oca")
 theme_override_styles/selected = SubResource("StyleBoxEmpty_lkgjs")
 
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = 126.5
+offset_right = 90.0
+offset_bottom = 226.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/VBoxContainer"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+theme = ExtResource("3_puuho")
+text = "Back"
+
 [node name="HBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList"]
 layout_mode = 0
 offset_right = 448.0
 offset_bottom = 110.0
+
+[node name="Master Volume" type="HBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer"]
+layout_mode = 2
+
+[node name="MasterVolumeLabel" type="Label" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Master Volume"]
+layout_mode = 2
+theme = ExtResource("3_puuho")
+theme_override_font_sizes/font_size = 30
+text = "Master Volume"
+
+[node name="MasterSlider" type="HSlider" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Master Volume"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+script = ExtResource("6_fryyg")
+bus_name = "Master"
 
 [node name="Sound Effects" type="HBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer"]
 layout_mode = 2
@@ -330,7 +372,19 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList"]
+[node name="Controls" type="MarginContainer" parent="ColorRect/TabContainer"]
+layout_mode = 2
+theme = ExtResource("3_puuho")
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+metadata/_tab_index = 2
+
+[node name="TabBar" type="TabBar" parent="ColorRect/TabContainer/Controls"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Controls/TabBar"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -344,11 +398,37 @@ offset_bottom = 226.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Back" type="Button" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/VBoxContainer"]
+[node name="Back" type="Button" parent="ColorRect/TabContainer/Controls/TabBar/VBoxContainer"]
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme = ExtResource("3_puuho")
 text = "Back"
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect/TabContainer/Controls/TabBar"]
+layout_mode = 0
+offset_right = 680.0
+offset_bottom = 100.0
+
+[node name="ActionList" type="VBoxContainer" parent="ColorRect/TabContainer/Controls/TabBar/MarginContainer"]
+z_index = 2
+layout_mode = 2
+
+[node name="InputButton" parent="ColorRect/TabContainer/Controls/TabBar/MarginContainer/ActionList" instance=ExtResource("7_yxoqt")]
+layout_mode = 2
+
+[node name="Reset" type="HBoxContainer" parent="ColorRect/TabContainer/Controls/TabBar"]
+layout_mode = 2
+offset_top = 302.0
+offset_right = 680.0
+offset_bottom = 362.0
+
+[node name="ResetButton" type="Button" parent="ColorRect/TabContainer/Controls/TabBar/Reset"]
+custom_minimum_size = Vector2(260, 60)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_puuho")
+theme_override_font_sizes/font_size = 30
+text = "Reset to Default"
 
 [connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/VSync/VSyncToggle" to="." method="_on_v_sync_toggle_toggled"]
 [connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/Parallax/ParallaxToggle" to="." method="_on_parallax_toggle_toggled"]
@@ -356,3 +436,6 @@ text = "Back"
 [connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/FlashWhenHit/FlashToggle" to="." method="_on_flash_toggle_toggled"]
 [connection signal="pressed" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="ColorRect/TabContainer/Volume/TabBar/ItemList/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="drag_ended" from="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Master Volume/MasterSlider" to="." method="_on_master_slider_drag_ended"]
+[connection signal="drag_ended" from="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Sound Effects/SFXSlider" to="." method="_on_sfx_slider_drag_ended"]
+[connection signal="pressed" from="ColorRect/TabContainer/Controls/TabBar/VBoxContainer/Back" to="." method="_on_back_pressed"]

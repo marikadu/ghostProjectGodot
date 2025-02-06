@@ -1,12 +1,122 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch0rvar102sy5"]
+[gd_scene load_steps=18 format=3 uid="uid://ch0rvar102sy5"]
 
-[ext_resource type="AudioStream" uid="uid://btdl1ng72s6u8" path="res://SFX/button_pressed2.ogg" id="1_ha10p"]
 [ext_resource type="Script" path="res://scenes/scripts/audio_manager.gd" id="1_snhpj"]
+[ext_resource type="AudioStream" uid="uid://bijy2lf2py5yo" path="res://SFX/button_3.ogg" id="2_mk62g"]
+[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="3_2e61e"]
+[ext_resource type="AudioStream" uid="uid://ddqb2ykm2t4an" path="res://SFX/dash.ogg" id="4_yc4bk"]
+[ext_resource type="AudioStream" uid="uid://dwhfxeb35uw6v" path="res://SFX/pick_up.ogg" id="5_2brgg"]
+[ext_resource type="AudioStream" uid="uid://f2q1bbj0bkmt" path="res://SFX/dash_hit4.ogg" id="5_6ljbv"]
+[ext_resource type="AudioStream" uid="uid://cwqkcb7uy7cly" path="res://SFX/hit.ogg" id="5_s5220"]
+[ext_resource type="AudioStream" uid="uid://npjuitt28hls" path="res://SFX/stamina_restored_2.ogg" id="6_fpmkp"]
+[ext_resource type="AudioStream" uid="uid://df8xu5lt6prr4" path="res://SFX/ghost_dies2.ogg" id="7_beioi"]
 
-[node name="AudioManager" type="Node"]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7kv6d"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("2_mk62g")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mrc83"]
+random_pitch = 1.04
+streams_count = 1
+stream_0/stream = ExtResource("4_yc4bk")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_og31l"]
+random_pitch = 1.04
+streams_count = 1
+stream_0/stream = ExtResource("5_6ljbv")
+stream_0/weight = 94.007
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hpftm"]
+random_pitch = 1.57
+streams_count = 1
+stream_0/stream = ExtResource("7_beioi")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_61cmv"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("5_2brgg")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_foevj"]
+random_pitch = 1.24
+streams_count = 1
+stream_0/stream = ExtResource("3_2e61e")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yy3am"]
+random_pitch = 1.05
+streams_count = 1
+stream_0/stream = ExtResource("6_fpmkp")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6cvou"]
+random_pitch = 1.02
+streams_count = 1
+stream_0/stream = ExtResource("6_fpmkp")
+
+[node name="AudioManager" type="Node2D"]
 script = ExtResource("1_snhpj")
 
-[node name="button_hover" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("1_ha10p")
-volume_db = 7.672
-panning_strength = 0.0
+[node name="Music" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
+[node name="button_hover" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_7kv6d")
+volume_db = 2.7
+pitch_scale = 1.08
+bus = &"SFX"
+
+[node name="button_pressed" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_mk62g")
+volume_db = 2.7
+pitch_scale = 2.12
+bus = &"SFX"
+
+[node name="dash" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_mrc83")
+volume_db = -13.4
+pitch_scale = 2.57
+bus = &"SFX"
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2e61e")
+volume_db = -8.0
+bus = &"SFX"
+
+[node name="hit2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_s5220")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="dash_hit" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_og31l")
+volume_db = -7.789
+pitch_scale = 1.4
+bus = &"SFX"
+
+[node name="ghost_dies" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_hpftm")
+volume_db = -7.0
+max_polyphony = 3
+bus = &"SFX"
+
+[node name="pick_up" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_61cmv")
+volume_db = -8.0
+pitch_scale = 1.15
+bus = &"SFX"
+
+[node name="firefly_hit" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_foevj")
+volume_db = -7.0
+pitch_scale = 1.61
+bus = &"SFX"
+
+[node name="firefly_stamina_restored" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_yy3am")
+volume_db = -10.0
+pitch_scale = 1.23
+bus = &"SFX"
+
+[node name="stamina_restored" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_6cvou")
+volume_db = -10.0
+pitch_scale = 1.02
+bus = &"SFX"

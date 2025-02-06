@@ -58,7 +58,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func die():
-	player.ghost_dies.play()
+	#player.ghost_dies.play()
+	AudioManager.play_ghost_dies()
 	dead = true
 	splash.emitting = true
 
@@ -71,7 +72,8 @@ func die():
 	elif moving_direction == "left":
 		animated_sprite_2d.play("left_hit")
 	
-	player.hit.play()
+	AudioManager.play_hit()
+	#player.hit.play()
 	if Graphics.flash_when_hit_effect:
 		hit_flash.play("hit_flash")
 	await get_tree().create_timer(0.6).timeout

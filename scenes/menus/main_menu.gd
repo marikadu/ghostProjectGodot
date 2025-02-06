@@ -19,7 +19,6 @@ var can_hit_exit: bool
 
 
 
-
 func _ready() -> void:
 	can_hit_play = true
 	can_hit_settings = true
@@ -41,16 +40,20 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_play_pressed() -> void:
+	AudioManager.play_button_pressed()
 	print("play")
 	get_tree().change_scene_to_file("res://scenes/menus/level_selection.tscn")
 
 
 func _on_options_pressed() -> void:
+	AudioManager.play_button_pressed()
 	print("options")
 	get_tree().change_scene_to_file("res://scenes/menus/options.tscn")
 
 
 func _on_exit_pressed() -> void:
+	# add "are you sure you want to leave window"
+	AudioManager.play_button_pressed()
 	print("quit")
 	Transition.transition()
 	await Transition.on_transition_finished
@@ -111,10 +114,10 @@ func exit_get_hit():
 
 # --- BUTTON SOUNDS ---
 func _on_play_mouse_entered() -> void:
-	$button_hover.play()
+	AudioManager.play_button_hover()
 
 func _on_options_mouse_entered() -> void:
-	$button_hover.play()
+	AudioManager.play_button_hover()
 
 func _on_exit_mouse_entered() -> void:
-	$button_hover.play()
+	AudioManager.play_button_hover()

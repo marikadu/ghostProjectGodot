@@ -13,7 +13,7 @@ var scripted_enemy2_move: bool
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var splash: CPUParticles2D = $splash
-@onready var hit: AudioStreamPlayer2D = $hit
+#@onready var hit: AudioStreamPlayer2D = $hit
 @onready var camera_control = get_tree().root.get_node("MainMenu/CameraControl")
 
 
@@ -31,21 +31,25 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 	if body == player and player.dashing and not dead:
 		die()
+		print("a detected dash")
 
 
 func die():
-	player.ghost_dies.play()
+	#player.ghost_dies.play()
+	AudioManager.play_ghost_dies()
 	dead = true
 	splash.emitting = true
 	animated_sprite_2d.play("dies")
-	player.hit.play()
+	#player.hit.play()
+	AudioManager.play_hit2()
 	if Graphics.flash_when_hit_effect:
 		hit_flash.play("hit_flash")
 	#Global.score += 10
 	if player.dashing:
-		player.dash_hit.play()
+		print("b detected dash")
+		AudioManager.play_dash_hit()
 		player.restore_stamina()
-		player.stamina_restored.play()
+		AudioManager.play_stamina_restored()
 		camera_control.apply_shake(4, 5)
 	await get_tree().create_timer(wait_death_animation).timeout
 	animated_sprite_2d.play("moving")
@@ -54,13 +58,4 @@ func die():
 	
 	#Events.killed_scripted_enemy2.emit()
 	#Events.send_scripted_enemy3.emit()
-	
-	
-#func _on_send_scripted_enemy2():
-	#send_scripted_enemy2 = true
-	#scripted_enemy2_move = true
-	#print("sending second eeeeeeeeee")
-	#await get_tree().create_timer(5.5).timeout
-	# making enemy 2 stop for the player to hit it
-	#scripted_enemy2_move = false
 	

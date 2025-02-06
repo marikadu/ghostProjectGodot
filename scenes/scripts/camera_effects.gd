@@ -13,6 +13,11 @@ var zoom = Vector2(0.9, 0.9)
 #var zoom_speed = 0.3
 var zoom_speed = 1
 
+var vsync_enabled = ConfigFileHandler.is_vsync_enabled()
+var parallax_enabled = ConfigFileHandler.is_parallax_enabled()
+var shake_enabled = ConfigFileHandler.is_shake_enabled()
+var flash_enabled = ConfigFileHandler.is_flash_enabled()
+
 @onready var camera: Camera2D = %Camera2D
 
 
@@ -33,12 +38,20 @@ func _process(delta):
 	#camera.offset = randomOffset()
 	
 	
+#	if vsync_enabled:
+#		print("VSync is ON")
+#	else:
+#		print("VSync is OFF")
+	
+	
 func apply_shake(custom_strength: float = -1.0, custom_fade: float = -1.0):
-	if Graphics.camera_shake:
+	if shake_enabled:
+		print("should shake")
 	# if no custom strength given -> use default
 		shake_strength = custom_strength if custom_strength >= 0 else def_randomStrength
 		shake_fade = custom_fade if custom_fade >= 0 else def_shakeFade
 	else:
+		print("shake not enabled")
 		pass
 
 func zoom_in():
