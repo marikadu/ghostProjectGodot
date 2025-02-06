@@ -25,17 +25,17 @@ var input_actions = {
 func _ready() -> void:
 	
 	# by default it is turned on and the toggle button is ON
-	#if Graphics.vsync_enabled:
-		#v_sync_toggle.button_pressed = true
-		#
-	#if Graphics.camera_follow_player:
-		#parallax_toggle.button_pressed = true
-		#
-	#if Graphics.camera_shake:
-		#shake_toggle.button_pressed = true
-		#
-	#if Graphics.flash_when_hit_effect:
-		#flash_toggle.button_pressed = true
+	if Graphics.vsync_enabled:
+		v_sync_toggle.button_pressed = true
+		
+	if Graphics.camera_follow_player:
+		parallax_toggle.button_pressed = true
+		
+	if Graphics.camera_shake:
+		shake_toggle.button_pressed = true
+		
+	if Graphics.flash_when_hit_effect:
+		flash_toggle.button_pressed = true
 		
 	_load_keybindings_from_settings()
 	

@@ -117,7 +117,7 @@ bus = &"SFX"
 
 [node name="hit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_2e61e")
-volume_db = -8.0
+volume_db = -9.0
 bus = &"SFX"
 
 [node name="hit2" type="AudioStreamPlayer" parent="."]
@@ -133,17 +133,18 @@ bus = &"SFX"
 
 [node name="possessed_hit" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_i8o52")
-volume_db = -6.541
+volume_db = -9.017
 bus = &"SFX"
 
 [node name="possessed_dies" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_2krdm")
+volume_db = -9.0
 pitch_scale = 1.22
 bus = &"SFX"
 
 [node name="ghost_dies" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_hpftm")
-volume_db = -7.0
+volume_db = -12.571
 max_polyphony = 3
 bus = &"SFX"
 

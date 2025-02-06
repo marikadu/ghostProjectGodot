@@ -56,5 +56,7 @@ theme_override_font_sizes/font_size = 41
 text = "Main Menu"
 icon_alignment = 1
 
+[connection signal="mouse_entered" from="GameOverScreen/VBoxContainer/TryAgain" to="GameOverScreen" method="_on_try_again_mouse_entered"]
 [connection signal="pressed" from="GameOverScreen/VBoxContainer/TryAgain" to="GameOverScreen" method="_on_try_again_pressed"]
+[connection signal="mouse_entered" from="GameOverScreen/VBoxContainer/MainMenuButton" to="GameOverScreen" method="_on_main_menu_button_mouse_entered"]
 [connection signal="pressed" from="GameOverScreen/VBoxContainer/MainMenuButton" to="GameOverScreen" method="_on_main_menu_button_pressed"]

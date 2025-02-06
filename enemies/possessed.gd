@@ -108,6 +108,7 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player and !player.dashing and not dead and not Global.is_game_over:
 		take_damage(1.0)
+		AudioManager.play_hit2()
 		#print("-1")
 		if health <= 0:
 			die()
@@ -115,7 +116,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		
 	if body == player and player.dashing and not dead and not Global.is_game_over :
 		take_damage(3.0)
+		AudioManager.play_hit()
 		AudioManager.play_hit2()
+		AudioManager.play_dash_hit()
 		AudioManager.play_stamina_restored()
 		player.restore_stamina()
 		if health <= 0:
