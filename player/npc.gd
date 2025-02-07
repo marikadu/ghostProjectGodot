@@ -100,10 +100,14 @@ func _on_area_2d_body_entered(body_e: Node) -> void:
 		if body_e == player and not npc_ignore_player:
 			camera_control.zoom_in()
 			is_player_near = true
+			animated_sprite.play("hit_player")
+			
+			if player_near_timer.paused: # if the timer is paused, unpause
+				print("player re-entered!!!!!!")
+				player_near_timer.paused = false
 			player_near_timer.start()
 			player_near_timer.one_shot = false
-			animated_sprite.play("hit_player")
-			print("player near")
+			
 			#AudioManager.play_player_near()
 			AudioManager.unpause_player_near() # resume audio
 			player_re_enter_npc.stop() # resetting the timer when player enters back
@@ -118,9 +122,10 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		is_player_near = false
 		print("player exited?")
 		
-		player_near_timer.stop()
+		#player_near_timer.stop()
+		player_near_timer.paused
 		player_re_enter_npc.start() # counting for how long has player been away
-		print("player away: ", player_re_enter_npc.time_left)
+		print(player_near_timer.paused, "player away: ", player_re_enter_npc.time_left)
 		#player_near_timer.set_wait_time(3.0) 
 		#player_near_timer.one_shot = true
 		#if not Global.is_game_won:
@@ -203,6 +208,6 @@ func _on_player_near_timeout() -> void:
 
 
 func _on_player_re_enter_npc_timeout() -> void:
-	print("SAFE: player away safe")
 	AudioManager.stop_player_near()
 	player_near_timer.stop() # reset the timer
+	print("SAFE: player away safe", player_near_timer.paused)

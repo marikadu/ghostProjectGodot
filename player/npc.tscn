@@ -350,7 +350,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="player_re_enter_npc" type="Timer" parent="."]
-wait_time = 0.6
+wait_time = 1.1
 one_shot = true
 
 [node name="NPCCollisionShape2D2" type="CollisionShape2D" parent="."]
