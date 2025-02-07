@@ -23,8 +23,11 @@ var flash_enabled = ConfigFileHandler.is_flash_enabled()
 
 func _process(delta):
 	# smooth zoom
-	camera.zoom.x = lerp(camera.zoom.x, zoom.x, zoom_speed * delta)
-	camera.zoom.y = lerp(camera.zoom.y, zoom.y, zoom_speed * delta)
+	#camera.zoom.x = lerp(camera.zoom.x, zoom.x, zoom_speed * delta)
+	#camera.zoom.y = lerp(camera.zoom.y, zoom.y, zoom_speed * delta)
+	var t = 1.0 - exp(-zoom_speed * delta * 0.5)  # starts slower
+	camera.zoom.x = lerp(camera.zoom.x, zoom.x, t)
+	camera.zoom.y = lerp(camera.zoom.y, zoom.y, t)
 	
 	
 	if shake_strength > 0:
@@ -46,20 +49,26 @@ func _process(delta):
 	
 func apply_shake(custom_strength: float = -1.0, custom_fade: float = -1.0):
 	if shake_enabled:
-		print("should shake")
 	# if no custom strength given -> use default
 		shake_strength = custom_strength if custom_strength >= 0 else def_randomStrength
 		shake_fade = custom_fade if custom_fade >= 0 else def_shakeFade
 	else:
-		print("shake not enabled")
 		pass
 
 func zoom_in():
 	#camera.zoom.x = lerp(1.0, 1.2, zoom_time)
 	#camera.zoom.y = lerp(1.0, 1.2, zoom_time)
-	zoom = Vector2(1.01, 1.01)
+	zoom = Vector2(1.0, 1.0)
+	#var tween = create_tween()
+	#tween.tween_property(camera, "zoom", Vector2(1.01, 1.01), 1.5).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	#await tween.finished
+	#queue_free()
 	
 func zoom_out():
+	#var tween = create_tween()
+	#tween.tween_property(camera, "zoom", Vector2(0.9, 0.9), 0.7).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	#await tween.finished
+	#queue_free()
 	zoom = Vector2(0.9, 0.9)
 	
 	

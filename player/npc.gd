@@ -7,6 +7,8 @@ extends CharacterBody2D
 @onready var hit_flash = $AnimatedSprite2D/HitFlash
 @onready var hit_timer = $isHitAnimation
 @onready var player_near_timer: Timer = $player_near
+@onready var player_re_enter_npc: Timer = $player_re_enter_npc
+
 @onready var camera_control = get_tree().root.get_node("main/CameraControl")
 
 @onready var vfx_heal: CPUParticles2D = $vfx_heal
@@ -97,31 +99,35 @@ func _on_area_2d_body_entered(body_e: Node) -> void:
 		# apply damage if player is near
 		if body_e == player and not npc_ignore_player:
 			camera_control.zoom_in()
-			AudioManager.play_player_near()
 			is_player_near = true
-			#print("player near")
 			player_near_timer.start()
 			player_near_timer.one_shot = false
 			animated_sprite.play("hit_player")
+			print("player near")
+			#AudioManager.play_player_near()
+			AudioManager.unpause_player_near() # resume audio
+			player_re_enter_npc.stop() # resetting the timer when player enters back
+			#player_re_enter_npc.start()
+			#print("timer paused", player_re_enter_npc.paused)
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body == player and is_alive:
 		camera_control.zoom_out()
-		#player_near_sfx.stop()
-		AudioManager.stop_player_near()
+		AudioManager.pause_player_near()
 		is_player_near = false
-		player_near_timer.stop()
-		player_near_timer.set_wait_time(3.0) 
-		player_near_timer.one_shot = true
-		if not Global.is_game_won:
-			animated_sprite.play("sleeping")
-		else:
-			#print("ignore player BECAUSE WIN")
-			pass
+		print("player exited?")
 		
-	if body.is_in_group("orial"):
-		print("detected")
+		player_near_timer.stop()
+		player_re_enter_npc.start() # counting for how long has player been away
+		print("player away: ", player_re_enter_npc.time_left)
+		#player_near_timer.set_wait_time(3.0) 
+		#player_near_timer.one_shot = true
+		#if not Global.is_game_won:
+			#animated_sprite.play("sleeping")
+		#else:
+			#print("ignore player BECAUSE WIN")
+			#pass
 
 
 # take damage
@@ -160,7 +166,7 @@ func restore_health(amount: float) -> void:
 		AudioManager.play_npc_back_from_dead()
 		is_alive = true
 		animated_sprite.play("sleeping")
-		print("npc back from the dead")
+		#print("npc back from the dead")
 		player_near_timer.stop()
 		player_near_timer.set_wait_time(3.0) 
 		player_near_timer.one_shot = true
@@ -169,7 +175,7 @@ func restore_health(amount: float) -> void:
 	if healthbar != null:
 		healthbar.health = health  # update the health bar
 		
-	print("NPC health: ", health)
+	#print("NPC health: ", health)
 
 
 # when isHit timer finishes -> go back to sleeping animation if alive
@@ -194,3 +200,9 @@ func _on_player_near_timeout() -> void:
 	elif is_alive and Global.current_scene_name == 1 and not npc_ignore_player:
 		take_damage(1.0, self)
 		#print("TUTORIAL: NOTICED THE PLAYER ", health)
+
+
+func _on_player_re_enter_npc_timeout() -> void:
+	print("SAFE: player away safe")
+	AudioManager.stop_player_near()
+	player_near_timer.stop() # reset the timer

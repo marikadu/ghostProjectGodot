@@ -349,6 +349,10 @@ wait_time = 0.7
 wait_time = 3.0
 one_shot = true
 
+[node name="player_re_enter_npc" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
 [node name="NPCCollisionShape2D2" type="CollisionShape2D" parent="."]
 scale = Vector2(4.785, 7.213)
 shape = SubResource("RectangleShape2D_8d2p6")
@@ -376,3 +380,4 @@ color_ramp = SubResource("Gradient_78oki")
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2dnpc_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="player_near" to="." method="_on_player_near_timeout"]
+[connection signal="timeout" from="player_re_enter_npc" to="." method="_on_player_re_enter_npc_timeout"]

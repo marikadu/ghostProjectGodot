@@ -145,7 +145,7 @@ bus = &"SFX"
 [node name="ghost_dies" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_hpftm")
 volume_db = -12.571
-max_polyphony = 3
+max_polyphony = 2
 bus = &"SFX"
 
 [node name="pick_up" type="AudioStreamPlayer" parent="."]
@@ -174,7 +174,7 @@ bus = &"SFX"
 
 [node name="player_near" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_2ggyf")
-volume_db = 0.88
+volume_db = -1.906
 bus = &"SFX"
 
 [node name="hit_npc_impact" type="AudioStreamPlayer" parent="."]
@@ -203,3 +203,6 @@ stream = SubResource("AudioStreamRandomizer_3d8wd")
 volume_db = -3.0
 pitch_scale = 1.19
 bus = &"SFX"
+
+[node name="player_re_enter_npc" type="Timer" parent="."]
+one_shot = true
