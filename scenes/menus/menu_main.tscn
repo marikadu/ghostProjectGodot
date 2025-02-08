@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://dn4008nv06clk"]
+[gd_scene load_steps=25 format=3 uid="uid://dn4008nv06clk"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_60uys"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_3r7k7"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="2_36rfs"]
 [ext_resource type="Shader" path="res://shaders/border.gdshader" id="2_go6j5"]
+[ext_resource type="PackedScene" uid="uid://d2e2rawo3q68k" path="res://scenes/screens/ExitConfirmation.tscn" id="2_odf7d"]
 [ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="2_tp1el"]
 [ext_resource type="Script" path="res://scenes/scripts/camera.gd" id="3_dgiyq"]
 [ext_resource type="Texture2D" uid="uid://bcevh7r2hat" path="res://sprites/title.png" id="3_hsspx"]
@@ -87,6 +88,12 @@ grow_vertical = 2
 script = ExtResource("1_60uys")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="ExitConfirmation" parent="CanvasLayer" instance=ExtResource("2_odf7d")]
+unique_name_in_owner = true
+visible = false
+z_index = 10
 
 [node name="Stamina" parent="CanvasLayer" instance=ExtResource("2_tp1el")]
 z_index = 6

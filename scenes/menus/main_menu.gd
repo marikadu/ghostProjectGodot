@@ -8,6 +8,8 @@ extends Control
 @onready var o_splash: CPUParticles2D = $MarginContainer/VBoxContainer/Settings/o_splash
 @onready var e_splash: CPUParticles2D = $MarginContainer/VBoxContainer/Exit/e_splash
 @onready var camera_2d: Camera2D = %Camera2D
+@onready var exit_confirmation: ColorRect = %ExitConfirmation
+
 
 var player: CharacterBody2D
 
@@ -15,12 +17,15 @@ var can_hit_play: bool
 var can_hit_settings: bool
 var can_hit_exit: bool
 
+var can_hit_other_buttons: bool # preventing the other buttons to be hit if multiple buttons are hit
+
 
 
 func _ready() -> void:
 	can_hit_play = true
 	can_hit_settings = true
 	can_hit_exit = true
+	can_hit_other_buttons = true
 
 	Global.current_scene_name = 0
 	print(Global.current_scene_name)
@@ -48,11 +53,9 @@ func _on_options_pressed() -> void:
 
 
 func _on_exit_pressed() -> void:
-	# add "are you sure you want to leave window"
-	AudioManager.play_button_pressed()
-	Transition.transition()
-	await Transition.on_transition_finished
-	get_tree().quit()
+	# "are you sure you want to exit window"
+	#%ExitConfirmation.show()
+	exit_confirmation.show_window()
 
 
 # --- PLAY ---
@@ -63,16 +66,23 @@ func _on_p_area_body_entered(body: Node2D) -> void:
 		
 
 func play_get_hit():
-	can_hit_play = false
-	p_splash.emitting = true
-	AudioManager.play_hit2()
-	AudioManager.play_dash_hit()
-	player.restore_stamina()
-	AudioManager.play_stamina_restored()
-	play.scale = Vector2(1.4, 0.7)
-	# cooldown timer to restrict the player from hitting it multiple times at once
-	await get_tree().create_timer(0.8).timeout
-	can_hit_play = true
+	if not can_hit_other_buttons:
+		return
+	else:
+		can_hit_play = false
+		can_hit_other_buttons = false
+		p_splash.emitting = true
+		AudioManager.play_hit2()
+		AudioManager.play_dash_hit()
+		player.restore_stamina()
+		AudioManager.play_stamina_restored()
+		play.scale = Vector2(1.4, 0.7)
+		await get_tree().create_timer(0.2).timeout # cooldown timer to restrict the player from hitting it multiple times at once
+		can_hit_play = true
+		Transition.transition()
+		await Transition.on_transition_finished
+		get_tree().change_scene_to_file("res://scenes/menus/level_selection.tscn")
+	
 
 
 # --- OPTIONS ---
@@ -82,15 +92,24 @@ func _on_o_area_body_entered(body: Node2D) -> void:
 		
 
 func options_get_hit():
-	can_hit_settings = false
-	o_splash.emitting = true
-	AudioManager.play_hit2()
-	AudioManager.play_dash_hit()
-	AudioManager.play_stamina_restored()
-	player.restore_stamina()
-	settings.scale = Vector2(1.4, 0.7)
-	await get_tree().create_timer(0.8).timeout
-	can_hit_settings = true
+	if not can_hit_other_buttons:
+		return
+	else:
+		can_hit_settings = false
+		can_hit_other_buttons = false
+		o_splash.emitting = true
+		AudioManager.play_hit2()
+		AudioManager.play_dash_hit()
+		AudioManager.play_stamina_restored()
+		player.restore_stamina()
+		settings.scale = Vector2(1.4, 0.7)
+		await get_tree().create_timer(0.2).timeout
+		can_hit_settings = true
+		Transition.transition()
+		await Transition.on_transition_finished
+		get_tree().change_scene_to_file("res://scenes/menus/options.tscn")
+		#await get_tree().create_timer(0.8).timeout
+	
 
 # --- EXIT ---
 func _on_e_area_body_entered(body: Node2D) -> void:
@@ -99,15 +118,24 @@ func _on_e_area_body_entered(body: Node2D) -> void:
 		
 
 func exit_get_hit():
-	can_hit_exit = false
-	e_splash.emitting = true
-	AudioManager.play_hit2()
-	AudioManager.play_dash_hit()
-	AudioManager.play_stamina_restored()
-	player.restore_stamina()
-	exit.scale = Vector2(1.4, 0.7)
-	await get_tree().create_timer(0.8).timeout
-	can_hit_exit = true
+	if not can_hit_other_buttons:
+		return
+	else:
+		can_hit_exit = false
+		can_hit_other_buttons = false
+		e_splash.emitting = true
+		AudioManager.play_hit2()
+		AudioManager.play_dash_hit()
+		AudioManager.play_stamina_restored()
+		player.restore_stamina()
+		exit.scale = Vector2(1.4, 0.7)
+		await get_tree().create_timer(0.1).timeout
+		can_hit_exit = true
+		
+		exit_confirmation.show_window()
+		await get_tree().create_timer(0.3, false).timeout # can hit other buttons
+		# GOOD TO KNOW: false ^ means that it stops when the game is paused!
+		can_hit_other_buttons = true
 
 
 # --- BUTTON SOUNDS ---

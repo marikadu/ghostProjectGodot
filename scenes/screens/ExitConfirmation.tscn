@@ -1,0 +1,96 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2e2rawo3q68k"]
+
+[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="1_50haq"]
+[ext_resource type="Script" path="res://scenes/screens/ExitConfirmation.gd" id="2_mweyy"]
+[ext_resource type="Texture2D" uid="uid://cy3scsoca16ds" path="res://sprites/UI/panel.png" id="2_w5t05"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_adcam"]
+texture = ExtResource("2_w5t05")
+
+[node name="ExitConfirmation" type="ColorRect"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.848185, 0.864246, 0.992224, 0.048)
+script = ExtResource("2_mweyy")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -300.0
+offset_right = 350.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_50haq")
+theme_override_styles/panel = SubResource("StyleBoxTexture_adcam")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -139.0
+offset_right = 175.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_50haq")
+theme_override_font_sizes/font_size = 50
+text = "Are you sure
+you want to exit?"
+horizontal_alignment = 1
+
+[node name="ExitConfirmation" type="CenterContainer" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.0
+offset_top = -99.0
+offset_right = 222.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ExitConfirmation"]
+layout_mode = 2
+
+[node name="Yes" type="Button" parent="ExitConfirmation/HBoxContainer"]
+custom_minimum_size = Vector2(130, 90)
+layout_mode = 2
+theme = ExtResource("1_50haq")
+theme_override_font_sizes/font_size = 41
+text = "Yes"
+icon_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ExitConfirmation/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+
+[node name="No" type="Button" parent="ExitConfirmation/HBoxContainer"]
+custom_minimum_size = Vector2(130, 90)
+layout_mode = 2
+theme = ExtResource("1_50haq")
+theme_override_font_sizes/font_size = 41
+text = "No"
+icon_alignment = 1
+
+[connection signal="mouse_entered" from="ExitConfirmation/HBoxContainer/Yes" to="." method="_on_yes_mouse_entered"]
+[connection signal="pressed" from="ExitConfirmation/HBoxContainer/Yes" to="." method="_on_yes_pressed"]
+[connection signal="mouse_entered" from="ExitConfirmation/HBoxContainer/No" to="." method="_on_no_mouse_entered"]
+[connection signal="pressed" from="ExitConfirmation/HBoxContainer/No" to="." method="_on_no_pressed"]
