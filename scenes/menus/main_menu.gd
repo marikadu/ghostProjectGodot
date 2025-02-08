@@ -30,6 +30,7 @@ func _ready() -> void:
 	Global.current_scene_name = 0
 	print(Global.current_scene_name)
 	player = get_tree().root.get_node("MainMenu/GhostPlayer")
+	player.position = get_viewport_rect().size / 2
 	
 func _physics_process(delta: float) -> void:
 	play.scale.x = move_toward(play.scale.x, 1, 2.3 * delta)

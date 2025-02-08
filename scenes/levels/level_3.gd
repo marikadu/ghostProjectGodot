@@ -50,6 +50,7 @@ func _ready() -> void:
 	Events.game_over.connect(show_game_over)
 	Events.npc_died.connect(_on_npc_died)
 	Events.possessed_defeated.connect(_on_possessed_defeated)
+	Events.game_over_woke_up_human.connect(_on_woke_up_human)
 	
 	# resetting the score for every new game
 	Global.score = 0
@@ -70,7 +71,7 @@ func _ready() -> void:
 	player_instance = player.instantiate()
 	
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("spawn_possessed"):
 		spawn_possessed()
 	
@@ -107,13 +108,17 @@ func show_game_over():
 		#get_tree().paused = true # pause game
 	#	I don't know if I need to unpause it when I go to other screen, show check it later
 	
+	
+func _on_woke_up_human():
+	npc_instance.npc_ignore_player = true
+	player_instance.can_move = false
+	Global.is_game_over = true
+	game_over.show()
+	kill_all_enemies()
+	can_spawn_enemies = false
+	can_spawn_fireflies = false
+	%CountDownTimer.cd_timer.paused = true
 
-#func _on_npc_died():
-	#spawn_possessed()
-	## maybe create some sort of effect?
-	## like change the colour / apply filter
-	#kill_all_enemies()
-	#can_spawn_enemies = false
 	
 func _on_npc_died():
 	match npc_instance.killed_by:

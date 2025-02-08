@@ -129,25 +129,26 @@ func _on_area_2d_body_entered(body_e: Node) -> void:
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body == player and is_alive:
-		camera_control.zoom_out()
-		AudioManager.pause_player_near()
-		is_player_near = false
-		print("player exited?")
-		
-		# store remaining time + stop the timer
-		player_near_time_remaining = player_near_timer.time_left
-		print("NPC: PAUSING AT: ", player_near_time_remaining)
-		
-		player_near_timer.stop()
-		player_re_enter_npc.start() # counting for how long has player been away
-		print("NPC: player away for: ", player_re_enter_npc.time_left)
-		#player_near_timer.set_wait_time(3.0) 
-		#player_near_timer.one_shot = true
-		if not Global.is_game_won:
-			animated_sprite.play("sleeping")
-		else:
-			print("ignore player BECAUSE WIN")
-			pass
+		if not npc_ignore_player:
+			camera_control.zoom_out()
+			AudioManager.pause_player_near()
+			is_player_near = false
+			print("player exited?")
+			
+			# store remaining time + stop the timer
+			player_near_time_remaining = player_near_timer.time_left
+			print("NPC: PAUSING AT: ", player_near_time_remaining)
+			
+			player_near_timer.stop()
+			player_re_enter_npc.start() # counting for how long has player been away
+			print("NPC: player away for: ", player_re_enter_npc.time_left)
+			#player_near_timer.set_wait_time(3.0) 
+			#player_near_timer.one_shot = true
+			if not Global.is_game_won:
+				animated_sprite.play("sleeping")
+			else:
+				print("ignore player BECAUSE WIN")
+				pass
 
 
 # take damage
@@ -168,7 +169,6 @@ func take_damage(damage: float, enemy: Node):
 
 
 func heal(healing: float):
-	animated_sprite.play("healed")
 	is_healed = true
 	vfx_heal.emitting = true
 #	update health
@@ -176,6 +176,7 @@ func heal(healing: float):
 	animated_sprite.scale = Vector2(1.2, 0.8)
 	
 	if not Global.is_game_won:
+		animated_sprite.play("healed")
 		await get_tree().create_timer(1).timeout
 		animated_sprite.play("sleeping")
 		is_healed = false
@@ -226,7 +227,8 @@ func _on_player_near_timeout() -> void:
 
 
 func _on_player_re_enter_npc_timeout() -> void:
-	AudioManager.stop_player_near()
-	player_near_timer.stop() # resetting the timer
-	player_near_time_remaining = 0.0 # resetting remaining time
-	print("SAFE: player away safe", player_near_timer.paused)
+	if not Global.is_game_won or not Global.is_game_over:
+		AudioManager.stop_player_near()
+		player_near_timer.stop() # resetting the timer
+		player_near_time_remaining = 0.0 # resetting remaining time
+		print("SAFE: player away safe", player_near_timer.paused)

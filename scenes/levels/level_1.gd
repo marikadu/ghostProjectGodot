@@ -157,7 +157,6 @@ func show_win_game():
 	
 func show_game_over():
 	if not Global.is_game_over: # don't trigget game over if there is already game over
-		npc_instance.npc_ignore_player = true
 		player_instance.can_move = false
 		Global.is_game_over = true
 		game_over.show()
@@ -166,7 +165,9 @@ func show_game_over():
 		kill_all_enemies()
 		# main character (ghost) evaporates or is sad
 		can_spawn_enemies = false
+		npc_instance.npc_ignore_player = true
 		can_spawn_fireflies = false
+		%CountDownTimer.cd_timer.paused = true
 		#get_tree().paused = true # pause game
 	#	I don't know if I need to unpause it when I go to other screen, show check it later
 
@@ -178,6 +179,7 @@ func _on_woke_up_human():
 	kill_all_enemies()
 	can_spawn_enemies = false
 	can_spawn_fireflies = false
+	%CountDownTimer.cd_timer.paused = true
 
 
 # NPC died

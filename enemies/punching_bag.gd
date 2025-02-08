@@ -28,14 +28,9 @@ func _ready() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body == player and not dead:
 		die()
-		
-	if body == player and player.dashing and not dead:
-		die()
-		print("a detected dash")
 
 
 func die():
-	#player.ghost_dies.play()
 	AudioManager.play_ghost_dies()
 	AudioManager.play_hit2()
 	dead = true
@@ -43,9 +38,8 @@ func die():
 	animated_sprite_2d.play("dies")
 	if Graphics.flash_when_hit_effect:
 		hit_flash.play("hit_flash")
-	#Global.score += 10
 	if player.dashing:
-		print("b detected dash")
+		#print("b detected dash")
 		AudioManager.play_dash_hit()
 		player.restore_stamina()
 		AudioManager.play_stamina_restored()

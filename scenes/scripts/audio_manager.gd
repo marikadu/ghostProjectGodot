@@ -40,15 +40,15 @@ func play_player_near():
 func pause_player_near():
 	player_near_sound_position = $player_near.get_playback_position()
 	$player_near.stream_paused = true
-	print("Am: pause: player near: ", player_near_sound_position)
+	#print("Am: pause: player near: ", player_near_sound_position)
 	
 func unpause_player_near():
 	$player_near.stream_paused = false
 	$player_near.play(player_near_sound_position)
-	print("AM: continuing to play sound at:", player_near_sound_position)
+	#print("AM: continuing to play sound at:", player_near_sound_position)
 
 func stop_player_near():
-	print("AM: stopping the audio")
+	#print("AM: stopping the audio")
 	$player_near.stop()
 	player_near_sound_position = 0.0 # resetting the position
 	

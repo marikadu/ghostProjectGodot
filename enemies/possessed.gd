@@ -160,7 +160,6 @@ func take_damage(damage: float):
 					animated_sprite.play("idle_red")
 	
 func die():
-	# if I put the sounds here, they don't work. probably because of the "queue_free"
 	dead = true
 	# death animations
 	if npc.killed_by == "enemy1":
@@ -197,5 +196,6 @@ func die():
 # possessed escaped
 func _on_area_2d_possessed_area_shape_entered(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
 	if area == possessed_escapes and not dead:
+		print("POSSESSED: ESCALPES")
 		Events.game_over.emit()
 		Events.possessed_escaped.emit()

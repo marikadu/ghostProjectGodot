@@ -118,11 +118,13 @@ texture = ExtResource("3_hsspx")
 unique_name_in_owner = true
 layout_direction = 1
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -864.0
 grow_horizontal = 2
-pivot_offset = Vector2(579, 423)
+grow_vertical = 2
 script = ExtResource("3_pcqfg")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
@@ -321,20 +323,18 @@ z_index = -10
 position = Vector2(576, 458)
 texture = ExtResource("3_lq80u")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.445, 0.445)
+ignore_rotation = false
+zoom = Vector2(0.9, 0.9)
+process_callback = 0
+position_smoothing_speed = 10.0
+script = ExtResource("3_dgiyq")
+
 [node name="GhostPlayer" parent="." instance=ExtResource("4_sd2tg")]
 unique_name_in_owner = true
 z_index = 2
-position = Vector2(576, 271)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-unique_name_in_owner = true
-top_level = true
-position = Vector2(584, 449)
-zoom = Vector2(0.9, 0.9)
-process_callback = 0
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-script = ExtResource("3_dgiyq")
 
 [node name="wall" type="StaticBody2D" parent="."]
 collision_layer = 15

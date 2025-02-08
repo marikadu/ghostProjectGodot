@@ -33,14 +33,13 @@ func _ready() -> void:
 	
 	await get_tree().create_timer(0.1).timeout
 	if Global.current_scene_name == 1:
-		print("bg_moves: stop the bg!!!!!!")
-		#time = 8.0
+		#print("bg_moves: stop the bg!!!!!!")
 		wait_before_sunrise = 18.0
 		rise_the_sun = 22.0
 		
 	# different background for the infinite mode
 	elif Global.current_scene_name == 7:
-		print("bg moves: infinite mode")
+		#print("bg moves: infinite mode")
 		background_animation_start()
 		wait_before_sunrise = null
 		rise_the_sun = 22.0
@@ -57,9 +56,10 @@ func _process(delta):
 	#foreground.position = (player.position*delta) * 2
 	# parallax effect
 	if Graphics.camera_follow_player:
+		#pass
 		n_middleground.position = (player.position*delta) / 2
 		d_middleground.position = (player.position*delta) / 2
-		
+		#
 		n_background.position = (player.position*delta) / 4
 		d_background.position = (player.position*delta) / 4
 	
@@ -70,7 +70,7 @@ func _process(delta):
 		return
 	
 	else:
-		await get_tree().create_timer(wait_before_sunrise).timeout
+		await get_tree().create_timer(wait_before_sunrise, false).timeout
 		fade_out_stars()
 		fade_out()
 	
@@ -101,20 +101,20 @@ func fade_out():
 
 func tutorial_background():
 	background_animation_start()
-	await get_tree().create_timer(wait_before_sunrise).timeout
+	await get_tree().create_timer(wait_before_sunrise, false).timeout
 	fade_out()
 	fade_out_stars()
 	
 
 func background_animation_start():
-	print("bg_moves: activate all bg")
+	#print("bg_moves: activate all bg")
 
 	if Global.current_scene_name == 1:
 		moon_player.stop(false) # no moon for the first level
 		$moon_timer.stop()
-		print("bg: level tutorial!")
+		#print("bg: level tutorial!")
 		#stars_player.play("stars")
-		await get_tree().create_timer(rise_the_sun).timeout
+		await get_tree().create_timer(rise_the_sun, false).timeout
 		sun_player.play("sun")
 		
 	elif Global.current_scene_name == 7:
@@ -125,10 +125,10 @@ func background_animation_start():
 		#moon_player.play("moon")
 		
 	else:
-		print("other levels!")
+		#print("other levels!")
 		moon_player.play("moon")
 		#stars_player.play("stars")
-		await get_tree().create_timer(rise_the_sun).timeout
+		await get_tree().create_timer(rise_the_sun, false).timeout
 		sun_player.play("sun")
 		
 
@@ -140,11 +140,11 @@ func fade_out_stars():
 	tween.set_ease(Tween.EASE_OUT)
 	# tween modulation
 	tween.tween_property(stars_infinite, "modulate:a", 0.0, stars_fading_out_time)
-	tween.tween_callback(func():
+	tween.tween_callback(
+		func():
 		stars_infinite.visible = false
-		print("stars are gone"))
+		)
 
 
 func _on_moon_timer_timeout() -> void:
-	print("moon go!")
 	moon_player.play("moon")
