@@ -67,6 +67,6 @@ func die():
 	if Graphics.flash_when_hit_effect:
 		hit_flash.play("hit_flash")
 	Global.score += 10
-	await get_tree().create_timer(wait_death_animation).timeout
+	await get_tree().create_timer(wait_death_animation, false).timeout
 	queue_free()  # remove the enemy from the scene
 	Events.send_scripted_enemy2.emit()

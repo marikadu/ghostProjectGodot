@@ -282,11 +282,11 @@ func _on_spawn_scripted_enemy():
 func _on_npc_is_scared_of_the_player2():
 	if npc_instance.is_alive:
 		npc_instance.npc_ignore_player = false
-	await get_tree().create_timer(1.8).timeout
+	await get_tree().create_timer(1.8, false).timeout
 	
 	$EnemySpawnTimer.start()
 	print("spawn enemies")
-	await get_tree().create_timer(7.8).timeout
+	await get_tree().create_timer(7.8, false).timeout
 	$EnemySpawnTimer.stop()
 	print("stop enemy timer")
 	Events.introduce_fireflies.emit()
@@ -296,23 +296,23 @@ func _on_npc_is_scared_of_the_player2():
 func _on_introduce_fireflies():
 	#$FireFlySpawnTimer.start()
 	#$FireFlySpawnTimer.wait_time = 2.6
-	await get_tree().create_timer(2.2).timeout
+	await get_tree().create_timer(2.2, false).timeout
 	show_health()
-	await get_tree().create_timer(3.5).timeout
+	await get_tree().create_timer(3.5, false).timeout
 	
 	spawn_firefly()
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(3, false).timeout
 	
 	$FireFlySpawnTimer.start()
 	$FireFlySpawnTimer.wait_time = 2.7
 	print("fireflies!!!!!!!!")
 	#show_health()
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(3, false).timeout
 	# enemies spawn slowly while introducing to the fireflies
 	$EnemySpawnTimer.wait_time = 3.2
 	$EnemySpawnTimer.start()
 	
-	await get_tree().create_timer(9).timeout
+	await get_tree().create_timer(9, false).timeout
 	$FireFlySpawnTimer.start()
 	$FireFlySpawnTimer.wait_time = 5.6
 	_on_show_the_rest_of_ui()
@@ -321,7 +321,7 @@ func _on_introduce_fireflies():
 func _on_show_the_rest_of_ui():
 	#await get_tree().create_timer(3).timeout
 	#show_health()
-	await get_tree().create_timer(4).timeout
+	await get_tree().create_timer(4, false).timeout
 	
 	# showing the timer
 	$EnemySpawnTimer.wait_time = 1.5
@@ -329,7 +329,7 @@ func _on_show_the_rest_of_ui():
 	show_timer()
 	
 	# starting the game
-	await get_tree().create_timer(3.5).timeout
+	await get_tree().create_timer(3.5, false).timeout
 	%CountDownTimer.cd_timer.paused = false
 	Events.start_counting_down.emit()
 	print("start timer!")

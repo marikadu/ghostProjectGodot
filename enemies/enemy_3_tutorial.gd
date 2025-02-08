@@ -115,6 +115,6 @@ func _on_send_scripted_enemy3():
 	send_scripted_enemy_3 = true
 	scripted_enemy3_move = true
 	speed_timer.paused = false
-	await get_tree().create_timer(4).timeout
+	await get_tree().create_timer(4, false).timeout
 	scripted_enemy3_move = false
 	

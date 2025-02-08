@@ -88,7 +88,7 @@ func _on_send_scripted_enemy2():
 	send_scripted_enemy2 = true
 	scripted_enemy2_move = true
 	print("sending second eeeeeeeeee")
-	await get_tree().create_timer(2.7).timeout
+	await get_tree().create_timer(2.7, false).timeout
 	# making enemy 2 stop for the player to hit it
 	scripted_enemy2_move = false
 	

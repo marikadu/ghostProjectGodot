@@ -94,7 +94,7 @@ func first_get_hit():
 	label_1.scale = Vector2(1.5, 0.7)
 	#player.dash_hit.play()
 	AudioManager.play_dash_hit()
-	await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(0.4, false).timeout
 	label_1.visible = false
 	label_2.visible = true
 	can_hit_2 = true
@@ -110,7 +110,7 @@ func _on_second_body_entered(body: Node2D) -> void:
 		label_2.scale = Vector2(1.5, 0.7)
 		AudioManager.play_dash_hit()
 		#print("you are so cool_2")
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.4, false).timeout
 		can_hit_2 = true
 
 
@@ -121,7 +121,7 @@ func _on_third_body_entered(body: Node2D) -> void:
 		label_3.scale = Vector2(1.5, 0.7)
 		AudioManager.play_dash_hit()
 		print("you are so cool3")
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.4, false).timeout
 		can_hit_3 = true
 
 	
@@ -135,26 +135,26 @@ func _on_npc_is_scared_of_the_player_text():
 	label_2.visible = false
 	can_hit_2 = false
 	
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(5, false).timeout
 	_on_enemies_start_spawning()
 	
 	
 func _on_enemies_start_spawning():
 	#label_2.visible = false
 	#can_hit_2 = false
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(2, false).timeout
 	label_3.visible = false
 	can_hit_3 = false
 	
 	
 func _on_introduce_fireflies():
 	
-	await get_tree().create_timer(8).timeout
+	await get_tree().create_timer(8, false).timeout
 	label_4.visible = true
 	can_hit_4 = true
 	bg_4.visible = true
 	voice.play()
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(3, false).timeout
 	bg_4.visible = false
 	
 	label_4.visible = false
@@ -174,7 +174,7 @@ func _on_fourth_body_entered(body: Node2D) -> void:
 		label_4.scale = Vector2(1.5, 0.7)
 		AudioManager.play_dash_hit()
 		print("you are so cool4")
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.4, false).timeout
 		can_hit_4 = true
 
 
@@ -185,7 +185,7 @@ func _on_fourth_2_body_entered(body: Node2D) -> void:
 		label_4_2.scale = Vector2(1.5, 0.7)
 		AudioManager.play_dash_hit()
 		print("you are so cool4_2")
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.4, false).timeout
 		can_hit_4_2 = true
 
 
@@ -197,7 +197,7 @@ func _on_fifth_body_entered(body: Node2D) -> void:
 		label_5.scale = Vector2(1.5, 0.7)
 		AudioManager.play_dash_hit()
 		print("you are so cool5")
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.4, false).timeout
 		can_hit_5 = true
 
 
@@ -208,7 +208,7 @@ func _on_sixth_body_entered(body: Node2D) -> void:
 		label_6.scale = Vector2(1.5, 0.7)
 		AudioManager.play_dash_hit()
 		print("you are so cool6")
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.4, false).timeout
 		can_hit_6 = true
 	
 	
@@ -232,6 +232,6 @@ func _on_win_game():
 	label_6.visible = true
 	can_hit_6 = true
 	voice.play()
-	await get_tree().create_timer(6).timeout
+	await get_tree().create_timer(6, false).timeout
 	label_6.visible = false
 	can_hit_6 = false
