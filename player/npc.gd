@@ -21,11 +21,12 @@ var max_health: float
 var is_alive: bool = true
 var is_player_near: bool = false
 var npc_ignore_player: bool = false
-#var can_npc_take_damage: bool
-#var player_near_time: float = 0.0
-#var patience: float = 3.0
+var is_healed: bool
+
+var player_near_time_remaining: float = 0.0
 var player: CharacterBody2D
 var killed_by: String = ""
+
 #var body: Node
 
 
@@ -36,6 +37,7 @@ func _ready():
 	max_health = 10.0
 	health = max_health # at the start of the game, health is max
 	is_alive = true
+	is_healed = false
 
 	if healthbar != null:
 		healthbar.init_health(health)
@@ -102,17 +104,27 @@ func _on_area_2d_body_entered(body_e: Node) -> void:
 			is_player_near = true
 			animated_sprite.play("hit_player")
 			
-			if player_near_timer.paused: # if the timer is paused, unpause
-				print("player re-entered!!!!!!")
-				player_near_timer.paused = false
-			player_near_timer.start()
+			#if player_near_timer.paused: # if the timer is paused, unpause
+				#print("player re-entered!!!!!!") # didn't work
+				#player_near_timer.paused = false
+				
+				# if there is some remaining time, continue where paused
+			if player_near_time_remaining > 0:
+				player_near_timer.start(player_near_time_remaining)
+				print("NPC: re-enter, resuming time: ", player_near_time_remaining)
+			else:
+				player_near_timer.start(3.0) # start from beginning
+				print("NPC: STARTING timer from beginning")
+				
+			#if player_near_timer.is_stopped():
+				#player_near_timer.start(3.0) # resetting with full 3 seconds
+				#print("NPC: starting timer with 3 seconds interval")
+				
+			#player_near_timer.start()
 			player_near_timer.one_shot = false
-			
-			#AudioManager.play_player_near()
 			AudioManager.unpause_player_near() # resume audio
 			player_re_enter_npc.stop() # resetting the timer when player enters back
-			#player_re_enter_npc.start()
-			#print("timer paused", player_re_enter_npc.paused)
+			player_near_time_remaining = 0.0 # resettin stored time
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
@@ -122,17 +134,20 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		is_player_near = false
 		print("player exited?")
 		
-		#player_near_timer.stop()
-		player_near_timer.paused
+		# store remaining time + stop the timer
+		player_near_time_remaining = player_near_timer.time_left
+		print("NPC: PAUSING AT: ", player_near_time_remaining)
+		
+		player_near_timer.stop()
 		player_re_enter_npc.start() # counting for how long has player been away
-		print(player_near_timer.paused, "player away: ", player_re_enter_npc.time_left)
+		print("NPC: player away for: ", player_re_enter_npc.time_left)
 		#player_near_timer.set_wait_time(3.0) 
 		#player_near_timer.one_shot = true
-		#if not Global.is_game_won:
-			#animated_sprite.play("sleeping")
-		#else:
-			#print("ignore player BECAUSE WIN")
-			#pass
+		if not Global.is_game_won:
+			animated_sprite.play("sleeping")
+		else:
+			print("ignore player BECAUSE WIN")
+			pass
 
 
 # take damage
@@ -154,6 +169,7 @@ func take_damage(damage: float, enemy: Node):
 
 func heal(healing: float):
 	animated_sprite.play("healed")
+	is_healed = true
 	vfx_heal.emitting = true
 #	update health
 	set_health(min(health + healing, max_health))
@@ -162,16 +178,16 @@ func heal(healing: float):
 	if not Global.is_game_won:
 		await get_tree().create_timer(1).timeout
 		animated_sprite.play("sleeping")
+		is_healed = false
 	
 	
+# npc back from the dead
 func restore_health(amount: float) -> void:
 	# revive npc if dead and health is restored
-	# if not is_alive and health + amount > 0:
 	if not is_alive:
 		AudioManager.play_npc_back_from_dead()
 		is_alive = true
 		animated_sprite.play("sleeping")
-		#print("npc back from the dead")
 		player_near_timer.stop()
 		player_near_timer.set_wait_time(3.0) 
 		player_near_timer.one_shot = true
@@ -179,8 +195,6 @@ func restore_health(amount: float) -> void:
 	health = min(health + amount, max_health)  # doesn't go beyond max_health
 	if healthbar != null:
 		healthbar.health = health  # update the health bar
-		
-	#print("NPC health: ", health)
 
 
 # when isHit timer finishes -> go back to sleeping animation if alive
@@ -189,8 +203,8 @@ func _on_hit_timer_timeout():
 		animated_sprite.play("hit")
 		await get_tree().create_timer(1).timeout
 		$isHitAnimation.stop()
-		# don't make them go back to sleep after the game is won and they woke up lol
-		if is_alive and not is_player_near and not Global.is_game_won:
+		# don't make them go back to sleep after the game is won and they woke up
+		if is_alive and not is_player_near and not Global.is_game_won and not is_healed:
 			print("go back to sleep")
 			animated_sprite.play("sleeping")
 		elif is_alive and is_player_near:
@@ -198,16 +212,21 @@ func _on_hit_timer_timeout():
 
 	
 func _on_player_near_timeout() -> void:
+	# WORKS!!!
 	if is_alive and not Global.current_scene_name == 1 and not npc_ignore_player:
 		take_damage(2.0, self)
+		player_near_timer.start(2.5) # a bit less time to make it slightly harder
 		#print("NOTICED THE PLAYER ", health)
+
 	# npc gets damaged 1 hp instead of 2 for the tutorial
 	elif is_alive and Global.current_scene_name == 1 and not npc_ignore_player:
 		take_damage(1.0, self)
+		player_near_timer.start(2.4)
 		#print("TUTORIAL: NOTICED THE PLAYER ", health)
 
 
 func _on_player_re_enter_npc_timeout() -> void:
 	AudioManager.stop_player_near()
-	player_near_timer.stop() # reset the timer
+	player_near_timer.stop() # resetting the timer
+	player_near_time_remaining = 0.0 # resetting remaining time
 	print("SAFE: player away safe", player_near_timer.paused)
