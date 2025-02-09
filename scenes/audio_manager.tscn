@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://ch0rvar102sy5"]
+[gd_scene load_steps=34 format=3 uid="uid://ch0rvar102sy5"]
 
 [ext_resource type="Script" path="res://scenes/scripts/audio_manager.gd" id="1_snhpj"]
 [ext_resource type="AudioStream" uid="uid://bijy2lf2py5yo" path="res://SFX/button_3.ogg" id="2_mk62g"]
@@ -18,6 +18,8 @@
 [ext_resource type="AudioStream" uid="uid://d7xvpqlch2my" path="res://SFX/npc_died.ogg" id="16_327q7"]
 [ext_resource type="AudioStream" uid="uid://c0m7d31qwbhsp" path="res://SFX/health_restored.ogg" id="17_rarb6"]
 [ext_resource type="AudioStream" uid="uid://c3lxgsexbr5sy" path="res://SFX/healing.ogg" id="18_5ytcx"]
+[ext_resource type="AudioStream" uid="uid://cuv87knktx10p" path="res://SFX/ghost_voice.ogg" id="19_f6015"]
+[ext_resource type="AudioStream" uid="uid://bpk24ipm3cyj5" path="res://SFX/after_pause.ogg" id="20_oge8y"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_7kv6d"]
 random_pitch = 1.1
@@ -79,6 +81,11 @@ stream_0/stream = ExtResource("15_fjgxs")
 random_pitch = 1.12
 streams_count = 1
 stream_0/stream = ExtResource("18_5ytcx")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_o66jo"]
+random_pitch = 1.26
+streams_count = 1
+stream_0/stream = ExtResource("19_f6015")
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_snhpj")
@@ -203,6 +210,17 @@ stream = SubResource("AudioStreamRandomizer_3d8wd")
 volume_db = -3.0
 pitch_scale = 1.19
 bus = &"SFX"
+
+[node name="orial_voice" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_o66jo")
+volume_db = -2.672
+pitch_scale = 0.93
+bus = &"SFX"
+
+[node name="after_pause" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_oge8y")
+volume_db = -5.244
+bus = &"Music"
 
 [node name="player_re_enter_npc" type="Timer" parent="."]
 one_shot = true

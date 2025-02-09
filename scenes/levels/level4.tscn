@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bc740oneqgdlf"]
+[gd_scene load_steps=21 format=3 uid="uid://bc740oneqgdlf"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_4.gd" id="1_taymm"]
 [ext_resource type="Script" path="res://scenes/scripts/day_night.gd" id="2_gdotc"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dj3b8i7bdcu8j" path="res://scenes/screens/Pause.tscn" id="4_qr6ra"]
 [ext_resource type="Script" path="res://scenes/scripts/camera_effects.gd" id="5_b23un"]
 [ext_resource type="PackedScene" uid="uid://giv47sl8et1g" path="res://player/hp.tscn" id="6_35vdn"]
+[ext_resource type="PackedScene" uid="uid://qu06wlu637ji" path="res://scenes/scripts/game_start_321.tscn" id="6_o125h"]
 [ext_resource type="PackedScene" uid="uid://c86ohxnlg8a" path="res://player/dash_stamina.tscn" id="7_iwro6"]
 [ext_resource type="PackedScene" uid="uid://d4eb43rmirjs8" path="res://scenes/score.tscn" id="8_xfgd0"]
 [ext_resource type="PackedScene" uid="uid://bbobth255p4np" path="res://scenes/timer.tscn" id="9_yvi11"]
@@ -73,6 +74,9 @@ rotation = -0.00563519
 [node name="Pause" type="CanvasLayer" parent="."]
 
 [node name="Pause" parent="Pause" instance=ExtResource("4_qr6ra")]
+
+[node name="GameStartTimer" parent="Pause" instance=ExtResource("6_o125h")]
+visible = false
 
 [node name="CameraControl" type="Control" parent="."]
 unique_name_in_owner = true

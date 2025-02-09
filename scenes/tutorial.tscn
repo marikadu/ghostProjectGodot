@@ -1,20 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://djb0frbwme6q3"]
+[gd_scene load_steps=9 format=3 uid="uid://djb0frbwme6q3"]
 
 [ext_resource type="Script" path="res://scenes/scripts/tutorial.gd" id="1_bom5o"]
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="1_ifomp"]
 [ext_resource type="Texture2D" uid="uid://dam6wkjqs7lyy" path="res://sprites/UI/speech_bubble.png" id="2_tlr6h"]
-[ext_resource type="AudioStream" uid="uid://i6mb63m4vyaa" path="res://SFX/possessed_hit2.ogg" id="3_apkci"]
 [ext_resource type="Texture2D" uid="uid://ce7t8fw641hfe" path="res://sprites/UI/speech_bubble3.png" id="4_vkeot"]
 [ext_resource type="Texture2D" uid="uid://dibbyyhohlorq" path="res://sprites/UI/speech_bubble4.png" id="5_ov3fr"]
 [ext_resource type="Texture2D" uid="uid://dppdryiaemd4a" path="res://sprites/UI/speech_bubble5.png" id="6_8loot"]
 [ext_resource type="Texture2D" uid="uid://cqp33f4v4x1wr" path="res://sprites/UI/speech_bubble6.png" id="7_c86df"]
 [ext_resource type="Texture2D" uid="uid://bjx5mgkgwxtvm" path="res://sprites/UI/speech_bubble7.png" id="8_uo8cp"]
-[ext_resource type="AudioStream" uid="uid://cuv87knktx10p" path="res://SFX/ghost_voice.ogg" id="10_ug0wv"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xcntx"]
-random_pitch = 1.26
-streams_count = 1
-stream_0/stream = ExtResource("10_ug0wv")
 
 [node name="Tutorial" type="Control"]
 layout_mode = 3
@@ -226,16 +219,6 @@ texture = ExtResource("8_uo8cp")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label6/sixth"]
 polygon = PackedVector2Array(-3, 50, 154, 49, 155, 5, -1, 3)
-
-[node name="hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_apkci")
-
-[node name="voice" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_xcntx")
-volume_db = 6.067
-pitch_scale = 0.93
-panning_strength = 0.1
-bus = &"SFX"
 
 [connection signal="body_entered" from="Label1/first" to="." method="_on_first_body_entered"]
 [connection signal="body_entered" from="Label2/second" to="." method="_on_second_body_entered"]

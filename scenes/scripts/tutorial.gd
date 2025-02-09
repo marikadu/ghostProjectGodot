@@ -10,8 +10,7 @@ extends Control
 @onready var label_5: Label = $Label5
 @onready var label_6: Label = $Label6
 
-@onready var hit: AudioStreamPlayer2D = $hit
-@onready var voice: AudioStreamPlayer2D = $voice
+#@onready var voice: AudioStreamPlayer2D = $voice
 
 #@onready var player = preload("res://player/ghost_player.tscn")
 #var player: CharacterBody2D
@@ -73,34 +72,26 @@ func _physics_process(delta: float) -> void:
 
 func _on_first_body_entered(body: Node2D) -> void:
 	if body == player and player.dashing and can_hit_1:
-		#if can_hit_1:
 		first_get_hit()
-			#print("yo yo")
-		
-#func _on_b_area_body_entered(body: Node2D) -> void:
-	#if body == player and player.dashing:
-		#first_get_hit()
-		#print("yo yo")
+
+
 func _on_tutorial_start():
 	label_1.visible = true
 	can_hit_1 = true
-	voice.play()
+	AudioManager.play_orial_voice()
 
 
 func first_get_hit():
-	#player.hit.play()
 	AudioManager.play_hit2()
 	can_hit_1 = false
 	label_1.scale = Vector2(1.5, 0.7)
-	#player.dash_hit.play()
 	AudioManager.play_dash_hit()
 	await get_tree().create_timer(0.4, false).timeout
 	label_1.visible = false
 	label_2.visible = true
 	can_hit_2 = true
-	voice.play()
+	AudioManager.play_orial_voice()
 	Events.send_scripted_enemy.emit()
-	
 
 
 func _on_second_body_entered(body: Node2D) -> void:
@@ -124,13 +115,13 @@ func _on_third_body_entered(body: Node2D) -> void:
 		await get_tree().create_timer(0.4, false).timeout
 		can_hit_3 = true
 
-	
+
 func _on_npc_is_scared_of_the_player_text():
 	Events.npc_is_scared_of_the_player2.emit()
 	
 	label_3.visible = true
 	can_hit_3 = true
-	voice.play()
+	AudioManager.play_orial_voice()
 	
 	label_2.visible = false
 	can_hit_2 = false
@@ -140,20 +131,17 @@ func _on_npc_is_scared_of_the_player_text():
 	
 	
 func _on_enemies_start_spawning():
-	#label_2.visible = false
-	#can_hit_2 = false
 	await get_tree().create_timer(2, false).timeout
 	label_3.visible = false
 	can_hit_3 = false
 	
 	
 func _on_introduce_fireflies():
-	
 	await get_tree().create_timer(8, false).timeout
 	label_4.visible = true
 	can_hit_4 = true
 	bg_4.visible = true
-	voice.play()
+	AudioManager.play_orial_voice()
 	await get_tree().create_timer(3, false).timeout
 	bg_4.visible = false
 	
@@ -163,8 +151,7 @@ func _on_introduce_fireflies():
 	bg_4_2.visible = true
 	label_4_2.visible = true
 	can_hit_4_2 = true
-	voice.play()
-	
+	AudioManager.play_orial_voice()
 
 
 func _on_fourth_body_entered(body: Node2D) -> void:
@@ -187,7 +174,6 @@ func _on_fourth_2_body_entered(body: Node2D) -> void:
 		print("you are so cool4_2")
 		await get_tree().create_timer(0.4, false).timeout
 		can_hit_4_2 = true
-
 
 
 func _on_fifth_body_entered(body: Node2D) -> void:
@@ -222,7 +208,7 @@ func _on_start_counting_down():
 	
 	label_5.visible = true
 	can_hit_5 = true
-	voice.play()
+	AudioManager.play_orial_voice()
 
 
 func _on_win_game():
@@ -231,7 +217,7 @@ func _on_win_game():
 	
 	label_6.visible = true
 	can_hit_6 = true
-	voice.play()
+	AudioManager.play_orial_voice()
 	await get_tree().create_timer(6, false).timeout
 	label_6.visible = false
 	can_hit_6 = false

@@ -54,19 +54,22 @@ func _process(_delta: float) -> void:
 	#pass # Replace with function body.
 	
 func _on_resume_game():
+	AudioManager.play_after_pause()
 	print(\"resuming game!\")
-	label.visible = true
+	self.visible = true
+	#label.visible = true
 	game_start_timer.start()
 	$SecondTimer.start()
 	animation_player.play(\"zoom_out\")
 
 
 func _on_second_timer_timeout() -> void:
-	animation_player.play(\"zoom_out\")
 	print(\"second1\")
+	animation_player.play(\"zoom_out\")
 	if game_start_timer.time_left < 1.0:
 		print(\"timer bye\")
-		label.visible = false
+		#label.visible = false
+		self.visible = false
 		get_tree().paused = false
 		
 		game_start_timer.stop()
@@ -75,6 +78,7 @@ func _on_second_timer_timeout() -> void:
 
 [sub_resource type="Animation" id="Animation_g4lqp"]
 resource_name = "zoom_out"
+length = 0.97
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -117,18 +121,33 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.3, 1.3)
+pivot_offset = Vector2(572, 367)
 script = SubResource("GDScript_84e7d")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0.0627451, 0.0627451, 0.25098, 0.12549)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -68.0
-offset_top = 341.0
-offset_right = 68.0
-offset_bottom = 411.0
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -98.0
+offset_right = 64.0
+offset_bottom = -28.0
 grow_horizontal = 2
+grow_vertical = 2
 pivot_offset = Vector2(67, 34)
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -138,7 +157,8 @@ text = "0"
 horizontal_alignment = 1
 
 [node name="GameStartTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 3.99
+one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Label")
