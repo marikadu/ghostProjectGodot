@@ -37,6 +37,7 @@ func _ready() -> void:
 	if Graphics.flash_when_hit_effect:
 		flash_toggle.button_pressed = true
 		
+		
 	_load_keybindings_from_settings()
 	
 	_create_action_list()

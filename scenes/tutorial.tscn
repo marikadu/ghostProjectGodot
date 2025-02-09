@@ -51,7 +51,6 @@ texture = ExtResource("2_tlr6h")
 polygon = PackedVector2Array(-10, 252, 204, 255, 213, 132, 207, -2, 96, -6, -10, 0, -15, 128)
 
 [node name="Label2" type="Label" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 151.0
 offset_top = 483.0
@@ -80,7 +79,6 @@ texture = ExtResource("2_tlr6h")
 polygon = PackedVector2Array(-11, 98, -5, 158, 109, 166, 220, 161, 230, 113, 224, 27, 201, 3, 121, -5, -12, -1)
 
 [node name="Label3" type="Label" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 90.0
 offset_top = 386.0
@@ -109,7 +107,6 @@ texture = ExtResource("4_vkeot")
 polygon = PackedVector2Array(-6, 158, 118, 161, 215, 166, 244, 126, 245, 49, 232, -8, 119, -14, -7, -10, -18, 61)
 
 [node name="Label4" type="Label" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 90.0
 offset_top = 286.0
@@ -167,7 +164,6 @@ texture = ExtResource("6_8loot")
 polygon = PackedVector2Array(-10, 270, 181, 283, 346, 229, 340, 91, 330, 10, 237, -27, -8, -12, -20, 73)
 
 [node name="Label5" type="Label" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 86.0
 offset_top = 328.0
@@ -194,7 +190,6 @@ texture = ExtResource("7_c86df")
 polygon = PackedVector2Array(-3, 55, 306, 55, 306, 6, -1, 3)
 
 [node name="Label6" type="Label" parent="."]
-visible = false
 layout_mode = 0
 offset_left = 90.0
 offset_top = 347.0
@@ -219,6 +214,32 @@ texture = ExtResource("8_uo8cp")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label6/sixth"]
 polygon = PackedVector2Array(-3, 50, 154, 49, 155, 5, -1, 3)
+
+[node name="Label7" type="Label" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 510.0
+offset_right = 559.0
+offset_bottom = 787.0
+theme = ExtResource("1_ifomp")
+theme_override_colors/font_color = Color(0.215686, 0.419608, 0.603922, 1)
+theme_override_font_sizes/font_size = 36
+text = "Oh well..."
+
+[node name="bg1" type="NinePatchRect" parent="Label7"]
+z_index = -1
+layout_mode = 0
+offset_left = -25.0
+offset_top = -28.0
+offset_right = 212.0
+offset_bottom = 244.0
+scale = Vector2(1.02889, 1.02925)
+texture = ExtResource("8_uo8cp")
+
+[node name="seventh" type="Area2D" parent="Label7"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Label7/seventh"]
+polygon = PackedVector2Array(-1, 97, 162, 87, 172, 54, 151, -3, 79, -13, -4, -5, -18, 54)
 
 [connection signal="body_entered" from="Label1/first" to="." method="_on_first_body_entered"]
 [connection signal="body_entered" from="Label2/second" to="." method="_on_second_body_entered"]

@@ -1,9 +1,12 @@
-[gd_scene load_steps=38 format=3 uid="uid://cn2xqtixlnh2p"]
+[gd_scene load_steps=41 format=3 uid="uid://cn2xqtixlnh2p"]
 
 [ext_resource type="Shader" path="res://player/wants_dash.gdshader" id="1_u11qh"]
 [ext_resource type="Script" path="res://player/orial.gd" id="2_w4vmx"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="3_si5me"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="4_15yti"]
+[ext_resource type="Texture2D" uid="uid://tqv8168sx2rk" path="res://sprites/orial/o_game_over0000.png" id="5_854en"]
+[ext_resource type="Texture2D" uid="uid://dfe3x17vgkgv2" path="res://sprites/orial/o_game_over0001.png" id="6_cwtht"]
+[ext_resource type="Texture2D" uid="uid://clw81nvc1fxjq" path="res://sprites/orial/o_game_over0002.png" id="7_qjnwv"]
 [ext_resource type="Texture2D" uid="uid://dy52cntvh4y8p" path="res://sprites/orial/o_hit0000.png" id="9_1vpd3"]
 [ext_resource type="Texture2D" uid="uid://2pmk331sti6x" path="res://sprites/orial/o_hit0001.png" id="10_axuwo"]
 [ext_resource type="Texture2D" uid="uid://pb1w4k7mytxf" path="res://sprites/orial/o_hit0002.png" id="11_e27qi"]
@@ -41,6 +44,20 @@ shader_parameter/Tint = Color(1, 1, 1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hgbdu"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_854en")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cwtht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qjnwv")
+}],
+"loop": true,
+"name": &"game_over",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("9_1vpd3")
@@ -279,7 +296,7 @@ texture_scale = 0.67
 material = SubResource("ShaderMaterial_5jufo")
 rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_hgbdu")
-animation = &"idle"
+animation = &"game_over"
 
 [node name="HitFlash" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {

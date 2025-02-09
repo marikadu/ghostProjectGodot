@@ -82,7 +82,7 @@ func _ready() -> void:
 	
 	# resetting the score for every new game
 	Global.score = 0
-	print("resetting score:", Global.score)
+	#print("resetting score:", Global.score)
 	
 
 	if npc_instance == null:  # check if the NPC instance exists
@@ -287,55 +287,52 @@ func _on_npc_is_scared_of_the_player2():
 	await get_tree().create_timer(1.8, false).timeout
 	
 	$EnemySpawnTimer.start()
-	print("spawn enemies")
 	await get_tree().create_timer(7.8, false).timeout
 	$EnemySpawnTimer.stop()
-	print("stop enemy timer")
 	Events.introduce_fireflies.emit()
 
 	
 	# INTRODUCE TO THE FIREFLIES HERE
 func _on_introduce_fireflies():
-	#$FireFlySpawnTimer.start()
-	#$FireFlySpawnTimer.wait_time = 2.6
-	await get_tree().create_timer(2.2, false).timeout
-	show_health()
-	await get_tree().create_timer(3.5, false).timeout
-	
-	spawn_firefly()
-	await get_tree().create_timer(3, false).timeout
-	
-	$FireFlySpawnTimer.start()
-	$FireFlySpawnTimer.wait_time = 2.7
-	print("fireflies!!!!!!!!")
-	#show_health()
-	await get_tree().create_timer(3, false).timeout
-	# enemies spawn slowly while introducing to the fireflies
-	$EnemySpawnTimer.wait_time = 3.2
-	$EnemySpawnTimer.start()
-	
-	await get_tree().create_timer(9, false).timeout
-	$FireFlySpawnTimer.start()
-	$FireFlySpawnTimer.wait_time = 5.6
-	_on_show_the_rest_of_ui()
+	if not Global.is_game_over:
+
+		await get_tree().create_timer(2.2, false).timeout
+		show_health()
+		await get_tree().create_timer(3.5, false).timeout
+		
+		spawn_firefly()
+		await get_tree().create_timer(3, false).timeout
+		
+		$FireFlySpawnTimer.start()
+		$FireFlySpawnTimer.wait_time = 2.7
+		#show_health()
+		await get_tree().create_timer(3, false).timeout
+		# enemies spawn slowly while introducing to the fireflies
+		$EnemySpawnTimer.wait_time = 3.2
+		$EnemySpawnTimer.start()
+		
+		await get_tree().create_timer(9, false).timeout
+		$FireFlySpawnTimer.start()
+		$FireFlySpawnTimer.wait_time = 5.6
+		_on_show_the_rest_of_ui()
 
 
 func _on_show_the_rest_of_ui():
-	#await get_tree().create_timer(3).timeout
-	#show_health()
-	await get_tree().create_timer(4, false).timeout
-	
-	# showing the timer
-	$EnemySpawnTimer.wait_time = 1.5
-	$FireFlySpawnTimer.wait_time = 8
-	show_timer()
-	
-	# starting the game
-	await get_tree().create_timer(3.5, false).timeout
-	%CountDownTimer.cd_timer.paused = false
-	Events.start_counting_down.emit()
-	print("start timer!")
-	$EnemySpawnTimer.start()
+	if not Global.is_game_over:
+		#await get_tree().create_timer(3).timeout
+		#show_health()
+		await get_tree().create_timer(4, false).timeout
+		
+		# showing the timer
+		$EnemySpawnTimer.wait_time = 1.5
+		$FireFlySpawnTimer.wait_time = 8
+		show_timer()
+		
+		# starting the game
+		await get_tree().create_timer(3.5, false).timeout
+		%CountDownTimer.cd_timer.paused = false
+		Events.start_counting_down.emit()
+		$EnemySpawnTimer.start()
 	
 	
 
@@ -350,8 +347,10 @@ func _on_scripted_enemy3_killed():
 
 
 func show_timer():
-	timer_animation_player.play("show_timer")
+	if not Global.is_game_over:
+		timer_animation_player.play("show_timer")
 	
 func show_health():
-	health_animation_player.play("show_health")
+	if not Global.is_game_over:
+		health_animation_player.play("show_health")
 	

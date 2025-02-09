@@ -22,6 +22,3 @@ func _ready() -> void:
 	print ("camera shake is set to: ", camera_shake)
 	
 	flash_when_hit_effect = true
-	
-	
-	

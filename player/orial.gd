@@ -30,6 +30,9 @@ func _ready() -> void:
 	Events.npc_is_scared_of_the_player2.connect(_on_show_human)
 	Events.introduce_fireflies.connect(_on_introduce_fireflies)
 	Events.win_game_tutorial.connect(_on_win_game)
+	
+	Events.game_over_woke_up_human.connect(_on_game_over)
+	Events.game_over.connect(_on_game_over)
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -107,3 +110,7 @@ func _on_win_game():
 	await get_tree().create_timer(3, false).timeout
 	moving = false
 	queue_free()
+	
+	
+func _on_game_over():
+	animated_sprite_2d.play("game_over")

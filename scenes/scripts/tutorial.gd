@@ -9,11 +9,8 @@ extends Control
 @onready var label_4_2: Label = $Label4_2
 @onready var label_5: Label = $Label5
 @onready var label_6: Label = $Label6
+@onready var label_7: Label = $Label7
 
-#@onready var voice: AudioStreamPlayer2D = $voice
-
-#@onready var player = preload("res://player/ghost_player.tscn")
-#var player: CharacterBody2D
 @onready var player = get_tree().root.get_node("main/GhostPlayer")
 
 var can_hit_1
@@ -40,12 +37,16 @@ func _ready() -> void:
 	label_4_2.visible = false
 	label_5.visible = false
 	label_6.visible = false
+	label_7.visible = false
 	
 	Events.tutorial_start.connect(_on_tutorial_start)
 	Events.killed_scripted_enemy3.connect(_on_npc_is_scared_of_the_player_text)
 	Events.introduce_fireflies.connect(_on_introduce_fireflies)
 	Events.start_counting_down.connect(_on_start_counting_down)
 	Events.win_game_tutorial.connect(_on_win_game)
+	
+	Events.game_over_woke_up_human.connect(_on_game_over)
+	Events.game_over.connect(_on_game_over)
 
 
 func _physics_process(delta: float) -> void:
@@ -117,41 +118,44 @@ func _on_third_body_entered(body: Node2D) -> void:
 
 
 func _on_npc_is_scared_of_the_player_text():
-	Events.npc_is_scared_of_the_player2.emit()
-	
-	label_3.visible = true
-	can_hit_3 = true
-	AudioManager.play_orial_voice()
-	
-	label_2.visible = false
-	can_hit_2 = false
-	
-	await get_tree().create_timer(5, false).timeout
-	_on_enemies_start_spawning()
+	if not Global.is_game_over:
+		Events.npc_is_scared_of_the_player2.emit()
+		
+		label_3.visible = true
+		can_hit_3 = true
+		AudioManager.play_orial_voice()
+		
+		label_2.visible = false
+		can_hit_2 = false
+		
+		await get_tree().create_timer(5, false).timeout
+		_on_enemies_start_spawning()
 	
 	
 func _on_enemies_start_spawning():
-	await get_tree().create_timer(2, false).timeout
-	label_3.visible = false
-	can_hit_3 = false
+	if not Global.is_game_over:
+		await get_tree().create_timer(2, false).timeout
+		label_3.visible = false
+		can_hit_3 = false
 	
 	
 func _on_introduce_fireflies():
-	await get_tree().create_timer(8, false).timeout
-	label_4.visible = true
-	can_hit_4 = true
-	bg_4.visible = true
-	AudioManager.play_orial_voice()
-	await get_tree().create_timer(3, false).timeout
-	bg_4.visible = false
+	if not Global.is_game_over:
+		await get_tree().create_timer(8, false).timeout
+		label_4.visible = true
+		can_hit_4 = true
+		bg_4.visible = true
+		AudioManager.play_orial_voice()
+		await get_tree().create_timer(3, false).timeout
+		bg_4.visible = false
 	
-	label_4.visible = false
-	can_hit_4 = false
-	
-	bg_4_2.visible = true
-	label_4_2.visible = true
-	can_hit_4_2 = true
-	AudioManager.play_orial_voice()
+		label_4.visible = false
+		can_hit_4 = false
+		
+		bg_4_2.visible = true
+		label_4_2.visible = true
+		can_hit_4_2 = true
+		AudioManager.play_orial_voice()
 
 
 func _on_fourth_body_entered(body: Node2D) -> void:
@@ -199,25 +203,52 @@ func _on_sixth_body_entered(body: Node2D) -> void:
 	
 	
 func _on_start_counting_down():
-	label_4.visible = false
-	can_hit_4= false
-	
-	label_4_2.visible = false
-	can_hit_4_2= false
-	bg_4_2.visible = false
-	
-	label_5.visible = true
-	can_hit_5 = true
-	AudioManager.play_orial_voice()
+	if not Global.is_game_over:
+		label_4.visible = false
+		can_hit_4= false
+		
+		label_4_2.visible = false
+		can_hit_4_2= false
+		bg_4_2.visible = false
+		
+		label_5.visible = true
+		can_hit_5 = true
+		AudioManager.play_orial_voice()
 
 
 func _on_win_game():
+	if not Global.is_game_over:
+		label_5.visible = false
+		can_hit_5 = false
+		
+		label_6.visible = true
+		can_hit_6 = true
+		AudioManager.play_orial_voice()
+		await get_tree().create_timer(6, false).timeout
+		label_6.visible = false
+		can_hit_6 = false
+	
+
+func _on_game_over():
+	label_1.visible = false
+	can_hit_1 = false
+	
+	label_2.visible = false
+	can_hit_2 = false
+	
+	label_3.visible = false
+	can_hit_3 = false
+	
+	label_4.visible = false
+	can_hit_4 = false
+	
+	label_4_2.visible = false
+	can_hit_4_2 = false
+	
 	label_5.visible = false
 	can_hit_5 = false
 	
-	label_6.visible = true
-	can_hit_6 = true
-	AudioManager.play_orial_voice()
-	await get_tree().create_timer(6, false).timeout
-	label_6.visible = false
-	can_hit_6 = false
+	label_1.visible = false
+	can_hit_1 = false
+	
+	label_7.visible = true

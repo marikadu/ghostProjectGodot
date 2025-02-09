@@ -2,13 +2,10 @@
 extends Node2D
 # -- LEVEL 7
 
-# CTRL + drag a script to put it here with @onready with $
-#@onready var camera_2d: Camera2D = $Camera2D
 
 @onready var camera: Camera2D = %Camera2D
 @onready var win_game: ColorRect = $UI/WinScreen_completed_game
 @onready var game_over: ColorRect = $UI/GameOverScreen
-#@onready var is_game_over = false
 
 @onready var npc = preload("res://player/npc.tscn")
 @onready var player = preload("res://player/ghost_player.tscn")
@@ -25,7 +22,6 @@ var times_possessed_is_spawned = 0
 var possessed = preload("res://enemies/possessed.tscn")
 var npc_instance: Node = null
 var player_instance
-#var npc_instance = null
 
 # list of enemies
 var enemy_list = [
@@ -69,14 +65,10 @@ func _ready() -> void:
 
 	if npc_instance == null:  # check if the NPC instance exists
 		npc_instance = npc.instantiate()  # instance the NPC
-		#npc_instance.position = Vector2(576, 390)
 		npc_instance.position = get_viewport_rect().size/2
 		add_child(npc_instance)  # adding npc to the scene tree
 		Global.npc_instance = npc_instance # store the instance in the global variable
-		#print("NPC ready")
-	#else:
-		#print("NPC already instantiated or error occured")
-		
+	
 	player_instance = player.instantiate()
 	
 	
@@ -121,11 +113,7 @@ func _on_npc_died():
 			can_spawn_enemies = false
 			can_spawn_fireflies = false
 		_:
-			print("dammmn you woke them up")
-			#kill_all_enemies()
 			show_game_over()
-			#can_spawn_enemies = false
-			#can_spawn_fireflies = false
 	
 	
 func spawn_possessed():
@@ -165,7 +153,6 @@ func kill_all_enemies():
 #		if there are enemies present
 		if enemy != null and enemy.is_inside_tree():
 			enemy.die()
-			#enemy.queue_free()
 #	clear the list
 	enemy_instances.clear()
 
@@ -187,7 +174,6 @@ func spawn_enemy():
 func _on_enemy_spawn_timer_timeout() -> void:
 	if can_spawn_enemies:
 		spawn_enemy()
-		pass
 	else:
 		return
 		
@@ -198,7 +184,6 @@ func spawn_firefly():
 	%PathFollow2D.progress_ratio = randf() # get a random position from Path2D
 	firefly_instance.global_position = %PathFollow2D.global_position
 	add_child(firefly_instance) # spawn to the scene
-	#enemy_instances.append(enemy_instance) # store the instance of the enemy in the list
 	firefly_instance.add_to_group("firefly")
 	can_spawn_fireflies = true
 
@@ -206,7 +191,6 @@ func spawn_firefly():
 func _on_fire_fly_spawn_timer_timeout() -> void:
 	if can_spawn_fireflies:
 		spawn_firefly()
-		pass
 	else:
 		return
 
@@ -214,9 +198,3 @@ func _on_fire_fly_spawn_timer_timeout() -> void:
 func _on_spawn_timer_decrease_timeout() -> void:
 	$EnemySpawnTimer.wait_time = max($EnemySpawnTimer.wait_time - decrease_amount, min_spawn_time)
 	print("spawn rate decreased: ", $EnemySpawnTimer.wait_time)
-	
-	# the possessed's speed changes
-	#possessed_instance.min_speed = 160
-	#possessed_instance.speed = 180
-	#possessed_instance.max_speed = 300
-	
