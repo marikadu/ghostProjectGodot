@@ -28,7 +28,9 @@ func _process(_delta: float) -> void:
 
 func resume():
 	pause_menu.hide()
-	get_tree().paused = false
+	#get_tree().paused = false
+	$"../GameStartTimer".show()
+	Events.resume_game.emit()
 	
 func pause():
 	pause_menu.show()

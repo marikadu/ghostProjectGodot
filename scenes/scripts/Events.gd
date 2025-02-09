@@ -7,6 +7,8 @@ signal npc_died
 signal possessed_defeated
 signal possessed_escaped
 
+signal resume_game
+
 # --- tutorial signals ---
 signal tutorial_start
 signal send_scripted_enemy

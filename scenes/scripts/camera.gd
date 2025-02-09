@@ -22,10 +22,9 @@ func _process(_delta):
 
 # https://www.youtube.com/watch?v=P0VMQ40VTtc comment
 func cameraUpdate():
-	#var pos = get_local_mouse_position()
 	if player:
 		# the lower the player position division number -> the slower the camera
-		#get_viewport_rect() to find the middle of the screen
+		# "get_viewport_rect()" # to find the middle of the screen
 		var pos = player.get_position_delta()/6 + get_viewport_rect().size / 2
 		set_position(pos)
 		
