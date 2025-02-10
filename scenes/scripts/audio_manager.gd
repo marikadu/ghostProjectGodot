@@ -7,8 +7,12 @@ var player_near_sound_position: float = 0.0
 func _ready() -> void:
 	Events.game_over.connect(_on_game_over)
 	Events.game_over_woke_up_human.connect(_on_game_over)
+	
 	Events.win_game.connect(_on_win_game)
 	Events.win_game_tutorial.connect(_on_win_game)
+	
+	Events.npc_died.connect(_on_npc_died)
+	Events.possessed_defeated.connect(_on_possessed_defeated)
 
 # ---- MUSIC ----
 func play_game_theme():
@@ -122,8 +126,18 @@ func _on_game_over():
 	print("AM: switching to game over")
 	$Gameplay_Theme["parameters/switch_to_clip"] = "GameOver"
 	#OST["parameters/switch_to_clip"] == "GameOver"
-	
-	
+
+
 func _on_win_game():
 	print("AM: switching to WIN game")
 	$Gameplay_Theme["parameters/switch_to_clip"] = "Win"
+
+
+func _on_npc_died():
+	print("AM: spawn possessed")
+	$Gameplay_Theme["parameters/switch_to_clip"] = "Possessed"
+
+
+func _on_possessed_defeated():
+	print("AM: revived npc")
+	$Gameplay_Theme["parameters/switch_to_clip"] = "Loop"

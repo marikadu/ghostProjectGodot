@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://ch0rvar102sy5"]
+[gd_scene load_steps=38 format=3 uid="uid://ch0rvar102sy5"]
 
 [ext_resource type="Script" path="res://scenes/scripts/audio_manager.gd" id="1_snhpj"]
 [ext_resource type="AudioStream" uid="uid://dtlhcfvio80jb" path="res://SFX/ghost_game_theme.ogg" id="2_c04p5"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://dwhfxeb35uw6v" path="res://SFX/pick_up.ogg" id="5_2brgg"]
 [ext_resource type="AudioStream" uid="uid://f2q1bbj0bkmt" path="res://SFX/dash_hit4.ogg" id="5_6ljbv"]
 [ext_resource type="AudioStream" uid="uid://cwqkcb7uy7cly" path="res://SFX/hit.ogg" id="5_s5220"]
+[ext_resource type="AudioStream" uid="uid://c51itioer027i" path="res://SFX/possessed_ost.ogg" id="6_8y470"]
 [ext_resource type="AudioStream" uid="uid://npjuitt28hls" path="res://SFX/stamina_restored_2.ogg" id="6_fpmkp"]
 [ext_resource type="AudioStream" uid="uid://df8xu5lt6prr4" path="res://SFX/ghost_dies2.ogg" id="7_beioi"]
 [ext_resource type="AudioStream" uid="uid://blxd3xi3kn46d" path="res://SFX/possessed_hit.wav" id="7_uh855"]
@@ -24,7 +25,7 @@
 [ext_resource type="AudioStream" uid="uid://bpk24ipm3cyj5" path="res://SFX/after_pause.ogg" id="20_oge8y"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_e8u67"]
-clip_count = 4
+clip_count = 5
 clip_0/name = &"Intro"
 clip_0/stream = ExtResource("2_cqekl")
 clip_0/auto_advance = 1
@@ -38,6 +39,9 @@ clip_2/auto_advance = 0
 clip_3/name = &"Win"
 clip_3/stream = ExtResource("13_1l4tn")
 clip_3/auto_advance = 0
+clip_4/name = &"Possessed"
+clip_4/stream = ExtResource("6_8y470")
+clip_4/auto_advance = 0
 _transitions = {
 Vector2i(0, 2): {
 "fade_beats": 1,
@@ -57,6 +61,12 @@ Vector2i(1, 0): {
 "from_time": 0,
 "to_time": 1
 },
+Vector2i(1, 4): {
+"fade_beats": 1,
+"fade_mode": 3,
+"from_time": 0,
+"to_time": 1
+},
 Vector2i(2, 2): {
 "fade_beats": 1,
 "fade_mode": 0,
@@ -66,6 +76,12 @@ Vector2i(2, 2): {
 Vector2i(3, 3): {
 "fade_beats": 1,
 "fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(4, 1): {
+"fade_beats": 1,
+"fade_mode": 3,
 "from_time": 0,
 "to_time": 1
 }
