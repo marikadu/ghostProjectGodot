@@ -51,9 +51,8 @@ func _ready() -> void:
 	Global.score = 0
 	
 	print(Global.current_scene_name)
-	
 
-	
+
 	if npc_instance == null:  # check if the NPC instance exists
 		npc_instance = npc.instantiate()  # instance the NPC
 		npc_instance.position = get_viewport_rect().size/2
@@ -61,6 +60,10 @@ func _ready() -> void:
 		Global.npc_instance = npc_instance # store the instance in the global variable
 		
 	player_instance = player.instantiate()
+	
+	AudioManager.play_game_theme()
+	# prevents the "gameover" or "win" from playing again
+	AudioManager.OST["parameters/switch_to_clip"] = "Intro" 
 	
 	
 func _physics_process(_delta: float) -> void:
@@ -70,7 +73,7 @@ func _physics_process(_delta: float) -> void:
 	
 func show_win_game():
 	Global.is_game_won = true
-	AudioManager.play_win()
+	#AudioManager.play_win()
 	win_game.show()
 	kill_all_enemies()
 	Global.update_personal_best() # updating personal best ONLY when won the game
@@ -90,7 +93,8 @@ func show_game_over():
 		player_instance.can_move = false
 		Global.is_game_over = true
 		game_over.show()
-		AudioManager.play_game_over()
+		#AudioManager.play_game_over()
+		#AudioManager.OST.switch_to_clip_by_name(&"GameOver")
 		# show that the ghosts go back to hiding spots when sun rises
 		kill_all_enemies()
 		can_spawn_enemies = false

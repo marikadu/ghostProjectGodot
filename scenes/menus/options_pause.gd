@@ -186,3 +186,8 @@ func _on_master_slider_drag_ended(value_changed: bool) -> void:
 func _on_sfx_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
 		ConfigFileHandler.save_audio_settings("sfx_volume", %SFXSlider.value / 100)
+
+
+func _on_m_slider_drag_ended(value_changed: bool) -> void:
+	if value_changed:
+		ConfigFileHandler.save_audio_settings("music_volume", %MSlider.value / 100)

@@ -180,8 +180,11 @@ func _on_flash_toggle_toggled(toggled_on: bool) -> void:
 
 func _on_back_pressed() -> void:
 	AudioManager.play_button_pressed()
-	print("back")
-	get_tree().change_scene_to_file("res://scenes/menus/menu_main.tscn")
+	#get_tree().change_scene_to_file("res://scenes/menus/menu_main.tscn")
+	if Global.current_scene_name != 0:
+		self.hide()
+	else:
+		get_tree().change_scene_to_file("res://scenes/menus/menu_main.tscn")
 
 func _on_back_mouse_entered() -> void:
 	AudioManager.play_button_hover()
@@ -194,3 +197,8 @@ func _on_master_slider_drag_ended(value_changed: bool) -> void:
 func _on_sfx_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
 		ConfigFileHandler.save_audio_settings("sfx_volume", %SFXSlider.value / 100)
+
+
+func _on_m_slider_drag_ended(value_changed: bool) -> void:
+	if value_changed:
+		ConfigFileHandler.save_audio_settings("music_volume", %MSlider.value / 100)

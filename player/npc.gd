@@ -100,6 +100,7 @@ func _on_area_2d_body_entered(body_e: Node) -> void:
 			
 		# apply damage if player is near
 		if body_e == player and not npc_ignore_player:
+			AudioManager.OST.volume_db = -10.0 # reduse audio
 			camera_control.zoom_in()
 			is_player_near = true
 			animated_sprite.play("hit_player")
@@ -134,6 +135,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 			AudioManager.pause_player_near()
 			is_player_near = false
 			print("player exited?")
+			AudioManager.OST.volume_db = -2.295 # bring audio back
 			
 			# store remaining time + stop the timer
 			player_near_time_remaining = player_near_timer.time_left

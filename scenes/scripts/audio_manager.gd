@@ -2,7 +2,17 @@ extends Node2D
 
 # storing the time where the "player near" audio has stopped
 var player_near_sound_position: float = 0.0 
+@onready var OST: AudioStreamPlayer = $Gameplay_Theme
 
+func _ready() -> void:
+	Events.game_over.connect(_on_game_over)
+	Events.game_over_woke_up_human.connect(_on_game_over)
+	Events.win_game.connect(_on_win_game)
+	Events.win_game_tutorial.connect(_on_win_game)
+
+# ---- MUSIC ----
+func play_game_theme():
+	$Gameplay_Theme.play()
 
 
 # ---- UI ----
@@ -101,8 +111,19 @@ func play_firefly_stamina_restored():
 
 
 # ---- GAME STATE ----
-func play_game_over():
-	$game_over.play()
+#func play_game_over():
+	#$game_over.play()
+	#
+#func play_win():
+	#$win.play()
 	
-func play_win():
-	$win.play()
+# ---- GAME STATE NEW ----
+func _on_game_over():
+	print("AM: switching to game over")
+	$Gameplay_Theme["parameters/switch_to_clip"] = "GameOver"
+	#OST["parameters/switch_to_clip"] == "GameOver"
+	
+	
+func _on_win_game():
+	print("AM: switching to WIN game")
+	$Gameplay_Theme["parameters/switch_to_clip"] = "Win"
