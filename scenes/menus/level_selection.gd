@@ -65,6 +65,7 @@ func _on_back_mouse_entered() -> void:
 
 
 func _on_1_pressed() -> void:
+	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
 	print("level 1 selected")
 	Transition.transition()
@@ -73,6 +74,7 @@ func _on_1_pressed() -> void:
 
 
 func _on_2_pressed() -> void:
+	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
 	print("level 2 selected")
 	Transition.transition()
@@ -82,6 +84,7 @@ func _on_2_pressed() -> void:
 
 
 func _on_3_pressed() -> void:
+	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
 	print("level 3 selected")
 	Transition.transition()
@@ -91,6 +94,7 @@ func _on_3_pressed() -> void:
 
 
 func _on_4_pressed() -> void:
+	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
 	print("level 4 selected")
 	Transition.transition()
@@ -99,6 +103,7 @@ func _on_4_pressed() -> void:
 
 
 func _on_5_pressed() -> void:
+	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
 	print("level 5 selected")
 	Transition.transition()
@@ -107,6 +112,7 @@ func _on_5_pressed() -> void:
 
 
 func _on_6_pressed() -> void:
+	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
 	print("level 6 selected")
 	Transition.transition()
@@ -116,6 +122,7 @@ func _on_6_pressed() -> void:
 
 # infinite night
 func _on_7_infinite_pressed() -> void:
+	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
 	print("level 7 selected")
 	Transition.transition()

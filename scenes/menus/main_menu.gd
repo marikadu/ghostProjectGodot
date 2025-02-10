@@ -34,6 +34,18 @@ func _ready() -> void:
 	player = get_tree().root.get_node("MainMenu/GhostPlayer")
 	player.position = get_viewport_rect().size / 2
 	
+	AudioManager.stop_game_theme()
+	
+	#AudioManager.play_game_theme()
+	AudioManager.play_main_menu()
+	if Global.is_main_menu_music_playing == false:
+		Global.is_main_menu_music_playing = true
+		print(Global.is_main_menu_music_playing)
+		
+	#AudioManager.play_main_menu()
+	# prevents the "gameover" or "win" from playing again
+	#AudioManager.OST["parameters/switch_to_clip"] = "MainMenu" 
+	
 func _physics_process(delta: float) -> void:
 	play.scale.x = move_toward(play.scale.x, 1, 2.3 * delta)
 	play.scale.y = move_toward(play.scale.y, 1, 2.3 * delta)

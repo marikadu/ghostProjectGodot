@@ -16,7 +16,15 @@ func _ready() -> void:
 
 # ---- MUSIC ----
 func play_game_theme():
+	
+	#if Global.current_scene_name == 0:
+		#$MainMenu.play()
+	#else:
 	$Gameplay_Theme.play()
+	
+	
+func stop_game_theme():
+	$Gameplay_Theme.stop()
 
 
 # ---- UI ----
@@ -122,6 +130,17 @@ func play_firefly_stamina_restored():
 	#$win.play()
 	
 # ---- GAME STATE NEW ----
+func play_main_menu():
+	if not Global.is_main_menu_music_playing:
+		$MainMenu.play()
+	#print("AM: play main menu")
+	#$Gameplay_Theme["parameters/switch_to_clip"] = "MainMenu"
+	
+
+func stop_main_menu():
+	$MainMenu.stop()
+
+
 func _on_game_over():
 	print("AM: switching to game over")
 	$Gameplay_Theme["parameters/switch_to_clip"] = "GameOver"

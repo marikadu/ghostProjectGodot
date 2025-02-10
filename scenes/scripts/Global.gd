@@ -4,6 +4,7 @@ var npc_instance: Node = null
 var player_instance
 var is_game_over : bool
 var is_game_won : bool
+var is_main_menu_music_playing: bool
 var current_scene_name: int
 
 var score = 0
