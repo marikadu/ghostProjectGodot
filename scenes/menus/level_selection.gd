@@ -51,13 +51,17 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	# show personal best as string for the label
 	personal_best.text = str(Global.personal_best)
+	
 	# storing personal best time as int for later to compare previous time and new time
-	personal_best_time_label.text = "%02d:%02d" % [int(Global.personal_best_time) / 60, int(Global.personal_best_time) % 60]
+	#personal_best_time_label.text = "%02d:%02d" % [int(Global.personal_best_time) / 60, int(Global.personal_best_time) % 60]
+	
+	var best_time = int(Global.personal_best_time)
+	personal_best_time_label.text = "%02d:%02d" % [best_time / 60, best_time % 60]
 
 func _on_back_pressed() -> void:
 	AudioManager.play_button_pressed()
-	print("back")
 	get_tree().change_scene_to_file("res://scenes/menus/menu_main.tscn")
 	
 func _on_back_mouse_entered() -> void:
@@ -67,7 +71,6 @@ func _on_back_mouse_entered() -> void:
 func _on_1_pressed() -> void:
 	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
-	print("level 1 selected")
 	Transition.transition()
 	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level1.tscn")
@@ -76,7 +79,6 @@ func _on_1_pressed() -> void:
 func _on_2_pressed() -> void:
 	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
-	print("level 2 selected")
 	Transition.transition()
 	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level2.tscn")
@@ -86,7 +88,6 @@ func _on_2_pressed() -> void:
 func _on_3_pressed() -> void:
 	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
-	print("level 3 selected")
 	Transition.transition()
 	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level3.tscn")
@@ -96,7 +97,6 @@ func _on_3_pressed() -> void:
 func _on_4_pressed() -> void:
 	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
-	print("level 4 selected")
 	Transition.transition()
 	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level4.tscn")
@@ -105,7 +105,6 @@ func _on_4_pressed() -> void:
 func _on_5_pressed() -> void:
 	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
-	print("level 5 selected")
 	Transition.transition()
 	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level5.tscn")
@@ -114,7 +113,6 @@ func _on_5_pressed() -> void:
 func _on_6_pressed() -> void:
 	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
-	print("level 6 selected")
 	Transition.transition()
 	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level6.tscn")
@@ -124,7 +122,6 @@ func _on_6_pressed() -> void:
 func _on_7_infinite_pressed() -> void:
 	Global.is_main_menu_music_playing = false
 	AudioManager.play_button_pressed()
-	print("level 7 selected")
 	Transition.transition()
 	await Transition.on_transition_finished
 	get_tree().change_scene_to_file("res://scenes/levels/level7.tscn")

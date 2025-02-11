@@ -42,9 +42,14 @@ func update_personal_best():
 
 
 func update_personal_best_time():
-	var time_as_int = int(time_recorded)
+	# recording as int to compare later
+	var time_as_int = int(time_recorded) # storing seconds
 	var best_time_as_int = int(personal_best_time)
 	
-	if time_as_int and (best_time_as_int == 0 or time_as_int > best_time_as_int):
-		personal_best_time = time_recorded
+	#if time_as_int and (best_time_as_int == 0 or time_as_int > best_time_as_int):
+		#personal_best_time = time_recorded
+		#print("new best time: ", personal_best_time)
+		
+	if time_as_int > best_time_as_int:
+		personal_best_time = time_as_int
 		print("new best time: ", personal_best_time)

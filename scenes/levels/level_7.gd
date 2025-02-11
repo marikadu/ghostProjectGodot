@@ -88,7 +88,7 @@ func show_game_over():
 		game_over.show()
 		Global.update_personal_best() # update personal best when game over only for level 7
 		# personal best time
-		Global.time_recorded = $"%Timer".get_time_formatted()
+		Global.time_recorded = $"%Timer".get_time_seconds()
 		Global.update_personal_best_time()
 		# show that the ghosts go back to hiding spots when sun rises
 		kill_all_enemies()
@@ -104,7 +104,7 @@ func _on_woke_up_human():
 	game_over.show()
 	Global.update_personal_best() # update personal best when game over only for level 7
 	# personal best time
-	Global.time_recorded = $"%Timer".get_time_formatted()
+	Global.time_recorded = $"%Timer".get_time_seconds()
 	Global.update_personal_best_time()
 	kill_all_enemies()
 	can_spawn_enemies = false

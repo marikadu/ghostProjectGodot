@@ -2,7 +2,6 @@ extends Control
 
 # timer for the infinite gamemode (level7)
 
-@onready var cd_timer: Control = $"."
 
 var time: float = 0.0
 var minutes: float = 0.0
@@ -33,8 +32,12 @@ func stop() -> void:
 	
 
 # storing time as String
-func get_time_formatted() -> String:
-	return "%02d:%02d" % [minutes, seconds]
+#func get_time_formatted() -> String:
+	#return "%02d:%02d" % [minutes, seconds]
+	
+	
+func get_time_seconds() -> int:
+	return int(time)
 
 
 func _initialize_npc() -> void:
@@ -45,8 +48,8 @@ func _on_possessed_escaped():
 	#print("stop the timer")
 	stop()
 	# storing the time as int
-	Global.time_recorded = minutes * 60 + seconds
+	#Global.time_recorded = minutes * 60 + seconds
 	
 func _on_woke_up_human():
 	stop()
-	Global.time_recorded = minutes * 60 + seconds
+	#Global.time_recorded = minutes * 60 + seconds
