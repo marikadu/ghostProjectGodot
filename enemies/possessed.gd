@@ -49,18 +49,17 @@ func _ready() -> void:
 	match npc.killed_by:
 		"enemy1":
 			animated_sprite.play("idle_purple")
-			print("spawn LILLY possessed")
+			#print("spawn LILLY possessed")
 		"enemy2":
 			animated_sprite.play("idle_blue")
-			print("spawn BLU possessed")
+			#print("spawn BLU possessed")
 		"enemy3":
 			animated_sprite.play("idle_red")
-			print("spawn REDDY possessed")
+			#print("spawn REDDY possessed")
 		_:
 			# hidden 4th possessed
 			animated_sprite.play("dead")
-			#animated_sprite.play("woken_up_2")
-			print("possessed: npc is woken up")
+			#print("possessed: npc is woken up")
 	
 	if possessed_area:
 #		npc_area.connect("body_entered", Callable(self, "_on_area_2d_body_entered"))

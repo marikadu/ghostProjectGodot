@@ -65,7 +65,7 @@ func set_health(value: float):
 		is_alive = false
 		AudioManager.play_npc_died()
 		camera_control.apply_shake(30.0, 5)
-		print("npc died. killed: ", killed_by)
+		#print("npc died. killed: ", killed_by)
 		killedBy()
 	else:
 		pass
@@ -77,13 +77,13 @@ func set_health(value: float):
 func killedBy():
 	match killed_by:
 		"enemy1":
-			print("killed by PURPLE")
+			#print("killed by LILLY")
 			animated_sprite.play("gone")
 		"enemy2":
-			print("killed by BLUE")
+			#print("killed by BLU")
 			animated_sprite.play("gone")
 		"enemy3":
-			print("killed by RED")
+			#print("killed by REDDY")
 			animated_sprite.play("gone")
 		_:
 			# DON'T SPAWN POSSESSED!
@@ -100,13 +100,10 @@ func _on_area_2d_body_entered(body_e: Node) -> void:
 			
 		# apply damage if player is near
 		if body_e == player and not npc_ignore_player:
+			AudioManager.OST.volume_db = -10.0 # reduse audio
 			camera_control.zoom_in()
 			is_player_near = true
 			animated_sprite.play("hit_player")
-			
-			#if player_near_timer.paused: # if the timer is paused, unpause
-				#print("player re-entered!!!!!!") # didn't work
-				#player_near_timer.paused = false
 				
 				# if there is some remaining time, continue where paused
 			if player_near_time_remaining > 0:
@@ -115,12 +112,8 @@ func _on_area_2d_body_entered(body_e: Node) -> void:
 			else:
 				player_near_timer.start(3.0) # start from beginning
 				print("NPC: STARTING timer from beginning")
-				
-			#if player_near_timer.is_stopped():
-				#player_near_timer.start(3.0) # resetting with full 3 seconds
-				#print("NPC: starting timer with 3 seconds interval")
-				
-			#player_near_timer.start()
+			
+			
 			player_near_timer.one_shot = false
 			AudioManager.unpause_player_near() # resume audio
 			player_re_enter_npc.stop() # resetting the timer when player enters back
@@ -133,17 +126,16 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 			camera_control.zoom_out()
 			AudioManager.pause_player_near()
 			is_player_near = false
-			print("player exited?")
+			#print("NPC: player exited?")
+			AudioManager.OST.volume_db = -2.295 # bring audio back
 			
 			# store remaining time + stop the timer
 			player_near_time_remaining = player_near_timer.time_left
-			print("NPC: PAUSING AT: ", player_near_time_remaining)
+			#print("NPC: PAUSING AT: ", player_near_time_remaining)
 			
 			player_near_timer.stop()
 			player_re_enter_npc.start() # counting for how long has player been away
-			print("NPC: player away for: ", player_re_enter_npc.time_left)
-			#player_near_timer.set_wait_time(3.0) 
-			#player_near_timer.one_shot = true
+			#print("NPC: player away for: ", player_re_enter_npc.time_left)
 			if not Global.is_game_won:
 				animated_sprite.play("sleeping")
 			else:
@@ -216,13 +208,15 @@ func _on_player_near_timeout() -> void:
 	# WORKS!!!
 	if is_alive and not Global.current_scene_name == 1 and not npc_ignore_player:
 		take_damage(2.0, self)
-		player_near_timer.start(2.5) # a bit less time to make it slightly harder
+		AudioManager.play_you_hit_npc()
+		player_near_timer.start(2.8) # a bit less time to make it slightly harder
 		#print("NOTICED THE PLAYER ", health)
 
 	# npc gets damaged 1 hp instead of 2 for the tutorial
 	elif is_alive and Global.current_scene_name == 1 and not npc_ignore_player:
 		take_damage(1.0, self)
-		player_near_timer.start(2.4)
+		AudioManager.play_you_hit_npc()
+		player_near_timer.start(2.8)
 		#print("TUTORIAL: NOTICED THE PLAYER ", health)
 
 

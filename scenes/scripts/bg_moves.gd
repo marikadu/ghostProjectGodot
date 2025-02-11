@@ -53,15 +53,23 @@ func _ready() -> void:
 
 
 func _process(delta):
-	#foreground.position = (player.position*delta) * 2
 	# parallax effect
 	if Graphics.camera_follow_player:
-		#pass
-		n_middleground.position = (player.position*delta) / 2
-		d_middleground.position = (player.position*delta) / 2
-		#
-		n_background.position = (player.position*delta) / 4
-		d_background.position = (player.position*delta) / 4
+		
+		# OLD CODE:
+		#n_middleground.position = (player.position*delta) / 2 # !!OLD
+		#d_middleground.position = (player.position*delta) / 2 # !!OLD
+		
+		#n_background.position = (player.position*delta) / 4
+		#d_background.position = (player.position*delta) / 4
+		
+		
+		# NEW CODE:
+		n_middleground.position = player.get_position_delta()/-5
+		d_middleground.position = player.get_position_delta()/-5
+		
+		n_background.position = player.get_position_delta()/-10
+		d_background.position = player.get_position_delta()/-10
 	
 	if Global.current_scene_name == 1:
 		return
@@ -113,27 +121,22 @@ func background_animation_start():
 		moon_player.stop(false) # no moon for the first level
 		$moon_timer.stop()
 		#print("bg: level tutorial!")
-		#stars_player.play("stars")
 		await get_tree().create_timer(rise_the_sun, false).timeout
 		sun_player.play("sun")
 		
+	# infinite mode:
 	elif Global.current_scene_name == 7:
-		# infinite mode:
 		# infinite stars, no sun, moon every 1 minute
 		moon_timer.start()
-		#stars_player.play("stars")
-		#moon_player.play("moon")
 		
 	else:
 		#print("other levels!")
 		moon_player.play("moon")
-		#stars_player.play("stars")
 		await get_tree().create_timer(rise_the_sun, false).timeout
 		sun_player.play("sun")
 		
 
 func fade_out_stars():
-	#print("fading out the stars")
 	var tween: Tween = get_tree().create_tween()
 	# transitions and ease for the tweens
 	tween.set_trans(Tween.TRANS_QUART)
@@ -147,4 +150,5 @@ func fade_out_stars():
 
 
 func _on_moon_timer_timeout() -> void:
-	moon_player.play("moon")
+	if Global.current_scene_name == 7:
+		moon_player.play("moon")

@@ -22,6 +22,8 @@ var can_hit_other_buttons: bool # preventing the other buttons to be hit if mult
 
 
 func _ready() -> void:
+	if get_tree().paused == true:
+		get_tree().paused = false # unpause the game if quit during pause
 	can_hit_play = true
 	can_hit_settings = true
 	can_hit_exit = true
@@ -31,6 +33,19 @@ func _ready() -> void:
 	print(Global.current_scene_name)
 	player = get_tree().root.get_node("MainMenu/GhostPlayer")
 	player.position = get_viewport_rect().size / 2
+	
+	AudioManager.stop_game_theme()
+	
+	#AudioManager.play_game_theme()
+	AudioManager.play_main_menu()
+	if Global.is_main_menu_music_playing == false:
+		Global.is_main_menu_music_playing = true
+		print(Global.is_main_menu_music_playing)
+		
+	#AudioManager.play_main_menu()
+	# prevents the "gameover" or "win" from playing again
+	#AudioManager.OST["parameters/switch_to_clip"] = "MainMenu" 
+	# edit: no need for that!
 	
 func _physics_process(delta: float) -> void:
 	play.scale.x = move_toward(play.scale.x, 1, 2.3 * delta)

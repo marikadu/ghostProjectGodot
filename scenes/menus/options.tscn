@@ -335,10 +335,15 @@ theme_override_font_sizes/font_size = 30
 text = "Music"
 
 [node name="MSlider" type="HSlider" parent="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Music"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+script = ExtResource("6_jt7dd")
+bus_name = "Music"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Volume/TabBar/ItemList"]
 layout_mode = 1
@@ -426,6 +431,7 @@ text = "Reset to Default"
 [connection signal="pressed" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="drag_ended" from="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Master Volume/MasterSlider" to="." method="_on_master_slider_drag_ended"]
 [connection signal="drag_ended" from="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Sound Effects/SFXSlider" to="." method="_on_sfx_slider_drag_ended"]
+[connection signal="drag_ended" from="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Music/MSlider" to="." method="_on_m_slider_drag_ended"]
 [connection signal="mouse_entered" from="ColorRect/TabContainer/Volume/TabBar/ItemList/VBoxContainer/Back" to="." method="_on_back_mouse_entered"]
 [connection signal="pressed" from="ColorRect/TabContainer/Volume/TabBar/ItemList/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="mouse_entered" from="ColorRect/TabContainer/Controls/TabBar/VBoxContainer/Back" to="." method="_on_back_mouse_entered"]

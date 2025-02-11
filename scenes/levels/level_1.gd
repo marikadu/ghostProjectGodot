@@ -79,7 +79,6 @@ func _ready() -> void:
 	Events.introduce_fireflies.connect(_on_introduce_fireflies)
 	
 	
-	
 	# resetting the score for every new game
 	Global.score = 0
 	#print("resetting score:", Global.score)
@@ -95,6 +94,11 @@ func _ready() -> void:
 		
 	player_instance = player.instantiate()
 	player_is_speedrunning_the_tutorial = false
+	
+	AudioManager.stop_main_menu()
+	AudioManager.play_game_theme()
+	# prevents the "gameover" or "win" from playing again
+	AudioManager.OST["parameters/switch_to_clip"] = "Intro" 
 	
 	
 	if scripted_enemy_1_instance == null:  # check if the scripted_1 instance exists
@@ -118,16 +122,12 @@ func _ready() -> void:
 		add_child(orial_instance)
 	
 	
-	
 	if Global.current_scene_name == 1:
-		#%CountDownTimer.cd_timer.wait_time = 30.0
 		%CountDownTimer.cd_timer.autostart = false
-		#%CountDownTimer.cd_timer.set_wait_time(30.0)
 		%CountDownTimer.cd_timer.start(30.0)
 		%CountDownTimer.cd_timer.paused = true
 		print("TUTORIAL start")
 		npc_instance.npc_ignore_player = true
-		#possessed.
 	
 	
 func _physics_process(_delta: float) -> void:
@@ -136,7 +136,6 @@ func _physics_process(_delta: float) -> void:
 	
 	
 func show_win_game():
-	AudioManager.play_win()
 	win_game.show()
 	Global.is_game_won = true
 	kill_all_enemies()
@@ -160,7 +159,6 @@ func show_game_over():
 		player_instance.can_move = false
 		Global.is_game_over = true
 		game_over.show()
-		AudioManager.play_game_over()
 		# show that the ghosts go back to hiding spots when sun rises
 		kill_all_enemies()
 		# main character (ghost) evaporates or is sad

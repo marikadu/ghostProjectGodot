@@ -308,13 +308,13 @@ script = ExtResource("10_t81fx")
 
 [node name="background" type="Sprite2D" parent="background"]
 z_index = -10
-position = Vector2(0, -42)
+position = Vector2(0, -30)
 texture = ExtResource("13_qikvg")
 centered = false
 
 [node name="middleground" type="Sprite2D" parent="background"]
 z_index = -10
-position = Vector2(0, -42)
+position = Vector2(0, -40)
 texture = ExtResource("12_undaw")
 centered = false
 

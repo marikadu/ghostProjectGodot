@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var max_speed = 460
 @export var acceleration = 2700
-@export var friction = 900
+@export var friction = 930 # the lower -> the more "slippery" the surface is
 @export var dash_speed = 1330
 
 @export var max_stamina_sections = 5
@@ -35,7 +35,6 @@ signal is_dashing
 
 @onready var sprite_move: Sprite2D = $s_move
 @onready var sprite_gameover: AnimatedSprite2D = $sprite_gameover
-#@onready var s_gameover: Sprite2D = $s_gameover
 
 var dash_stamina_instance
 

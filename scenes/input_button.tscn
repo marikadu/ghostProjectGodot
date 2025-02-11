@@ -3,9 +3,10 @@
 [ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="1_sowin"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e72mg"]
+bg_color = Color(0.404803, 0.377586, 0.602653, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mib0a"]
-bg_color = Color(0.411765, 0.372549, 0.627451, 0.831373)
+bg_color = Color(0.411765, 0.372549, 0.627451, 0)
 
 [node name="InputButton" type="Button"]
 custom_minimum_size = Vector2(0, 38)

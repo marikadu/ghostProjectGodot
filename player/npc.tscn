@@ -340,7 +340,7 @@ visibility_layer = 5
 
 [node name="sleep_distance" type="CollisionPolygon2D" parent="Area2D"]
 scale = Vector2(2.315, 2.315)
-polygon = PackedVector2Array(0, -130, -130, -65, -120, 110, 120, 110, 130, -65)
+polygon = PackedVector2Array(0, -130, -115, -65, -100, 90, 100, 90, 115, -65)
 
 [node name="isHitAnimation" type="Timer" parent="."]
 wait_time = 0.7

@@ -50,8 +50,6 @@ func _ready() -> void:
 	
 	# resetting the score for every new game
 	Global.score = 0
-	print("resetting score:", Global.score)
-	
 	
 	print(Global.current_scene_name)
 	
@@ -64,6 +62,11 @@ func _ready() -> void:
 		
 	player_instance = player.instantiate()
 	
+	AudioManager.play_game_theme()
+	AudioManager.stop_main_menu()
+	# prevents the "gameover" or "win" from playing again
+	AudioManager.OST["parameters/switch_to_clip"] = "Intro" 
+	
 	
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("spawn_possessed"):
@@ -72,7 +75,6 @@ func _physics_process(_delta: float) -> void:
 	
 func show_win_game():
 	Global.is_game_won = true
-	AudioManager.play_win()
 	win_game.show()
 	kill_all_enemies()
 	Global.update_personal_best() # updating personal best ONLY when won the game
@@ -92,7 +94,6 @@ func show_game_over():
 		player_instance.can_move = false
 		Global.is_game_over = true
 		game_over.show()
-		AudioManager.play_game_over()
 		# show that the ghosts go back to hiding spots when sun rises
 		kill_all_enemies()
 		can_spawn_enemies = false

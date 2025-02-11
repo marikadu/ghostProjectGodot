@@ -58,7 +58,6 @@ func _ready() -> void:
 	
 	# resetting the score for every new game
 	Global.score = 0
-	print("resetting score:", Global.score)
 
 	print(Global.current_scene_name)
 
@@ -70,6 +69,11 @@ func _ready() -> void:
 		Global.npc_instance = npc_instance # store the instance in the global variable
 	
 	player_instance = player.instantiate()
+	
+	AudioManager.stop_main_menu()
+	AudioManager.play_game_theme()
+	# prevents the "gameover" or "win" from playing again
+	AudioManager.OST["parameters/switch_to_clip"] = "Intro" 
 	
 	
 func _physics_process(_delta: float) -> void:
@@ -84,9 +88,8 @@ func show_game_over():
 		game_over.show()
 		Global.update_personal_best() # update personal best when game over only for level 7
 		# personal best time
-		Global.time_recorded = $"%Timer".get_time_formatted()
+		Global.time_recorded = $"%Timer".get_time_seconds()
 		Global.update_personal_best_time()
-		AudioManager.play_game_over()
 		# show that the ghosts go back to hiding spots when sun rises
 		kill_all_enemies()
 		can_spawn_enemies = false
@@ -99,10 +102,15 @@ func _on_woke_up_human():
 	player_instance.can_move = false
 	Global.is_game_over = true
 	game_over.show()
+	Global.update_personal_best() # update personal best when game over only for level 7
+	# personal best time
+	Global.time_recorded = $"%Timer".get_time_seconds()
+	Global.update_personal_best_time()
 	kill_all_enemies()
 	can_spawn_enemies = false
 	can_spawn_fireflies = false
-	%CountDownTimer.cd_timer.paused = true
+	#%CountDownTimer.cd_timer.paused = true
+	#%Timer.cd_timer.paused = true
 	
 	
 func _on_npc_died():
