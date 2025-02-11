@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://ch0rvar102sy5"]
+[gd_scene load_steps=41 format=3 uid="uid://ch0rvar102sy5"]
 
 [ext_resource type="Script" path="res://scenes/scripts/audio_manager.gd" id="1_snhpj"]
 [ext_resource type="AudioStream" uid="uid://dtlhcfvio80jb" path="res://SFX/ghost_game_theme.ogg" id="2_c04p5"]
@@ -23,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://c0m7d31qwbhsp" path="res://SFX/health_restored.ogg" id="17_rarb6"]
 [ext_resource type="AudioStream" uid="uid://c3lxgsexbr5sy" path="res://SFX/healing.ogg" id="18_5ytcx"]
 [ext_resource type="AudioStream" uid="uid://cuv87knktx10p" path="res://SFX/ghost_voice.ogg" id="19_f6015"]
+[ext_resource type="AudioStream" uid="uid://c6groidbafs8n" path="res://SFX/you_hit_npc.ogg" id="20_3sam2"]
 [ext_resource type="AudioStream" uid="uid://bpk24ipm3cyj5" path="res://SFX/after_pause.ogg" id="20_oge8y"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_e8u67"]
@@ -153,6 +154,11 @@ random_pitch = 1.19
 streams_count = 1
 stream_0/stream = ExtResource("15_fjgxs")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_spwg6"]
+random_pitch = 1.25
+streams_count = 1
+stream_0/stream = ExtResource("20_3sam2")
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3d8wd"]
 random_pitch = 1.12
 streams_count = 1
@@ -276,6 +282,10 @@ bus = &"SFX"
 stream = SubResource("AudioStreamRandomizer_opkxp")
 volume_db = -6.191
 bus = &"SFX"
+
+[node name="you_hit_npc" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_spwg6")
+volume_db = -7.488
 
 [node name="npc_died" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_327q7")

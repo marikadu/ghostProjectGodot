@@ -6,7 +6,7 @@ var player_near_sound_position: float = 0.0
 
 func _ready() -> void:
 	Events.game_over.connect(_on_game_over)
-	Events.game_over_woke_up_human.connect(_on_game_over)
+	Events.game_over_woke_up_human.connect(_on_woke_up_human)
 	
 	Events.win_game.connect(_on_win_game)
 	Events.win_game_tutorial.connect(_on_win_game)
@@ -90,6 +90,9 @@ func play_hit_npc_impact():
 func play_hit_npc_voice():
 	$hit_npc_voice.play()
 	
+func play_you_hit_npc():
+	$you_hit_npc.play()
+	
 func play_npc_died():
 	$npc_died.play()
 	
@@ -120,14 +123,6 @@ func play_firefly_hit():
 func play_firefly_stamina_restored():
 	$firefly_stamina_restored.play()
 
-
-
-# ---- GAME STATE ----
-#func play_game_over():
-	#$game_over.play()
-	#
-#func play_win():
-	#$win.play()
 	
 # ---- GAME STATE NEW ----
 func play_main_menu():
@@ -142,21 +137,24 @@ func stop_main_menu():
 
 
 func _on_game_over():
-	print("AM: switching to game over")
+	#print("AM: switching to game over")
 	$Gameplay_Theme["parameters/switch_to_clip"] = "GameOver"
 	#OST["parameters/switch_to_clip"] == "GameOver"
+	
+func _on_woke_up_human():
+	$Gameplay_Theme.stop()
 
 
 func _on_win_game():
-	print("AM: switching to WIN game")
+	#print("AM: switching to WIN game")
 	$Gameplay_Theme["parameters/switch_to_clip"] = "Win"
 
 
 func _on_npc_died():
-	print("AM: spawn possessed")
+	#print("AM: spawn possessed")
 	$Gameplay_Theme["parameters/switch_to_clip"] = "Possessed"
 
 
 func _on_possessed_defeated():
-	print("AM: revived npc")
+	#print("AM: revived npc")
 	$Gameplay_Theme["parameters/switch_to_clip"] = "Loop"

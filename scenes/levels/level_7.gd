@@ -102,10 +102,15 @@ func _on_woke_up_human():
 	player_instance.can_move = false
 	Global.is_game_over = true
 	game_over.show()
+	Global.update_personal_best() # update personal best when game over only for level 7
+	# personal best time
+	Global.time_recorded = $"%Timer".get_time_formatted()
+	Global.update_personal_best_time()
 	kill_all_enemies()
 	can_spawn_enemies = false
 	can_spawn_fireflies = false
-	%CountDownTimer.cd_timer.paused = true
+	#%CountDownTimer.cd_timer.paused = true
+	#%Timer.cd_timer.paused = true
 	
 	
 func _on_npc_died():

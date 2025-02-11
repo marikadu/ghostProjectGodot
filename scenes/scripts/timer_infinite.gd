@@ -1,7 +1,8 @@
-extends Node
+extends Control
 
 # timer for the infinite gamemode (level7)
 
+@onready var cd_timer: Control = $"."
 
 var time: float = 0.0
 var minutes: float = 0.0
@@ -13,6 +14,7 @@ var npc: CharacterBody2D
 
 func _ready() -> void:
 	Events.possessed_escaped.connect(_on_possessed_escaped)
+	Events.game_over_woke_up_human.connect(_on_woke_up_human)
 	
 #	initializing npc before accessing it
 	call_deferred("_initialize_npc")
@@ -43,4 +45,8 @@ func _on_possessed_escaped():
 	#print("stop the timer")
 	stop()
 	# storing the time as int
+	Global.time_recorded = minutes * 60 + seconds
+	
+func _on_woke_up_human():
+	stop()
 	Global.time_recorded = minutes * 60 + seconds

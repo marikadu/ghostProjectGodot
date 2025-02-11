@@ -117,8 +117,8 @@ func background_animation_start():
 		await get_tree().create_timer(rise_the_sun, false).timeout
 		sun_player.play("sun")
 		
+	# infinite mode:
 	elif Global.current_scene_name == 7:
-		# infinite mode:
 		# infinite stars, no sun, moon every 1 minute
 		moon_timer.start()
 		#stars_player.play("stars")
@@ -147,4 +147,5 @@ func fade_out_stars():
 
 
 func _on_moon_timer_timeout() -> void:
-	moon_player.play("moon")
+	if Global.current_scene_name == 7:
+		moon_player.play("moon")

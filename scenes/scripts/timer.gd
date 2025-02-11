@@ -50,26 +50,19 @@ func _initialize_npc() -> void:
 	npc = Global.npc_instance
 	if npc == null:
 		print("NPC instance not ready yet")
-	else:
-		print("NPC loaded successfully")
 
 
 func _on_timer_timeout() -> void:
 	var animated_sprite = npc.get_node_or_null("AnimatedSprite2D")
 	if animated_sprite != null:
 		if npc.is_alive:
-			print("yippie npc is alive")
-			print("win!")
 			animated_sprite.play("waking_up")
 			Events.win_game.emit()
 			
 		else:
-			print("npc is dead lmao")
 			Events.game_over.emit()
-		#npc.animated_sprite.play("waking_up")
 
 	if npc == null:
-		print("NPC instance is null")
 		return 
 		
 func _on_possessed_escaped():

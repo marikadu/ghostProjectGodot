@@ -193,7 +193,7 @@ collision_mask = 15
 position = Vector2(1004, 559)
 scale = Vector2(1.03, 1.03)
 build_mode = 1
-polygon = PackedVector2Array(310, 410, -1100, 410, -1100, -510, -1018, -510, -1018, 333, 194, 333, 194, -508, -1066, -508, -1066, -561.165, 310, -561.165)
+polygon = PackedVector2Array(310, 410, -1100, 410, -1100, -510, -1017, -510, -1017, 320, 194, 320, 194, -524, -1066, -524, -1066, -561.165, 310, -561.165)
 
 [node name="PossessedEscapes" type="Area2D" parent="."]
 collision_layer = 17

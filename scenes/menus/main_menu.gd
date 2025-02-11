@@ -45,6 +45,7 @@ func _ready() -> void:
 	#AudioManager.play_main_menu()
 	# prevents the "gameover" or "win" from playing again
 	#AudioManager.OST["parameters/switch_to_clip"] = "MainMenu" 
+	# edit: no need for that!
 	
 func _physics_process(delta: float) -> void:
 	play.scale.x = move_toward(play.scale.x, 1, 2.3 * delta)

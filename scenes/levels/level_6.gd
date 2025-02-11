@@ -62,6 +62,7 @@ func _ready() -> void:
 	player_instance = player.instantiate()
 	
 	AudioManager.play_game_theme()
+	AudioManager.stop_main_menu()
 	# prevents the "gameover" or "win" from playing again
 	AudioManager.OST["parameters/switch_to_clip"] = "Intro" 
 	

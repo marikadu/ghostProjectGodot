@@ -218,13 +218,15 @@ func _on_player_near_timeout() -> void:
 	# WORKS!!!
 	if is_alive and not Global.current_scene_name == 1 and not npc_ignore_player:
 		take_damage(2.0, self)
-		player_near_timer.start(2.5) # a bit less time to make it slightly harder
+		AudioManager.play_you_hit_npc()
+		player_near_timer.start(2.8) # a bit less time to make it slightly harder
 		#print("NOTICED THE PLAYER ", health)
 
 	# npc gets damaged 1 hp instead of 2 for the tutorial
 	elif is_alive and Global.current_scene_name == 1 and not npc_ignore_player:
 		take_damage(1.0, self)
-		player_near_timer.start(2.4)
+		AudioManager.play_you_hit_npc()
+		player_near_timer.start(2.8)
 		#print("TUTORIAL: NOTICED THE PLAYER ", health)
 
 

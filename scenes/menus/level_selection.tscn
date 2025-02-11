@@ -145,11 +145,11 @@ offset_bottom = -22.0
 [node name="PersonalBestTime" type="Label" parent="BestTime"]
 modulate = Color(0.126205, 0.0960744, 0.245993, 0.789)
 layout_mode = 0
-offset_left = 465.0
-offset_top = 744.0
-offset_right = 564.0
-offset_bottom = 797.0
-rotation = 0.0248291
+offset_left = 703.0
+offset_top = 745.0
+offset_right = 802.0
+offset_bottom = 798.0
+rotation = 0.00842324
 theme = ExtResource("2_exllh")
 theme_override_font_sizes/font_size = 40
 text = "0000"
@@ -157,14 +157,14 @@ text = "0000"
 [node name="PersonalBestTitleTime" type="Label" parent="BestTime"]
 modulate = Color(0.126205, 0.0960744, 0.245993, 0.789)
 layout_mode = 0
-offset_left = 154.0
-offset_top = 729.0
-offset_right = 369.0
-offset_bottom = 782.0
-rotation = 0.0375228
+offset_left = 142.0
+offset_top = 728.0
+offset_right = 682.0
+offset_bottom = 781.0
+rotation = 0.0263287
 theme = ExtResource("2_exllh")
 theme_override_font_sizes/font_size = 40
-text = "Personal Best Time:"
+text = "Infinite Night's Personal Best Time:"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
