@@ -29,3 +29,6 @@ https://freesound.org/people/ladako/sounds/608742/
 https://freesound.org/people/BennettFilmTeacher/sounds/518598/
 
 https://freesound.org/people/isbeorn/sounds/553954/
+
+**Font:** Chewy-Regular
+https://fonts.google.com/specimen/Chewy
