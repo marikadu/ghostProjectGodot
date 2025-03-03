@@ -312,7 +312,7 @@ bus = &"SFX"
 [node name="after_pause" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("20_oge8y")
 volume_db = -5.244
-bus = &"Music"
+bus = &"SFX"
 
 [node name="player_re_enter_npc" type="Timer" parent="."]
 one_shot = true

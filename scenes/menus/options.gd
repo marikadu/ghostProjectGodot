@@ -53,7 +53,7 @@ func _ready() -> void:
 	# saving audio as 0 to 100, instead of 0 to 1
 	%MasterSlider.value = min(audio_settings.master_volume, 1.0) * 100
 	%SFXSlider.value = min(audio_settings.sfx_volume, 1.0) * 100
-	
+	%MSlider.value = min(audio_settings.music_volume, 1.0) * 100
 
 # --- CUSTOM KEYBINDINGS ---
 func _load_keybindings_from_settings():

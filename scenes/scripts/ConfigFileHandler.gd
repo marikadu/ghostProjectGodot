@@ -33,9 +33,6 @@ func _ready():
 	apply_keybindings()
 	apply_audio_settings()
 	apply_video_settings()
-	
-# apply keybindings at game start
-
 
 # ---- GRAPHICS SETTINGS ----
 

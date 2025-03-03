@@ -13,17 +13,18 @@ config_version=5
 config/name="GhostNights"
 config/description="game for the uni"
 config/version="1.0.0.0"
-run/main_scene="res://scenes/menus/menu_main.tscn"
+run/main_scene="res://scenes/screens/made_in_godot.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/image="res://scenes/screens/splash screen.png"
 config/icon="res://icon.png"
 
 [autoload]
 
-Events="*res://scenes/scripts/Events.gd"
-Global="*res://scenes/scripts/Global.gd"
 Graphics="*res://scenes/scripts/Graphics.gd"
-Transition="*res://scenes/transition.tscn"
 ConfigFileHandler="*res://scenes/scripts/ConfigFileHandler.gd"
+Global="*res://scenes/scripts/Global.gd"
+Events="*res://scenes/scripts/Events.gd"
+Transition="*res://scenes/transition.tscn"
 AudioManager="*res://scenes/audio_manager.tscn"
 
 [debug]

@@ -22,6 +22,7 @@ var can_hit_other_buttons: bool # preventing the other buttons to be hit if mult
 
 
 func _ready() -> void:
+	
 	if get_tree().paused == true:
 		get_tree().paused = false # unpause the game if quit during pause
 	can_hit_play = true
