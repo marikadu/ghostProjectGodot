@@ -23,8 +23,8 @@ func _ready() -> void:
 	#await Transition.on_transition_finished
 	#get_tree().change_scene_to_file("res://scenes/menus/menu_main.tscn")
 	
-func _process(delta: float) -> void:
-	await get_tree().create_timer(2.0).timeout
+func _process(_delta: float) -> void:
+	await get_tree().create_timer(2.1).timeout
 	if not sound_has_played:
 		AudioManager.play_ghost_dies()
 		sound_has_played = true

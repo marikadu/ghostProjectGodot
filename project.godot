@@ -13,9 +13,9 @@ config_version=5
 config/name="GhostNights"
 config/description="game for the uni"
 config/version="1.0.0.0"
-run/main_scene="res://scenes/menus/menu_main.tscn"
+run/main_scene="res://scenes/screens/made_in_godot.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-boot_splash/show_image=false
+boot_splash/image="res://scenes/screens/splash screen.png"
 config/icon="res://icon.png"
 
 [autoload]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dn4008nv06clk"]
+[gd_scene load_steps=25 format=3 uid="uid://dn4008nv06clk"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_60uys"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="2_3r7k7"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" path="res://scenes/menus/bg_main_menu.gd" id="10_t81fx"]
 [ext_resource type="Texture2D" uid="uid://bksvvake7ja0d" path="res://sprites/background/bg_mainmenu3.png" id="12_undaw"]
 [ext_resource type="Texture2D" uid="uid://dk65pd0y7rjyc" path="res://sprites/background/bg_mainmenu4.png" id="13_qikvg"]
-[ext_resource type="PackedScene" uid="uid://byrlkolmk8xx5" path="res://scenes/menus/options.tscn" id="17_cco37"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qg754"]
 shader = ExtResource("2_go6j5")
@@ -346,10 +345,6 @@ position = Vector2(1004, 559)
 scale = Vector2(1.03, 1.03)
 build_mode = 1
 polygon = PackedVector2Array(220, 367, -1064.91, 366.019, -1064.91, -466.019, -887.379, -432.039, -897.087, -238.835, -888.35, 87.3787, -865.049, 255.34, -651.456, 268.932, -167.961, 268.932, 31.068, 252.427, 54.3689, 89.3204, 65.0486, -250.485, 53.3981, -426.214, -161.165, -459.223, -707.767, -452.427, -902.913, -423.301, -1053.4, -450.485, -1039.67, -561.165, 214.699, -561.165)
-
-[node name="OptionsMenu" parent="." instance=ExtResource("17_cco37")]
-visible = false
-layout_mode = 1
 
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
