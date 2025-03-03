@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cq5eew1xibsj7"]
+[gd_scene load_steps=8 format=3 uid="uid://dxxeyxki3gm0x"]
 
 [ext_resource type="Script" path="res://scenes/made_in_godot.gd" id="1_a2fe4"]
 [ext_resource type="VideoStream" path="res://scenes/screens/custom made in godot3.ogv" id="2_1g31x"]
