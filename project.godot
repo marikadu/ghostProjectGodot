@@ -15,6 +15,7 @@ config/description="game for the uni"
 config/version="1.0.0.0"
 run/main_scene="res://scenes/menus/menu_main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/show_image=false
 config/icon="res://icon.png"
 
 [autoload]
