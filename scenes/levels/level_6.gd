@@ -36,7 +36,7 @@ func _ready() -> void:
 	
 	Global.is_game_won = false
 	%CountDownTimer.cd_timer.paused = false
-	$EnemySpawnTimer.wait_time = 0.5
+	$EnemySpawnTimer.wait_time = 0.7
 	
 	#fire_fly_spawn_timer.start(randi_range(10,18)) 
 

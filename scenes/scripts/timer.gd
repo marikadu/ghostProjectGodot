@@ -60,6 +60,7 @@ func _on_timer_timeout() -> void:
 			Events.win_game.emit()
 			
 		else:
+			Events.time_up_human_dead.emit()
 			Events.game_over.emit()
 
 	if npc == null:
@@ -68,15 +69,8 @@ func _on_timer_timeout() -> void:
 func _on_possessed_escaped():
 	#print("stop the timer")
 	cd_timer.stop()
-	
-#func animate_timer():
-	#label.scale = Vector2(1.6, 0.7)
-	#await get_tree().create_timer(0.4).timeout
-	
-	#label.scale.x = move_toward(label.scale.x, 1, 3 * delta)
-	#label.scale.y = move_toward(label.scale.y, 1, 3 * delta)
 
-	
+
 #func tutorial_mode():
 	#if Global.current_scene_name == "level_1":
 		#print("setting cd timer to 30 seconds")

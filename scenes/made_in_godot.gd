@@ -14,14 +14,6 @@ func _ready() -> void:
 	
 	await Transition.on_transition_finished
 
-
- #Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-	#await get_tree().create_timer(2).timeout
-	#Transition.animation_player.speed_scale = 1
-	#Transition.transition()
-	#await Transition.on_transition_finished
-	#get_tree().change_scene_to_file("res://scenes/menus/menu_main.tscn")
 	
 func _process(_delta: float) -> void:
 	await get_tree().create_timer(2.1).timeout

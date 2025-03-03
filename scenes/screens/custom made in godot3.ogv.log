@@ -1,17 +1,0 @@
-C:/Users/Computer/Downloads/ffmpeg-5.1.2-essentials_build/bin/ffmpeg.exe -hide_banner -y -y -r 24 -start_number 0 -start_number_range 1 -i C:/Users/Computer/Desktop/LUT GameDev/ghostProjectGodot/scenes/screens/frame%04d.png -b 5000k C:/Users/Computer/Desktop/LUT GameDev/ghostProjectGodot/scenes/screens/custom made in godot3.ogv
-=====================================================
-Input #0, image2, from 'C:/Users/Computer/Desktop/LUT GameDev/ghostProjectGodot/scenes/screens/frame%04d.png':
-  Duration: 00:00:03.72, start: 0.000000, bitrate: N/A
-  Stream #0:0: Video: png, rgba(pc), 1152x864 [SAR 11811:11811 DAR 4:3], 25 fps, 25 tbr, 25 tbn
-Please use -b:a or -b:v, -b is ambiguous
-Stream mapping:
-  Stream #0:0 -> #0:0 (png (native) -> theora (libtheora))
-Press [q] to stop, [?] for help
-Output #0, ogv, to 'C:/Users/Computer/Desktop/LUT GameDev/ghostProjectGodot/scenes/screens/custom made in godot3.ogv':
-  Metadata:
-    encoder         : Lavf59.27.100
-  Stream #0:0: Video: theora, yuv444p(tv, progressive), 1152x864 [SAR 1:1 DAR 4:3], q=2-31, 5000 kb/s, 24 fps, 24 tbn
-    Metadata:
-      encoder         : Lavc59.37.100 libtheora
-frame=    1 fps=0.0 q=-0.0 size=       3kB time=00:00:00.04 bitrate= 648.6kbits/s speed=3.66x    frame=   12 fps=0.0 q=-0.0 size=       3kB time=00:00:00.50 bitrate=  54.0kbits/s speed=0.946x    frame=   26 fps= 25 q=-0.0 size=      35kB time=00:00:01.08 bitrate= 262.3kbits/s speed=1.03x    frame=   39 fps= 25 q=-0.0 size=      59kB time=00:00:01.62 bitrate= 297.9kbits/s speed=1.05x    frame=   52 fps= 25 q=-0.0 size=      99kB time=00:00:02.16 bitrate= 375.3kbits/s speed=1.05x    frame=   66 fps= 25 q=-0.0 size=     127kB time=00:00:02.75 bitrate= 378.7kbits/s speed=1.06x    frame=   79 fps= 25 q=-0.0 size=     147kB time=00:00:03.29 bitrate= 364.9kbits/s speed=1.05x    frame=   91 fps= 25 q=-0.0 size=     197kB time=00:00:03.79 bitrate= 424.7kbits/s speed=1.04x    frame=   93 fps= 25 q=-0.0 Lsize=     219kB time=00:00:03.87 bitrate= 462.3kbits/s speed=1.03x    
-video:214kB audio:0kB subtitle:0kB other streams:0kB global headers:3kB muxing overhead: 2.158828%

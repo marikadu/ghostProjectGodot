@@ -6,7 +6,7 @@ extends CenterContainer
 func _ready() -> void:
 	cause.hide()
 	
-	Events.game_over.connect(_on_game_over)
+	Events.time_up_human_dead.connect(_on_time_up)
 	Events.possessed_escaped.connect(_on_possessed_escaped)
 	Events.game_over_woke_up_human.connect(_on_woke_up_human)
 
@@ -51,7 +51,7 @@ func show_game_over_message(reason: String):
 	cause.visible = true
 
 
-func _on_game_over():
+func _on_time_up():
 	if not Global.is_game_over:
 		show_game_over_message("possessed_on_screen")
 	
