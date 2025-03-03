@@ -1,13 +1,94 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq5eew1xibsj7"]
+[gd_scene load_steps=7 format=3 uid="uid://cq5eew1xibsj7"]
 
-[ext_resource type="VideoStream" path="res://sprites/custom made in godot.ogv" id="1_1ihqv"]
 [ext_resource type="Script" path="res://scenes/scripts/made_in_godot.gd" id="1_7x3gh"]
+[ext_resource type="VideoStream" path="res://sprites/custom made in godot2.ogv" id="2_1pefy"]
+[ext_resource type="Theme" uid="uid://dti72e04ltog4" path="res://game.theme" id="3_brod5"]
 
-[node name="made_in_godot" type="Node2D"]
+[sub_resource type="Animation" id="Animation_0qkl3"]
+resource_name = "fade_out"
+length = 2.6495
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.133333, 0.866667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7u3w2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tf87w"]
+_data = {
+"RESET": SubResource("Animation_7u3w2"),
+"fade_out": SubResource("Animation_0qkl3")
+}
+
+[node name="made_in_godot" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_7x3gh")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-stream = ExtResource("1_1ihqv")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -432.0
+offset_right = 576.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("2_1pefy")
 autoplay = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -236.0
+offset_top = 72.0
+offset_right = 236.0
+offset_bottom = 163.0
+grow_horizontal = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme = ExtResource("3_brod5")
+theme_override_font_sizes/font_size = 70
+text = "Made with Godot"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_tf87w")
+}
+
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
