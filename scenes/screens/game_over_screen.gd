@@ -40,7 +40,7 @@ func show_game_over_message(reason: String):
 			cause.text = "The human is possessed!"
 			
 		"possessed_escaped":
-			cause.text = "The Possessed has escaped!"
+			cause.text = "Possessed has escaped!"
 			
 		"you_woke_them_up":
 			cause.text = "You woke the humnan up!"
@@ -52,11 +52,14 @@ func show_game_over_message(reason: String):
 
 
 func _on_game_over():
-	show_game_over_message("possessed_on_screen")
+	if not Global.is_game_over:
+		show_game_over_message("possessed_on_screen")
 	
 func _on_possessed_escaped():
-	show_game_over_message("possessed_escaped")
+	if not Global.is_game_over:
+		show_game_over_message("possessed_escaped")
 	
 
 func _on_woke_up_human():
-	show_game_over_message("you_woke_them_up")
+	if not Global.is_game_over:
+		show_game_over_message("you_woke_them_up")

@@ -70,10 +70,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_p4r2c")
 theme_override_font_sizes/font_size = 36
-current_tab = 2
+current_tab = 0
 
 [node name="Graphics" type="MarginContainer" parent="ColorRect/TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
@@ -366,6 +365,7 @@ theme = ExtResource("3_p4r2c")
 text = "Back"
 
 [node name="Controls" type="MarginContainer" parent="ColorRect/TabContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("3_p4r2c")
 theme_override_constants/margin_left = 40

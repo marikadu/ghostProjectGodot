@@ -134,6 +134,8 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 			#print("NPC: PAUSING AT: ", player_near_time_remaining)
 			
 			player_near_timer.stop()
+			## add a feature to fix a red error:
+			## do not continue the timer when near the npc and exiting to main menu
 			player_re_enter_npc.start() # counting for how long has player been away
 			#print("NPC: player away for: ", player_re_enter_npc.time_left)
 			if not Global.is_game_won:

@@ -137,9 +137,10 @@ func stop_main_menu():
 
 
 func _on_game_over():
-	#print("AM: switching to game over")
-	$Gameplay_Theme["parameters/switch_to_clip"] = "GameOver"
-	#OST["parameters/switch_to_clip"] == "GameOver"
+	if not Global.is_game_over:
+		#print("AM: switching to game over")
+		$Gameplay_Theme["parameters/switch_to_clip"] = "GameOver"
+		#OST["parameters/switch_to_clip"] == "GameOver"
 	
 func _on_woke_up_human():
 	$Gameplay_Theme.stop()
