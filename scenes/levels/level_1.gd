@@ -306,7 +306,7 @@ func _on_introduce_fireflies():
 		#show_health()
 		await get_tree().create_timer(3, false).timeout
 		# enemies spawn slowly while introducing to the fireflies
-		$EnemySpawnTimer.wait_time = 3.2
+		$EnemySpawnTimer.wait_time = 6
 		$EnemySpawnTimer.start()
 		
 		await get_tree().create_timer(9, false).timeout
