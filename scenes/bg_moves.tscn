@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dnhtj68mhqb2u"]
+[gd_scene load_steps=21 format=3 uid="uid://dnhtj68mhqb2u"]
 
 [ext_resource type="Texture2D" uid="uid://cth7yboi1klpl" path="res://sprites/background/foreground_n.png" id="1_6sewi"]
 [ext_resource type="Script" path="res://scenes/scripts/bg_moves.gd" id="1_wo1p5"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://04pi5nvnnso4" path="res://sprites/background/background_n.png" id="2_vi5fq"]
 [ext_resource type="Texture2D" uid="uid://b2mbjhtlvxuid" path="res://sprites/background/moon.png" id="3_fe7de"]
 [ext_resource type="Texture2D" uid="uid://ibdwlbh40u73" path="res://sprites/background/sky_d.png" id="3_v65wt"]
-[ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="6_2nxss"]
 [ext_resource type="Shader" path="res://scenes/scroll.gdshader" id="6_6a2jm"]
 [ext_resource type="Texture2D" uid="uid://dpjxqtqbkq382" path="res://sprites/background/sun.png" id="6_mp1xp"]
 [ext_resource type="Texture2D" uid="uid://ckxjik6ycia2i" path="res://sprites/background/stars_infinite.png" id="6_n5pha"]
@@ -112,13 +111,6 @@ texture = ExtResource("3_fe7de")
 libraries = {
 "": SubResource("AnimationLibrary_75ivp")
 }
-
-[node name="PointLight2D" type="PointLight2D" parent="moon"]
-z_index = -1
-color = Color(0.730192, 0.695854, 0.992129, 1)
-energy = 0.1
-texture = ExtResource("6_2nxss")
-texture_scale = 0.67
 
 [node name="stars_infinite" type="Sprite2D" parent="."]
 texture_repeat = 2
