@@ -18,7 +18,7 @@
 **Freesound.org** - Sound database website
 
 
-Music and some audio were created by me. Other audio is from Freesound.org:
+Music and some sound effects were created by me. Other audio is from Freesound.org:
 
 https://freesound.org/people/kev_durr/sounds/426207/
 
