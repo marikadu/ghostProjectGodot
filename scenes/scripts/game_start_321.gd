@@ -33,10 +33,9 @@ func _on_resume_game():
 
 func _on_second_timer_timeout() -> void:
 	animation_player.play("zoom_out")
-	# 1.1 instead of 1, because there's the sound bug, sound starts playing again
-	# even if it doesn't have a loop
 	if game_start_timer.time_left < 1.1:
 		print("timer bye")
+		AudioManager.stop_after_pause()
 		self.visible = false
 		get_tree().paused = false
 		

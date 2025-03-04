@@ -39,6 +39,9 @@ func play_orial_voice():
 	
 func play_after_pause():
 	$after_pause.play()
+	
+func stop_after_pause():
+	$after_pause.stop()
 
 
 

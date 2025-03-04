@@ -41,7 +41,7 @@ func _ready() -> void:
 	AudioManager.play_main_menu()
 	if Global.is_main_menu_music_playing == false:
 		Global.is_main_menu_music_playing = true
-		print(Global.is_main_menu_music_playing)
+		#print(Global.is_main_menu_music_playing)
 		
 	#AudioManager.play_main_menu()
 	# prevents the "gameover" or "win" from playing again

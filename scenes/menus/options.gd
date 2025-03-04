@@ -6,20 +6,12 @@ extends Control
 @onready var shake_toggle: CheckButton = %ShakeToggle
 @onready var flash_toggle: CheckButton = %FlashToggle
 
-@onready var input_button_scene = preload("res://scenes/input_button.tscn")
+#@onready var input_button_scene = preload("res://scenes/input_button.tscn")
 #@onready var action_list = $ColorRect/TabContainer/Controls/TabBar/MarginContainer/ActionList
 
 var is_remapping = false
 var action_to_remap = null
 var remapping_button = null
-
-var input_actions = {
-	"left": "Move Left",
-	"right": "Move Right",
-	"up": "Move Up",
-	"down": "Move Down",
-	"dash": "Dash",
-}
 
 
 func _ready() -> void:
