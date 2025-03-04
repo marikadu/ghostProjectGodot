@@ -270,6 +270,7 @@ custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 theme = ExtResource("2_36rfs")

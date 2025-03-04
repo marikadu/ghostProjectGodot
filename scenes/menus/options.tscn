@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://byrlkolmk8xx5"]
+[gd_scene load_steps=17 format=3 uid="uid://byrlkolmk8xx5"]
 
 [ext_resource type="Script" path="res://scenes/menus/options.gd" id="1_86o0v"]
 [ext_resource type="Texture2D" uid="uid://d3xuonkxbhvvq" path="res://sprites/background/bg_options.png" id="2_bw28m"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://kgbn0t3xvn68" path="res://sprites/UI/toggle_enabled.png" id="4_m1ccm"]
 [ext_resource type="Texture2D" uid="uid://clsl35fkfvrwn" path="res://sprites/UI/toggle_disabled.png" id="5_uvwqm"]
 [ext_resource type="Script" path="res://scenes/scripts/sfx_slider.gd" id="6_jt7dd"]
-[ext_resource type="PackedScene" uid="uid://cwdqy54mxlmps" path="res://scenes/input_button.tscn" id="7_4kae2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_whudj"]
 
@@ -70,9 +69,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_p4r2c")
 theme_override_font_sizes/font_size = 36
-current_tab = 0
+current_tab = 1
 
 [node name="Graphics" type="MarginContainer" parent="ColorRect/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 40
@@ -256,7 +256,6 @@ theme = ExtResource("3_p4r2c")
 text = "Back"
 
 [node name="Volume" type="MarginContainer" parent="ColorRect/TabContainer"]
-visible = false
 layout_mode = 2
 theme = ExtResource("3_p4r2c")
 theme_override_constants/margin_left = 40
@@ -364,65 +363,6 @@ layout_mode = 2
 theme = ExtResource("3_p4r2c")
 text = "Back"
 
-[node name="Controls" type="MarginContainer" parent="ColorRect/TabContainer"]
-visible = false
-layout_mode = 2
-theme = ExtResource("3_p4r2c")
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_right = 40
-theme_override_constants/margin_bottom = 40
-metadata/_tab_index = 2
-
-[node name="TabBar" type="TabBar" parent="ColorRect/TabContainer/Controls"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/TabContainer/Controls/TabBar"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -90.0
-offset_top = 126.5
-offset_right = 90.0
-offset_bottom = 226.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Back" type="Button" parent="ColorRect/TabContainer/Controls/TabBar/VBoxContainer"]
-custom_minimum_size = Vector2(0, 90)
-layout_mode = 2
-theme = ExtResource("3_p4r2c")
-text = "Back"
-
-[node name="MarginContainer" type="MarginContainer" parent="ColorRect/TabContainer/Controls/TabBar"]
-layout_mode = 0
-offset_right = 680.0
-offset_bottom = 100.0
-
-[node name="ActionList" type="VBoxContainer" parent="ColorRect/TabContainer/Controls/TabBar/MarginContainer"]
-z_index = 2
-layout_mode = 2
-
-[node name="InputButton" parent="ColorRect/TabContainer/Controls/TabBar/MarginContainer/ActionList" instance=ExtResource("7_4kae2")]
-layout_mode = 2
-
-[node name="Reset" type="HBoxContainer" parent="ColorRect/TabContainer/Controls/TabBar"]
-layout_mode = 2
-offset_top = 302.0
-offset_right = 680.0
-offset_bottom = 362.0
-
-[node name="ResetButton" type="Button" parent="ColorRect/TabContainer/Controls/TabBar/Reset"]
-custom_minimum_size = Vector2(260, 60)
-layout_mode = 2
-focus_mode = 0
-theme = ExtResource("3_p4r2c")
-theme_override_font_sizes/font_size = 30
-text = "Reset to Default"
-
 [connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/VSync/VSyncToggle" to="." method="_on_v_sync_toggle_toggled"]
 [connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/Parallax/ParallaxToggle" to="." method="_on_parallax_toggle_toggled"]
 [connection signal="toggled" from="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/CameraShake/ShakeToggle" to="." method="_on_shake_toggle_toggled"]
@@ -434,7 +374,3 @@ text = "Reset to Default"
 [connection signal="drag_ended" from="ColorRect/TabContainer/Volume/TabBar/ItemList/HBoxContainer/Music/MSlider" to="." method="_on_m_slider_drag_ended"]
 [connection signal="mouse_entered" from="ColorRect/TabContainer/Volume/TabBar/ItemList/VBoxContainer/Back" to="." method="_on_back_mouse_entered"]
 [connection signal="pressed" from="ColorRect/TabContainer/Volume/TabBar/ItemList/VBoxContainer/Back" to="." method="_on_back_pressed"]
-[connection signal="mouse_entered" from="ColorRect/TabContainer/Controls/TabBar/VBoxContainer/Back" to="." method="_on_back_mouse_entered"]
-[connection signal="pressed" from="ColorRect/TabContainer/Controls/TabBar/VBoxContainer/Back" to="." method="_on_back_pressed"]
-[connection signal="mouse_entered" from="ColorRect/TabContainer/Controls/TabBar/Reset/ResetButton" to="." method="_on_reset_button_mouse_entered"]
-[connection signal="pressed" from="ColorRect/TabContainer/Controls/TabBar/Reset/ResetButton" to="." method="_on_reset_button_pressed"]

@@ -7,7 +7,7 @@ extends Control
 @onready var flash_toggle: CheckButton = %FlashToggle
 
 @onready var input_button_scene = preload("res://scenes/input_button.tscn")
-@onready var action_list = $ColorRect/TabContainer/Controls/TabBar/MarginContainer/ActionList
+#@onready var action_list = $ColorRect/TabContainer/Controls/TabBar/MarginContainer/ActionList
 
 var is_remapping = false
 var action_to_remap = null
@@ -38,9 +38,7 @@ func _ready() -> void:
 		flash_toggle.button_pressed = true
 		
 		
-	_load_keybindings_from_settings()
-	
-	_create_action_list()
+
 	
 	var video_settings = ConfigFileHandler.load_video_settings()
 	v_sync_toggle.button_pressed = video_settings.vsync
@@ -54,96 +52,6 @@ func _ready() -> void:
 	%MasterSlider.value = min(audio_settings.master_volume, 1.0) * 100
 	%SFXSlider.value = min(audio_settings.sfx_volume, 1.0) * 100
 	%MSlider.value = min(audio_settings.music_volume, 1.0) * 100
-
-# --- CUSTOM KEYBINDINGS ---
-func _load_keybindings_from_settings():
-	var keybindings = ConfigFileHandler.load_keybindings()
-	for action in keybindings.keys():
-		InputMap.action_erase_events(action)
-		InputMap.action_add_event(action, keybindings[action])
-	
-	
-func _create_action_list():
-	#InputMap.load_from_project_settings()
-	for item in action_list.get_children():
-		item.queue_free() #action list is empty
-	
-	for action in input_actions:
-		var button = input_button_scene.instantiate()
-		var action_label = button.find_child("ActionLabel")
-		var input_label = button.find_child("ActionInput")
-		
-		action_label.text = input_actions[action]
-		
-		var events = InputMap.action_get_events(action)
-		if events.size() > 0: # if the event exists
-			input_label.text = events[0].as_text().trim_suffix(" (Physical)")
-		else:
-			input_label.text = ""
-		
-		action_list.add_child(button)
-		button.pressed.connect(_on_input_button_pressed.bind(button, action))
-		
-func _on_input_button_pressed(button, action):
-	if not is_remapping:
-		is_remapping = true
-		action_to_remap = action
-		remapping_button = button
-		button.find_child("ActionInput").text = "Press key to bind"
-		
-
-func _input(event):
-	if is_remapping:
-		if (
-			event is InputEventKey or 
-			(event is InputEventMouseButton and event.pressed)
-		):
-			# double click counts as single click
-			if event is InputEventMouseButton and event.double_click:
-				event.double_click = false
-			
-			InputMap.action_erase_events(action_to_remap)
-			#InputMap.action_add_event(action_to_remap, event)
-			
-			# remove duplicate inputs
-			for action in input_actions:
-				if InputMap.action_has_event(action, event):
-					InputMap.action_erase_event(action, event)
-					var buttons_with_action = action_list.get_children().filter(func(button):
-						return button.find_child("ActionLabel").text == input_actions[action]
-					)
-					for button in buttons_with_action:
-						button.find_child("ActionInput").text = ""
-				
-			InputMap.action_add_event(action_to_remap, event)
-			ConfigFileHandler.save_keybindings(action_to_remap, event)
-			_update_action_list(remapping_button, event)
-			
-			is_remapping = false
-			action_to_remap = null
-			remapping_button = null
-			
-			accept_event() # stopping the initial event
-
-func _update_action_list(button, event):
-	button.find_child("ActionInput").text = event.as_text().trim_suffix(" (Physical)")
-
-
-func _on_reset_button_pressed() -> void:
-	AudioManager.play_button_pressed()
-	print("resetting keybindings")
-	InputMap.load_from_project_settings()
-	for action in input_actions:
-		var events = InputMap.action_get_events(action)
-		if events.size()> 0:
-			# overriding the settings with the defaults
-			ConfigFileHandler.save_keybindings(action, events[0])
-	
-	# getting the actions from the project settings
-	_create_action_list()
-	
-func _on_reset_button_mouse_entered() -> void:
-	AudioManager.play_button_hover()
 
 # ------------------------
 
