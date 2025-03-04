@@ -26,15 +26,11 @@ func time_left_until_win():
 	return [minute, second]
 	
 	
-func _physics_process(_delta: float) -> void:
-	if Input.is_action_pressed("time_minus"):
-		#print("timer down")
-		#time_left = 2.0
-		cd_timer.set_wait_time(6.0) 
-		cd_timer.start()
-		
-	#label.scale.x = move_toward(label.scale.x, 1, 3 * delta)
-	#label.scale.y = move_toward(label.scale.y, 1, 3 * delta)
+# debugging
+#func _physics_process(_delta: float) -> void:
+	#if Input.is_action_pressed("time_minus"):
+		#cd_timer.set_wait_time(6.0) 
+		#cd_timer.start()
 
 
 func _process(_delta: float) -> void:
@@ -67,7 +63,6 @@ func _on_timer_timeout() -> void:
 		return 
 		
 func _on_possessed_escaped():
-	#print("stop the timer")
 	cd_timer.stop()
 
 

@@ -58,8 +58,9 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	
-	if Input.is_action_pressed("game_over_input"):
-		Global.is_game_over = true
+	# debugging game over
+	#if Input.is_action_pressed("game_over_input"):
+		#Global.is_game_over = true
 	
 	if can_move:
 		input = Input.get_vector("left", "right", "up", "down")

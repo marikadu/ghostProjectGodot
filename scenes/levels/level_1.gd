@@ -129,10 +129,10 @@ func _ready() -> void:
 		print("TUTORIAL start")
 		npc_instance.npc_ignore_player = true
 	
-	
-func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("spawn_possessed"):
-		spawn_possessed()
+# debugging, spawn possessed
+#func _physics_process(_delta: float) -> void:
+	#if Input.is_action_just_pressed("spawn_possessed"):
+		#spawn_possessed()
 	
 	
 func show_win_game():

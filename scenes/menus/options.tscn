@@ -140,7 +140,7 @@ layout_mode = 2
 layout_mode = 2
 theme = ExtResource("3_p4r2c")
 theme_override_font_sizes/font_size = 30
-text = "Parallax"
+text = "Parallax Effect"
 
 [node name="ParallaxToggle" type="CheckButton" parent="ColorRect/TabContainer/Graphics/TabBar/ItemList/SettingList/Parallax"]
 unique_name_in_owner = true

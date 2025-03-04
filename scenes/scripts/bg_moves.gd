@@ -52,19 +52,10 @@ func _ready() -> void:
 	#wait_before_sunrise_timer.set_wait_time(wait_before_sunrise) 
 
 
-func _process(delta):
+func _process(_delta):
 	# parallax effect
 	if Graphics.camera_follow_player:
 		
-		# OLD CODE:
-		#n_middleground.position = (player.position*delta) / 2 # !!OLD
-		#d_middleground.position = (player.position*delta) / 2 # !!OLD
-		
-		#n_background.position = (player.position*delta) / 4
-		#d_background.position = (player.position*delta) / 4
-		
-		
-		# NEW CODE:
 		n_middleground.position = player.get_position_delta()/-5
 		d_middleground.position = player.get_position_delta()/-5
 		
