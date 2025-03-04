@@ -42,4 +42,4 @@ func update_personal_best_time():
 
 	if time_as_int > best_time_as_int:
 		personal_best_time = time_as_int
-		print("new best time: ", personal_best_time)
+		#print("new best time: ", personal_best_time)

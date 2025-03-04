@@ -222,9 +222,3 @@ func restore_stamina():
 			stamina_restore_timer.start()
 		else:
 			restoring_stamina = false
-
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("interact_dash"):
-		pass
-		

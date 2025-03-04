@@ -1,6 +1,5 @@
-[gd_scene load_steps=30 format=3 uid="uid://bb0ojl4hx61c3"]
+[gd_scene load_steps=29 format=3 uid="uid://bb0ojl4hx61c3"]
 
-[ext_resource type="Shader" path="res://player/wants_dash.gdshader" id="1_j0mrd"]
 [ext_resource type="Script" path="res://enemies/enemy_1.gd" id="1_nl2ya"]
 [ext_resource type="Texture2D" uid="uid://cqqbap4nxnyp2" path="res://sprites/light.png" id="2_7e2my"]
 [ext_resource type="Shader" uid="uid://0dm11c6qayeu" path="res://shaders/hit.tres" id="3_4o8mh"]
@@ -21,13 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://ck4xlbv3lj03f" path="res://sprites/enemies/purple/purple3.png" id="17_2eew0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pbie8"]
-shader = ExtResource("1_j0mrd")
-shader_parameter/rect_size = Vector2(0.1, 0.1)
-shader_parameter/bness = 1.0
-shader_parameter/fall_off_scale = 3.0
-shader_parameter/b_offset = 0.0
-shader_parameter/speed = 4.517
-shader_parameter/noise_intensity = 0.5
+shader = ExtResource("3_4o8mh")
+shader_parameter/isHit = false
+shader_parameter/Tint = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5jufo"]
 resource_local_to_scene = true
