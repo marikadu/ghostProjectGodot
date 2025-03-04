@@ -37,7 +37,7 @@ func _on_main_menu_button_mouse_entered() -> void:
 func show_game_over_message(reason: String):
 	match reason:
 		"possessed_on_screen":
-			cause.text = "The human is possessed!"
+			cause.text = "The human is Possessed!"
 			
 		"possessed_escaped":
 			cause.text = "Possessed has escaped!"
