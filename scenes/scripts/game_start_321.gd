@@ -1,4 +1,3 @@
-#extends Node
 extends Control
 ## "get ready" 3-2-1 timer
 
@@ -27,7 +26,6 @@ func _process(_delta: float) -> void:
 func _on_resume_game():
 	AudioManager.play_after_pause()
 	self.visible = true
-	#label.visible = true
 	game_start_timer.start()
 	$SecondTimer.start()
 	animation_player.play("zoom_out")
@@ -35,7 +33,9 @@ func _on_resume_game():
 
 func _on_second_timer_timeout() -> void:
 	animation_player.play("zoom_out")
-	if game_start_timer.time_left < 1.0:
+	# 1.1 instead of 1, because there's the sound bug, sound starts playing again
+	# even if it doesn't have a loop
+	if game_start_timer.time_left < 1.1:
 		print("timer bye")
 		self.visible = false
 		get_tree().paused = false
