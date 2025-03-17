@@ -30,5 +30,7 @@ https://freesound.org/people/BennettFilmTeacher/sounds/518598/
 
 https://freesound.org/people/isbeorn/sounds/553954/
 
+Torch_Swinging_ medium speed 1.wav by kev_durr -- https://freesound.org/s/426207/ -- License: Attribution 4.0
+
 **Font:** Chewy-Regular
 https://fonts.google.com/specimen/Chewy
